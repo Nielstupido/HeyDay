@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BirdCloudMovement : MonoBehaviour
 {
-    [SerializeField]private int speedMin, speedMax;
+    [SerializeField]private float speedMin, speedMax;
     private float speed = 0;
 
 
     private void Start()
     {
+        MenuObjManager.onGameStart += DestroyObj;
         speed = Random.Range(speedMin, speedMax);
     }
 
@@ -22,6 +23,20 @@ public class BirdCloudMovement : MonoBehaviour
 
     private void OnDestroy()
     {
-        MenuObjManager.onObjDestroyed(transform.parent.name);
+        if (MenuObjManager.onGameStart != null)
+        {
+            MenuObjManager.onGameStart -= DestroyObj;
+        }
+        
+        if (MenuObjManager.onObjDestroyed != null)
+        {
+            MenuObjManager.onObjDestroyed(transform.parent.name);
+        }
+    }
+
+
+    private void DestroyObj()
+    {
+        Destroy(this.gameObject);
     }
 }

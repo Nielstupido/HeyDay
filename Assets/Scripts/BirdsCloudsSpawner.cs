@@ -11,13 +11,27 @@ public class BirdsCloudsSpawner : MonoBehaviour
     private float waitSec;
     private RectTransform rectT;
 
-    private  int totalSpawnedObj;
+    private  int totalSpawnedObj = 0;
 
 
     private void Start()
     {
         MenuObjManager.onObjDestroyed += SubtractTotalSpawned;
+        MenuObjManager.onGameStart += StopSpawning;
+        MenuObjManager.onBtnSet += StartSpawning;
+    }
+
+
+    private void StartSpawning()
+    {
         StartCoroutine("Spawn");
+    }
+
+
+    private void StopSpawning()
+    {
+        totalSpawnedObj = 0;
+        StopCoroutine("Spawn");
     }
 
 
@@ -42,7 +56,18 @@ public class BirdsCloudsSpawner : MonoBehaviour
     {
         if (parent.Equals(gameObject.name))
         {
-            totalSpawnedObj--;
+            if (totalSpawnedObj != 0)
+            {
+                totalSpawnedObj--;
+            }
+            Debug.Log(gameObject.name + " total spawned " + totalSpawnedObj);
         }
+    }
+
+
+    private void OnDestroy()
+    {
+        MenuObjManager.onObjDestroyed -= SubtractTotalSpawned;
+        MenuObjManager.onGameStart -= StopSpawning;
     }
 }
