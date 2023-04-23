@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
@@ -32,6 +33,7 @@ public class MainMenuManager : MonoBehaviour
     public void StartGame()
     {
         MenuObjManager.onGameStart();
+        SceneManager.LoadScene("MainGame");
     }
 
 
