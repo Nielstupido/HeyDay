@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Factory : Building
+public class PrivateFirm : Building
 {
     // Start is called before the first frame update
     void Start()
     {
-        buildingName = Buildings.FACTORY;
-        actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.QUIT};     
+        buildingName = Buildings.BANK;
+        actionButtons = new List<Buttons>(){Buttons.WORK, Buttons.QUIT};
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         

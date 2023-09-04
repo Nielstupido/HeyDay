@@ -1,6 +1,12 @@
+using UnityEngine;
+using System.Collections.Generic;
 
-public class Building 
+public class Building : MonoBehaviour
 {
+    [HideInInspector]public Buildings buildingName;
+    [HideInInspector]public List<Buttons> actionButtons;
+
+
     public virtual void Work()
     {
 
@@ -17,4 +23,33 @@ public class Building
     {
         
     }
+}
+
+
+public enum Buildings
+{
+    HOSPITAL,
+    CAFE,
+    BANK,
+    MALL,
+    CONVENIENCESTORE,
+    CAFETERIA,
+    CARSHOP,
+    CINEMA,
+    FACTORY,
+    FOODXPRESS,
+    NIGHTCLUB,
+    UNIVERSITY,
+    PRIVATEFIRM,
+    GOVERNMENTOFFICE
+}
+
+
+public enum Buttons
+{
+    BUY,
+    APPLY,
+    QUIT,
+    WORK,
+    DEPOSITMONEY
 }

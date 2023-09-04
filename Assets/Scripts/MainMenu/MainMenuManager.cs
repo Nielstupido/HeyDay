@@ -29,7 +29,6 @@ public class MainMenuManager : MonoBehaviour
     }
 
 
-    //public methods
     public void StartGame()
     {
         MenuObjManager.onGameStart();

@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cafe : MonoBehaviour
+public class Cafe : Building
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        buildingName = Buildings.CAFE;
+        actionButtons = new List<Buttons>(){Buttons.BUY, Buttons.QUIT};
     }
 
-    // Update is called once per frame
     void Update()
     {
         
