@@ -10,6 +10,12 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject settingsBtn;
     [SerializeField] private GameObject dictionaryBtn;
     [SerializeField] private GameObject dictionaryOverlay;
+    [SerializeField] private GameObject mechanicsBtn;
+    [SerializeField] private GameObject creditsBtn;
+    [SerializeField] private GameObject mechanicsPanel;
+    [SerializeField] private GameObject creditsPanel;
+    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject closeBtn;
 
 
     private void Start()
@@ -20,12 +26,11 @@ public class MainMenuManager : MonoBehaviour
 
     private void AnimateMainMenu()
     {
-        LeanTween.moveY(startBtn, (float)(Screen.height / 2.7), 1.2f).setEaseOutElastic().delay = 0.2f;
+        LeanTween.moveY(startBtn, (float)(Screen.height / 3.5), 1.2f).setEaseOutElastic().delay = 0.2f;
+        LeanTween.moveY(exitBtn, (float)(Screen.height / 8.5), 1.2f).setEaseOutElastic().setOnComplete(StartSpawn).delay = 0.4f;
+        LeanTween.moveY(mechanicsBtn, (float)(Screen.height / 4.5), 1.2f).setEaseOutElastic().setOnComplete(StartSpawn).delay = 0.2f;
+        LeanTween.moveY(creditsBtn, (float)(Screen.height / 4.5), 1.2f).setEaseOutElastic().setOnComplete(StartSpawn).delay = 0.2f;
         LeanTween.moveY(dictionaryBtn, (float)(Screen.height / 4.4), 1.2f).setEaseOutElastic().setOnComplete(StartSpawn).delay = 0.4f;
-        LeanTween.moveY(exitBtn, (float)(Screen.height / 8), 1.2f).setEaseOutElastic().setOnComplete(StartSpawn).delay = 0.4f;
-        
-    
-    
     }
 
 
@@ -35,7 +40,6 @@ public class MainMenuManager : MonoBehaviour
     }
 
 
-    //public methods
     public void StartGame()
     {
         MenuObjManager.onGameStart();
@@ -53,6 +57,29 @@ public class MainMenuManager : MonoBehaviour
         dictionaryOverlay.SetActive(false);
     }
 
+    public void ShowGameMechanics()
+    {
+        mechanicsPanel.SetActive(true);
+        AudioManager.Instance.PlaySFX("Select");
+    }
+
+    public void ShowGameCredits()
+    {
+        creditsPanel.SetActive(true);
+        AudioManager.Instance.PlaySFX("Select");
+    }
+
+    public void ShowSettings()
+    {
+        settingsPanel.SetActive(true);
+        AudioManager.Instance.PlaySFX("Select");
+    }
+
+    public void ExitSettings()
+    {
+        settingsPanel.SetActive(false);
+        //AudioManager.Instance.PlaySFX("Select");
+    }
 
     public void ExitGame()
     {

@@ -5,34 +5,36 @@ using UnityEngine.EventSystems;
 
 public class BuildingSelect : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private GameObject buildingSelectOverlay;
     [SerializeField] private Text buildingNameText;
     [SerializeField] private BuildingManager buildingManager;
-    private bool isSelectBtnHidden = true;
     private Vector3 scaleDown = new Vector3(0.1f, 0.1f, 0.1f);
     
 
     private void Start()
     {
-        buildingSelectOverlay.transform.localScale = scaleDown;
-        buildingSelectOverlay.SetActive(false);
+        buildingManager.BuildingSelectOverlay.transform.localScale = scaleDown;
     }
 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (isSelectBtnHidden)
+
+        if (buildingManager.BuildingSelectOverlay.activeSelf && buildingManager.CurrentSelectedBuilding == eventData.selectedObject.GetComponent<Building>())
         {
-            buildingNameText.text = eventData.selectedObject.gameObject.name;
-            buildingManager.CurrentSelectedBuilding = eventData.selectedObject.gameObject.name;
-            buildingSelectOverlay.SetActive(true);
-            AnimationManager.ScaleObj(buildingSelectOverlay, Vector3.one, 0.4f, false, LeanTweenType.easeOutBounce);
+            AnimationManager.ScaleObj(buildingManager.BuildingSelectOverlay, scaleDown, 0.4f, true, LeanTweenType.easeInOutBack);
         }
         else
         {
-            AnimationManager.ScaleObj(buildingSelectOverlay, scaleDown, 0.4f, true, LeanTweenType.easeInOutBack);
+            buildingNameText.text = eventData.selectedObject.gameObject.name;
+            buildingManager.CurrentSelectedBuilding = eventData.selectedObject.GetComponent<Building>();
+            Debug.Log("building name " + buildingManager.CurrentSelectedBuilding);
+
+            if (!buildingManager.BuildingSelectOverlay.activeSelf)
+            {
+                buildingManager.BuildingSelectOverlay.SetActive(true);
+                AnimationManager.ScaleObj(buildingManager.BuildingSelectOverlay, Vector3.one, 0.4f, false, LeanTweenType.easeOutBounce);
+            }
         }
-        isSelectBtnHidden = !isSelectBtnHidden;
     }
 
 }

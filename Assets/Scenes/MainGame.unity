@@ -153,8 +153,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 315949133}
+  - {fileID: 1280679156}
   - {fileID: 1045205170}
+  - {fileID: 315949133}
   m_Father: {fileID: 1138957115}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -402,7 +403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &107460592
@@ -483,7 +483,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -713,11 +713,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b4f2a61c0475a4eb35e6e9e77a2b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingSelectOverlay: {fileID: 434310656}
+  buttonImages:
+  - {fileID: 21300000, guid: f8861d5aa737ff045b473959ad06fffa, type: 3}
+  - {fileID: 21300000, guid: 2fdbc6c3fff98584dbe88b38760fc513, type: 3}
+  - {fileID: 21300000, guid: ca6946a06bca1ad4886b1e1b6fba6c22, type: 3}
+  - {fileID: 21300000, guid: 37bb87d4f68f5c04f923974e95643db2, type: 3}
+  - {fileID: 21300000, guid: a3ad09e531fc67445ae0970d0a38ce51, type: 3}
   gameManager: {fileID: 147613447}
   walkBtn: {fileID: 925704130}
   rideBtn: {fileID: 484582873}
   enterBtn: {fileID: 1025055506}
+  buttonsHolder: {fileID: 315949133}
   player: {fileID: 433560202}
+  btnPrefab: {fileID: 8422458373500371487, guid: c9e80a3819bedc44caa597172cf1ad61, type: 3}
 --- !u!4 &223557264
 Transform:
   m_ObjectHideFlags: 0
@@ -844,7 +853,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &246909198
@@ -902,8 +910,9 @@ GameObject:
   - component: {fileID: 315949133}
   - component: {fileID: 315949135}
   - component: {fileID: 315949134}
+  - component: {fileID: 315949136}
   m_Layer: 5
-  m_Name: OverlayPanel
+  m_Name: ButtonsHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -922,12 +931,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 62309207}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -20.8051}
+  m_SizeDelta: {x: 0, y: 514.5872}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &315949134
 MonoBehaviour:
@@ -967,6 +976,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315949132}
   m_CullTransparentMesh: 1
+--- !u!114 &315949136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315949132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 20
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 8
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 260, y: 140}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &336508957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,7 +1276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &434310657
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1783,7 +1816,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &599675106
@@ -1960,7 +1992,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &662546995
@@ -2007,6 +2038,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &662546996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662546992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6d0508491ca1849afe626979cbbe09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingName: 0
+  actionButtons: 
 --- !u!1001 &670205239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2099,7 +2144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &670205244
@@ -2146,6 +2190,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &670205245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670205241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c604ba247b13604d8ea193d98e7ddcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingName: 0
+  actionButtons: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,7 +2409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &731146705
@@ -2723,7 +2780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &773521944
@@ -3069,7 +3125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &833446618
@@ -3150,7 +3205,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3698,7 +3753,7 @@ MonoBehaviour:
       - m_Target: {fileID: 223557263}
         m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
         m_MethodName: EnterBuilding
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4124,7 +4179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &1115879682
@@ -4476,7 +4530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &1153844372
@@ -4678,7 +4731,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4719,6 +4772,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257256732}
+  m_CullTransparentMesh: 1
+--- !u!1 &1280679155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1280679156}
+  - component: {fileID: 1280679158}
+  - component: {fileID: 1280679157}
+  m_Layer: 5
+  m_Name: BgOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1280679156
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280679155}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 62309207}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1280679157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280679155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1280679158
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280679155}
   m_CullTransparentMesh: 1
 --- !u!1 &1295500905
 GameObject:
@@ -5160,7 +5289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &1423372750
@@ -5453,7 +5581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &1496227676
@@ -5690,7 +5817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &1517769845
@@ -5737,6 +5863,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1517769846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517769841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6700fa507f997b48a3883b0ea1fa770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingName: 0
+  actionButtons: 
 --- !u!1 &1533616307
 GameObject:
   m_ObjectHideFlags: 0
@@ -5755,7 +5895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1533616308
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6018,7 +6158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &1600002709
@@ -6220,7 +6359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &1681455241
@@ -6378,7 +6516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &1681729803
@@ -6442,7 +6579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1710457673
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6867,7 +7004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &1832908750
@@ -7223,7 +7359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &1988852900
@@ -7381,7 +7516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buildingManager: {fileID: 223557263}
 --- !u!114 &2010685494
