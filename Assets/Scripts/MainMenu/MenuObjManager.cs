@@ -10,6 +10,12 @@ public class MenuObjManager : MonoBehaviour
     public delegate void OnGameStart();
     public static OnGameStart onGameStart;
 
+    public delegate void OnGameDictionary();
+    public static OnGameDictionary onGameDictionary;
+
     public delegate void OnBtnSet();
     public static OnBtnSet onBtnSet;
+
+    public delegate void OnExitGameDictionary();
+    public static OnExitGameDictionary onExitGameDictionary;
 }
