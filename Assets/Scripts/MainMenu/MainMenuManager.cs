@@ -7,6 +7,8 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject startBtn;
     [SerializeField] private GameObject exitBtn;
+    [SerializeField] private GameObject dictionaryBtn;
+    [SerializeField] private GameObject dictionaryOverlay;
     [SerializeField] private GameObject settingsBtn;
     [SerializeField] private GameObject mechanicsBtn;
     [SerializeField] private GameObject creditsBtn;
@@ -26,6 +28,7 @@ public class MainMenuManager : MonoBehaviour
     {
         LeanTween.moveY(startBtn, (float)(Screen.height / 3.5), 1.2f).setEaseOutElastic().delay = 0.2f;
         LeanTween.moveY(exitBtn, (float)(Screen.height / 8.5), 1.2f).setEaseOutElastic().setOnComplete(StartSpawn).delay = 0.4f;
+        LeanTween.moveY(dictionaryBtn, (float)(Screen.height / 4.4), 1.2f).setEaseOutElastic().setOnComplete(StartSpawn).delay = 0.4f;
         LeanTween.moveY(mechanicsBtn, (float)(Screen.height / 4.5), 1.2f).setEaseOutElastic().setOnComplete(StartSpawn).delay = 0.2f;
         LeanTween.moveY(creditsBtn, (float)(Screen.height / 4.5), 1.2f).setEaseOutElastic().setOnComplete(StartSpawn).delay = 0.2f;
     }
@@ -61,6 +64,16 @@ public class MainMenuManager : MonoBehaviour
         AudioManager.Instance.PlaySFX("Select");
     }
 
+    public void ShowGameDictionary()
+    {
+        dictionaryOverlay.SetActive(true);
+    }
+
+    public void ExitGameDictionary()
+    {
+        dictionaryOverlay.SetActive(false);
+    }
+    
     public void ExitSettings()
     {
         settingsPanel.SetActive(false);
