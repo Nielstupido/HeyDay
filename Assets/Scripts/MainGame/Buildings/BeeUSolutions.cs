@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class University : Building
+public class BeeUSolutions : Building
 {
     private void Start()
     {
-        buildingName = Buildings.UNIVERSITY;
-        actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.QUIT};
+        buildingName = Buildings.BANK;
+        actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -23,9 +23,6 @@ public class University : Building
         if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
             switch (clickedBtn)
             {
-                case Buttons.DEPOSITMONEY:
-                    Debug.Log("money deposited");
-                    break;
                 case Buttons.APPLY:
                     Debug.Log("money deposited");
                     break;

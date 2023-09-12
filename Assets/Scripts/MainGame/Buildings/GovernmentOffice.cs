@@ -4,16 +4,34 @@ using UnityEngine;
 
 public class GovernmentOffice : Building
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         buildingName = Buildings.BANK;
-        actionButtons = new List<Buttons>(){Buttons.WORK, Buttons.QUIT};
+        actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
+        BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
 
-    void Update()
+    private void OnDestroy()
     {
-        
+        BuildingManager.Instance.onBuildingBtnClicked -= CheckBtnClicked;
+    }
+
+
+    public override void CheckBtnClicked(Buttons clickedBtn)
+    {
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+            switch (clickedBtn)
+            {
+                case Buttons.APPLY:
+                    Debug.Log("money deposited");
+                    break;
+                case Buttons.WORK:
+                    Debug.Log("money deposited");
+                    break;
+                case Buttons.QUIT:
+                    Debug.Log("money deposited");
+                    break;
+            }
     }
 }

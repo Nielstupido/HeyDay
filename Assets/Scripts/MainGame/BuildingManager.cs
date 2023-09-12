@@ -18,9 +18,25 @@ public class BuildingManager : MonoBehaviour
     private Building currentSelectedBuilding;
 
 
+    public delegate void OnBuildingBtnClicked(Buttons clickedBtn);
+    public OnBuildingBtnClicked onBuildingBtnClicked;
+
     public Building CurrentSelectedBuilding { set{currentSelectedBuilding = value;} get{return currentSelectedBuilding;}}
     public GameObject BuildingSelectOverlay { get{return buildingSelectOverlay;}}
+    public static BuildingManager Instance { get; private set; }
 
+
+    private void Awake() 
+    { 
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
+    }
 
     private void Start()
     {
@@ -73,6 +89,7 @@ public class BuildingManager : MonoBehaviour
         {
             GameObject newBtn = Instantiate(btnPrefab, Vector3.zero, Quaternion.identity, buttonsHolder);
             newBtn.GetComponent<Image>().sprite = buttonImages[((int)btn)];
+            newBtn.GetComponent<Button>().onClick.AddListener(delegate { onBuildingBtnClicked(btn); });
         }
     }
 }

@@ -4,16 +4,28 @@ using UnityEngine;
 
 public class NightClub : Building
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         buildingName = Buildings.NIGHTCLUB;
-        actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.QUIT};
+        actionButtons = new List<Buttons>(){Buttons.PARTY};
+        BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void OnDestroy()
     {
-        
+        BuildingManager.Instance.onBuildingBtnClicked -= CheckBtnClicked;
+    }
+
+
+    public override void CheckBtnClicked(Buttons clickedBtn)
+    {
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+            switch (clickedBtn)
+            {
+                case Buttons.PARTY:
+                    Debug.Log("party party");
+                    break;
+            }
     }
 }

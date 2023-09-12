@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Building : MonoBehaviour
+public abstract class Building : MonoBehaviour
 {
     [HideInInspector]public Buildings buildingName;
     [HideInInspector]public List<Buttons> actionButtons;
@@ -23,6 +23,9 @@ public class Building : MonoBehaviour
     {
         
     }
+
+
+    public abstract void CheckBtnClicked(Buttons clickedBtn);
 }
 
 
@@ -40,16 +43,19 @@ public enum Buildings
     FOODXPRESS,
     NIGHTCLUB,
     UNIVERSITY,
-    PRIVATEFIRM,
+    BEEUSOLUTIONS,
     GOVERNMENTOFFICE
 }
 
 
 public enum Buttons
 {
-    BUY,
+    BUYDRINK,
+    BUYFOOD,
     APPLY,
     QUIT,
     WORK,
-    DEPOSITMONEY
+    DEPOSITMONEY,
+    WATCHMOVIE,
+    PARTY
 }
