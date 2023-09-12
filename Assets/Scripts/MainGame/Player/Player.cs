@@ -19,14 +19,16 @@ public class Player : MonoBehaviour
     private string playerName;
     private float hospitalFee = 1500; // hospital fee per day
     private float numOfdays = 0;
-    private float currentTime = 7; //time will start at 7AM
+    private float currentTime = 11; //time will start at 7AM
+    private int toggleCounter;
+    private float currentDayCount = 1;// number of days that have passed
     
     [SerializeField] private GameObject hospitalizedPrompt;
     [SerializeField] private TextMeshProUGUI daysHospitalized;
     [SerializeField] private TextMeshProUGUI totalBill;
     [SerializeField] private TextMeshProUGUI clockValue;
     [SerializeField] private TextMeshProUGUI indicatorAMPM;
-
+    [SerializeField] private TextMeshProUGUI dayValue;
 
     public string PlayerName { set{playerName = value;} get{return playerName;}}
 
@@ -73,11 +75,8 @@ public class Player : MonoBehaviour
 
     public void Walk(float energyLevelCutValue)
     {
-        AddClockTime(.3f);
-        StatsChecker(playerStatsDict[PlayerStats.ENERGY], playerStatsDict[PlayerStats.HAPPINESS], playerStatsDict[PlayerStats.HUNGER]);
-        /*Debug.Log("Energy:" + playerStatsDict[PlayerStats.ENERGY]);
-        Debug.Log("Happiness:" + playerStatsDict[PlayerStats.HAPPINESS]);
-        Debug.Log("Money:" + playerStatsDict[PlayerStats.MONEY]);*/
+        AddClockTime(2.3f);
+        StatsChecker();
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
     }
@@ -89,11 +88,11 @@ public class Player : MonoBehaviour
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
     }
 
-    public void StatsChecker(float currentEnergy, float currentHappiness, float currentHunger)
+    public void StatsChecker()
     {
-        if (currentEnergy <= 10 | currentHappiness <= 10 | currentHunger <= 10)//checks if any of the stats reaches lower limit
+        if (playerStatsDict[PlayerStats.ENERGY] <= 10 | playerStatsDict[PlayerStats.HAPPINESS] <= 10 | playerStatsDict[PlayerStats.HUNGER] <= 10)//checks if any of the stats reaches lower limit
         {
-            float sumOfStats = currentEnergy + currentHappiness + currentHunger;
+            float sumOfStats = playerStatsDict[PlayerStats.ENERGY] + playerStatsDict[PlayerStats.HAPPINESS] + playerStatsDict[PlayerStats.HUNGER];
 
             if ((sumOfStats*100) / 300 <= 10)
             {
@@ -133,7 +132,6 @@ public class Player : MonoBehaviour
         playerStatsDict[PlayerStats.HUNGER] = 100;
 
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
-        //Debug.Log("Money after hospi:" + playerStatsDict[PlayerStats.MONEY]);
 
         hospitalizedPrompt.SetActive(false);
     }
@@ -142,47 +140,94 @@ public class Player : MonoBehaviour
     {
         currentTime += addedClockValue;
         int minutes = 0;
-        int hours = 0; 
-        //Debug.Log("Current Time = " + currentTime);
-        //clockValue.text = currentTime.ToString() + ":00";
+        int hours = 0;
+        int transposedValue; 
 
         if (currentTime % 1 != 0)
         {
-            Debug.Log("is FLOAT");
             hours = (int)currentTime;
             float temp = (currentTime % 1) * 100;
             minutes = (int)temp;
-            Debug.Log("Hours = " + hours);
-            Debug.Log("Minutes = " + minutes);
 
             if (minutes >= 60)
             {
                 minutes = 0;
                 hours ++;
 
-                if (hours > 12)
+                if (hours > 24)
                 {
                     hours = 1;
+                    toggleCounter++;
                 }
-                clockValue.text = hours.ToString() + ":00";
+
+                transposedValue = TransposeTimeValue((int)currentTime);
+                clockValue.text = transposedValue.ToString() + ":00";
                 currentTime = hours;
             }
-            else if (hours > 12)
+            else if (hours > 24)
             {
                 hours = 1;
-                clockValue.text = hours.ToString() + ":" + minutes.ToString();
                 currentTime = hours + (minutes / 100);
+                transposedValue = TransposeTimeValue((int)currentTime);
+                clockValue.text = transposedValue.ToString() + ":" + minutes.ToString();
+                toggleCounter++;
             }
             else
             {
-                clockValue.text = hours.ToString() + ":" + minutes.ToString();
+                transposedValue = TransposeTimeValue((int)currentTime);
+                clockValue.text = transposedValue.ToString() + ":" + minutes.ToString();
             }
         }
         else
         {
-            Debug.Log("is INT");
             hours = (int)currentTime;
             clockValue.text = hours.ToString() + ":00";
+        }
+
+        AmOrPm();
+        IncrementDayCount();
+    }
+
+    public static int TransposeTimeValue(int currentTime)
+    {
+        switch (currentTime)
+        {
+            case 13: return 1;
+            case 14: return 2;
+            case 15: return 3;
+            case 16: return 4;
+            case 17: return 5;
+            case 18: return 6;
+            case 19: return 7;
+            case 20: return 8;
+            case 21: return 9;
+            case 22: return 10;
+            case 23: return 11;
+            case 24: return 12;
+            default: return (currentTime);
+        }
+    }
+
+    public void AmOrPm()
+    {
+        if (currentTime >= 12)
+        {
+            indicatorAMPM.text = "PM";
+        }
+        else
+        {
+            indicatorAMPM.text = "AM";
+        }
+    }
+
+    public void IncrementDayCount()
+    {
+        if (toggleCounter == 1)
+        {
+            currentDayCount++;
+            Debug.Log("Current Day Count = " + currentDayCount);
+            dayValue.text = currentDayCount.ToString();
+            toggleCounter = 0;
         }
     }
 }
