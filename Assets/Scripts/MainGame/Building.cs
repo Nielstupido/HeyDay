@@ -57,5 +57,7 @@ public enum Buttons
     WORK,
     DEPOSITMONEY,
     WATCHMOVIE,
-    PARTY
+    PARTY,
+    STUDY,
+    ENROL
 }
