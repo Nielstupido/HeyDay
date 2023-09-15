@@ -12,15 +12,35 @@ public enum PlayerStats
     MONEY
 }
 
+public enum Gender
+{
+    MALE,
+    FEMALE
+}
+
 
 
 public class Player : MonoBehaviour
 {
     private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
     private string playerName;
-
-
+    private Gender playerGender;
     public string PlayerName { set{playerName = value;} get{return playerName;}}
+    public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
+    public static Player Instance { get; private set; }
+
+
+    private void Awake() 
+    { 
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
+    }
 
 
     private void Start()

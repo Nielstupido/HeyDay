@@ -8,12 +8,10 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private IDictionary<string, GameObject> buildings = new Dictionary<string, GameObject>();
     [SerializeField] private GameObject buildingSelectOverlay;
     [SerializeField] private List<Sprite> buttonImages = new List<Sprite>();
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject walkBtn;
     [SerializeField] private GameObject rideBtn; 
     [SerializeField] private GameObject enterBtn;
     [SerializeField] private Transform buttonsHolder;
-    [SerializeField] private Player player;
     [SerializeField] private GameObject btnPrefab;
     private Building currentSelectedBuilding;
 
@@ -31,7 +29,7 @@ public class BuildingManager : MonoBehaviour
 
     public void Walk()
     {
-        player.Walk(10f);
+        Player.Instance.Walk(10f);
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
@@ -40,7 +38,7 @@ public class BuildingManager : MonoBehaviour
 
     public void Ride()
     {
-        player.Walk(5f);
+        Player.Instance.Walk(5f);
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
@@ -49,7 +47,7 @@ public class BuildingManager : MonoBehaviour
 
     public void EnterBuilding(Building selectedBuilding)
     {
-        gameManager.EnterBuilding();
+        GameManager.Instance.EnterBuilding();
         PrepareButtons(selectedBuilding);
     }
 
@@ -63,7 +61,7 @@ public class BuildingManager : MonoBehaviour
         walkBtn.SetActive(true);
         rideBtn.SetActive(true);
         enterBtn.SetActive(false);
-        gameManager.ExitBuilding();
+        GameManager.Instance.ExitBuilding();
     }
 
 
