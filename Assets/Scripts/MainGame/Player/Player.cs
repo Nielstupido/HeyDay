@@ -13,10 +13,19 @@ public enum PlayerStats
     MONEY
 }
 
+public enum Gender
+{
+    MALE,
+    FEMALE
+}
+
+
+
 public class Player : MonoBehaviour
 {
     private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
     private string playerName;
+    private Gender playerGender;
     private float hospitalFee = 1500; // hospital fee per day
     private float numOfdays = 0;
     private float currentTime = 11; //time will start at 7AM
@@ -25,12 +34,27 @@ public class Player : MonoBehaviour
     
     [SerializeField] private GameObject hospitalizedPrompt;
     [SerializeField] private TextMeshProUGUI daysHospitalized;
-    [SerializeField] private TextMeshProUGUI totalBill;
+    [SerializeField] private TextMeshProUGUI totalBill; 
     [SerializeField] private TextMeshProUGUI clockValue;
     [SerializeField] private TextMeshProUGUI indicatorAMPM;
     [SerializeField] private TextMeshProUGUI dayValue;
 
     public string PlayerName { set{playerName = value;} get{return playerName;}}
+    public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
+    public static Player Instance { get; private set; }
+
+
+    private void Awake() 
+    { 
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
+    }
 
 
     private void Start()

@@ -44,6 +44,7 @@ public class MainMenuManager : MonoBehaviour
     {
         MenuObjManager.onGameStart();
         SceneManager.LoadScene("MainGame");
+        AudioManager.Instance.StopMusic();
     }
 
 
