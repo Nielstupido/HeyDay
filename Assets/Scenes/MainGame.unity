@@ -151,18 +151,18 @@ RectTransform:
   m_GameObject: {fileID: 56812781}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6125803, y: 0.6125803, z: 0.6125803}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1125393417}
   - {fileID: 1533616308}
-  m_Father: {fileID: 1138957115}
-  m_RootOrder: 4
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1017.82574, y: 509.32098}
+  m_SizeDelta: {x: 2035.6515, y: 1018.64197}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &56812783
 MonoBehaviour:
@@ -215,7 +215,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 1448206700}
-  player: {fileID: 433560202}
   selectGenderOverlay: {fileID: 1125393416}
   setNameOverlay: {fileID: 1533616307}
   introCutsceneMannager: {fileID: 916354908}
@@ -703,7 +702,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &166259432
 GameObject:
@@ -821,7 +820,6 @@ MonoBehaviour:
   rideBtn: {fileID: 484582873}
   enterBtn: {fileID: 1025055506}
   buttonsHolder: {fileID: 315949133}
-  player: {fileID: 433560202}
   btnPrefab: {fileID: 8422458373500371487, guid: c9e80a3819bedc44caa597172cf1ad61, type: 3}
 --- !u!4 &223557264
 Transform:
@@ -836,7 +834,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &246909192
 GameObject:
@@ -1299,7 +1297,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &433560200
 MonoBehaviour:
@@ -1354,7 +1352,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 1064102319}
-  player: {fileID: 433560202}
   selectGenderOverlay: {fileID: 0}
   setNameOverlay: {fileID: 0}
   introCutsceneMannager: {fileID: 0}
@@ -3506,18 +3503,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916354903}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6125803, y: 0.6125803, z: 0.6125803}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1138957115}
-  m_RootOrder: 5
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 169.85754, y: 135.075}
+  m_AnchoredPosition: {x: 1017.82574, y: 509.32098}
+  m_SizeDelta: {x: 2205.509, y: 1153.7169}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &916354905
 MonoBehaviour:
@@ -4775,10 +4772,8 @@ RectTransform:
   - {fileID: 434310657}
   - {fileID: 62309207}
   - {fileID: 1710457673}
-  - {fileID: 56812782}
-  - {fileID: 916354904}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6716,7 +6711,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1605115982
 MonoBehaviour:
@@ -7476,7 +7471,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1792510651
 MonoBehaviour:
