@@ -7,22 +7,39 @@ using UnityEngine.UI;
 
 public class BudgetSetter : MonoBehaviour
 {
-    [SerializeField] private Slider SliderUi;
-    [SerializeField] private TextMeshProUGUI SliderText;
+    [SerializeField] private Slider billsSlider;
+    [SerializeField] private TextMeshProUGUI billsSliderAmountText;
+    [SerializeField] private Slider savingsSlider;
+    [SerializeField] private TextMeshProUGUI savingsSliderAmountText;
+    [SerializeField] private Slider consumablesSlider;
+    [SerializeField] private TextMeshProUGUI consumablesSliderAmountText;
+    [SerializeField] private Slider emergencySlider;
+    [SerializeField] private TextMeshProUGUI emergencySliderAmountText;
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        SliderUi.onValueChanged.AddListener((v) => {
-            SliderText.text = v.ToString("0");
+        billsSlider.onValueChanged.AddListener((v) => {
+            billsSliderAmountText.text = v.ToString("0");
         });
-
-    
+        savingsSlider.onValueChanged.AddListener((v) => {
+            savingsSliderAmountText.text = v.ToString("0");
+        });
+        consumablesSlider.onValueChanged.AddListener((v) => {
+            consumablesSliderAmountText.text = v.ToString("0");
+        });
+        emergencySlider.onValueChanged.AddListener((v) => {
+            emergencySliderAmountText.text = v.ToString("0");
+        });
     }
-    // Update is called once per frame
-    void Update()
+
+
+    public void SaveBudget()
     {
-        
+        Debug.Log(int.Parse(billsSliderAmountText.text));
+        Debug.Log(int.Parse(savingsSliderAmountText.text));
+        Debug.Log(int.Parse(consumablesSliderAmountText.text));
+        Debug.Log(int.Parse(emergencySliderAmountText.text));
     }
 }
 
