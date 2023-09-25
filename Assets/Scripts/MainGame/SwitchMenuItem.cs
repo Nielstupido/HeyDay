@@ -22,7 +22,13 @@ public class SwitchMenuItem : MonoBehaviour
    [SerializeField] private Sprite smallMeal;
    [SerializeField] private Sprite mediumMeal;
    [SerializeField] private Sprite bigMeal;
-    [SerializeField] private Sprite superMeal;
+   [SerializeField] private Sprite superMeal;
+   [SerializeField] private Sprite eggRice;
+   [SerializeField] private Sprite tofuRice;
+   [SerializeField] private Sprite veggiesRice;
+   [SerializeField] private Sprite chickenRice;
+   [SerializeField] private Sprite porkRice;
+   [SerializeField] private Sprite seafoodRice;
 
    private string[] foodList;
    private float[] priceList;
@@ -30,7 +36,7 @@ public class SwitchMenuItem : MonoBehaviour
    private float[] hungerBarIncrementValue;
    private float[] happinessBarIncrementValue;
    private float[] eatingTime;
-   private string selectedBuilding = "CAFE";
+   private string selectedBuilding = "CAFETERIA"; //Temporary variable
    private int currentItem = 0;
 
    public void Start()
@@ -92,16 +98,20 @@ public class SwitchMenuItem : MonoBehaviour
          foodList = new string[] {"Small meal", "Medium meal", "Large meal", "Super meal"};
          priceList = new float[] {60, 90, 120, 150};
          images = new Sprite[] {smallMeal, mediumMeal, bigMeal, superMeal};
-         energyBarIncrementValue = new float[] {0, 0, 5, 8};
+         energyBarIncrementValue = new float[] {2, 3, 5, 8};
          hungerBarIncrementValue = new float[] {20, 30, 35, 40};
-         happinessBarIncrementValue = new float[] {0, 3, 5, 10};
+         happinessBarIncrementValue = new float[] {3, 5, 10, 15};
          eatingTime = new float[] {0.25f, 0.30f, 0.30f, 1f};
       }
       else if (selectedBuilding == "CAFETERIA")
       {
-         foodList = new string[] {"small meal", "medium meal", "large meal", "super meal"};
-         priceList = new float[] {40, 38, 35, 32};
-         images = new Sprite[] {smallMeal, mediumMeal, bigMeal, superMeal};
+         foodList = new string[] {"Egg and Rice", "Tofu and Rice", "Veggies and Rice", "Chicken and Rice", "Pork and Rice", "Seafood and Rice"};
+         priceList = new float[] {30, 40, 40, 60, 60, 70};
+         images = new Sprite[] {eggRice, tofuRice, veggiesRice, chickenRice, porkRice, seafoodRice};
+         energyBarIncrementValue = new float[] {3, 5, 5, 8, 8, 8};
+         hungerBarIncrementValue = new float[] {20, 30, 30, 35, 35, 40};
+         happinessBarIncrementValue = new float[] {0, 3, 3, 5, 5, 8};
+         eatingTime = new float[] {0.30f, 0.30f, 0.30f, 0.45f, 0.45f, 0.45f};
       }
    }
 

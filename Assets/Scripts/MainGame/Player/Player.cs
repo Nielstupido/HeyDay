@@ -19,17 +19,6 @@ public enum Gender
     FEMALE
 }
 
-public enum FinanceStats
-{
-    BANKSAVINGS,
-    EMERGENCYFUNDS,
-    INCOME,
-    TAXRATE,
-    DEBT,
-    MONTHLYOUTFLOW
-}
-
-
 
 public class Player : MonoBehaviour
 {
@@ -79,14 +68,15 @@ public class Player : MonoBehaviour
     public void EatDrink(float happinessAddValue, float energyLevelAddValue, float hungerLevelCutValue, float amount, float eatingTimeValue)
     {
         AddClockTime(eatingTimeValue);
-        StatsChecker();
         playerStatsDict[PlayerStats.HAPPINESS] += happinessAddValue;
         playerStatsDict[PlayerStats.ENERGY] += energyLevelAddValue;
         playerStatsDict[PlayerStats.HUNGER] += hungerLevelCutValue;
         playerStatsDict[PlayerStats.MONEY] -= amount;
 
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
-        Debug.Log("HAPPY:" + playerStatsDict[PlayerStats.HAPPINESS]);
+        //Debug.Log("HAPPY:" + playerStatsDict[PlayerStats.HAPPINESS]);
+        StatsChecker();
+        //Debug.Log("HAPPY AFTER:" + playerStatsDict[PlayerStats.HAPPINESS]);
     }
 
 
@@ -162,6 +152,20 @@ public class Player : MonoBehaviour
             }
             
         }
+
+        //Checks if stats reaches the upper limit
+        if (playerStatsDict[PlayerStats.ENERGY] > 100)
+        {
+            playerStatsDict[PlayerStats.ENERGY] = 100;
+        }
+        if (playerStatsDict[PlayerStats.HAPPINESS] > 100)
+        {
+            playerStatsDict[PlayerStats.HAPPINESS] = 100;
+        }
+        if (playerStatsDict[PlayerStats.HUNGER] > 100)
+        {
+            playerStatsDict[PlayerStats.HUNGER] = 100;
+        }
     }
 
     public void Hospitalized(float dayCount)
@@ -212,6 +216,16 @@ public class Player : MonoBehaviour
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":00";
             }
+            else if (minutes < 10)
+            {
+                if (hours > 24)
+                {
+                    hours = 0;
+                    toggleCounter++;
+                }
+                transposedValue = TransposeTimeValue((int)currentTime);
+                clockValue.text = transposedValue.ToString() + ":0" + minutes.ToString();
+            }
             else if (hours > 24)
             {
                 hours = 0;
@@ -222,6 +236,7 @@ public class Player : MonoBehaviour
             }
             else
             {
+                Debug.Log(minutes);
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":" + minutes.ToString();
             }
@@ -242,7 +257,7 @@ public class Player : MonoBehaviour
                 clockValue.text = transposedValue.ToString() + ":00";
             }
         }
-        Debug.Log(currentTime);
+        //Debug.Log(currentTime);
         AmOrPm();
         IncrementDayCount();
     }

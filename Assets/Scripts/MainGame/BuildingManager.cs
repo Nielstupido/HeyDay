@@ -42,6 +42,7 @@ public class BuildingManager : MonoBehaviour
     {
         enterBtn.GetComponent<Button>().onClick.AddListener(delegate { EnterBuilding(currentSelectedBuilding); });
         buildingSelectOverlay.SetActive(false);
+        Debug.Log(currentSelectedBuilding);
     }
 
 

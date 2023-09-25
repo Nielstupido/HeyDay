@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08966714, g: 0.23434177, b: 0.2924528, a: 0.6745098}
+  m_Color: {r: 0.08966714, g: 0.23434177, b: 0.2924528, a: 0.95686275}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -754,8 +754,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -295.566, y: 0}
-  m_SizeDelta: {x: 408.259, y: 64.566}
+  m_AnchoredPosition: {x: -287.24402, y: 0}
+  m_SizeDelta: {x: 424.903, y: 64.566}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &72271845
 MonoBehaviour:
@@ -7224,7 +7224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &819062727
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9045,7 +9045,7 @@ GameObject:
   - component: {fileID: 1027872557}
   - component: {fileID: 1027872556}
   m_Layer: 0
-  m_Name: SwitchMenuItem
+  m_Name: FoodMenuManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9076,10 +9076,16 @@ MonoBehaviour:
   milkTea: {fileID: 21300000, guid: 45418091643eee849a7efe412b69563f, type: 3}
   fruitTea: {fileID: 21300000, guid: 8229c9b32bc03b540985960c8614ff71, type: 3}
   slushie: {fileID: 21300000, guid: bba79ffc66e371a408cca1133c9856e0, type: 3}
-  smallMeal: {fileID: 0}
-  mediumMeal: {fileID: 0}
-  bigMeal: {fileID: 0}
-  superMeal: {fileID: 0}
+  smallMeal: {fileID: 21300000, guid: 93872471f337ee045a0bf122596b6923, type: 3}
+  mediumMeal: {fileID: 21300000, guid: 8a841aa39c20cec4198fa068b31db177, type: 3}
+  bigMeal: {fileID: 21300000, guid: 495597df84d723f469c7c552550269d7, type: 3}
+  superMeal: {fileID: 21300000, guid: 75f34509de408e4448bc10792e147e38, type: 3}
+  eggRice: {fileID: 21300000, guid: f397b4f6202cc8f45b5063182340b8e6, type: 3}
+  tofuRice: {fileID: 21300000, guid: 4b50e6aa968db7440bedadfab6786e61, type: 3}
+  veggiesRice: {fileID: 21300000, guid: 39c7f0a4a9de44b4a91ec8f9f86990aa, type: 3}
+  chickenRice: {fileID: 21300000, guid: a50280161e5c2504f9b32bbd2d79a077, type: 3}
+  porkRice: {fileID: 21300000, guid: 1d54a8c15446bda4fa402d9e7b605098, type: 3}
+  seafoodRice: {fileID: 21300000, guid: b52c36fece1edf644a48f1ece81379cf, type: 3}
 --- !u!4 &1027872557
 Transform:
   m_ObjectHideFlags: 0
@@ -14126,7 +14132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1651387345
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15279,7 +15285,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1751283231
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16381,7 +16387,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 25524231}
         m_TargetAssemblyTypeName: PlayerPhone, Assembly-CSharp
-        m_MethodName: FinanceTracker
+        m_MethodName: PhoneBook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16469,8 +16475,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 288, y: -183}
-  m_SizeDelta: {x: 1027.931, y: 592.857}
+  m_AnchoredPosition: {x: 317.482, y: -183}
+  m_SizeDelta: {x: 1086.894, y: 592.857}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1868818327
 GameObject:
