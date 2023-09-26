@@ -1,9 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Bank : Building
 {
+    [SerializeField] private GameObject menuOverlay;
+    [SerializeField] private GameObject depositOverlay;
+    [SerializeField] private GameObject withdrawOverlay;
+    [SerializeField] private GameObject balanceOverlay;
+    [SerializeField] private TMP_InputField depositAmountField;
+    [SerializeField] private TMP_InputField withdrawAmountField;
+
+
+
     private void Start()
     {
         buildingName = Buildings.BANK;
@@ -36,5 +46,62 @@ public class Bank : Building
                     Debug.Log("money deposited");
                     break;
             }
+    }
+
+
+    public void OpenDepositMenu()
+    {
+        depositOverlay.SetActive(true);
+    }
+
+
+    public void OpenWithdrawMenu()
+    {
+        withdrawOverlay.SetActive(true);
+    }
+
+
+    public void OpenBalanceMenu()
+    {
+        balanceOverlay.SetActive(true);
+    }
+
+
+    public void CancelTransaction()
+    {
+        if (depositOverlay.activeSelf)
+        {
+            depositOverlay.SetActive(false);
+        }
+        else if (withdrawOverlay.activeSelf)
+        {
+            withdrawOverlay.SetActive(false);
+        }
+        else if (balanceOverlay.activeSelf)
+        {
+            balanceOverlay.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+
+    public void DepositMoney()
+    {
+        Debug.Log(int.Parse(depositAmountField.text).ToString());
+    }
+
+
+    public void WithdrawMoney()
+    {
+        Debug.Log(int.Parse(withdrawAmountField.text).ToString());
+    }
+
+
+    public void CheckBalance()
+    {
+        
     }
 }
