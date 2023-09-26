@@ -42,6 +42,7 @@ public class BuildingManager : MonoBehaviour
     {
         enterBtn.GetComponent<Button>().onClick.AddListener(delegate { EnterBuilding(currentSelectedBuilding); });
         buildingSelectOverlay.SetActive(false);
+        Debug.Log(currentSelectedBuilding);
     }
 
 
@@ -56,10 +57,16 @@ public class BuildingManager : MonoBehaviour
 
     public void Ride()
     {
-        player.Walk(5f);
+        player.Ride(5f);
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
+    }
+
+    public void BuyFood(float energyValue, float hungerValue, float happinessValue, float amountValue, float eatingTime)
+    { 
+        //Debug.Log(happinessValue);
+        player.EatDrink(happinessValue, energyValue, hungerValue, amountValue, eatingTime);
     }
 
 

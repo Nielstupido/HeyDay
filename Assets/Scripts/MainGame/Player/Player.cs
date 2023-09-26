@@ -20,7 +20,6 @@ public enum Gender
 }
 
 
-
 public class Player : MonoBehaviour
 {
     private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
@@ -28,7 +27,7 @@ public class Player : MonoBehaviour
     private Gender playerGender;
     private float hospitalFee = 1500; // hospital fee per day
     private float numOfdays = 0;
-    private float currentTime = 11; //time will start at 7AM
+    private float currentTime = 7; //time will start at 7AM
     private int toggleCounter;
     private float currentDayCount = 1;// number of days that have passed
     
@@ -66,14 +65,18 @@ public class Player : MonoBehaviour
     }
 
 
-    public void EatDrink(float happinessAddValue, float energyLevelAddValue, float hungerLevelCutValue, float amount)
+    public void EatDrink(float happinessAddValue, float energyLevelAddValue, float hungerLevelCutValue, float amount, float eatingTimeValue)
     {
+        AddClockTime(eatingTimeValue);
         playerStatsDict[PlayerStats.HAPPINESS] += happinessAddValue;
         playerStatsDict[PlayerStats.ENERGY] += energyLevelAddValue;
-        playerStatsDict[PlayerStats.HUNGER] -= hungerLevelCutValue;
+        playerStatsDict[PlayerStats.HUNGER] += hungerLevelCutValue;
         playerStatsDict[PlayerStats.MONEY] -= amount;
 
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
+        //Debug.Log("HAPPY:" + playerStatsDict[PlayerStats.HAPPINESS]);
+        StatsChecker();
+        //Debug.Log("HAPPY AFTER:" + playerStatsDict[PlayerStats.HAPPINESS]);
     }
 
 
@@ -99,7 +102,7 @@ public class Player : MonoBehaviour
 
     public void Walk(float energyLevelCutValue)
     {
-        AddClockTime(2.3f);
+        AddClockTime(2);
         StatsChecker();
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
@@ -108,14 +111,23 @@ public class Player : MonoBehaviour
 
     public void Ride(float energyLevelCutValue)
     {
+        AddClockTime(0.5f);
+        StatsChecker();
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
+    }
+
+    public void BuyGrocery(float amount)
+    {
+        playerStatsDict[PlayerStats.MONEY] -= amount;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
     }
 
     public void StatsChecker()
     {
         if (playerStatsDict[PlayerStats.ENERGY] <= 10 | playerStatsDict[PlayerStats.HAPPINESS] <= 10 | playerStatsDict[PlayerStats.HUNGER] <= 10)//checks if any of the stats reaches lower limit
         {
+            Debug.Log("LUH");
             float sumOfStats = playerStatsDict[PlayerStats.ENERGY] + playerStatsDict[PlayerStats.HAPPINESS] + playerStatsDict[PlayerStats.HUNGER];
 
             if ((sumOfStats*100) / 300 <= 10)
@@ -134,7 +146,25 @@ public class Player : MonoBehaviour
             {
                 Hospitalized(2);
             }
+            else
+            {
+                Hospitalized(1);
+            }
             
+        }
+
+        //Checks if stats reaches the upper limit
+        if (playerStatsDict[PlayerStats.ENERGY] > 100)
+        {
+            playerStatsDict[PlayerStats.ENERGY] = 100;
+        }
+        if (playerStatsDict[PlayerStats.HAPPINESS] > 100)
+        {
+            playerStatsDict[PlayerStats.HAPPINESS] = 100;
+        }
+        if (playerStatsDict[PlayerStats.HUNGER] > 100)
+        {
+            playerStatsDict[PlayerStats.HUNGER] = 100;
         }
     }
 
@@ -165,32 +195,40 @@ public class Player : MonoBehaviour
         currentTime += addedClockValue;
         int minutes = 0;
         int hours = 0;
-        int transposedValue; 
+        int transposedValue;
 
-        if (currentTime % 1 != 0)
+        hours = (int)currentTime;
+        float temp = (currentTime % 1) * 100;
+        minutes = (int)temp;
+
+        if (currentTime % 1 != 0) //determines if value is whole number or not
         {
-            hours = (int)currentTime;
-            float temp = (currentTime % 1) * 100;
-            minutes = (int)temp;
-
-            if (minutes >= 60)
+            if (minutes > 59)
             {
                 minutes = 0;
-                hours ++;
-
+                hours += 1;
                 if (hours > 24)
                 {
-                    hours = 1;
+                    hours = 0;
                     toggleCounter++;
                 }
-
+                currentTime = hours;
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":00";
-                currentTime = hours;
+            }
+            else if (minutes < 10)
+            {
+                if (hours > 24)
+                {
+                    hours = 0;
+                    toggleCounter++;
+                }
+                transposedValue = TransposeTimeValue((int)currentTime);
+                clockValue.text = transposedValue.ToString() + ":0" + minutes.ToString();
             }
             else if (hours > 24)
             {
-                hours = 1;
+                hours = 0;
                 currentTime = hours + (minutes / 100);
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":" + minutes.ToString();
@@ -198,16 +236,28 @@ public class Player : MonoBehaviour
             }
             else
             {
+                Debug.Log(minutes);
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":" + minutes.ToString();
             }
         }
         else
         {
-            hours = (int)currentTime;
-            clockValue.text = hours.ToString() + ":00";
+            if (hours > 24)
+            {
+                hours = 0;
+                currentTime = hours + (minutes / 100);
+                transposedValue = TransposeTimeValue((int)currentTime);
+                clockValue.text = transposedValue.ToString() + ":00";
+                toggleCounter++;
+            }
+            else
+            {
+                transposedValue = TransposeTimeValue((int)currentTime);
+                clockValue.text = transposedValue.ToString() + ":00";
+            }
         }
-
+        //Debug.Log(currentTime);
         AmOrPm();
         IncrementDayCount();
     }
@@ -228,6 +278,7 @@ public class Player : MonoBehaviour
             case 22: return 10;
             case 23: return 11;
             case 24: return 12;
+            case 0: return 12;
             default: return (currentTime);
         }
     }
