@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dayValue;
 
     public string PlayerName { set{playerName = value;} get{return playerName;}}
+    public float PlayerCash { set; get;}
+    public float PlayerBankSavings { set; get;}
     public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
     public static Player Instance { get; private set; }
 
@@ -62,6 +64,7 @@ public class Player : MonoBehaviour
         playerStatsDict.Add(PlayerStats.HUNGER, 100f);
         playerStatsDict.Add(PlayerStats.ENERGY, 100f);
         playerStatsDict.Add(PlayerStats.MONEY, 5000f);
+        PlayerBankSavings = 20000f;
     }
 
 

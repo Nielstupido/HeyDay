@@ -7,8 +7,16 @@ public class Bank : Building
 {
     [SerializeField] private GameObject menuOverlay;
     [SerializeField] private GameObject depositOverlay;
+    [SerializeField] private GameObject depositProcessOverlay;
+    [SerializeField] private GameObject depositProcessingOverlay;
+    [SerializeField] private GameObject depositProcessedOverlay;
     [SerializeField] private GameObject withdrawOverlay;
+    [SerializeField] private GameObject withdrawProcessOverlay;
+    [SerializeField] private GameObject withdrawProcessingOverlay;
+    [SerializeField] private GameObject withdrawProcessedOverlay;
     [SerializeField] private GameObject balanceOverlay;
+    [SerializeField] private TextMeshProUGUI balanceText;
+
     [SerializeField] private TMP_InputField depositAmountField;
     [SerializeField] private TMP_InputField withdrawAmountField;
 
@@ -64,6 +72,7 @@ public class Bank : Building
     public void OpenBalanceMenu()
     {
         balanceOverlay.SetActive(true);
+        CheckBalance();
     }
 
 
@@ -88,20 +97,78 @@ public class Bank : Building
     }
 
 
-    public void DepositMoney()
+    public void WithdrawMoney()
     {
-        Debug.Log(int.Parse(depositAmountField.text).ToString());
+        StartCoroutine(ProcessTransaction(1));
     }
 
 
-    public void WithdrawMoney()
+    public void DepositMoney()
     {
-        Debug.Log(int.Parse(withdrawAmountField.text).ToString());
+        StartCoroutine(ProcessTransaction(2));
     }
 
 
     public void CheckBalance()
     {
-        
+        balanceText.text = Player.Instance.PlayerBankSavings.ToString();
+    }
+
+
+    private IEnumerator ProcessTransaction(int transacType)
+    {
+        if (transacType == 1)
+        {
+            if (float.Parse(withdrawAmountField.text) > Player.Instance.PlayerBankSavings)
+            {
+                //error
+            }
+
+            Debug.Log("cash = " + Player.Instance.PlayerCash.ToString());
+            Debug.Log("bank = " + Player.Instance.PlayerBankSavings.ToString());
+            withdrawProcessOverlay.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            withdrawProcessingOverlay.SetActive(false);
+            withdrawProcessedOverlay.SetActive(true);
+            yield return new WaitForSeconds(2f);
+
+            Player.Instance.PlayerCash += float.Parse(withdrawAmountField.text);
+            Player.Instance.PlayerBankSavings -= float.Parse(withdrawAmountField.text);
+
+            withdrawOverlay.SetActive(false);
+            withdrawProcessedOverlay.SetActive(false);
+            withdrawProcessingOverlay.SetActive(true);
+            withdrawProcessedOverlay.SetActive(false);
+            Debug.Log("cash = " + Player.Instance.PlayerCash.ToString());
+            Debug.Log("bank = " + Player.Instance.PlayerBankSavings.ToString());
+        }
+        else if (transacType == 2)
+        {
+            if (float.Parse(depositAmountField.text) > Player.Instance.PlayerCash)
+            {
+                //error
+            }
+
+            Debug.Log("cash = " + Player.Instance.PlayerCash.ToString());
+            Debug.Log("bank = " + Player.Instance.PlayerBankSavings.ToString());
+            depositProcessOverlay.SetActive(true);
+            depositProcessingOverlay.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            depositProcessingOverlay.SetActive(false);
+            depositProcessedOverlay.SetActive(true);
+            yield return new WaitForSeconds(2f);
+
+            Player.Instance.PlayerCash -= float.Parse(depositAmountField.text);
+            Player.Instance.PlayerBankSavings += float.Parse(depositAmountField.text);
+
+            depositOverlay.SetActive(false);
+            depositProcessOverlay.SetActive(true);
+            depositProcessingOverlay.SetActive(true);
+            depositProcessedOverlay.SetActive(false);
+            Debug.Log("cash = " + Player.Instance.PlayerCash.ToString());
+            Debug.Log("bank = " + Player.Instance.PlayerBankSavings.ToString());
+        }
+
+        yield return null;
     }
 }
