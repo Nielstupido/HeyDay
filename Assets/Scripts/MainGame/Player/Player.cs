@@ -102,6 +102,17 @@ public class Player : MonoBehaviour
 
     }
 
+    public void Purchase(float energyLevelCutValue, float amount)
+    {
+        AddClockTime(0.30f);
+        playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
+
+        playerStatsDict[PlayerStats.MONEY] -= amount;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
+        StatsChecker();
+    }
+
 
     public void Walk(float energyLevelCutValue)
     {
