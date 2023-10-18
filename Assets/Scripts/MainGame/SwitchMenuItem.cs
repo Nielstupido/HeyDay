@@ -36,7 +36,7 @@ public class SwitchMenuItem : MonoBehaviour
    private float[] hungerBarIncrementValue;
    private float[] happinessBarIncrementValue;
    private float[] eatingTime;
-   private string selectedBuilding = "CAFETERIA"; //Temporary variable
+   private string selectedBuilding = "CONVENIENCESTORE"; //Temporary variable
    private int currentItem = 0;
 
    public void Start()
@@ -118,7 +118,7 @@ public class SwitchMenuItem : MonoBehaviour
    public void DisplayMenuText()
    {
       foodName.text = foodList[currentItem];
-      priceValue.text = priceList[currentItem].ToString();
+      priceValue.text = "₱" + priceList[currentItem].ToString();
    }
 
    public void DisplayImage()
