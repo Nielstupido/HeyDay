@@ -63,6 +63,11 @@ public class BuildingManager : MonoBehaviour
         enterBtn.SetActive(true);
     }
 
+    public void Buy(float amount)
+    {
+        player.Purchase(10f, amount);
+    }
+
     public void BuyFood(float energyValue, float hungerValue, float happinessValue, float amountValue, float eatingTime)
     { 
         //Debug.Log(happinessValue);
