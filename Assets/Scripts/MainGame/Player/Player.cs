@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
 {
     private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
     private string playerName;
+    private string playerCourse;
+    private float playerCourseDuration;
     private Gender playerGender;
     private float hospitalFee = 1500; // hospital fee per day
     private float numOfdays = 0;
@@ -37,9 +39,11 @@ public class Player : MonoBehaviour
     [SerializeField] private TextMeshProUGUI clockValue;
     [SerializeField] private TextMeshProUGUI indicatorAMPM;
     [SerializeField] private TextMeshProUGUI dayValue;
+    [SerializeField] private TextMeshProUGUI studyHours;
 
     public string PlayerName { set{playerName = value;} get{return playerName;}}
     public float PlayerCash { set; get;}
+    public float PlayerStudyHours { set; get;}
     public float PlayerBankSavings { set; get;}
     public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
     public static Player Instance { get; private set; }
@@ -96,10 +100,46 @@ public class Player : MonoBehaviour
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
     }
 
-
-    public void Study()
+    public float checkInputDuration(float duration)
     {
+        float targetTime = duration + currentTime;
+        if (targetTime > 17.0f)
+        {
+            float excessTime = targetTime - 17;
+            duration -= excessTime;
+        }
 
+        return duration;
+    }
+
+
+    public void Study(float studyDurationValue)
+    {
+        studyDurationValue = checkInputDuration(studyDurationValue);
+        AddClockTime(studyDurationValue);
+        playerStatsDict[PlayerStats.ENERGY] -= studyDurationValue * 10;
+        playerStatsDict[PlayerStats.HAPPINESS] -= studyDurationValue * 3;
+        playerStatsDict[PlayerStats.HUNGER] -= studyDurationValue * 5;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HAPPINESS, playerStatsDict);
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HUNGER, playerStatsDict);
+
+        StatsChecker();
+        UpdateStudyHours(studyDurationValue);
+    }
+
+    public void UpdateStudyHours(float studyDurationValue)
+    {
+        PlayerStudyHours += studyDurationValue;
+        studyHours.text = PlayerStudyHours.ToString();
+    }
+
+    public void Enroll(string courseName, float courseDuration)
+    {
+        playerCourse = courseName;
+        playerCourseDuration = courseDuration;
+
+        UpdateStudyHours(0);
     }
 
     public void Purchase(float energyLevelCutValue, float amount)
@@ -271,7 +311,7 @@ public class Player : MonoBehaviour
                 clockValue.text = transposedValue.ToString() + ":00";
             }
         }
-        //Debug.Log(currentTime);
+        Debug.Log(currentTime);
         AmOrPm();
         IncrementDayCount();
     }

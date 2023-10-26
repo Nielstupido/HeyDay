@@ -52,5 +52,6 @@
         "temp/":true,
         "Temp/":true
     },
-    "dotnet.defaultSolution": "HeyDay.sln"
+    "dotnet.defaultSolution": "HeyDay.sln",
+    "dotnet.preferCSharpExtension": true
 }
