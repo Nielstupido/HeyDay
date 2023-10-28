@@ -59,5 +59,6 @@ public enum Buttons
     WATCHMOVIE,
     PARTY,
     STUDY,
-    ENROL
+    ENROL,
+    SHOP
 }
