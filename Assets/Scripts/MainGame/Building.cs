@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+
 public abstract class Building : MonoBehaviour
 {
     [HideInInspector]public Buildings buildingName;
@@ -44,7 +45,8 @@ public enum Buildings
     NIGHTCLUB,
     UNIVERSITY,
     BEEUSOLUTIONS,
-    GOVERNMENTOFFICE
+    GOVERNMENTOFFICE,
+    RESIDENTIAL
 }
 
 
@@ -59,5 +61,6 @@ public enum Buttons
     WATCHMOVIE,
     PARTY,
     STUDY,
-    ENROL
+    ENROL,
+    ENTER
 }

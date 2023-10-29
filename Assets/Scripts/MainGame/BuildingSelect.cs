@@ -5,34 +5,47 @@ using UnityEngine.EventSystems;
 
 public class BuildingSelect : MonoBehaviour, IPointerClickHandler
 {
-    [SerializeField] private Text buildingNameText;
-    [SerializeField] private BuildingManager buildingManager;
     private Vector3 scaleDown = new Vector3(0.1f, 0.1f, 0.1f);
-    
+
 
     private void Start()
     {
-        buildingManager.BuildingSelectOverlay.transform.localScale = scaleDown;
+        BuildingManager.Instance.BuildingSelectOverlay.transform.localScale = scaleDown;
     }
 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
-        if (buildingManager.BuildingSelectOverlay.activeSelf && buildingManager.CurrentSelectedBuilding == eventData.selectedObject.GetComponent<Building>())
+        if (BuildingManager.Instance.BuildingSelectOverlay.activeSelf && BuildingManager.Instance.CurrentSelectedBuilding == eventData.selectedObject.GetComponent<Building>())
         {
-            AnimationManager.ScaleObj(buildingManager.BuildingSelectOverlay, scaleDown, 0.4f, true, LeanTweenType.easeInOutBack);
+            AnimationManager.ScaleObj(BuildingManager.Instance.BuildingSelectOverlay, scaleDown, 0.4f, true, LeanTweenType.easeInOutBack);
         }
         else
         {
-            buildingNameText.text = eventData.selectedObject.gameObject.name;
-            buildingManager.CurrentSelectedBuilding = eventData.selectedObject.GetComponent<Building>();
-            Debug.Log("building name " + buildingManager.CurrentSelectedBuilding);
+            BuildingManager.Instance.BuildingNameText = eventData.selectedObject.gameObject.name;
+            BuildingManager.Instance.CurrentSelectedBuilding = eventData.selectedObject.GetComponent<Building>();
+            Debug.Log("building name " + BuildingManager.Instance.CurrentSelectedBuilding);
 
-            if (!buildingManager.BuildingSelectOverlay.activeSelf)
+            if (PlayerTravelManager.Instance.CurrentVisitedBuilding != null)
             {
-                buildingManager.BuildingSelectOverlay.SetActive(true);
-                AnimationManager.ScaleObj(buildingManager.BuildingSelectOverlay, Vector3.one, 0.4f, false, LeanTweenType.easeOutBounce);
+                if (PlayerTravelManager.Instance.CurrentVisitedBuilding != BuildingManager.Instance.CurrentSelectedBuilding)
+                {
+                    BuildingManager.Instance.walkBtn.SetActive(true);
+                    BuildingManager.Instance.rideBtn.SetActive(true);
+                    BuildingManager.Instance.enterBtn.SetActive(false);
+                }
+                else
+                {
+                    BuildingManager.Instance.walkBtn.SetActive(false);
+                    BuildingManager.Instance.rideBtn.SetActive(false);
+                    BuildingManager.Instance.enterBtn.SetActive(true);
+                }
+            }
+
+            if (!BuildingManager.Instance.BuildingSelectOverlay.activeSelf)
+            {
+                BuildingManager.Instance.BuildingSelectOverlay.SetActive(true);
+                AnimationManager.ScaleObj(BuildingManager.Instance.BuildingSelectOverlay, Vector3.one, 0.4f, false, LeanTweenType.easeOutBounce);
             }
         }
     }

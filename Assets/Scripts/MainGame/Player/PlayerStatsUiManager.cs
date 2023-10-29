@@ -9,6 +9,7 @@ public class PlayerStatsUiManager : MonoBehaviour
     [SerializeField] private Slider happinessBar;
     [SerializeField] private Slider energyBar;
     [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI moneyTextSmallOverlay;
 
 
     private void Start()
@@ -26,6 +27,7 @@ public class PlayerStatsUiManager : MonoBehaviour
                 happinessBar.value = playerStatsDict[PlayerStats.HAPPINESS];
                 energyBar.value = playerStatsDict[PlayerStats.ENERGY];
                 moneyText.text = playerStatsDict[PlayerStats.MONEY].ToString();
+                moneyTextSmallOverlay.text = playerStatsDict[PlayerStats.MONEY].ToString();
                 break;
             case PlayerStats.HUNGER:
                 hungerBar.value = playerStatsDict[statName];

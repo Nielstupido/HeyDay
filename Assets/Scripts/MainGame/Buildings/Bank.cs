@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Bank : Building
 {
+    [SerializeField] private GameObject bankSystemOverlay;
     [SerializeField] private GameObject menuOverlay;
     [SerializeField] private GameObject depositOverlay;
     [SerializeField] private GameObject depositProcessOverlay;
@@ -57,6 +59,12 @@ public class Bank : Building
     }
 
 
+    public void OpenBankSystem()
+    {
+        bankSystemOverlay.SetActive(true);
+    }
+
+
     public void OpenDepositMenu()
     {
         depositOverlay.SetActive(true);
@@ -92,7 +100,7 @@ public class Bank : Building
         }
         else
         {
-            gameObject.SetActive(false);
+            bankSystemOverlay.SetActive(false);
         }
     }
 
