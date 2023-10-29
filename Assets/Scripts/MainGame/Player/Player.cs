@@ -25,9 +25,8 @@ public class Player : MonoBehaviour
     private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
     public List<int> itemsBought = new List<int>(); //list to store bought items
     private string playerName;
-    private string playerCourse;
-    private float playerCourseDuration;
     private Gender playerGender;
+    private string courseEnrolled;
     private float hospitalFee = 1500; // hospital fee per day
     private float numOfdays = 0;
     private float currentTime = 7; //time will start at 7AM
@@ -44,6 +43,8 @@ public class Player : MonoBehaviour
 
     public string PlayerName { set{playerName = value;} get{return playerName;}}
     public float PlayerCash { set; get;}
+    public string PlayerEnrolledCourse { set{courseEnrolled = value;} get{return courseEnrolled;}}
+    public float PlayerEnrolledCourseDuration { set; get;}
     public float PlayerStudyHours { set; get;}
     public float PlayerBankSavings { set; get;}
     public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
@@ -126,7 +127,7 @@ public class Player : MonoBehaviour
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HUNGER, playerStatsDict);
 
         StatsChecker();
-        UpdateStudyHours(studyDurationValue);
+        University.Instance.UpdateStudyHours(studyDurationValue);
     }
 
     public void UpdateStudyHours(float studyDurationValue)
@@ -137,9 +138,6 @@ public class Player : MonoBehaviour
 
     public void Enroll(string courseName, float courseDuration)
     {
-        playerCourse = courseName;
-        playerCourseDuration = courseDuration;
-
         UpdateStudyHours(0);
     }
 
