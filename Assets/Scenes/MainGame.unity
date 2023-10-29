@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44486502, g: 0.49442548, b: 0.5735965, a: 1}
+  m_IndirectSpecularColor: {r: 0.44233638, g: 0.49120283, b: 0.5710321, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2289,6 +2289,7 @@ GameObject:
   - component: {fileID: 107460589}
   - component: {fileID: 107460588}
   - component: {fileID: 107460592}
+  - component: {fileID: 107460593}
   m_Layer: 0
   m_Name: Cube (10)
   m_TagString: Untagged
@@ -2418,6 +2419,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &107460593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107460586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &108945845
 GameObject:
   m_ObjectHideFlags: 0
@@ -3376,6 +3389,9 @@ MonoBehaviour:
   bottomOverlay: {fileID: 1710457672}
   pauseBtn: {fileID: 1248060380}
   buildingInteriorOverlay: {fileID: 62309206}
+  hospitalizedPrompt: {fileID: 0}
+  daysHospitalized: {fileID: 0}
+  totalBill: {fileID: 0}
 --- !u!4 &147613448
 Transform:
   m_ObjectHideFlags: 0
@@ -4892,6 +4908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingSelectOverlay: {fileID: 434310656}
+  buildingNameText: {fileID: 1850773246}
   buttonImages:
   - {fileID: 21300000, guid: f8861d5aa737ff045b473959ad06fffa, type: 3}
   - {fileID: 21300000, guid: f8861d5aa737ff045b473959ad06fffa, type: 3}
@@ -4908,9 +4925,14 @@ MonoBehaviour:
   walkBtn: {fileID: 925704130}
   rideBtn: {fileID: 484582873}
   enterBtn: {fileID: 1025055506}
+  closedBtn: {fileID: 1818084105}
   buttonsHolder: {fileID: 315949133}
   player: {fileID: 433560202}
   btnPrefab: {fileID: 8422458373500371487, guid: c9e80a3819bedc44caa597172cf1ad61, type: 3}
+  smallStatsOverlay: {fileID: 2911800399325964226}
+  camera1: {fileID: 963194225}
+  camera2: {fileID: 316978989}
+  playerTravelManager: {fileID: 1328888010}
 --- !u!4 &223557264
 Transform:
   m_ObjectHideFlags: 0
@@ -5197,6 +5219,7 @@ GameObject:
   - component: {fileID: 246909195}
   - component: {fileID: 246909194}
   - component: {fileID: 246909198}
+  - component: {fileID: 246909199}
   m_Layer: 0
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -5326,6 +5349,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &246909199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246909192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &248593300
 GameObject:
   m_ObjectHideFlags: 0
@@ -9574,6 +9609,7 @@ MonoBehaviour:
   happinessBar: {fileID: 77767979}
   energyBar: {fileID: 1514917349}
   moneyText: {fileID: 766147961}
+  moneyTextSmallOverlay: {fileID: 2911800399204112981}
 --- !u!114 &433560201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9599,13 +9635,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemsBought: 
-  hospitalizedPrompt: {fileID: 0}
-  daysHospitalized: {fileID: 0}
-  totalBill: {fileID: 0}
-  clockValue: {fileID: 0}
-  indicatorAMPM: {fileID: 0}
-  dayValue: {fileID: 0}
-  studyHours: {fileID: 0}
 --- !u!114 &433560203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12294,6 +12323,7 @@ GameObject:
   - component: {fileID: 599675103}
   - component: {fileID: 599675102}
   - component: {fileID: 599675106}
+  - component: {fileID: 599675107}
   m_Layer: 0
   m_Name: Cube (9)
   m_TagString: Untagged
@@ -12423,6 +12453,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &599675107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599675100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &599823409
 GameObject:
   m_ObjectHideFlags: 0
@@ -12614,10 +12656,10 @@ RectTransform:
   m_Father: {fileID: 882433112}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 286.64996, y: -200}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &606973841
 MonoBehaviour:
@@ -14270,6 +14312,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: 0
   actionButtons: 
+  buildingOpeningTime: 0
+  buildingClosingTime: 0
 --- !u!114 &662546997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14326,8 +14370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingNameText: {fileID: 0}
-  buildingManager: {fileID: 0}
 --- !u!1 &664348746
 GameObject:
   m_ObjectHideFlags: 0
@@ -14614,6 +14656,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: 0
   actionButtons: 
+  buildingOpeningTime: 0
+  buildingClosingTime: 0
+  bankSystemOverlay: {fileID: 0}
   menuOverlay: {fileID: 6386970846542207706}
   depositOverlay: {fileID: 6386970846358408435}
   depositProcessOverlay: {fileID: 438302068123433586}
@@ -14639,8 +14684,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingNameText: {fileID: 0}
-  buildingManager: {fileID: 0}
 --- !u!1 &680146134
 GameObject:
   m_ObjectHideFlags: 0
@@ -15638,8 +15681,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingNameText: {fileID: 0}
-  buildingManager: {fileID: 0}
 --- !u!1 &740362231
 GameObject:
   m_ObjectHideFlags: 0
@@ -17408,6 +17449,7 @@ GameObject:
   - component: {fileID: 773521941}
   - component: {fileID: 773521940}
   - component: {fileID: 773521944}
+  - component: {fileID: 773521945}
   m_Layer: 0
   m_Name: Cube (15)
   m_TagString: Untagged
@@ -17537,6 +17579,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &773521945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773521938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &783761689
 GameObject:
   m_ObjectHideFlags: 0
@@ -18851,6 +18905,7 @@ GameObject:
   - component: {fileID: 833446615}
   - component: {fileID: 833446614}
   - component: {fileID: 833446618}
+  - component: {fileID: 833446619}
   m_Layer: 0
   m_Name: Cube (8)
   m_TagString: Untagged
@@ -18980,6 +19035,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &833446619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833446612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &834706735
 GameObject:
   m_ObjectHideFlags: 0
@@ -20713,7 +20780,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.0068359375, y: 0.001953125}
-  m_SizeDelta: {x: 0.5999756, y: 0}
+  m_SizeDelta: {x: 0.5999756, y: -177.56006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &882433113
 MonoBehaviour:
@@ -20960,10 +21027,10 @@ RectTransform:
   m_Father: {fileID: 882433112}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 736.64996, y: -700}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &906611504
 MonoBehaviour:
@@ -21201,10 +21268,10 @@ RectTransform:
   m_Father: {fileID: 882433112}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1186.6499, y: -700}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &922352936
 MonoBehaviour:
@@ -25598,6 +25665,7 @@ GameObject:
   - component: {fileID: 1115879679}
   - component: {fileID: 1115879678}
   - component: {fileID: 1115879682}
+  - component: {fileID: 1115879683}
   m_Layer: 0
   m_Name: Cube (11)
   m_TagString: Untagged
@@ -25727,6 +25795,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1115879683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115879676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1117243562
 GameObject:
   m_ObjectHideFlags: 0
@@ -26681,6 +26761,7 @@ GameObject:
   - component: {fileID: 1153844369}
   - component: {fileID: 1153844368}
   - component: {fileID: 1153844372}
+  - component: {fileID: 1153844373}
   m_Layer: 0
   m_Name: University
   m_TagString: Untagged
@@ -26810,6 +26891,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1153844373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153844366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1154669322
 GameObject:
   m_ObjectHideFlags: 0
@@ -29487,10 +29580,10 @@ RectTransform:
   m_Father: {fileID: 882433112}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 286.64996, y: -700}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1253959886
 MonoBehaviour:
@@ -30017,10 +30110,10 @@ RectTransform:
   m_Father: {fileID: 882433112}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1186.6499, y: -200}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1293812189
 MonoBehaviour:
@@ -32553,6 +32646,7 @@ GameObject:
   - component: {fileID: 1423372747}
   - component: {fileID: 1423372746}
   - component: {fileID: 1423372750}
+  - component: {fileID: 1423372751}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -32682,6 +32776,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1423372751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423372744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1424855423
 GameObject:
   m_ObjectHideFlags: 0
@@ -33395,7 +33501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1467327162
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33436,20 +33542,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: 0
   actionButtons: 
+  buildingOpeningTime: 0
+  buildingClosingTime: 0
   universityOverlay: {fileID: 2097173935}
   course: {fileID: 1731721722}
   duration: {fileID: 758093524}
-  totalStudyHours: {fileID: 0}
+  totalStudyHours: {fileID: 1030789229}
   fieldSelectionOverlay: {fileID: 1708154137}
   fieldNameText: {fileID: 216753468}
   courseSelectionOverlay: {fileID: 645633795}
   courseButtonPrefab: {fileID: 5845034710032808991, guid: 07c7b6b2e24556e4f8ac24cfd78eec23, type: 3}
   courseButtonParent: {fileID: 1769320761}
-  studyPromptOverlay: {fileID: 0}
-  studyDurationField: {fileID: 0}
+  studyPromptOverlay: {fileID: 897234194}
+  studyDurationField: {fileID: 1034310753}
   enrollPrompt: {fileID: 2141338752}
   courseNamePrompt: {fileID: 285211563}
-  studyAnimationOverlay: {fileID: 0}
+  studyAnimationOverlay: {fileID: 962178832}
 --- !u!1 &1473049023
 GameObject:
   m_ObjectHideFlags: 0
@@ -33874,6 +33982,7 @@ GameObject:
   - component: {fileID: 1496227673}
   - component: {fileID: 1496227672}
   - component: {fileID: 1496227676}
+  - component: {fileID: 1496227677}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -34003,6 +34112,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1496227677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496227670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1497657277
 GameObject:
   m_ObjectHideFlags: 0
@@ -34401,6 +34522,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: 0
   actionButtons: 
+  buildingOpeningTime: 0
+  buildingClosingTime: 0
 --- !u!114 &1517769847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34457,8 +34580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingNameText: {fileID: 0}
-  buildingManager: {fileID: 0}
 --- !u!1 &1520962243
 GameObject:
   m_ObjectHideFlags: 0
@@ -35625,6 +35746,7 @@ GameObject:
   - component: {fileID: 1600002706}
   - component: {fileID: 1600002705}
   - component: {fileID: 1600002709}
+  - component: {fileID: 1600002710}
   m_Layer: 0
   m_Name: Cube (6)
   m_TagString: Untagged
@@ -35754,6 +35876,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1600002710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600002703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1603089298
 GameObject:
   m_ObjectHideFlags: 0
@@ -37351,6 +37485,7 @@ GameObject:
   - component: {fileID: 1681455238}
   - component: {fileID: 1681455237}
   - component: {fileID: 1681455241}
+  - component: {fileID: 1681455242}
   m_Layer: 0
   m_Name: Cube (13)
   m_TagString: Untagged
@@ -37480,6 +37615,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1681455242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681455235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1681729797
 GameObject:
   m_ObjectHideFlags: 0
@@ -37494,6 +37641,7 @@ GameObject:
   - component: {fileID: 1681729799}
   - component: {fileID: 1681729804}
   - component: {fileID: 1681729803}
+  - component: {fileID: 1681729805}
   m_Layer: 0
   m_Name: Cube (7)
   m_TagString: Untagged
@@ -37639,6 +37787,18 @@ MonoBehaviour:
   actionButtons: 
   buildingOpeningTime: 0
   buildingClosingTime: 0
+--- !u!114 &1681729805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681729797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1683745579
 GameObject:
   m_ObjectHideFlags: 0
@@ -42447,6 +42607,7 @@ GameObject:
   - component: {fileID: 1832908747}
   - component: {fileID: 1832908746}
   - component: {fileID: 1832908750}
+  - component: {fileID: 1832908751}
   m_Layer: 0
   m_Name: Cube (12)
   m_TagString: Untagged
@@ -42576,6 +42737,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1832908751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832908744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1846140978
 GameObject:
   m_ObjectHideFlags: 0
@@ -43998,6 +44171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: 0
   actionButtons: 
+  buildingOpeningTime: 0
+  buildingClosingTime: 0
   shopOptionsOverlay: {fileID: 0}
   shopBrowserOverlay: {fileID: 0}
   itemButtonPrefab: {fileID: 0}
@@ -44094,10 +44269,10 @@ RectTransform:
   m_Father: {fileID: 882433112}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 736.64996, y: -200}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1926697129
 MonoBehaviour:
@@ -44850,6 +45025,7 @@ GameObject:
   - component: {fileID: 1988852897}
   - component: {fileID: 1988852896}
   - component: {fileID: 1988852900}
+  - component: {fileID: 1988852901}
   m_Layer: 0
   m_Name: Factory
   m_TagString: Untagged
@@ -44979,6 +45155,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1988852901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988852894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1992679237
 GameObject:
   m_ObjectHideFlags: 0
@@ -45439,6 +45627,7 @@ GameObject:
   - component: {fileID: 2010685491}
   - component: {fileID: 2010685490}
   - component: {fileID: 2010685494}
+  - component: {fileID: 2010685495}
   m_Layer: 0
   m_Name: Cube (14)
   m_TagString: Untagged
@@ -45568,6 +45757,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2010685495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010685488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdc5831fc15f5d478fb5ccae611187f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2010759257
 GameObject:
   m_ObjectHideFlags: 0
@@ -47519,10 +47720,10 @@ RectTransform:
   m_Father: {fileID: 882433112}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 1636.6499, y: -200}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2057106756
 MonoBehaviour:
@@ -76389,6 +76590,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: 0
   actionButtons: 
+  buildingOpeningTime: 0
+  buildingClosingTime: 0
   shopOptionsOverlay: {fileID: 0}
   shopBrowserOverlay: {fileID: 0}
   itemButtonPrefab: {fileID: 0}
