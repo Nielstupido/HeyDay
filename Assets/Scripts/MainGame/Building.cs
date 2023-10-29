@@ -69,5 +69,6 @@ public enum Buttons
     PARTY,
     STUDY,
     ENROL,
-    ENTER
+    ENTER,
+    SHOP
 }

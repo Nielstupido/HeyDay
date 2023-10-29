@@ -23,11 +23,16 @@ public enum Gender
 public class Player : MonoBehaviour
 {
     private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
+    public List<int> itemsBought = new List<int>(); //list to store bought items
     private string playerName;
+    private string courseEnrolled;
     private Gender playerGender;
     private ResBuilding currentPlayerPlace;
     public string PlayerName { set{playerName = value;} get{return playerName;}}
     public float PlayerCash { set; get;}
+    public string PlayerEnrolledCourse { set{courseEnrolled = value;} get{return courseEnrolled;}}
+    public float PlayerEnrolledCourseDuration { set; get;}
+    public float PlayerStudyHours { set; get;}
     public float PlayerBankSavings { set; get;}
     public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
     public ResBuilding CurrentPlayerPlace { set{currentPlayerPlace = value;} get{return currentPlayerPlace;}}
@@ -89,15 +94,62 @@ public class Player : MonoBehaviour
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
     }
 
-
-    public void Study()
+    /*public float checkInputDuration(float duration)
     {
+        float targetTime = duration + currentTime;
+        if (targetTime > 17.0f)
+        {
+            float excessTime = targetTime - 17;
+            duration -= excessTime;
+        }
 
+        return duration;
+    }*/
+
+
+    public void Study(float studyDurationValue)
+    {
+        //studyDurationValue = checkInputDuration(studyDurationValue);
+        //AddClockTime(studyDurationValue);
+        playerStatsDict[PlayerStats.ENERGY] -= studyDurationValue * 10;
+        playerStatsDict[PlayerStats.HAPPINESS] -= studyDurationValue * 3;
+        playerStatsDict[PlayerStats.HUNGER] -= studyDurationValue * 5;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HAPPINESS, playerStatsDict);
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HUNGER, playerStatsDict);
+
+        StatsChecker();
+        University.Instance.UpdateStudyHours(studyDurationValue);
+    }
+
+    public void UpdateStudyHours(float studyDurationValue)
+    {
+        PlayerStudyHours += studyDurationValue;
+        //studyHours.text = PlayerStudyHours.ToString();
+    }
+
+    public void Enroll(string courseName, float courseDuration)
+    {
+        UpdateStudyHours(0);
     }
 
     public void Purchase(float energyLevelCutValue, float amount)
     {
         TimeManager.Instance.AddClockTime(0.30f);
+        playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
+
+        playerStatsDict[PlayerStats.MONEY] -= amount;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
+        StatsChecker();
+    }
+
+    public void PurchaseMallItem(float energyLevelCutValue, float amount, float happinessAddValue)
+    {
+        //AddClockTime(0.30f);
+        playerStatsDict[PlayerStats.HAPPINESS] += happinessAddValue;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HAPPINESS, playerStatsDict);
+
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
 
