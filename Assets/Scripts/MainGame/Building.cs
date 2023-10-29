@@ -6,6 +6,9 @@ public abstract class Building : MonoBehaviour
 {
     [HideInInspector]public Buildings buildingName;
     [HideInInspector]public List<Buttons> actionButtons;
+    [HideInInspector]public int buildingOpeningTime;
+    [HideInInspector]public int buildingClosingTime;
+
 
 
     public virtual void Work()
@@ -38,15 +41,19 @@ public enum Buildings
     MALL,
     CONVENIENCESTORE,
     CAFETERIA,
-    CARSHOP,
+    AUTODEALER,
     CINEMA,
-    FACTORY,
     FOODXPRESS,
     NIGHTCLUB,
     UNIVERSITY,
     BEEUSOLUTIONS,
-    GOVERNMENTOFFICE,
-    RESIDENTIAL
+    POLICESTATION,
+    RESIDENTIAL,
+    WATERDISTRICT,
+    ELECTRICCOOP,
+    WASTEFACILITY,
+    FIRESTATION,
+    CITYHALL
 }
 
 

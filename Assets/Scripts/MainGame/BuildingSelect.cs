@@ -12,6 +12,37 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
     {
         BuildingManager.Instance.BuildingSelectOverlay.transform.localScale = scaleDown;
     }
+    
+
+    public void RefreshSelectOverlayUI()
+    {
+        if (PlayerTravelManager.Instance.CurrentVisitedBuilding != null)
+        {
+            if (PlayerTravelManager.Instance.CurrentVisitedBuilding != BuildingManager.Instance.CurrentSelectedBuilding)
+            {
+                BuildingManager.Instance.WalkBtn.SetActive(true);
+                BuildingManager.Instance.RideBtn.SetActive(true);
+                BuildingManager.Instance.EnterBtn.SetActive(false);
+                BuildingManager.Instance.ClosedBtn.SetActive(false);
+            }
+            else
+            {
+                BuildingManager.Instance.WalkBtn.SetActive(false);
+                BuildingManager.Instance.RideBtn.SetActive(false);
+
+                if (CheckIsBuildingOpen(PlayerTravelManager.Instance.CurrentVisitedBuilding))
+                {
+                    BuildingManager.Instance.ClosedBtn.SetActive(false);
+                    BuildingManager.Instance.EnterBtn.SetActive(true);
+                }
+                else
+                {
+                    BuildingManager.Instance.EnterBtn.SetActive(false);
+                    BuildingManager.Instance.ClosedBtn.SetActive(true);
+                }
+            }
+        }
+    }
 
 
     public void OnPointerClick(PointerEventData eventData)
@@ -26,21 +57,7 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
             BuildingManager.Instance.CurrentSelectedBuilding = eventData.selectedObject.GetComponent<Building>();
             Debug.Log("building name " + BuildingManager.Instance.CurrentSelectedBuilding);
 
-            if (PlayerTravelManager.Instance.CurrentVisitedBuilding != null)
-            {
-                if (PlayerTravelManager.Instance.CurrentVisitedBuilding != BuildingManager.Instance.CurrentSelectedBuilding)
-                {
-                    BuildingManager.Instance.walkBtn.SetActive(true);
-                    BuildingManager.Instance.rideBtn.SetActive(true);
-                    BuildingManager.Instance.enterBtn.SetActive(false);
-                }
-                else
-                {
-                    BuildingManager.Instance.walkBtn.SetActive(false);
-                    BuildingManager.Instance.rideBtn.SetActive(false);
-                    BuildingManager.Instance.enterBtn.SetActive(true);
-                }
-            }
+            RefreshSelectOverlayUI();
 
             if (!BuildingManager.Instance.BuildingSelectOverlay.activeSelf)
             {
@@ -50,4 +67,31 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
         }
     }
 
+
+    private bool CheckIsBuildingOpen(Building currentBuilding)
+    {
+        if (currentBuilding.buildingOpeningTime == 0 && currentBuilding.buildingClosingTime == 0)
+        {
+            return true;
+        }
+        
+        if (currentBuilding.buildingOpeningTime > currentBuilding.buildingClosingTime)
+        {
+            if (TimeManager.Instance.CurrentTime > currentBuilding.buildingOpeningTime || TimeManager.Instance.CurrentTime < currentBuilding.buildingClosingTime)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        else
+        {
+            if (TimeManager.Instance.CurrentTime > currentBuilding.buildingOpeningTime && TimeManager.Instance.CurrentTime < currentBuilding.buildingClosingTime)
+            {
+                return true;
+            }
+                
+            return false;
+        }
+    }
 }

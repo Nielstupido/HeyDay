@@ -10,9 +10,10 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private Text buildingNameText;
     [SerializeField] private List<Sprite> buttonImages = new List<Sprite>();
     [SerializeField] private GameManager gameManager;
-    [SerializeField] public GameObject walkBtn;
-    [SerializeField] public GameObject rideBtn; 
-    [SerializeField] public GameObject enterBtn;
+    [SerializeField] private GameObject walkBtn;
+    [SerializeField] private GameObject rideBtn; 
+    [SerializeField] private GameObject enterBtn;
+    [SerializeField] private GameObject closedBtn;
     [SerializeField] private Transform buttonsHolder;
     [SerializeField] private Player player;
     [SerializeField] private GameObject btnPrefab;
@@ -25,6 +26,11 @@ public class BuildingManager : MonoBehaviour
     public OnBuildingBtnClicked onBuildingBtnClicked;
     public Building CurrentSelectedBuilding { set{currentSelectedBuilding = value;} get{return currentSelectedBuilding;}}
     public GameObject BuildingSelectOverlay { get{return buildingSelectOverlay;}}
+    public GameObject WalkBtn { get{return walkBtn;}}
+    public GameObject RideBtn { get{return rideBtn;}}
+    public GameObject EnterBtn { get{return enterBtn;}}
+    public GameObject ClosedBtn { get{return closedBtn;}}
+
     public string BuildingNameText { set{buildingNameText.text = value;}}
     public static BuildingManager Instance { get; private set; }
 

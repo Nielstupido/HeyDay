@@ -6,7 +6,10 @@ public class Cinema : Building
 {
     private void Start()
     {
-        buildingName = Buildings.CINEMA;
+        this.buildingName = Buildings.CINEMA;
+        this.buildingOpeningTime = 13;
+        this.buildingClosingTime = 23;
+
         actionButtons = new List<Buttons>(){Buttons.WATCHMOVIE};     
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

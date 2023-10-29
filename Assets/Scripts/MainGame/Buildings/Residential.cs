@@ -6,7 +6,10 @@ public class Residential : Building
 {
     private void Start()
     {
-        buildingName = Buildings.RESIDENTIAL;
+        this.buildingName = Buildings.RESIDENTIAL;
+        this.buildingOpeningTime = 0;
+        this.buildingClosingTime = 0;
+
         actionButtons = new List<Buttons>(){Buttons.ENTER};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

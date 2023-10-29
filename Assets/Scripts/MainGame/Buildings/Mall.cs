@@ -6,7 +6,10 @@ public class Mall : Building
 {
     private void Start()
     {
-        buildingName = Buildings.MALL;
+        this.buildingName = Buildings.MALL;
+        this.buildingOpeningTime = 10;
+        this.buildingClosingTime = 22;
+
         actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.QUIT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

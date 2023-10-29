@@ -13,6 +13,7 @@ public class TimeManager : MonoBehaviour
     private float currentTime = 7; //time will start at 7AM
     private int toggleCounter;
     private float currentDayCount = 1;// number of days that have passed
+    public float CurrentTime { get{return currentTime;}}
     public static TimeManager Instance { get; private set; }
     public delegate void OnDayAdded(float dayCount);
     public static OnDayAdded onDayAdded;

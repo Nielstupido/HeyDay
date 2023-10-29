@@ -26,7 +26,10 @@ public class Bank : Building
 
     private void Start()
     {
-        buildingName = Buildings.BANK;
+        this.buildingName = Buildings.BANK;
+        this.buildingOpeningTime = 8;
+        this.buildingClosingTime = 16;
+
         actionButtons = new List<Buttons>(){Buttons.DEPOSITMONEY, Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

@@ -6,7 +6,10 @@ public class BeeUSolutions : Building
 {
     private void Start()
     {
-        buildingName = Buildings.BANK;
+        this.buildingName = Buildings.BEEUSOLUTIONS;
+        this.buildingOpeningTime = 8;
+        this.buildingClosingTime = 17;
+
         actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

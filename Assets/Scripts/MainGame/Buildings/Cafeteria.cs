@@ -6,7 +6,10 @@ public class Cafeteria : Building
 {
     private void Start()
     {
-        buildingName = Buildings.CAFETERIA;
+        this.buildingName = Buildings.CAFETERIA;
+        this.buildingOpeningTime = 6;
+        this.buildingClosingTime = 20;
+
         actionButtons = new List<Buttons>(){Buttons.BUYFOOD, Buttons.BUYDRINK, Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
