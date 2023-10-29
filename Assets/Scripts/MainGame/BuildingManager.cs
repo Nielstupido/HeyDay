@@ -7,22 +7,31 @@ public class BuildingManager : MonoBehaviour
 {
     [SerializeField] private IDictionary<string, GameObject> buildings = new Dictionary<string, GameObject>();
     [SerializeField] private GameObject buildingSelectOverlay;
+    [SerializeField] private Text buildingNameText;
     [SerializeField] private List<Sprite> buttonImages = new List<Sprite>();
     [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject walkBtn;
     [SerializeField] private GameObject rideBtn; 
     [SerializeField] private GameObject enterBtn;
+    [SerializeField] private GameObject closedBtn;
     [SerializeField] private Transform buttonsHolder;
     [SerializeField] private Player player;
     [SerializeField] private GameObject btnPrefab;
+    [SerializeField] private GameObject smallStatsOverlay;
+    [SerializeField] private GameObject camera1;
+    [SerializeField] private GameObject camera2;
+    [SerializeField] private PlayerTravelManager playerTravelManager;
     private Building currentSelectedBuilding;
-
-
     public delegate void OnBuildingBtnClicked(Buttons clickedBtn);
     public OnBuildingBtnClicked onBuildingBtnClicked;
-
     public Building CurrentSelectedBuilding { set{currentSelectedBuilding = value;} get{return currentSelectedBuilding;}}
     public GameObject BuildingSelectOverlay { get{return buildingSelectOverlay;}}
+    public GameObject WalkBtn { get{return walkBtn;}}
+    public GameObject RideBtn { get{return rideBtn;}}
+    public GameObject EnterBtn { get{return enterBtn;}}
+    public GameObject ClosedBtn { get{return closedBtn;}}
+
+    public string BuildingNameText { set{buildingNameText.text = value;}}
     public static BuildingManager Instance { get; private set; }
 
 
@@ -38,8 +47,10 @@ public class BuildingManager : MonoBehaviour
         } 
     }
 
+
     private void Start()
     {
+        camera2.SetActive(false);
         enterBtn.GetComponent<Button>().onClick.AddListener(delegate { EnterBuilding(currentSelectedBuilding); });
         buildingSelectOverlay.SetActive(false);
         Debug.Log(currentSelectedBuilding);
@@ -52,6 +63,7 @@ public class BuildingManager : MonoBehaviour
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
+        playerTravelManager.PlayerTravel(currentSelectedBuilding);
     }
 
 
@@ -61,6 +73,7 @@ public class BuildingManager : MonoBehaviour
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
+        playerTravelManager.PlayerTravel(currentSelectedBuilding);
     }
 
     public void Buy(float amount)
@@ -77,8 +90,15 @@ public class BuildingManager : MonoBehaviour
 
     public void EnterBuilding(Building selectedBuilding)
     {
-        gameManager.EnterBuilding();
-        PrepareButtons(selectedBuilding);
+        if (selectedBuilding.buildingName == Buildings.RESIDENTIAL)
+        {
+            EnterResidentialArea();
+        }
+        else
+        {
+            gameManager.EnterBuilding();
+            PrepareButtons(selectedBuilding);
+        }
     }
 
 
@@ -103,5 +123,22 @@ public class BuildingManager : MonoBehaviour
             newBtn.GetComponent<Image>().sprite = buttonImages[((int)btn)];
             newBtn.GetComponent<Button>().onClick.AddListener(delegate { onBuildingBtnClicked(btn); });
         }
+    }
+
+
+    public void EnterResidentialArea()
+    {
+        buildingSelectOverlay.SetActive(false);
+        camera2.SetActive(true);
+        smallStatsOverlay.SetActive(true);
+        camera1.SetActive(false);
+    }
+
+
+    public void ExitResidential()
+    {
+        camera1.SetActive(true);
+        smallStatsOverlay.SetActive(false);
+        camera2.SetActive(false);
     }
 }

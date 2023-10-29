@@ -6,7 +6,10 @@ public class Hospital : Building
 {
     private void Start()
     {
-        buildingName = Buildings.HOSPITAL;
+        this.buildingName = Buildings.HOSPITAL;
+        this.buildingOpeningTime = 0;
+        this.buildingClosingTime = 0;
+
         actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.QUIT};     
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

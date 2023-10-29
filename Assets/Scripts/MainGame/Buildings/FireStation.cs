@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FastfoodStore : Building
+public class FireStation : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.FOODXPRESS;
-        this.buildingOpeningTime = 0;
-        this.buildingClosingTime = 0;
+        this.buildingName = Buildings.FIRESTATION;
+        this.buildingOpeningTime = 8;
+        this.buildingClosingTime = 17;
 
-        actionButtons = new List<Buttons>(){Buttons.BUYFOOD, Buttons.BUYDRINK, Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
+        actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.WORK, Buttons.QUIT};     
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -26,12 +26,6 @@ public class FastfoodStore : Building
         if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
             switch (clickedBtn)
             {
-                case Buttons.BUYFOOD:
-                    Debug.Log("money deposited");
-                    break;
-                case Buttons.BUYDRINK:
-                    Debug.Log("money deposited");
-                    break;
                 case Buttons.APPLY:
                     Debug.Log("money deposited");
                     break;
