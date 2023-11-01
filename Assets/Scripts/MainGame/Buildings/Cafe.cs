@@ -10,7 +10,7 @@ public class Cafe : Building
         this.buildingOpeningTime = 10;
         this.buildingClosingTime = 22;
 
-        actionButtons = new List<Buttons>(){Buttons.BUYFOOD, Buttons.BUYDRINK, Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
+        this.actionButtons = new List<Buttons>(){Buttons.BUYFOOD, Buttons.BUYDRINK, Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

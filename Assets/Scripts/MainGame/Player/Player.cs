@@ -26,14 +26,19 @@ public class Player : MonoBehaviour
     public List<int> itemsBought = new List<int>(); //list to store bought items
     private string playerName;
     private string courseEnrolled;
+    private float playerCash;
+    private float playerBankSavings;
+    private bool isPlayerHasBankAcc;
     private Gender playerGender;
     private ResBuilding currentPlayerPlace;
+
     public string PlayerName { set{playerName = value;} get{return playerName;}}
-    public float PlayerCash { set; get;}
+    public float PlayerCash { set{playerCash = value;} get{return playerCash;}}
     public string PlayerEnrolledCourse { set{courseEnrolled = value;} get{return courseEnrolled;}}
     public float PlayerEnrolledCourseDuration { set; get;}
     public float PlayerStudyHours { set; get;}
-    public float PlayerBankSavings { set; get;}
+    public float PlayerBankSavings { set{playerBankSavings = value;} get{return playerBankSavings;}}
+    public bool IsPlayerHasBankAcc { set{isPlayerHasBankAcc = value;} get{return isPlayerHasBankAcc;}}
     public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
     public ResBuilding CurrentPlayerPlace { set{currentPlayerPlace = value;} get{return currentPlayerPlace;}}
     public IDictionary<PlayerStats, float> PlayerStatsDict {set{playerStatsDict = value;} get{return playerStatsDict;}}
@@ -62,6 +67,7 @@ public class Player : MonoBehaviour
         playerStatsDict.Add(PlayerStats.ENERGY, 100f);
         playerStatsDict.Add(PlayerStats.MONEY, PlayerCash);
         currentPlayerPlace = null;
+        isPlayerHasBankAcc = false;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
     }
 
@@ -78,13 +84,6 @@ public class Player : MonoBehaviour
         //Debug.Log("HAPPY:" + playerStatsDict[PlayerStats.HAPPINESS]);
         StatsChecker();
         //Debug.Log("HAPPY AFTER:" + playerStatsDict[PlayerStats.HAPPINESS]);
-    }
-
-
-    public void Sleep(float energyLevelAddValue)
-    {
-        playerStatsDict[PlayerStats.ENERGY] += energyLevelAddValue;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
     }
 
 

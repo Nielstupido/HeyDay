@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ public class ResBuildingManager : MonoBehaviour
     [SerializeField] private GameObject enterBtn;
     [SerializeField] private GameObject resBuildingSelectOverlay;
     [SerializeField] private GameObject roomBgOverlay;
+    [SerializeField] private GameObject btnPrefab;
+    [SerializeField] private Transform buttonsHolder;
     private ResBuilding currentSelectedResBuilding;
     private int stayCount;
     private float totalBilling;
@@ -24,10 +27,28 @@ public class ResBuildingManager : MonoBehaviour
     public string MonthlyWaterText {set{monthlyWaterText.text = "Monthly Water Charge : ₱" + value;}}
     public string DailyHappinessAdtnlText {set{dailyHappinessAdtnlText.text = "+" + value + " Happiness / Day";}}
     public string ResBuildingName {set{resBuildingName.text = value;}}
+    public delegate void OnResBuildingBtnClicked(Buttons clickedBtn);
+    public OnResBuildingBtnClicked onResBuildingBtnClicked;
+    public static ResBuildingManager Instance { get; private set; }
+
+
+    private void Awake() 
+    { 
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
+    }
 
 
     private void Start()
     {
+        enterBtn.GetComponent<Button>().onClick.AddListener(delegate { EnterRoom(currentSelectedResBuilding); });
+        rentBtn.GetComponent<Button>().onClick.AddListener(delegate { Rent(currentSelectedResBuilding); });
         TimeManager.onDayAdded += ComputeBillings;
         stayCount = 0;
         totalBilling = 0;
@@ -74,16 +95,30 @@ public class ResBuildingManager : MonoBehaviour
     }
 
 
-    public void Rent()
+    public void Rent(ResBuilding selectedBuilding)
     {
         stayCount = 0;
-        Player.Instance.CurrentPlayerPlace = currentSelectedResBuilding;
-        EnterRoom();
+        Player.Instance.CurrentPlayerPlace = selectedBuilding;
+        EnterRoom(selectedBuilding);
     }
 
 
-    public void EnterRoom()
+    public void EnterRoom(ResBuilding selectedBuilding)
     {
+        resBuildingSelectOverlay.SetActive(false);
         roomBgOverlay.SetActive(true);
+        PrepareButtons(selectedBuilding);
+        Debug.Log(selectedBuilding.actionButtons);
+    }
+
+
+    private void PrepareButtons(ResBuilding selectedBuilding)
+    {
+        foreach(Buttons btn in selectedBuilding.actionButtons)
+        {
+            GameObject newBtn = Instantiate(btnPrefab, Vector3.zero, Quaternion.identity, buttonsHolder);
+            newBtn.GetComponent<Image>().sprite = BuildingManager.Instance.ButtonImages[((int)btn)];
+            newBtn.GetComponent<Button>().onClick.AddListener(delegate { BuildingManager.Instance.onBuildingBtnClicked(btn); });
+        }
     }
 }

@@ -10,7 +10,7 @@ public class FastfoodStore : Building
         this.buildingOpeningTime = 0;
         this.buildingClosingTime = 0;
 
-        actionButtons = new List<Buttons>(){Buttons.BUYFOOD, Buttons.BUYDRINK, Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
+        this.actionButtons = new List<Buttons>(){Buttons.BUYFOOD, Buttons.BUYDRINK, Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

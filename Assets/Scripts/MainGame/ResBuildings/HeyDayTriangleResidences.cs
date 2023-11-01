@@ -12,5 +12,42 @@ public class HeyDayTriangleResidences : ResBuilding
         this.monthlyElecCharge = 1100f;
         this.monthlyWaterCharge = 300f;
         this.dailyAdtnlHappiness = 10f; 
+        this.adtnlEnergyForSleep = 1.5f;
+
+        this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT};
+        BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
+    }
+
+
+    private void OnDestroy()
+    {
+        BuildingManager.Instance.onBuildingBtnClicked -= CheckBtnClicked;
+    } 
+
+
+    public override void Sleep()
+    {
+        SleepManager.Instance.ShowSleepOverlay(this.adtnlEnergyForSleep);
+    }
+
+
+    public override void Eat()
+    {
+
+    }
+
+
+    public override void CheckBtnClicked(Buttons clickedBtn)
+    {
+        if (Player.Instance.CurrentPlayerPlace == this)
+            switch (clickedBtn)
+            {
+                case Buttons.SLEEP:
+                    Sleep();
+                    break;
+                case Buttons.EAT:
+                    Debug.Log("i'll be eating");
+                    break;
+            }
     }
 }

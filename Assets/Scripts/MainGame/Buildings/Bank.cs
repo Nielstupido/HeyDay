@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Bank : Building
 {
@@ -17,8 +16,8 @@ public class Bank : Building
     [SerializeField] private GameObject withdrawProcessingOverlay;
     [SerializeField] private GameObject withdrawProcessedOverlay;
     [SerializeField] private GameObject balanceOverlay;
+    [SerializeField] private Prompts createAccPrompt;
     [SerializeField] private TextMeshProUGUI balanceText;
-
     [SerializeField] private TMP_InputField depositAmountField;
     [SerializeField] private TMP_InputField withdrawAmountField;
 
@@ -30,7 +29,7 @@ public class Bank : Building
         this.buildingOpeningTime = 8;
         this.buildingClosingTime = 16;
 
-        actionButtons = new List<Buttons>(){Buttons.DEPOSITMONEY, Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
+        this.actionButtons = new List<Buttons>(){Buttons.OPENSAVINGSACCOUNT, Buttons.ACCESSSAVINGSACCOUNT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -46,17 +45,11 @@ public class Bank : Building
         if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
             switch (clickedBtn)
             {
-                case Buttons.DEPOSITMONEY:
+                case Buttons.OPENSAVINGSACCOUNT:
                     Debug.Log("money deposited");
                     break;
-                case Buttons.APPLY:
-                    Debug.Log("money deposited");
-                    break;
-                case Buttons.WORK:
-                    Debug.Log("money deposited");
-                    break;
-                case Buttons.QUIT:
-                    Debug.Log("money deposited");
+                case Buttons.ACCESSSAVINGSACCOUNT:
+                    OpenBankSystem();
                     break;
             }
     }
@@ -64,6 +57,12 @@ public class Bank : Building
 
     public void OpenBankSystem()
     {
+        if (!Player.Instance.IsPlayerHasBankAcc)
+        {
+            PromptManager.Instance.ShowPrompt(createAccPrompt);
+            return;
+        }
+
         bankSystemOverlay.SetActive(true);
     }
 

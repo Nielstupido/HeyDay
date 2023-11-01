@@ -10,7 +10,7 @@ public class AutoDealer : Building
         this.buildingOpeningTime = 8;
         this.buildingClosingTime = 16;
 
-        actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
+        this.actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

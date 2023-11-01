@@ -57,7 +57,7 @@ public class Mall : Building
         this.buildingOpeningTime = 10;
         this.buildingClosingTime = 22;
 
-        actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.QUIT};
+        this.actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.QUIT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

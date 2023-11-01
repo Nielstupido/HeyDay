@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject bottomOverlay;
     [SerializeField] private GameObject pauseBtn;
-    [SerializeField] private GameObject buildingInteriorOverlay;
     [SerializeField] private GameObject hospitalizedPrompt;
     [SerializeField] private TextMeshProUGUI daysHospitalized;
     [SerializeField] private TextMeshProUGUI totalBill; 
@@ -36,19 +35,6 @@ public class GameManager : MonoBehaviour
         pauseBtn.SetActive(true);
         AudioManager.Instance.PlayMusic("Theme");
     }
-
-
-    public void EnterBuilding()
-    {
-        buildingInteriorOverlay.SetActive(true);
-    }
-
-
-    public void ExitBuilding()
-    {
-        buildingInteriorOverlay.SetActive(false);
-    }
-
 
 
     public void Hospitalized(float dayCount)
