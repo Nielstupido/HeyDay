@@ -13,6 +13,43 @@ public enum PlayerStats
     MONEY
 }
 
+public enum ItemCondition
+{
+    NA,
+    HEAVILYUSED,
+    WELLUSED,
+    BRANDNEW
+}
+
+public enum VehicleType
+{
+    NA,
+    SCOOTER,
+    SEDAN,
+    SUV,
+    COUPE,
+    PICKUP
+}
+
+public enum VehicleColor
+{
+    NA,
+    BLUE,
+    RED,
+    BLACK,
+    CREAM,
+    YELLOW,
+    GREY,
+    BROWN
+}
+
+public enum ItemType
+{
+    VEHICLE,
+    APPLIANCE,
+    CONSUMABLE
+}
+
 public enum Gender
 {
     MALE,
@@ -23,7 +60,7 @@ public enum Gender
 public class Player : MonoBehaviour
 {
     private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
-    public List<int> itemsBought = new List<int>(); //list to store bought items
+    public List<int> itemsBought = new List<int>(); //to be refactored
     private string playerName;
     private string courseEnrolled;
     private float playerCash;
@@ -31,6 +68,9 @@ public class Player : MonoBehaviour
     private bool isPlayerHasBankAcc;
     private Gender playerGender;
     private ResBuilding currentPlayerPlace;
+    private List<Items> playerOwnedVehicles = new List<Items>();
+    private List<Items> playerOwnedAppliances = new List<Items>();
+    private List<Items> playerOwnedGroceries = new List<Items>();
 
     public string PlayerName { set{playerName = value;} get{return playerName;}}
     public float PlayerCash { set{playerCash = value;} get{return playerCash;}}
@@ -42,6 +82,9 @@ public class Player : MonoBehaviour
     public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
     public ResBuilding CurrentPlayerPlace { set{currentPlayerPlace = value;} get{return currentPlayerPlace;}}
     public IDictionary<PlayerStats, float> PlayerStatsDict {set{playerStatsDict = value;} get{return playerStatsDict;}}
+    public List<Items> PlayerOwnedVehicles { get{return playerOwnedVehicles;}}
+    public List<Items> PlayerOwnedAppliances { get{return playerOwnedAppliances;}}
+    public List<Items> PlayerOwnedGroceries { get{return playerOwnedGroceries;}}
     public static Player Instance { get; private set; }
 
 
@@ -121,39 +164,37 @@ public class Player : MonoBehaviour
         University.Instance.UpdateStudyHours(studyDurationValue);
     }
 
+
     public void UpdateStudyHours(float studyDurationValue)
     {
         PlayerStudyHours += studyDurationValue;
         //studyHours.text = PlayerStudyHours.ToString();
     }
 
+
     public void Enroll(string courseName, float courseDuration)
     {
         UpdateStudyHours(0);
     }
 
-    public void Purchase(float energyLevelCutValue, float amount)
+
+    public void Purchase(float energyLevelCutValue, Items item)
     {
         TimeManager.Instance.AddClockTime(0.30f);
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
-
-        playerStatsDict[PlayerStats.MONEY] -= amount;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
+        playerStatsDict[PlayerStats.MONEY] -= item.itemPrice;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
         StatsChecker();
     }
+
 
     public void PurchaseMallItem(float energyLevelCutValue, float amount, float happinessAddValue)
     {
         //AddClockTime(0.30f);
         playerStatsDict[PlayerStats.HAPPINESS] += happinessAddValue;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HAPPINESS, playerStatsDict);
-
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
-
         playerStatsDict[PlayerStats.MONEY] -= amount;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
         StatsChecker();
     }
 
@@ -175,11 +216,13 @@ public class Player : MonoBehaviour
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
     }
 
+
     public void BuyGrocery(float amount)
     {
         playerStatsDict[PlayerStats.MONEY] -= amount;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
     }
+
 
     public void StatsChecker()
     {

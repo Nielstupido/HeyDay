@@ -17,6 +17,10 @@ public class ResBuildingManager : MonoBehaviour
     [SerializeField] private GameObject roomBgOverlay;
     [SerializeField] private GameObject btnPrefab;
     [SerializeField] private Transform buttonsHolder;
+    [SerializeField] private Button vechiclesBtn;
+    [SerializeField] private Button appliancesBtn;
+    [SerializeField] private Button groceriesBtn;
+    [SerializeField] private PlayerItemsListManager playerItemsListManager;
     private ResBuilding currentSelectedResBuilding;
     private int stayCount;
     private float totalBilling;
@@ -47,6 +51,9 @@ public class ResBuildingManager : MonoBehaviour
 
     private void Start()
     {
+        vechiclesBtn.onClick.AddListener(delegate { ShowItems(ItemType.VEHICLE); });
+        appliancesBtn.onClick.AddListener(delegate { ShowItems(ItemType.APPLIANCE); });
+        groceriesBtn.onClick.AddListener(delegate { ShowItems(ItemType.CONSUMABLE); });
         enterBtn.GetComponent<Button>().onClick.AddListener(delegate { EnterRoom(currentSelectedResBuilding); });
         rentBtn.GetComponent<Button>().onClick.AddListener(delegate { Rent(currentSelectedResBuilding); });
         TimeManager.onDayAdded += ComputeBillings;
@@ -95,6 +102,17 @@ public class ResBuildingManager : MonoBehaviour
     }
 
 
+    private void PrepareButtons(ResBuilding selectedBuilding)
+    {
+        foreach(Buttons btn in selectedBuilding.actionButtons)
+        {
+            GameObject newBtn = Instantiate(btnPrefab, Vector3.zero, Quaternion.identity, buttonsHolder);
+            newBtn.GetComponent<Image>().sprite = BuildingManager.Instance.ButtonImages[((int)btn)];
+            newBtn.GetComponent<Button>().onClick.AddListener(delegate { BuildingManager.Instance.onBuildingBtnClicked(btn); });
+        }
+    }
+
+
     public void Rent(ResBuilding selectedBuilding)
     {
         stayCount = 0;
@@ -112,13 +130,19 @@ public class ResBuildingManager : MonoBehaviour
     }
 
 
-    private void PrepareButtons(ResBuilding selectedBuilding)
+    public void ShowItems(ItemType itemType)
     {
-        foreach(Buttons btn in selectedBuilding.actionButtons)
+        switch (itemType)
         {
-            GameObject newBtn = Instantiate(btnPrefab, Vector3.zero, Quaternion.identity, buttonsHolder);
-            newBtn.GetComponent<Image>().sprite = BuildingManager.Instance.ButtonImages[((int)btn)];
-            newBtn.GetComponent<Button>().onClick.AddListener(delegate { BuildingManager.Instance.onBuildingBtnClicked(btn); });
+            case ItemType.VEHICLE:
+                playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedVehicles);
+                break;
+            case ItemType.APPLIANCE:
+                playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedAppliances);
+                break;
+            case ItemType.CONSUMABLE:
+                playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedGroceries);
+                break;
         }
     }
 }

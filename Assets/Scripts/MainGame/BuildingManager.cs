@@ -77,10 +77,12 @@ public class BuildingManager : MonoBehaviour
         playerTravelManager.PlayerTravel(currentSelectedBuilding);
     }
 
-    public void Buy(float amount)
+
+    public void Buy(Items item)
     {
         player.Purchase(10f, amount);
     }
+
 
     public void BuyFood(float energyValue, float hungerValue, float happinessValue, float amountValue, float eatingTime)
     { 
