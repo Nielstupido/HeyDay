@@ -15,4 +15,7 @@ MonoBehaviour:
   itemName: Airconditioner
   itemType: 1
   itemImage: {fileID: 21300000, guid: c331dad2bd5d68341a8754e01958453f, type: 3}
-  itemPrice: 0
+  itemPrice: 9499
+  itemCondition: 0
+  vehicleType: 0
+  vehicleColor: 0
