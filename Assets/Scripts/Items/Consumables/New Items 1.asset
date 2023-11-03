@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: New Items 1
   m_EditorClassIdentifier: 
   itemName: 
-  itemType: 0
+  itemType: 2
   itemImage: {fileID: 0}
   itemPrice: 0
   itemCondition: 0
   vehicleType: 0
   vehicleColor: 0
+  energyBarValue: 0
+  hungerBarValue: 0
+  happinessBarValue: 0
