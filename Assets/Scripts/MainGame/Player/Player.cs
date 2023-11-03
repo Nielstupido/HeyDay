@@ -59,8 +59,8 @@ public enum Gender
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Prompts notEnoughMoneyPrompt;
     private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
-    public List<int> itemsBought = new List<int>(); //to be refactored
     private string playerName;
     private string courseEnrolled;
     private float playerCash;
@@ -178,8 +178,26 @@ public class Player : MonoBehaviour
     }
 
 
-    public void Purchase(float energyLevelCutValue, Items item)
+    public void Purchase(Items item, float energyLevelCutValue = 10f)
     {
+        if (item.itemPrice > playerCash)
+        {
+            PromptManager.Instance.ShowPrompt(notEnoughMoneyPrompt);
+            return;
+        }
+
+        switch (item.itemType)
+        {
+            case ItemType.VEHICLE:
+                playerOwnedVehicles.Add(item);
+                break;
+            case ItemType.APPLIANCE:
+                playerOwnedAppliances.Add(item);
+                break;
+            case ItemType.CONSUMABLE:
+                playerOwnedGroceries.Add(item);
+                break;
+        }
         TimeManager.Instance.AddClockTime(0.30f);
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         playerStatsDict[PlayerStats.MONEY] -= item.itemPrice;

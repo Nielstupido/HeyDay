@@ -96,6 +96,7 @@ public class CarCatalogueManager : MonoBehaviour
 
     public void BuyCar() //Passes the values to BuildingManager.Purchase
     {
-        FindObjectOfType<BuildingManager>().Buy(vehicleDets[currentItem]);
+        // FindObjectOfType<BuildingManager>().Buy(vehicleDets[currentItem]);
+        Player.Instance.Purchase(vehicleDets[currentItem]);
     }
 }

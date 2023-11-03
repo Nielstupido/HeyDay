@@ -153,24 +153,24 @@ public class Mall : Building
 
     public void SelectItem(int itemIndex)
     {
-        if (optionSelected == "Appliances")
-        {
-            if (!Player.Instance.itemsBought.Contains(itemIndex))
-            {
-                Player.Instance.PurchaseMallItem(5f, mallItemsPrice[itemIndex], mallItemsPerks[itemIndex]);
-                Player.Instance.itemsBought.Add(itemIndex);
+        // if (optionSelected == "Appliances")
+        // {
+        //     if (!Player.Instance.itemsBought.Contains(itemIndex))
+        //     {
+        //         Player.Instance.PurchaseMallItem(5f, mallItemsPrice[itemIndex], mallItemsPerks[itemIndex]);
+        //         Player.Instance.itemsBought.Add(itemIndex);
                 
-                DisplayItemBought(itemIndex);
-            }
-            else
-            {
-                Debug.Log("Item already bought: " + mallItems[itemIndex]);
-            }
-        }
-        else
-        {
-            Player.Instance.PurchaseMallItem(5f, mallItemsPrice[itemIndex], mallItemsPerks[itemIndex]);
-        }
+        //         DisplayItemBought(itemIndex);
+        //     }
+        //     else
+        //     {
+        //         Debug.Log("Item already bought: " + mallItems[itemIndex]);
+        //     }
+        // }
+        // else
+        // {
+        //     Player.Instance.PurchaseMallItem(5f, mallItemsPrice[itemIndex], mallItemsPerks[itemIndex]);
+        // }
     }
     
     public void DisplayItemBought(int i)
