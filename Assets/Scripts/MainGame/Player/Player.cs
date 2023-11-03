@@ -131,6 +131,19 @@ public class Player : MonoBehaviour
     }
 
 
+    public void EatDrink(Items consumableItem)
+    {
+        // TimeManager.Instance.AddClockTime(consumableItem.eatingTimeValue);
+        playerStatsDict[PlayerStats.HAPPINESS] += consumableItem.happinessBarValue;
+        playerStatsDict[PlayerStats.ENERGY] += consumableItem.energyBarValue;
+        playerStatsDict[PlayerStats.HUNGER] += consumableItem.hungerBarValue;
+        playerStatsDict[PlayerStats.MONEY] -= consumableItem.itemPrice;
+
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
+        StatsChecker();
+    }
+
+
     public void Work(float salary)
     {
         playerStatsDict[PlayerStats.MONEY] += salary;
@@ -199,6 +212,7 @@ public class Player : MonoBehaviour
                 playerOwnedVehicles.Add(item);
                 break;
             case ItemType.APPLIANCE:
+                //stats
                 playerOwnedAppliances.Add(item);
                 break;
             case ItemType.CONSUMABLE:

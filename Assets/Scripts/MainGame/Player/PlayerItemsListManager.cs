@@ -40,6 +40,14 @@ public class PlayerItemsListManager : MonoBehaviour
         {
             GameObject newItem = Instantiate(itemsObjPrefab, Vector3.zero, Quaternion.identity, itemsContentHolder);
             newItem.GetComponent<ItemsObjPrefab>().ItemImageSprite = playerItem.itemImage;
+            if (playerItem.itemType == ItemType.CONSUMABLE)
+            {
+                newItem.GetComponent<ItemsObjPrefab>().ItemEatBtn.gameObject.SetActive(true);
+                newItem.GetComponent<ItemsObjPrefab>().ItemEatBtn.onClick.AddListener(delegate {
+                    Player.Instance.EatDrink(playerItem); 
+                    newItem.GetComponent<ItemsObjPrefab>().DestroyObj();
+                });
+            }
         }
     }
 

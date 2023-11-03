@@ -6,8 +6,9 @@ using TMPro;
 
 public class CarCatalogueManager : MonoBehaviour
 {
-    [SerializeField] private GameObject carCatalogueOverlay;
+    [SerializeField] private GameObject vehicleListOverlay;
     [SerializeField] private GameObject buyCarPopUp;
+    [SerializeField] private Button buyBtn;
     [SerializeField] private TextMeshProUGUI vehicleName;
     [SerializeField] private TextMeshProUGUI vehiclePrice;
     [SerializeField] private TextMeshProUGUI vehicleColor;
@@ -20,10 +21,16 @@ public class CarCatalogueManager : MonoBehaviour
     private int currentItem = 0;
 
 
+    private void Start()
+    {
+        buyBtn.onClick.AddListener(delegate { BuyCar(); });
+    }
+
+    
     public void BrandNewCatalogue()
     {
         buyCarPopUp.SetActive(false);
-        carCatalogueOverlay.SetActive(true);
+        vehicleListOverlay.SetActive(true);
 
         vehicleDets = brandNewVehicles;
         currentItem = 0;
@@ -35,9 +42,9 @@ public class CarCatalogueManager : MonoBehaviour
     public void SecondHandCatalogue()
     {
         buyCarPopUp.SetActive(false);
-        carCatalogueOverlay.SetActive(true);
+        vehicleListOverlay.SetActive(true);
 
-        vehicleDets = brandNewVehicles;
+        vehicleDets = secondHandVehicles;
         currentItem = 0;
 
         DisplayItem();
@@ -87,16 +94,8 @@ public class CarCatalogueManager : MonoBehaviour
     }
 
 
-    public void ExitOverlay()
+    public void BuyCar() 
     {
-        carCatalogueOverlay.SetActive(false);
-        buyCarPopUp.SetActive(true);
-    }
-
-
-    public void BuyCar() //Passes the values to BuildingManager.Purchase
-    {
-        // FindObjectOfType<BuildingManager>().Buy(vehicleDets[currentItem]);
         Player.Instance.Purchase(vehicleDets[currentItem]);
     }
 }
