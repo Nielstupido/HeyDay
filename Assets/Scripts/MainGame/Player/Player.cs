@@ -47,7 +47,8 @@ public enum ItemType
 {
     VEHICLE,
     APPLIANCE,
-    CONSUMABLE
+    CONSUMABLE,
+    SERVICE
 }
 
 public enum Gender
@@ -175,6 +176,12 @@ public class Player : MonoBehaviour
     public void Enroll(string courseName, float courseDuration)
     {
         UpdateStudyHours(0);
+    }
+
+
+    public void Purchase(float energyValue, float hungerValue, float happinessValue, float amountValue, float eatingTime)
+    {
+        EatDrink(energyValue, hungerValue, happinessValue, amountValue, eatingTime);
     }
 
 

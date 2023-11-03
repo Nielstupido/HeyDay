@@ -11,4 +11,7 @@ public class Items : ScriptableObject
     public ItemCondition itemCondition;
     public VehicleType vehicleType;
     public VehicleColor vehicleColor;
+    public float energyBarValue;
+    public float hungerBarValue;
+    public float happinessBarValue;
 }

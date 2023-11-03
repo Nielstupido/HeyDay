@@ -135,6 +135,6 @@ public class SwitchMenuItem : MonoBehaviour
 
    public void ItemBought()
    {
-      FindObjectOfType<BuildingManager>().BuyFood(energyBarIncrementValue[currentItem], hungerBarIncrementValue[currentItem], happinessBarIncrementValue[currentItem], priceList[currentItem], eatingTime[currentItem]);
+      // FindObjectOfType<BuildingManager>().BuyFood(energyBarIncrementValue[currentItem], hungerBarIncrementValue[currentItem], happinessBarIncrementValue[currentItem], priceList[currentItem], eatingTime[currentItem]);
    }
 }

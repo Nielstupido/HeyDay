@@ -78,13 +78,6 @@ public class BuildingManager : MonoBehaviour
     }
 
 
-    public void BuyFood(float energyValue, float hungerValue, float happinessValue, float amountValue, float eatingTime)
-    { 
-        //Debug.Log(happinessValue);
-        player.EatDrink(happinessValue, energyValue, hungerValue, amountValue, eatingTime);
-    }
-
-
     public void EnterBuilding(Building selectedBuilding)
     {
         smallStatsOverlay.SetActive(true);
