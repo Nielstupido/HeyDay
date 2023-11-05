@@ -77,6 +77,17 @@ public class BuildingManager : MonoBehaviour
         playerTravelManager.PlayerTravel(currentSelectedBuilding);
     }
 
+    public void Buy(float amount)
+    {
+        //player.Purchase(10f, amount, 0.30f);
+    }
+
+    public void BuyFood(float energyValue, float hungerValue, float happinessValue, float amountValue, float eatingTime)
+    { 
+        //Debug.Log(happinessValue);
+        //player.EatDrink(happinessValue, energyValue, hungerValue, amountValue, eatingTime);
+    }
+
 
     public void EnterBuilding(Building selectedBuilding)
     {

@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class SequenceAnimator : MonoBehaviour
 {
-    public float WaitBetween = 0.15f;
-    public float WaitEnd = 0.5f;
+    public float WaitBetween = 0.20f;
+    public float WaitEnd = 1.5f;
 
 
     List<Animator> _animators;
+
+    public static SequenceAnimator Instance { get; private set; }
+
+    private void Awake() 
+    { 
+        if (Instance != null && Instance != this) 
+        { 
+            Destroy(this); 
+        } 
+        else 
+        { 
+            Instance = this; 
+        } 
+    }
 
     void Start()
     {
@@ -17,8 +31,19 @@ public class SequenceAnimator : MonoBehaviour
         StartCoroutine(DoAnimation());
     }
 
-    // Update is called once per frame
-    IEnumerator DoAnimation()
+    public void EnableAnimation()
+    {
+        _animators = new List<Animator>(GetComponentsInChildren<Animator>());
+
+        StartCoroutine(DoAnimation());
+    }
+
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+    public IEnumerator DoAnimation()
     {
         while(true)
         {

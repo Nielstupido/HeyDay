@@ -78,7 +78,6 @@ public class TimeManager : MonoBehaviour
             }
             else
             {
-                Debug.Log(minutes);
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":" + minutes.ToString();
             }

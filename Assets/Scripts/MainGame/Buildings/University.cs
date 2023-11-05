@@ -160,11 +160,13 @@ public class University : Building
         selectedField = "Social Sciences";
         fieldNameText.text = selectedField;
 
-        courses = new string[] {"Bachelor of Science in Medical Technology", 
-                                "Bachelor of Science in Midwifery",
-                                "Bachelor of Science in Nursing",
-                                "Bachelor of Science in Pharmacy",
-                                "Bachelor of Science in Radiologic Technology"};
+        courses = new string[] {"Bachelor of Arts in Communication",
+                                "Bachelor of Science in Criminal Justice",
+                                "Bachelor of Arts in Psychology",
+                                "Bachelor of Arts in Public Administration",
+                                "Bachelor of Arts in Political Science",
+                                "Bachelor of Arts in Sociology",
+                                "Bachelor of Science in Social Work"};
         courseDuration = new float[] {1450, 1500, 1450, 1350, 1500, 1450, 1350};
         courseSelectionOverlay.SetActive(true);
         DisplayCourses();
@@ -198,9 +200,8 @@ public class University : Building
             CourseButton courseButton = newButton.GetComponent<CourseButton>();
             courseButton.courseName.text = courses[i];
             courseButton.courseDuration.text = courseDuration[i].ToString() + " hrs";
-
-            // Add an onClick listener to each button
-            int index = i; // Create a local variable to hold the current index
+            
+            int index = i; 
             courseButton.GetComponent<Button>().onClick.AddListener(() => EnrollPrompt(index));
         }
     }
@@ -208,7 +209,6 @@ public class University : Building
     public void EnrollPrompt(int index)
     {
         selectedCourse = courses[index];
-        Debug.Log("Index = " + index);
         selectedCourseDuration = courseDuration[index];
 
         courseNamePrompt.text = selectedCourse;
@@ -219,13 +219,12 @@ public class University : Building
     {
         enrollPrompt.SetActive(false);
         courseSelectionOverlay.SetActive(false);
-        universityOverlay.SetActive(true);
-
+        fieldSelectionOverlay.SetActive(false);
         Player.Instance.PlayerEnrolledCourse = selectedCourse;
         Player.Instance.PlayerEnrolledCourseDuration = selectedCourseDuration;
-
-        course.text = Player.Instance.PlayerEnrolledCourse;
-        duration.text = "/" + Player.Instance.PlayerEnrolledCourse.ToString();
+        course.text = selectedCourse;
+        duration.text = "/" + selectedCourseDuration.ToString();
+        universityOverlay.SetActive(true);
         UpdateStudyHours(0);
     }
     public void CancelEnroll()
@@ -235,17 +234,29 @@ public class University : Building
 
     public void ContinueStudy()
     {
-        Player.Instance.Study(float.Parse(studyDurationField.text));
+        float studyDuration = CheckInputDuration(float.Parse(studyDurationField.text));
+        Player.Instance.Study(studyDuration);
         studyPromptOverlay.SetActive(false);
-
         studyAnimationOverlay.SetActive(true);
 
-        StartCoroutine(ClosePanelCoroutine(3));
+        StartCoroutine(EndStudyAnimation(3));
     }
 
     public void CancelStudy()
     {
         studyPromptOverlay.SetActive(false);
+    }
+
+    public float CheckInputDuration(float duration)
+    {
+        float targetTime = duration + TimeManager.Instance.CurrentTime;
+        if (targetTime > 17.0f)
+        {
+            float excessTime = targetTime - 17;
+            duration -= excessTime;
+        }
+
+        return duration;
     }
 
     public void UpdateStudyHours(float studyDurationValue)
@@ -254,7 +265,7 @@ public class University : Building
         totalStudyHours.text = Player.Instance.PlayerStudyHours.ToString();
     }
 
-    private IEnumerator ClosePanelCoroutine(float seconds)
+    private IEnumerator EndStudyAnimation(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         
