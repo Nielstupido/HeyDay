@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2df777171a0a6f4e8bf6ae12b8c43a2, type: 3}
-  m_Name: Refrigerator
+  m_Name: Siopao
   m_EditorClassIdentifier: 
-  itemName: Refrigerator
-  itemType: 1
-  itemImage: {fileID: 21300000, guid: 3d2261f548a23ce43b8175b54c1e4480, type: 3}
-  itemPrice: 6499
+  itemName: Siopao
+  itemType: 2
+  itemImage: {fileID: 21300000, guid: 7888dc7c7e1cc5948b1b08e9ad71e392, type: 3}
+  itemPrice: 35
   itemCondition: 0
   vehicleType: 0
   vehicleColor: 0
   energyBarValue: 0
-  hungerBarValue: 40
-  happinessBarValue: 15
-  electricBillValue: 150
+  hungerBarValue: 5
+  happinessBarValue: -10
+  electricBillValue: 0

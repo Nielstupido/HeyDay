@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2df777171a0a6f4e8bf6ae12b8c43a2, type: 3}
-  m_Name: Refrigerator
+  m_Name: Iced Latte & Bread
   m_EditorClassIdentifier: 
-  itemName: Refrigerator
-  itemType: 1
-  itemImage: {fileID: 21300000, guid: 3d2261f548a23ce43b8175b54c1e4480, type: 3}
-  itemPrice: 6499
+  itemName: Iced Latte and Bread
+  itemType: 2
+  itemImage: {fileID: 21300000, guid: ee6290ce39b0e0e45a3b68afc599979d, type: 3}
+  itemPrice: 220
   itemCondition: 0
   vehicleType: 0
   vehicleColor: 0
-  energyBarValue: 0
-  hungerBarValue: 40
-  happinessBarValue: 15
-  electricBillValue: 150
+  energyBarValue: 15
+  hungerBarValue: 20
+  happinessBarValue: 25
+  electricBillValue: 0

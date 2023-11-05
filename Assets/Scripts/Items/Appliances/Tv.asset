@@ -15,4 +15,11 @@ MonoBehaviour:
   itemName: Flat TV
   itemType: 1
   itemImage: {fileID: 21300000, guid: 2043d5b75c1b86b4a8c278308150772b, type: 3}
-  itemPrice: 0
+  itemPrice: 4999
+  itemCondition: 0
+  vehicleType: 0
+  vehicleColor: 0
+  energyBarValue: 0
+  hungerBarValue: 0
+  happinessBarValue: 10
+  electricBillValue: 150

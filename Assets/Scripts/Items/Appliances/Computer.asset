@@ -15,4 +15,11 @@ MonoBehaviour:
   itemName: Computer
   itemType: 1
   itemImage: {fileID: 21300000, guid: 9f7615cc3e5d17a42959fbd2323568aa, type: 3}
-  itemPrice: 0
+  itemPrice: 14699
+  itemCondition: 0
+  vehicleType: 0
+  vehicleColor: 0
+  energyBarValue: 0
+  hungerBarValue: 0
+  happinessBarValue: 15
+  electricBillValue: 360
