@@ -26,7 +26,7 @@ public class SlotMachineResults : MonoBehaviour
 
     public void CheckForMatches()
     {
-        Player.Instance.Purchase(5f,100f,0.5f);
+        //Player.Instance.Purchase(5f,100f,0.5f);
         if (results.Count == 3)
         {
             for (int i = 0; i < results.Count; i++)
