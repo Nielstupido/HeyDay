@@ -19,3 +19,7 @@ MonoBehaviour:
   itemCondition: 0
   vehicleType: 0
   vehicleColor: 0
+  energyBarValue: 0
+  hungerBarValue: 0
+  happinessBarValue: 15
+  electricBillValue: 500

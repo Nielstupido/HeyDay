@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2df777171a0a6f4e8bf6ae12b8c43a2, type: 3}
-  m_Name: Refrigerator
+  m_Name: Super meal
   m_EditorClassIdentifier: 
-  itemName: Refrigerator
-  itemType: 1
-  itemImage: {fileID: 21300000, guid: 3d2261f548a23ce43b8175b54c1e4480, type: 3}
-  itemPrice: 6499
+  itemName: Super meal
+  itemType: 2
+  itemImage: {fileID: 21300000, guid: 75f34509de408e4448bc10792e147e38, type: 3}
+  itemPrice: 150
   itemCondition: 0
   vehicleType: 0
   vehicleColor: 0
-  energyBarValue: 0
+  energyBarValue: 8
   hungerBarValue: 40
   happinessBarValue: 15
-  electricBillValue: 150
+  electricBillValue: 0

@@ -90,7 +90,7 @@ public class SwitchMenuItem : MonoBehaviour
          images = new Sprite[] {cupNoodles, sandwich, siopao, hotdog};
          energyBarIncrementValue = new float[] {0, 0, 0, 0};
          hungerBarIncrementValue = new float[] {10, 10, 5, 5};
-         happinessBarIncrementValue = new float[] {-10, -10, -10, -10, -10};
+         happinessBarIncrementValue = new float[] {-10, -10, -10, -10};
          eatingTime = new float[] {0.20f, 0.20f, 0.20f, 0.20f};
       }
       else if (selectedBuilding == "FOODXPRESS")
