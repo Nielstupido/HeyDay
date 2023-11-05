@@ -7,21 +7,23 @@ public class SlotMachine : MonoBehaviour
 {
     public Sprite[] sprites;
     public float StopTime;
-
     private bool isRandomizing = false;
 
-    void Update () {
+
+    private void Update () {
         if(isRandomizing)
         {
             RandomingImage();
         }
     }
 
-    void RandomingImage(){
+
+    private void RandomingImage(){
         gameObject.GetComponent<UnityEngine.UI.Image>().sprite = sprites [Random.Range (0, sprites.Length)];
     }
 
-    IEnumerator RandomizeCoroutine()
+
+    private IEnumerator RandomizeCoroutine()
     {
         isRandomizing = true;
 
@@ -39,6 +41,7 @@ public class SlotMachine : MonoBehaviour
         SlotMachineResults.Instance.results.Add(gameObject.GetComponent<UnityEngine.UI.Image>().sprite);
         SlotMachineResults.Instance.CheckForMatches();
     }
+
 
     public void StartRand(){
         StartCoroutine(RandomizeCoroutine());

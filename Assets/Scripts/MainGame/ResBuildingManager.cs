@@ -15,6 +15,7 @@ public class ResBuildingManager : MonoBehaviour
     [SerializeField] private GameObject enterBtn;
     [SerializeField] private GameObject resBuildingSelectOverlay;
     [SerializeField] private GameObject roomBgOverlay;
+    [SerializeField] private GameObject miniBtnsHolder;
     [SerializeField] private GameObject btnPrefab;
     [SerializeField] private Transform buttonsHolder;
     [SerializeField] private Button vechiclesBtn;
@@ -125,24 +126,37 @@ public class ResBuildingManager : MonoBehaviour
     {
         resBuildingSelectOverlay.SetActive(false);
         roomBgOverlay.SetActive(true);
+        miniBtnsHolder.SetActive(true);
         PrepareButtons(selectedBuilding);
         Debug.Log(selectedBuilding.actionButtons);
     }
 
 
+    public void LeaveRoom()
+    {
+        roomBgOverlay.SetActive(false);
+        miniBtnsHolder.SetActive(false);
+        
+        for (var i = buttonsHolder.childCount - 1; i >= 0; i--)
+        {
+            Object.Destroy(buttonsHolder.GetChild(i).gameObject);
+        }
+    }
+
+
     public void ShowItems(ItemType itemType)
     {
-        // switch (itemType)
-        // {
-        //     case ItemType.VEHICLE:
-        //         playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedVehicles);
-        //         break;
-        //     case ItemType.APPLIANCE:
-        //         playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedAppliances);
-        //         break;
-        //     case ItemType.CONSUMABLE:
-        //         playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedGroceries);
-        //         break;
-        // }
+        switch (itemType)
+        {
+            case ItemType.VEHICLE:
+                playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedVehicles);
+                break;
+            case ItemType.APPLIANCE:
+                playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedAppliances);
+                break;
+            case ItemType.CONSUMABLE:
+                playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedGroceries);
+                break;
+        }
     }
 }

@@ -60,7 +60,7 @@ public enum Gender
 
 public class Player : MonoBehaviour
 {
-    //[SerializeField] private Prompts notEnoughMoneyPrompt;
+    [SerializeField] private Prompts notEnoughMoneyPrompt;
     private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
     private string playerName;
     private string courseEnrolled;
@@ -69,9 +69,9 @@ public class Player : MonoBehaviour
     private bool isPlayerHasBankAcc;
     private Gender playerGender;
     private ResBuilding currentPlayerPlace;
-    // private List<Items> playerOwnedVehicles = new List<Items>();
-    // private List<Items> playerOwnedAppliances = new List<Items>();
-    // private List<Items> playerOwnedGroceries = new List<Items>();
+    private List<Items> playerOwnedVehicles = new List<Items>();
+    private List<Items> playerOwnedAppliances = new List<Items>();
+    private List<Items> playerOwnedGroceries = new List<Items>();
 
     public string PlayerName { set{playerName = value;} get{return playerName;}}
     public float PlayerCash { set{playerCash = value;} get{return playerCash;}}
@@ -83,9 +83,9 @@ public class Player : MonoBehaviour
     public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
     public ResBuilding CurrentPlayerPlace { set{currentPlayerPlace = value;} get{return currentPlayerPlace;}}
     public IDictionary<PlayerStats, float> PlayerStatsDict {set{playerStatsDict = value;} get{return playerStatsDict;}}
-    // public List<Items> PlayerOwnedVehicles { get{return playerOwnedVehicles;}}
-    // public List<Items> PlayerOwnedAppliances { get{return playerOwnedAppliances;}}
-    // public List<Items> PlayerOwnedGroceries { get{return playerOwnedGroceries;}}
+    public List<Items> PlayerOwnedVehicles { get{return playerOwnedVehicles;}}
+    public List<Items> PlayerOwnedAppliances { get{return playerOwnedAppliances;}}
+    public List<Items> PlayerOwnedGroceries { get{return playerOwnedGroceries;}}
     public static Player Instance { get; private set; }
 
 
@@ -104,8 +104,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        PlayerCash = 5000f;
-        PlayerBankSavings = 20000f;
+        playerCash = 5000f;
+        playerBankSavings = 0f;
         playerStatsDict.Add(PlayerStats.HAPPINESS, 100f);
         playerStatsDict.Add(PlayerStats.HUNGER, 100f);
         playerStatsDict.Add(PlayerStats.ENERGY, 100f);
@@ -116,16 +116,16 @@ public class Player : MonoBehaviour
     }
 
 
-    // public void EatDrink(Items foodToConsume)
-    // {
-    //     TimeManager.Instance.AddClockTime(foodToConsume.eatingTime);
-    //     playerStatsDict[PlayerStats.HAPPINESS] += foodToConsume.happinessBarValue;
-    //     playerStatsDict[PlayerStats.ENERGY] += foodToConsume.energyBarValue;
-    //     playerStatsDict[PlayerStats.HUNGER] += foodToConsume.hungerBarValue;
+    public void EatDrink(Items foodToConsume)
+    {
+        TimeManager.Instance.AddClockTime(foodToConsume.eatingTime);
+        playerStatsDict[PlayerStats.HAPPINESS] += foodToConsume.happinessBarValue;
+        playerStatsDict[PlayerStats.ENERGY] += foodToConsume.energyBarValue;
+        playerStatsDict[PlayerStats.HUNGER] += foodToConsume.hungerBarValue;
 
-    //     PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
-    //     StatsChecker();
-    // }
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
+        StatsChecker();
+    }
 
 
     public void Work(float salary)
@@ -163,40 +163,41 @@ public class Player : MonoBehaviour
     }
 
 
-    // public void Purchase(bool toConsume, Items item, float energyLevelCutValue = 10f)
-    // {
-    //     if (item.itemPrice > playerCash)
-    //     {
-    //         //PromptManager.Instance.ShowPrompt(notEnoughMoneyPrompt);
-    //         return;
-    //     }
+    public void Purchase(bool toConsume, Items item, float timeAdded, float energyLevelCutValue = 10f)
+    {
+        if (item.itemPrice > playerCash)
+        {
+            PromptManager.Instance.ShowPrompt(notEnoughMoneyPrompt);
+            return;
+        }
 
-    //     switch (item.itemType)
-    //     {
-    //         case ItemType.VEHICLE:
-    //             playerOwnedVehicles.Add(item);
-    //             playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
+        switch (item.itemType)
+        {
+            case ItemType.VEHICLE:
+                playerOwnedVehicles.Add(item);
+                playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
 
-    //             break;
-    //         case ItemType.APPLIANCE:
-    //             //stats
-    //             playerOwnedAppliances.Add(item);
-    //             playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
-    //             break;
-    //         case ItemType.CONSUMABLE:
-    //             playerOwnedGroceries.Add(item);
-    //             break;
-    //     }
-    //     TimeManager.Instance.AddClockTime(0.30f);
-    //     playerStatsDict[PlayerStats.MONEY] -= item.itemPrice;
-    //     PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
-    //     StatsChecker();
+                break;
+            case ItemType.APPLIANCE:
+                //stats
+                playerOwnedAppliances.Add(item);
+                playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
+                break;
+            case ItemType.CONSUMABLE:
+                playerOwnedGroceries.Add(item);
+                break;
+        }
+        TimeManager.Instance.AddClockTime(timeAdded);
+        playerCash -= item.itemPrice;
+        playerStatsDict[PlayerStats.MONEY] -= item.itemPrice;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
+        StatsChecker();
 
-    //     if (toConsume)
-    //     {
-    //         EatDrink(item);
-    //     }
-    // }
+        if (toConsume)
+        {
+            EatDrink(item);
+        }
+    }
 
 
     public void PurchaseMallItem(float energyLevelCutValue, float amount, float happinessAddValue)
@@ -262,7 +263,6 @@ public class Player : MonoBehaviour
             {
                 GameManager.Instance.Hospitalized(1);
             }
-            
         }
 
         //Checks if stats reaches the upper limit

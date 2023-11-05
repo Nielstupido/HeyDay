@@ -8,9 +8,14 @@ public class SlotMachineResults : MonoBehaviour
     [SerializeField] private GameObject winPrompt;
     [SerializeField] private Text winAmount;
     [SerializeField] private GameObject losePrompt;
+    [SerializeField] private Prompts notEnoughMoneyPrompt;
+    [SerializeField] private SlotMachine slotMachine1;
+    [SerializeField] private SlotMachine slotMachine2;
+    [SerializeField] private SlotMachine slotMachine3;
     public List<Sprite> results = new List<Sprite>();
     public static SlotMachineResults Instance { get; private set; }
     int matchCount = 0;
+
 
     private void Awake() 
     { 
@@ -24,9 +29,38 @@ public class SlotMachineResults : MonoBehaviour
         } 
     }
 
+
+    private bool Pay(float energyLevelCutValue, float amount, float timeAdded)
+    {
+        if (amount > Player.Instance.PlayerCash)
+        {
+            PromptManager.Instance.ShowPrompt(notEnoughMoneyPrompt);
+            return false;
+        }
+
+        TimeManager.Instance.AddClockTime(timeAdded);
+        Player.Instance.PlayerCash -= amount;
+        Player.Instance.PlayerStatsDict[PlayerStats.MONEY] -= amount;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
+        Player.Instance.StatsChecker();
+
+        return true;
+    }
+
+
+    public void Play()
+    {
+        if (Pay(5f, 100000f, 0.5f))
+        {
+            slotMachine1.StartRand();
+            slotMachine2.StartRand();
+            slotMachine3.StartRand();
+        }
+    }
+
+
     public void CheckForMatches()
     {
-        //Player.Instance.Purchase(5f,100f,0.5f);
         if (results.Count == 3)
         {
             for (int i = 0; i < results.Count; i++)
@@ -62,6 +96,7 @@ public class SlotMachineResults : MonoBehaviour
         StartCoroutine(ClosePrompt(2.5f));
     }
 
+
     private IEnumerator ShowPrompt(float seconds)
     {
         yield return new WaitForSeconds(seconds);
@@ -75,12 +110,12 @@ public class SlotMachineResults : MonoBehaviour
         }
     }
 
+
     private IEnumerator ClosePrompt(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         
         winPrompt.SetActive(false);
         losePrompt.SetActive(false);
-
     }
 }

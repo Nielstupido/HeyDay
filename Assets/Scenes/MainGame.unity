@@ -2303,33 +2303,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1848661554}
-        m_TargetAssemblyTypeName: SlotMachine, Assembly-CSharp
-        m_MethodName: StartRand
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 793301523}
-        m_TargetAssemblyTypeName: SlotMachine, Assembly-CSharp
-        m_MethodName: StartRand
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 825114648}
-        m_TargetAssemblyTypeName: SlotMachine, Assembly-CSharp
-        m_MethodName: StartRand
+      - m_Target: {fileID: 1677192345}
+        m_TargetAssemblyTypeName: SlotMachineResults, Assembly-CSharp
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10577,6 +10553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089ad70e39af4934bb37c1cf791d536f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notEnoughMoneyPrompt: {fileID: 11400000, guid: 934b940a4fce4b8468272bc3daa4df1e, type: 2}
 --- !u!114 &433560203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26080,10 +26057,29 @@ MonoBehaviour:
   foodName: {fileID: 743785006}
   priceValue: {fileID: 1898194362}
   targetImage: {fileID: 1630969196}
-  cafeFoodList: []
-  cafeteriaFoodList: []
-  convenienceStoreFoodList: []
-  foodxPressFoodList: []
+  cafeFoodList:
+  - {fileID: 11400000, guid: 5d8a5f8bd0fcf9d4bb4b0e4253598ec0, type: 2}
+  - {fileID: 11400000, guid: 38f969a487b2a3c418ba4dd433758423, type: 2}
+  - {fileID: 11400000, guid: 57eaecdb93afd214a8b0a6486af74007, type: 2}
+  - {fileID: 11400000, guid: 7ecffa008ba2f994f8ef6fa9a28e0ee5, type: 2}
+  - {fileID: 11400000, guid: ee9e783c0c6f2fe4cb2b26cf75697e84, type: 2}
+  cafeteriaFoodList:
+  - {fileID: 11400000, guid: 0c3e7726027450d46b19ba9cea32b6fc, type: 2}
+  - {fileID: 11400000, guid: 92c21091df1982e48983b20ff9d2f243, type: 2}
+  - {fileID: 11400000, guid: 13d9c7a303e9e9546878093b30fd45c3, type: 2}
+  - {fileID: 11400000, guid: cee5be2a20f516045a86062a26a960ea, type: 2}
+  - {fileID: 11400000, guid: 9a0667b3856b9154785f8c043ac31c5a, type: 2}
+  - {fileID: 11400000, guid: e90fa2c64a38a7b4ab6b8783e01f5331, type: 2}
+  convenienceStoreFoodList:
+  - {fileID: 11400000, guid: d21ab83af5d582f4ba73257e7cb837ac, type: 2}
+  - {fileID: 11400000, guid: e298864029f29ad4b9fca72bf776df5a, type: 2}
+  - {fileID: 11400000, guid: 923c7a5a869ad384486949ec9eb9dcda, type: 2}
+  - {fileID: 11400000, guid: 2a49b8c453712d04598b214c0105ab6d, type: 2}
+  foodxPressFoodList:
+  - {fileID: 11400000, guid: 903b81913d5f5394ebe7223d4f3543e1, type: 2}
+  - {fileID: 11400000, guid: f22e48bd41da5de419d4f20685973127, type: 2}
+  - {fileID: 11400000, guid: 51844063eaba21540a5d72b49ae9cc1e, type: 2}
+  - {fileID: 11400000, guid: f37b18f9b6fcc2f48a2729d8de2c9171, type: 2}
 --- !u!4 &1027872557
 Transform:
   m_ObjectHideFlags: 0
@@ -28740,9 +28736,9 @@ RectTransform:
   - {fileID: 1924926498}
   - {fileID: 731161806}
   - {fileID: 831691370}
+  - {fileID: 1677192348}
   - {fileID: 2911800399325964227}
   - {fileID: 1812526035}
-  - {fileID: 1677192348}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.479}
@@ -40905,6 +40901,10 @@ MonoBehaviour:
   winPrompt: {fileID: 1780387020}
   winAmount: {fileID: 1201294573}
   losePrompt: {fileID: 395101891}
+  notEnoughMoneyPrompt: {fileID: 11400000, guid: 1e93f7d4c4135774c852731db27d0852, type: 2}
+  slotMachine1: {fileID: 1848661554}
+  slotMachine2: {fileID: 793301523}
+  slotMachine3: {fileID: 825114648}
   results: []
 --- !u!114 &1677192346
 MonoBehaviour:
@@ -40964,7 +40964,7 @@ RectTransform:
   - {fileID: 1780387021}
   - {fileID: 395101894}
   m_Father: {fileID: 1138957115}
-  m_RootOrder: 24
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -45744,12 +45744,13 @@ MonoBehaviour:
   enterBtn: {fileID: 1733965627}
   resBuildingSelectOverlay: {fileID: 934206644}
   roomBgOverlay: {fileID: 62309206}
-  btnPrefab: {fileID: 0}
-  buttonsHolder: {fileID: 0}
-  vechiclesBtn: {fileID: 0}
-  appliancesBtn: {fileID: 0}
-  groceriesBtn: {fileID: 0}
-  playerItemsListManager: {fileID: 0}
+  miniBtnsHolder: {fileID: 1286516215}
+  btnPrefab: {fileID: 8422458373500371487, guid: c9e80a3819bedc44caa597172cf1ad61, type: 3}
+  buttonsHolder: {fileID: 315949133}
+  vechiclesBtn: {fileID: 1076060595}
+  appliancesBtn: {fileID: 1974824618}
+  groceriesBtn: {fileID: 2012771452}
+  playerItemsListManager: {fileID: 433560205}
 --- !u!4 &1811764788
 Transform:
   m_ObjectHideFlags: 0
@@ -45797,7 +45798,7 @@ RectTransform:
   m_Children:
   - {fileID: 1810652659}
   m_Father: {fileID: 1138957115}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -58511,7 +58512,7 @@ RectTransform:
   m_Children:
   - {fileID: 2911800400255858881}
   m_Father: {fileID: 1138957115}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -64648,15 +64649,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vehicleListOverlay: {fileID: 6961062203915114660}
   buyCarPopUp: {fileID: 6961062202748073134}
-  buyBtn: {fileID: 0}
+  buyBtn: {fileID: 6961062203943337616}
   vehicleName: {fileID: 6961062203736888962}
   vehiclePrice: {fileID: 6961062202134936183}
   vehicleColor: {fileID: 6961062202739777121}
   vehicleType: {fileID: 6961062202130502628}
   vehicleCondition: {fileID: 6961062202860910776}
   targetImage: {fileID: 6961062203349438788}
-  brandNewVehicles: []
-  secondHandVehicles: []
+  brandNewVehicles:
+  - {fileID: 11400000, guid: d106947e23d38e34dbc2bdacae7f8f42, type: 2}
+  - {fileID: 11400000, guid: 6f9f7954ef7ce264b9895227a4f80130, type: 2}
+  - {fileID: 11400000, guid: 449c11f40f152cf46aa8526be22f8674, type: 2}
+  - {fileID: 11400000, guid: a43586f9923c61d4b82971b3cd41ef67, type: 2}
+  - {fileID: 11400000, guid: 0648aabaf19e72a40961c83a8cc402e8, type: 2}
+  - {fileID: 11400000, guid: 5163107653986644abbecf2c83f962cb, type: 2}
+  - {fileID: 11400000, guid: 371e35ea13432544b83111cdcebc6bb2, type: 2}
+  - {fileID: 11400000, guid: 61a5321b4be5bdc40a74aa4d2d2cbcdb, type: 2}
+  - {fileID: 11400000, guid: cc4526ef77290b142b282d524cd3a9af, type: 2}
+  - {fileID: 11400000, guid: 67e12d19ca47ca94096a76b50d0d36de, type: 2}
+  - {fileID: 11400000, guid: b7fd160a251754b478594c7a348aa2b7, type: 2}
+  secondHandVehicles:
+  - {fileID: 11400000, guid: 0f87c3b5c76d149449891386bd126a7b, type: 2}
+  - {fileID: 11400000, guid: 94b86f922cc616146a10d49201a2664a, type: 2}
+  - {fileID: 11400000, guid: f268cc18c619bf840954be1c4cca78dc, type: 2}
+  - {fileID: 11400000, guid: e093243aaf6b1e6458aac23a3b36cfa6, type: 2}
+  - {fileID: 11400000, guid: 85e1b73d284e559409a8bc8216c73fe9, type: 2}
+  - {fileID: 11400000, guid: 9b8d39252f1c31d4b96de1efcf46fde6, type: 2}
+  - {fileID: 11400000, guid: df1e391ab98efe7488a773eb86edbdd0, type: 2}
+  - {fileID: 11400000, guid: f3613e75469894744a6949870cf2e413, type: 2}
+  - {fileID: 11400000, guid: 2f9829132dcd7eb4ebdb4a7da3bd31ee, type: 2}
+  - {fileID: 11400000, guid: 3b6ec4e3399ec1e4b80c519b4fd53b42, type: 2}
 --- !u!224 &6961062203793588097
 RectTransform:
   m_ObjectHideFlags: 0
@@ -65242,7 +65264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &6961062204114926816
 MonoBehaviour:
   m_ObjectHideFlags: 0

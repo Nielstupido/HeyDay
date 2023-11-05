@@ -96,6 +96,6 @@ public class CarCatalogueManager : MonoBehaviour
 
     public void BuyCar() 
     {
-        // Player.Instance.Purchase(false, vehicleDets[currentItem]);
+        Player.Instance.Purchase(false, vehicleDets[currentItem], 1f);
     }
 }

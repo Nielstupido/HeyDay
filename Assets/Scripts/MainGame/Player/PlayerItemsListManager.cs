@@ -44,7 +44,7 @@ public class PlayerItemsListManager : MonoBehaviour
             {
                 newItem.GetComponent<ItemsObjPrefab>().ItemEatBtn.gameObject.SetActive(true);
                 newItem.GetComponent<ItemsObjPrefab>().ItemEatBtn.onClick.AddListener(delegate {
-                    // Player.Instance.EatDrink(playerItem); 
+                    Player.Instance.EatDrink(playerItem); 
                     newItem.GetComponent<ItemsObjPrefab>().DestroyObj();
                 });
             }
