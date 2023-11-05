@@ -11,6 +11,7 @@ public class Mall : Building
     [SerializeField] private GameObject itemButtonPrefab;
     [SerializeField] private GameObject itemButtonParent;
     [SerializeField] private GameObject itemBoughtOverlay;
+    [SerializeField] private GameObject purchaseErrorPrompt;
     [SerializeField] private Text header;
     [SerializeField] private Text itemName;
     [SerializeField] private Image itemImage;
@@ -164,7 +165,9 @@ public class Mall : Building
             }
             else
             {
+                purchaseErrorPrompt.SetActive(true);
                 Debug.Log("Item already bought: " + mallItems[itemIndex]);
+                StartCoroutine(ClosePrompt(0.8f));
             }
         }
         else
@@ -178,5 +181,13 @@ public class Mall : Building
         itemBoughtOverlay.SetActive(true);
         itemName.text = mallItems[i];
         itemImage.sprite = mallItemsImages[i];
+    }
+
+    private IEnumerator ClosePrompt(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        
+        purchaseErrorPrompt.SetActive(false);
+
     }
 }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.IO;
+using Newtonsoft.Json;
 
 
 public class PlayerInfoManager : MonoBehaviour
@@ -18,6 +20,13 @@ public class PlayerInfoManager : MonoBehaviour
     {
         Player.Instance.PlayerName = playerNameTextInput.text;
         playerNameTextDisplay.text = playerNameTextInput.text;
+
+        MainMenuManager.Instance.playerScores.Add(playerNameTextInput.text, 0);
+        string filePath = Application.dataPath + "/Files/PlayerScores.json";
+        string jsonString = JsonConvert.SerializeObject(MainMenuManager.Instance.playerScores);
+        File.WriteAllText(filePath, jsonString);
+        Debug.Log("File saved successfully: " + jsonString);
+
         introCutsceneMannager.StartIntro();
         characterCreationOverlay.SetActive(false);
     }

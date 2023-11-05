@@ -94,23 +94,10 @@ public class Player : MonoBehaviour
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
     }
 
-    /*public float checkInputDuration(float duration)
-    {
-        float targetTime = duration + currentTime;
-        if (targetTime > 17.0f)
-        {
-            float excessTime = targetTime - 17;
-            duration -= excessTime;
-        }
-
-        return duration;
-    }*/
-
 
     public void Study(float studyDurationValue)
     {
-        //studyDurationValue = checkInputDuration(studyDurationValue);
-        //AddClockTime(studyDurationValue);
+        TimeManager.Instance.AddClockTime(studyDurationValue);
         playerStatsDict[PlayerStats.ENERGY] -= studyDurationValue * 10;
         playerStatsDict[PlayerStats.HAPPINESS] -= studyDurationValue * 3;
         playerStatsDict[PlayerStats.HUNGER] -= studyDurationValue * 5;
@@ -122,20 +109,9 @@ public class Player : MonoBehaviour
         University.Instance.UpdateStudyHours(studyDurationValue);
     }
 
-    public void UpdateStudyHours(float studyDurationValue)
+    public void Purchase(float energyLevelCutValue, float amount, float timeAdded)
     {
-        PlayerStudyHours += studyDurationValue;
-        //studyHours.text = PlayerStudyHours.ToString();
-    }
-
-    public void Enroll(string courseName, float courseDuration)
-    {
-        UpdateStudyHours(0);
-    }
-
-    public void Purchase(float energyLevelCutValue, float amount)
-    {
-        TimeManager.Instance.AddClockTime(0.30f);
+        TimeManager.Instance.AddClockTime(timeAdded);
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
 
@@ -146,7 +122,7 @@ public class Player : MonoBehaviour
 
     public void PurchaseMallItem(float energyLevelCutValue, float amount, float happinessAddValue)
     {
-        //AddClockTime(0.30f);
+        TimeManager.Instance.AddClockTime(0.30f);
         playerStatsDict[PlayerStats.HAPPINESS] += happinessAddValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HAPPINESS, playerStatsDict);
 

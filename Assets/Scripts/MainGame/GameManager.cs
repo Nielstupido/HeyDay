@@ -2,6 +2,9 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.IO;
+using System;
+using Newtonsoft.Json;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,8 +17,8 @@ public class GameManager : MonoBehaviour
     private IDictionary<PlayerStats, float> playerStatsDictTemp = new Dictionary<PlayerStats, float>();
     private float numOfdays = 0;
     private float hospitalFee = 1500; // hospital fee per day
-    public static GameManager Instance { get; private set; }
 
+    public static GameManager Instance { get; private set; }
 
     private void Awake() 
     { 
@@ -29,12 +32,16 @@ public class GameManager : MonoBehaviour
         } 
     }
 
-
     public void StartGame()
     {
         bottomOverlay.SetActive(true);
         pauseBtn.SetActive(true);
-        AudioManager.Instance.PlayMusic("Theme");
+        //AudioManager.Instance.PlayMusic("Theme");
+    }
+
+    public void LoadSavedGame()
+    {
+
     }
 
 
