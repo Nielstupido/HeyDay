@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44486502, g: 0.49442548, b: 0.5735965, a: 1}
+  m_IndirectSpecularColor: {r: 0.44233638, g: 0.49120283, b: 0.5710321, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3681,7 +3681,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bottomOverlay: {fileID: 1710457672}
   pauseBtn: {fileID: 1248060380}
-  buildingInteriorOverlay: {fileID: 0}
   hospitalizedPrompt: {fileID: 0}
   daysHospitalized: {fileID: 0}
   totalBill: {fileID: 0}
@@ -5229,6 +5228,7 @@ MonoBehaviour:
   smallStatsOverlay: {fileID: 2911800399325964226}
   camera1: {fileID: 963194225}
   camera2: {fileID: 316978989}
+  buildingInteriorOverlay: {fileID: 0}
   playerTravelManager: {fileID: 1328888010}
 --- !u!4 &223557264
 Transform:
@@ -7312,11 +7312,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: 0
+  actionButtons: 
   buildingNameStr: 
   monthlyRent: 0
   monthlyElecCharge: 0
   monthlyWaterCharge: 0
   dailyAdtnlHappiness: 0
+  adtnlEnergyForSleep: 0
 --- !u!114 &305224840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10575,7 +10577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089ad70e39af4934bb37c1cf791d536f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsBought: 
 --- !u!114 &433560203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15936,6 +15937,7 @@ MonoBehaviour:
   withdrawProcessingOverlay: {fileID: 438302068274020963}
   withdrawProcessedOverlay: {fileID: 438302069478610504}
   balanceOverlay: {fileID: 438302068574937202}
+  createAccPrompt: {fileID: 0}
   balanceText: {fileID: 438302067769605875}
   depositAmountField: {fileID: 6386970847008717802}
   withdrawAmountField: {fileID: 6386970846890352826}
@@ -19361,11 +19363,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: 0
+  actionButtons: 
   buildingNameStr: 
   monthlyRent: 0
   monthlyElecCharge: 0
   monthlyWaterCharge: 0
   dailyAdtnlHappiness: 0
+  adtnlEnergyForSleep: 0
 --- !u!114 &792391648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26076,26 +26080,10 @@ MonoBehaviour:
   foodName: {fileID: 743785006}
   priceValue: {fileID: 1898194362}
   targetImage: {fileID: 1630969196}
-  images: []
-  cupNoodles: {fileID: 0}
-  sandwich: {fileID: 0}
-  siopao: {fileID: 0}
-  hotdog: {fileID: 0}
-  icedCoffee: {fileID: 0}
-  icedMatcha: {fileID: 0}
-  milkTea: {fileID: 0}
-  fruitTea: {fileID: 0}
-  slushie: {fileID: 0}
-  smallMeal: {fileID: 0}
-  mediumMeal: {fileID: 0}
-  bigMeal: {fileID: 0}
-  superMeal: {fileID: 0}
-  eggRice: {fileID: 0}
-  tofuRice: {fileID: 0}
-  veggiesRice: {fileID: 0}
-  chickenRice: {fileID: 0}
-  porkRice: {fileID: 0}
-  seafoodRice: {fileID: 0}
+  cafeFoodList: []
+  cafeteriaFoodList: []
+  convenienceStoreFoodList: []
+  foodxPressFoodList: []
 --- !u!4 &1027872557
 Transform:
   m_ObjectHideFlags: 0
@@ -28754,6 +28742,7 @@ RectTransform:
   - {fileID: 831691370}
   - {fileID: 2911800399325964227}
   - {fileID: 1812526035}
+  - {fileID: 1677192348}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.479}
@@ -40964,7 +40953,7 @@ RectTransform:
   m_GameObject: {fileID: 1677192344}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.40146, y: 0.40146, z: 0.40146}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2095912778}
@@ -40974,13 +40963,13 @@ RectTransform:
   - {fileID: 85126078}
   - {fileID: 1780387021}
   - {fileID: 395101894}
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_Father: {fileID: 1138957115}
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 375.5, y: 222.5}
-  m_SizeDelta: {x: 1870.6927, y: 1108.4664}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1681455235
 GameObject:
@@ -41964,11 +41953,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: 0
+  actionButtons: 
   buildingNameStr: 
   monthlyRent: 0
   monthlyElecCharge: 0
   monthlyWaterCharge: 0
   dailyAdtnlHappiness: 0
+  adtnlEnergyForSleep: 0
 --- !u!114 &1704756966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42706,11 +42697,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: 0
+  actionButtons: 
   buildingNameStr: 
   monthlyRent: 0
   monthlyElecCharge: 0
   monthlyWaterCharge: 0
   dailyAdtnlHappiness: 0
+  adtnlEnergyForSleep: 0
 --- !u!114 &1727380149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44859,11 +44852,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: 0
+  actionButtons: 
   buildingNameStr: 
   monthlyRent: 0
   monthlyElecCharge: 0
   monthlyWaterCharge: 0
   dailyAdtnlHappiness: 0
+  adtnlEnergyForSleep: 0
 --- !u!114 &1774733756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45749,6 +45744,12 @@ MonoBehaviour:
   enterBtn: {fileID: 1733965627}
   resBuildingSelectOverlay: {fileID: 934206644}
   roomBgOverlay: {fileID: 62309206}
+  btnPrefab: {fileID: 0}
+  buttonsHolder: {fileID: 0}
+  vechiclesBtn: {fileID: 0}
+  appliancesBtn: {fileID: 0}
+  groceriesBtn: {fileID: 0}
+  playerItemsListManager: {fileID: 0}
 --- !u!4 &1811764788
 Transform:
   m_ObjectHideFlags: 0
@@ -48261,30 +48262,6 @@ MonoBehaviour:
   actionButtons: 
   buildingOpeningTime: 0
   buildingClosingTime: 0
-  shopOptionsOverlay: {fileID: 0}
-  shopBrowserOverlay: {fileID: 0}
-  itemButtonPrefab: {fileID: 0}
-  itemButtonParent: {fileID: 0}
-  itemBoughtOverlay: {fileID: 0}
-  purchaseErrorPrompt: {fileID: 0}
-  header: {fileID: 0}
-  itemName: {fileID: 0}
-  itemImage: {fileID: 0}
-  kettle: {fileID: 0}
-  speakers: {fileID: 0}
-  stove: {fileID: 0}
-  microwave: {fileID: 0}
-  tv: {fileID: 0}
-  fridge: {fileID: 0}
-  aircon: {fileID: 0}
-  computer: {fileID: 0}
-  laptop: {fileID: 0}
-  barbershop: {fileID: 0}
-  salon: {fileID: 0}
-  gym: {fileID: 0}
-  spa: {fileID: 0}
-  dental: {fileID: 0}
-  mallItemsImages: []
 --- !u!114 &1924926500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64669,36 +64646,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c383a83250a367428aac3c727daaeb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carCatalogueOverlay: {fileID: 0}
+  vehicleListOverlay: {fileID: 6961062203915114660}
   buyCarPopUp: {fileID: 6961062202748073134}
+  buyBtn: {fileID: 0}
   vehicleName: {fileID: 6961062203736888962}
   vehiclePrice: {fileID: 6961062202134936183}
   vehicleColor: {fileID: 6961062202739777121}
   vehicleType: {fileID: 6961062202130502628}
   vehicleCondition: {fileID: 6961062202860910776}
   targetImage: {fileID: 6961062203349438788}
-  images: []
-  scooterRed: {fileID: 0}
-  scooterBlue: {fileID: 0}
-  scooterBlack: {fileID: 0}
-  scooterYellow: {fileID: 0}
-  scooterCream: {fileID: 0}
-  sedanRed: {fileID: 0}
-  sedanBlue: {fileID: 0}
-  sedanYellow: {fileID: 0}
-  sedanBlack: {fileID: 0}
-  suvRed: {fileID: 0}
-  suvBlack: {fileID: 0}
-  suvBrown: {fileID: 0}
-  suvBlue: {fileID: 0}
-  coupeRed: {fileID: 0}
-  coupeBlue: {fileID: 0}
-  coupeBlack: {fileID: 0}
-  coupeGrey: {fileID: 0}
-  truckRed: {fileID: 0}
-  truckBlue: {fileID: 0}
-  truckCream: {fileID: 0}
-  truckBlack: {fileID: 0}
+  brandNewVehicles: []
+  secondHandVehicles: []
 --- !u!224 &6961062203793588097
 RectTransform:
   m_ObjectHideFlags: 0

@@ -84,6 +84,6 @@ public class SwitchMenuItem : MonoBehaviour
 
    public void ItemBought()
    {
-      Player.Instance.Purchase(true, foodList[currentItem]);
+      // Player.Instance.Purchase(true, foodList[currentItem]);
    }
 }

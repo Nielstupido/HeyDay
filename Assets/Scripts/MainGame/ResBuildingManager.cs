@@ -132,17 +132,17 @@ public class ResBuildingManager : MonoBehaviour
 
     public void ShowItems(ItemType itemType)
     {
-        switch (itemType)
-        {
-            case ItemType.VEHICLE:
-                playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedVehicles);
-                break;
-            case ItemType.APPLIANCE:
-                playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedAppliances);
-                break;
-            case ItemType.CONSUMABLE:
-                playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedGroceries);
-                break;
-        }
+        // switch (itemType)
+        // {
+        //     case ItemType.VEHICLE:
+        //         playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedVehicles);
+        //         break;
+        //     case ItemType.APPLIANCE:
+        //         playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedAppliances);
+        //         break;
+        //     case ItemType.CONSUMABLE:
+        //         playerItemsListManager.ShowItems(Player.Instance.PlayerOwnedGroceries);
+        //         break;
+        // }
     }
 }
