@@ -14,5 +14,6 @@ public class Items : ScriptableObject
     public float energyBarValue;
     public float hungerBarValue;
     public float happinessBarValue;
+    public float eatingTime;
     public float electricBillValue;
 }

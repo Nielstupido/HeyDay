@@ -2466,7 +2466,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16588,7 +16588,7 @@ RectTransform:
   - {fileID: 1401384375}
   - {fileID: 484068889}
   m_Father: {fileID: 1138957115}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -20060,7 +20060,7 @@ RectTransform:
   - {fileID: 231420003}
   - {fileID: 1066394502}
   m_Father: {fileID: 1138957115}
-  m_RootOrder: 23
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -20264,7 +20264,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -25488,26 +25488,29 @@ MonoBehaviour:
   foodName: {fileID: 743785006}
   priceValue: {fileID: 1898194362}
   targetImage: {fileID: 1630969196}
-  images: []
-  cupNoodles: {fileID: 21300000, guid: fe193a4b3e6c6de48a520daf951cec67, type: 3}
-  sandwich: {fileID: 21300000, guid: 93e24fb6ee557cf4fb79760af2e77230, type: 3}
-  siopao: {fileID: 21300000, guid: 7888dc7c7e1cc5948b1b08e9ad71e392, type: 3}
-  hotdog: {fileID: 21300000, guid: 75c09e81412ea014c84a1ee1006e2af8, type: 3}
-  icedCoffee: {fileID: 21300000, guid: ee6290ce39b0e0e45a3b68afc599979d, type: 3}
-  icedMatcha: {fileID: 21300000, guid: 705c8f594d6f425479adf62ef3162cf3, type: 3}
-  milkTea: {fileID: 21300000, guid: 45418091643eee849a7efe412b69563f, type: 3}
-  fruitTea: {fileID: 21300000, guid: 8229c9b32bc03b540985960c8614ff71, type: 3}
-  slushie: {fileID: 21300000, guid: bba79ffc66e371a408cca1133c9856e0, type: 3}
-  smallMeal: {fileID: 21300000, guid: 93872471f337ee045a0bf122596b6923, type: 3}
-  mediumMeal: {fileID: 21300000, guid: 8a841aa39c20cec4198fa068b31db177, type: 3}
-  bigMeal: {fileID: 21300000, guid: 495597df84d723f469c7c552550269d7, type: 3}
-  superMeal: {fileID: 21300000, guid: 75f34509de408e4448bc10792e147e38, type: 3}
-  eggRice: {fileID: 21300000, guid: f397b4f6202cc8f45b5063182340b8e6, type: 3}
-  tofuRice: {fileID: 21300000, guid: 4b50e6aa968db7440bedadfab6786e61, type: 3}
-  veggiesRice: {fileID: 21300000, guid: 39c7f0a4a9de44b4a91ec8f9f86990aa, type: 3}
-  chickenRice: {fileID: 21300000, guid: a50280161e5c2504f9b32bbd2d79a077, type: 3}
-  porkRice: {fileID: 21300000, guid: 1d54a8c15446bda4fa402d9e7b605098, type: 3}
-  seafoodRice: {fileID: 21300000, guid: b52c36fece1edf644a48f1ece81379cf, type: 3}
+  cafeFoodList:
+  - {fileID: 11400000, guid: 38f969a487b2a3c418ba4dd433758423, type: 2}
+  - {fileID: 11400000, guid: 57eaecdb93afd214a8b0a6486af74007, type: 2}
+  - {fileID: 11400000, guid: 7ecffa008ba2f994f8ef6fa9a28e0ee5, type: 2}
+  - {fileID: 11400000, guid: 5d8a5f8bd0fcf9d4bb4b0e4253598ec0, type: 2}
+  - {fileID: 11400000, guid: ee9e783c0c6f2fe4cb2b26cf75697e84, type: 2}
+  cafeteriaFoodList:
+  - {fileID: 11400000, guid: 92c21091df1982e48983b20ff9d2f243, type: 2}
+  - {fileID: 11400000, guid: 9a0667b3856b9154785f8c043ac31c5a, type: 2}
+  - {fileID: 11400000, guid: e90fa2c64a38a7b4ab6b8783e01f5331, type: 2}
+  - {fileID: 11400000, guid: 0c3e7726027450d46b19ba9cea32b6fc, type: 2}
+  - {fileID: 11400000, guid: 13d9c7a303e9e9546878093b30fd45c3, type: 2}
+  - {fileID: 11400000, guid: cee5be2a20f516045a86062a26a960ea, type: 2}
+  convenienceStoreFoodList:
+  - {fileID: 11400000, guid: d21ab83af5d582f4ba73257e7cb837ac, type: 2}
+  - {fileID: 11400000, guid: 923c7a5a869ad384486949ec9eb9dcda, type: 2}
+  - {fileID: 11400000, guid: 2a49b8c453712d04598b214c0105ab6d, type: 2}
+  - {fileID: 11400000, guid: e298864029f29ad4b9fca72bf776df5a, type: 2}
+  foodxPressFoodList:
+  - {fileID: 11400000, guid: 51844063eaba21540a5d72b49ae9cc1e, type: 2}
+  - {fileID: 11400000, guid: f22e48bd41da5de419d4f20685973127, type: 2}
+  - {fileID: 11400000, guid: 903b81913d5f5394ebe7223d4f3543e1, type: 2}
+  - {fileID: 11400000, guid: f37b18f9b6fcc2f48a2729d8de2c9171, type: 2}
 --- !u!4 &1027872557
 Transform:
   m_ObjectHideFlags: 0
@@ -28162,10 +28165,10 @@ RectTransform:
   - {fileID: 266221834}
   - {fileID: 1467327162}
   - {fileID: 1924926498}
-  - {fileID: 2911800399325964227}
   - {fileID: 731161806}
-  - {fileID: 1812526035}
   - {fileID: 831691370}
+  - {fileID: 2911800399325964227}
+  - {fileID: 1812526035}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.479}
@@ -32017,7 +32020,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -41274,7 +41277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1710457673
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44882,7 +44885,7 @@ RectTransform:
   m_Children:
   - {fileID: 1810652659}
   m_Father: {fileID: 1138957115}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -57444,7 +57447,7 @@ RectTransform:
   m_Children:
   - {fileID: 2911800400255858881}
   m_Father: {fileID: 1138957115}
-  m_RootOrder: 20
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

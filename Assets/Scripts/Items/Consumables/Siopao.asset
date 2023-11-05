@@ -22,4 +22,5 @@ MonoBehaviour:
   energyBarValue: 0
   hungerBarValue: 5
   happinessBarValue: -10
+  eatingTime: 0.2
   electricBillValue: 0

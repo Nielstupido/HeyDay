@@ -116,28 +116,12 @@ public class Player : MonoBehaviour
     }
 
 
-    public void EatDrink(float happinessAddValue, float energyLevelAddValue, float hungerLevelCutValue, float amount, float eatingTimeValue)
+    public void EatDrink(Items foodToConsume)
     {
-        TimeManager.Instance.AddClockTime(eatingTimeValue);
-        playerStatsDict[PlayerStats.HAPPINESS] += happinessAddValue;
-        playerStatsDict[PlayerStats.ENERGY] += energyLevelAddValue;
-        playerStatsDict[PlayerStats.HUNGER] += hungerLevelCutValue;
-        playerStatsDict[PlayerStats.MONEY] -= amount;
-
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
-        //Debug.Log("HAPPY:" + playerStatsDict[PlayerStats.HAPPINESS]);
-        StatsChecker();
-        //Debug.Log("HAPPY AFTER:" + playerStatsDict[PlayerStats.HAPPINESS]);
-    }
-
-
-    public void EatDrink(Items consumableItem)
-    {
-        // TimeManager.Instance.AddClockTime(consumableItem.eatingTimeValue);
-        playerStatsDict[PlayerStats.HAPPINESS] += consumableItem.happinessBarValue;
-        playerStatsDict[PlayerStats.ENERGY] += consumableItem.energyBarValue;
-        playerStatsDict[PlayerStats.HUNGER] += consumableItem.hungerBarValue;
-        playerStatsDict[PlayerStats.MONEY] -= consumableItem.itemPrice;
+        TimeManager.Instance.AddClockTime(foodToConsume.eatingTime);
+        playerStatsDict[PlayerStats.HAPPINESS] += foodToConsume.happinessBarValue;
+        playerStatsDict[PlayerStats.ENERGY] += foodToConsume.energyBarValue;
+        playerStatsDict[PlayerStats.HUNGER] += foodToConsume.hungerBarValue;
 
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
         StatsChecker();
@@ -192,13 +176,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public void Purchase(float energyValue, float hungerValue, float happinessValue, float amountValue, float eatingTime)
-    {
-        EatDrink(energyValue, hungerValue, happinessValue, amountValue, eatingTime);
-    }
-
-
-    public void Purchase(Items item, float energyLevelCutValue = 10f)
+    public void Purchase(bool toConsume, Items item, float energyLevelCutValue = 10f)
     {
         if (item.itemPrice > playerCash)
         {
@@ -210,20 +188,27 @@ public class Player : MonoBehaviour
         {
             case ItemType.VEHICLE:
                 playerOwnedVehicles.Add(item);
+                playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
+
                 break;
             case ItemType.APPLIANCE:
                 //stats
                 playerOwnedAppliances.Add(item);
+                playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
                 break;
             case ItemType.CONSUMABLE:
                 playerOwnedGroceries.Add(item);
                 break;
         }
         TimeManager.Instance.AddClockTime(0.30f);
-        playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         playerStatsDict[PlayerStats.MONEY] -= item.itemPrice;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
         StatsChecker();
+
+        if (toConsume)
+        {
+            EatDrink(item);
+        }
     }
 
 
