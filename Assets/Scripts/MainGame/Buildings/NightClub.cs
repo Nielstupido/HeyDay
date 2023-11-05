@@ -10,7 +10,7 @@ public class NightClub : Building
         this.buildingOpeningTime = 20;
         this.buildingClosingTime = 5;
 
-        actionButtons = new List<Buttons>(){Buttons.PARTY};
+        this.actionButtons = new List<Buttons>(){Buttons.PARTY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

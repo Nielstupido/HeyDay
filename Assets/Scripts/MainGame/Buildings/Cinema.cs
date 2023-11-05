@@ -10,7 +10,7 @@ public class Cinema : Building
         this.buildingOpeningTime = 13;
         this.buildingClosingTime = 23;
 
-        actionButtons = new List<Buttons>(){Buttons.WATCHMOVIE};     
+        this.actionButtons = new List<Buttons>(){Buttons.WATCHMOVIE};     
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

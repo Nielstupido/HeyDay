@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2df777171a0a6f4e8bf6ae12b8c43a2, type: 3}
+  m_Name: Iced Latte & Bread
+  m_EditorClassIdentifier: 
+  itemName: Iced Latte and Bread
+  itemType: 2
+  itemImage: {fileID: 21300000, guid: ee6290ce39b0e0e45a3b68afc599979d, type: 3}
+  itemPrice: 220
+  itemCondition: 0
+  vehicleType: 0
+  vehicleColor: 0
+  energyBarValue: 15
+  hungerBarValue: 20
+  happinessBarValue: 25
+  eatingTime: 1.05
+  electricBillValue: 0

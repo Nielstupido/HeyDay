@@ -51,7 +51,7 @@ public class University : Building
         this.buildingOpeningTime = 7;
         this.buildingClosingTime = 17;
 
-        actionButtons = new List<Buttons>(){Buttons.STUDY, Buttons.ENROL};
+        this.actionButtons = new List<Buttons>(){Buttons.STUDY, Buttons.ENROL};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

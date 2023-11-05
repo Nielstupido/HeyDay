@@ -10,7 +10,7 @@ public class Residential : Building
         this.buildingOpeningTime = 0;
         this.buildingClosingTime = 0;
 
-        actionButtons = new List<Buttons>(){Buttons.ENTER};
+        this.actionButtons = new List<Buttons>(){Buttons.ENTER};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

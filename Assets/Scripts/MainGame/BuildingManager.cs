@@ -20,6 +20,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject smallStatsOverlay;
     [SerializeField] private GameObject camera1;
     [SerializeField] private GameObject camera2;
+    [SerializeField] private GameObject buildingInteriorOverlay;
     [SerializeField] private PlayerTravelManager playerTravelManager;
     private Building currentSelectedBuilding;
     public delegate void OnBuildingBtnClicked(Buttons clickedBtn);
@@ -30,7 +31,7 @@ public class BuildingManager : MonoBehaviour
     public GameObject RideBtn { get{return rideBtn;}}
     public GameObject EnterBtn { get{return enterBtn;}}
     public GameObject ClosedBtn { get{return closedBtn;}}
-
+    public List<Sprite> ButtonImages { get{return buttonImages;}}
     public string BuildingNameText { set{buildingNameText.text = value;}}
     public static BuildingManager Instance { get; private set; }
 
@@ -78,25 +79,26 @@ public class BuildingManager : MonoBehaviour
 
     public void Buy(float amount)
     {
-        player.Purchase(10f, amount, 0.30f);
+        //player.Purchase(10f, amount, 0.30f);
     }
 
     public void BuyFood(float energyValue, float hungerValue, float happinessValue, float amountValue, float eatingTime)
     { 
         //Debug.Log(happinessValue);
-        player.EatDrink(happinessValue, energyValue, hungerValue, amountValue, eatingTime);
+        //player.EatDrink(happinessValue, energyValue, hungerValue, amountValue, eatingTime);
     }
 
 
     public void EnterBuilding(Building selectedBuilding)
     {
+        smallStatsOverlay.SetActive(true);
         if (selectedBuilding.buildingName == Buildings.RESIDENTIAL)
         {
             EnterResidentialArea();
         }
         else
         {
-            gameManager.EnterBuilding();
+            buildingInteriorOverlay.SetActive(true);
             PrepareButtons(selectedBuilding);
         }
     }
@@ -111,11 +113,12 @@ public class BuildingManager : MonoBehaviour
         walkBtn.SetActive(true);
         rideBtn.SetActive(true);
         enterBtn.SetActive(false);
-        gameManager.ExitBuilding();
+        smallStatsOverlay.SetActive(false);
+        buildingInteriorOverlay.SetActive(false);
     }
 
 
-    public void PrepareButtons(Building selectedBuilding)
+    private void PrepareButtons(Building selectedBuilding)
     {
         foreach(Buttons btn in selectedBuilding.actionButtons)
         {
@@ -130,7 +133,6 @@ public class BuildingManager : MonoBehaviour
     {
         buildingSelectOverlay.SetActive(false);
         camera2.SetActive(true);
-        smallStatsOverlay.SetActive(true);
         camera1.SetActive(false);
     }
 

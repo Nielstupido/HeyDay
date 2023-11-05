@@ -10,25 +10,6 @@ public abstract class Building : MonoBehaviour
     [HideInInspector]public int buildingClosingTime;
 
 
-
-    public virtual void Work()
-    {
-
-    }
-
-
-    public virtual void ApplyWork()
-    {
-
-    }
-
-
-    public virtual void QuitWork()
-    {
-        
-    }
-
-
     public abstract void CheckBtnClicked(Buttons clickedBtn);
 }
 
@@ -64,11 +45,14 @@ public enum Buttons
     APPLY,
     QUIT,
     WORK,
-    DEPOSITMONEY,
+    OPENSAVINGSACCOUNT,
+    ACCESSSAVINGSACCOUNT,
     WATCHMOVIE,
     PARTY,
     STUDY,
     ENROL,
     ENTER,
-    SHOP
+    SHOP,
+    SLEEP,
+    EAT
 }

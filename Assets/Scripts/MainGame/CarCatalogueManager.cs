@@ -6,91 +6,63 @@ using TMPro;
 
 public class CarCatalogueManager : MonoBehaviour
 {
-    [SerializeField] private GameObject carCatalogueOverlay;
+    [SerializeField] private GameObject vehicleListOverlay;
     [SerializeField] private GameObject buyCarPopUp;
+    [SerializeField] private Button buyBtn;
     [SerializeField] private TextMeshProUGUI vehicleName;
     [SerializeField] private TextMeshProUGUI vehiclePrice;
     [SerializeField] private TextMeshProUGUI vehicleColor;
     [SerializeField] private TextMeshProUGUI vehicleType;
     [SerializeField] private TextMeshProUGUI vehicleCondition;
     [SerializeField] private Image targetImage;
-    [SerializeField] private Sprite[] images;
-    [SerializeField] private Sprite scooterRed;
-    [SerializeField] private Sprite scooterBlue;
-    [SerializeField] private Sprite scooterBlack;
-    [SerializeField] private Sprite scooterYellow;
-    [SerializeField] private Sprite scooterCream;
-    [SerializeField] private Sprite sedanRed;
-    [SerializeField] private Sprite sedanBlue;
-    [SerializeField] private Sprite sedanYellow;
-    [SerializeField] private Sprite sedanBlack;
-    [SerializeField] private Sprite suvRed;
-    [SerializeField] private Sprite suvBlack;   
-    [SerializeField] private Sprite suvBrown;
-    [SerializeField] private Sprite suvBlue;
-    [SerializeField] private Sprite coupeRed;
-    [SerializeField] private Sprite coupeBlue;
-    [SerializeField] private Sprite coupeBlack;
-    [SerializeField] private Sprite coupeGrey;
-    [SerializeField] private Sprite truckRed;
-    [SerializeField] private Sprite truckBlue;
-    [SerializeField] private Sprite truckCream;
-    [SerializeField] private Sprite truckBlack;
-
-    private string[] vehicleList;
-    private float[] priceList;
-    private string[] condition;
-    private string[] color;
-    private string[] type;
+    [SerializeField] private List<Items> brandNewVehicles = new List<Items>();
+    [SerializeField] private List<Items> secondHandVehicles = new List<Items>();
+    private List<Items> vehicleDets = new List<Items>();
     private int currentItem = 0;
 
 
+    private void Start()
+    {
+        buyBtn.onClick.AddListener(delegate { BuyCar(); });
+    }
+
+    
     public void BrandNewCatalogue()
     {
         buyCarPopUp.SetActive(false);
-        carCatalogueOverlay.SetActive(true);
+        vehicleListOverlay.SetActive(true);
 
-        vehicleList = new string[] {"SwiftRide Vroom Sporty", "SwiftRide Vroom 125", "SwiftRide Vroom 150", "NovaDrive Sedan (Manual)", "NovaDrive Sedan (Automatic)", 
-        "VeloLux Coupe (Manual)", "VeloLux Coupe (Automatic)", "Zenith SUV (Manual)", "Zenith SUV (Automatic)", "Apex Pickup (Manual)",  "Apex Pickup (Automatic)"};
-        color = new string[] {"Blue", "Red", "Black", "Red", "Black", "Black", "Red", "Brown", "Black", "Red", "Cream"};
-        condition = new string[] {"Brand New", "Brand New", "Brand New", "Brand New", "Brand New", "Brand New", "Brand New", "Brand New", "Brand New", "Brand New", "Brand New"};
-        type = new string[] {"Scooter", "Scooter", "Scooter", "Sedan", "Sedan", "Coupe", "Coupe", "SUV", "SUV", "Pickup", "Pickup"};
-        priceList = new float[] {74900, 81000, 83500, 750000, 900000, 2000000, 2800000, 1500000, 2300000, 1600000, 1800000};
-        images = new Sprite[] {scooterBlue, scooterRed, scooterBlack, sedanRed, sedanBlack, coupeBlack, coupeRed, suvBrown, suvBlack, truckRed, truckCream};
+        vehicleDets = brandNewVehicles;
+        currentItem = 0;
 
-        DisplayText();
-        DisplayImage();
+        DisplayItem();
     }
+
 
     public void SecondHandCatalogue()
     {
         buyCarPopUp.SetActive(false);
-        carCatalogueOverlay.SetActive(true);
+        vehicleListOverlay.SetActive(true);
 
-        vehicleList = new string[] {"SwiftRide Vroom Sporty", "SwiftRide Vroom 125", "NovaDrive Sedan (Manual)", "NovaDrive Sedan (Automatic)", 
-        "VeloLux Coupe (Manual)", "VeloLux Coupe (Automatic)", "Zenith SUV (Manual)", "Zenith SUV (Automatic)", "Apex Pickup (Manual)",  "Apex Pickup (Automatic)"};
-        color = new string[] {"Yellow", "Cream", "Yellow", "Blue", "Blue", "Grey", "Blue", "Red", "Blue", "Black"};
-        condition = new string[] {"Heavily used", "Well used", "Heavily used", "Well used", "Heavily used", "Heavily used", "Well used", "Heavily used", "Well used", "Well used"};
-        type = new string[] {"Scooter", "Scooter", "Sedan", "Sedan", "Coupe", "Coupe", "SUV", "SUV", "Pickup", "Pickup"};
-        priceList = new float[] {15000, 20000, 90000, 120000, 300000, 400000, 250000, 350000, 280000, 370000};
-        images = new Sprite[] {scooterYellow, scooterCream, sedanYellow, sedanBlue, coupeBlue, coupeGrey, suvBlue, suvRed, truckBlue, truckBlack};
+        vehicleDets = secondHandVehicles;
+        currentItem = 0;
 
-        DisplayText();
-        DisplayImage();
+        DisplayItem();
     }
+
 
     public void NextItem()
     {
         currentItem++;
 
-        if (currentItem > vehicleList.Length - 1)
+        if (currentItem > vehicleDets.Count - 1)
         {
             currentItem = 0;
         }
 
-        DisplayText();
-        DisplayImage();
+        DisplayItem();
     }
+
 
     public void PreviousItem()
     {
@@ -98,47 +70,32 @@ public class CarCatalogueManager : MonoBehaviour
 
         if (currentItem < 0)
         {
-            currentItem = vehicleList.Length - 1;
+            currentItem = vehicleDets.Count - 1;
         }
 
-        DisplayText();
-        DisplayImage();
+        DisplayItem();
     }
 
-    public void DisplayText()
+
+    public void DisplayItem()
     {
-        vehicleName.text = vehicleList[currentItem];
-        vehiclePrice.text = "₱ " + ConvertToCurrency(priceList[currentItem]);
-        vehicleCondition.text = condition[currentItem];
-        vehicleColor.text = color[currentItem];
-        vehicleType.text = type[currentItem];
+        vehicleName.text = vehicleDets[currentItem].itemName;
+        vehiclePrice.text = "₱ " + ConvertToCurrency(vehicleDets[currentItem].itemPrice);
+        vehicleCondition.text = vehicleDets[currentItem].itemCondition.ToString();
+        vehicleColor.text = vehicleDets[currentItem].vehicleColor.ToString();
+        vehicleType.text = vehicleDets[currentItem].vehicleType.ToString();
+        targetImage.sprite = vehicleDets[currentItem].itemImage;
     }
+
 
     static string ConvertToCurrency(float amount)
     {
         return string.Format("{0:N0}", amount);
     }
 
-    public void DisplayImage()
-    {
-        if (currentItem < images.Length && images[currentItem] != null) 
-        {
-            targetImage.sprite = images[currentItem];
-        }
-        else
-        {
-            Debug.LogWarning("Image not Found");
-        }
-    }
 
-    public void ExitOverlay()
+    public void BuyCar() 
     {
-        carCatalogueOverlay.SetActive(false);
-        buyCarPopUp.SetActive(true);
-    }
-
-    public void BuyCar() //Passes the values to BuildingManager.Purchase
-    {
-        FindObjectOfType<BuildingManager>().Buy(priceList[currentItem]);
+        Player.Instance.Purchase(false, vehicleDets[currentItem]);
     }
 }

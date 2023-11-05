@@ -10,7 +10,7 @@ public class Hospital : Building
         this.buildingOpeningTime = 0;
         this.buildingClosingTime = 0;
 
-        actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.QUIT};     
+        this.actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.QUIT};     
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -26,9 +26,6 @@ public class Hospital : Building
         if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
             switch (clickedBtn)
             {
-                case Buttons.DEPOSITMONEY:
-                    Debug.Log("money deposited");
-                    break;
                 case Buttons.APPLY:
                     Debug.Log("money deposited");
                     break;
