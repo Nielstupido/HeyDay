@@ -176,17 +176,19 @@ public class Player : MonoBehaviour
             case ItemType.VEHICLE:
                 playerOwnedVehicles.Add(item);
                 playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
-
+                playerStatsDict[PlayerStats.HAPPINESS] += item.happinessBarValue;
                 break;
             case ItemType.APPLIANCE:
                 //stats
                 playerOwnedAppliances.Add(item);
                 playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
+                playerStatsDict[PlayerStats.HAPPINESS] += item.happinessBarValue;
                 break;
             case ItemType.CONSUMABLE:
                 playerOwnedGroceries.Add(item);
                 break;
         }
+        
         TimeManager.Instance.AddClockTime(timeAdded);
         playerCash -= item.itemPrice;
         playerStatsDict[PlayerStats.MONEY] -= item.itemPrice;
@@ -197,17 +199,6 @@ public class Player : MonoBehaviour
         {
             EatDrink(item);
         }
-    }
-
-
-    public void PurchaseMallItem(float energyLevelCutValue, float amount, float happinessAddValue)
-    {
-        TimeManager.Instance.AddClockTime(0.30f);
-        playerStatsDict[PlayerStats.HAPPINESS] += happinessAddValue;
-        playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
-        playerStatsDict[PlayerStats.MONEY] -= amount;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
-        StatsChecker();
     }
 
 

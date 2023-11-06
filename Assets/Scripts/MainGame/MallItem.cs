@@ -11,9 +11,10 @@ public class MallItem : MonoBehaviour
     public TextMeshProUGUI itemHungerBarPerks;
     public TextMeshProUGUI itemElectricBill;
     public TextMeshProUGUI itemPrice;
+    public GameObject ownedItemBtn;
     public Image itemImageHolder;
     public Button buyItem;
-    private int itemIndex;
+    private Items itemObj;
 
 
     private void Start()
@@ -22,14 +23,26 @@ public class MallItem : MonoBehaviour
     }
 
 
-    public void SetItemIndex(int index)
+    private void CheckItem()
     {
-        itemIndex = index; // Set the index when creating the button
+        if (Player.Instance.PlayerOwnedAppliances.Contains(itemObj))
+        {
+            // buyItem.image.sprite = itemOwnedBtn;
+            ownedItemBtn.SetActive(true);
+            buyItem.gameObject.SetActive(false);
+        }
+    }
+
+
+    public void SetItemObj(Items thisItem)
+    {
+        itemObj = thisItem; 
+        CheckItem();
     }
 
 
     private void BuyItem()
     {
-        MallManager.Instance.SelectItem(itemIndex); // Call the SelectItem method in ItemBrowser
+        Player.Instance.Purchase(false, itemObj, 0.3f,5f);
     }
 }
