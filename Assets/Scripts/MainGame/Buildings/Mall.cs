@@ -7,8 +7,8 @@ public class Mall : Building
     private void Start()
     {
         this.buildingName = Buildings.MALL;
-        this.buildingOpeningTime = 10;
-        this.buildingClosingTime = 22;
+        this.buildingOpeningTime = 10f;
+        this.buildingClosingTime = 22f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SHOP, Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
@@ -39,5 +39,10 @@ public class Mall : Building
                     Debug.Log("money deposited");
                     break;
             }
+    }
+
+
+    public override void CheckButtons()
+    {
     }
 }

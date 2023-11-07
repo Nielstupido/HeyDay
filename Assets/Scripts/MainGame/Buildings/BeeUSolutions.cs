@@ -7,10 +7,10 @@ public class BeeUSolutions : Building
     private void Start()
     {
         this.buildingName = Buildings.BEEUSOLUTIONS;
-        this.buildingOpeningTime = 8;
-        this.buildingClosingTime = 17;
+        this.buildingOpeningTime = 8f;
+        this.buildingClosingTime = 17f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
+        this.actionButtons = new List<Buttons>(){Buttons.APPLY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -36,5 +36,14 @@ public class BeeUSolutions : Building
                     Debug.Log("money deposited");
                     break;
             }
+    }
+
+
+    public override void CheckButtons()
+    {
+        if (this.currentlyHired)
+        {
+            this.actionButtons = new List<Buttons>(){Buttons.WORK, Buttons.QUIT};     
+        }
     }
 }

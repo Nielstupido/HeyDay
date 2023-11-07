@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44486475, g: 0.49442524, b: 0.5735957, a: 1}
+  m_IndirectSpecularColor: {r: 0.44233638, g: 0.49120283, b: 0.5710321, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2947,21 +2947,21 @@ MonoBehaviour:
   buildingSelectOverlay: {fileID: 434310656}
   buildingNameText: {fileID: 1850773246}
   buttonImages:
-  - {fileID: 21300000, guid: f8861d5aa737ff045b473959ad06fffa, type: 3}
-  - {fileID: 21300000, guid: f8861d5aa737ff045b473959ad06fffa, type: 3}
+  - {fileID: 21300000, guid: 73ff6891f10116448b6feb5f92c21949, type: 3}
+  - {fileID: 21300000, guid: d6dc54af618047c4292cb2ffcc4439b3, type: 3}
   - {fileID: 21300000, guid: 2fdbc6c3fff98584dbe88b38760fc513, type: 3}
   - {fileID: 21300000, guid: ca6946a06bca1ad4886b1e1b6fba6c22, type: 3}
   - {fileID: 21300000, guid: 37bb87d4f68f5c04f923974e95643db2, type: 3}
-  - {fileID: 21300000, guid: a3ad09e531fc67445ae0970d0a38ce51, type: 3}
-  - {fileID: 21300000, guid: f8861d5aa737ff045b473959ad06fffa, type: 3}
-  - {fileID: 21300000, guid: f8861d5aa737ff045b473959ad06fffa, type: 3}
-  - {fileID: 21300000, guid: f8861d5aa737ff045b473959ad06fffa, type: 3}
-  - {fileID: 21300000, guid: f8861d5aa737ff045b473959ad06fffa, type: 3}
+  - {fileID: 21300000, guid: 7c68cc093a54e7a4ebc37962ed46ad29, type: 3}
+  - {fileID: 21300000, guid: 1f58af30642373649b55334226a5847d, type: 3}
+  - {fileID: 21300000, guid: 22366397477fe8347bf0f89ab91a3e3c, type: 3}
+  - {fileID: 21300000, guid: a6f48621aecf47841940e1f5516c52da, type: 3}
+  - {fileID: 21300000, guid: 08ccfc01f83a7fa42bf7b4fa64c36bcc, type: 3}
+  - {fileID: 21300000, guid: a9cd6f5a692d0ae4ba57dfb35854bd54, type: 3}
   - {fileID: 21300000, guid: ac06d4d5c579916488652fbb130c8a80, type: 3}
+  - {fileID: 21300000, guid: 339c594117465aa41a838aa4ffa589da, type: 3}
   - {fileID: 21300000, guid: ac06d4d5c579916488652fbb130c8a80, type: 3}
-  - {fileID: 21300000, guid: ac06d4d5c579916488652fbb130c8a80, type: 3}
-  - {fileID: 21300000, guid: ac06d4d5c579916488652fbb130c8a80, type: 3}
-  - {fileID: 21300000, guid: ac06d4d5c579916488652fbb130c8a80, type: 3}
+  - {fileID: 21300000, guid: 1f74eca8268114545a16b3ca8ad66081, type: 3}
   gameManager: {fileID: 147613447}
   walkBtn: {fileID: 925704130}
   rideBtn: {fileID: 484582873}
@@ -9553,6 +9553,8 @@ MonoBehaviour:
   actionButtons: 
   buildingOpeningTime: 0
   buildingClosingTime: 0
+  totalWorkHours: 0
+  currentlyHired: 0
 --- !u!114 &662546997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9817,6 +9819,8 @@ MonoBehaviour:
   actionButtons: 
   buildingOpeningTime: 0
   buildingClosingTime: 0
+  totalWorkHours: 0
+  currentlyHired: 0
   bankSystemOverlay: {fileID: 6386970846028328528}
   menuOverlay: {fileID: 6386970846542207706}
   depositOverlay: {fileID: 6386970846358408435}
@@ -20067,6 +20071,50 @@ RectTransform:
   m_AnchoredPosition: {x: -0.0062485, y: -143.88}
   m_SizeDelta: {x: 612.909, y: 235.164}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1204623217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1204623219}
+  - component: {fileID: 1204623218}
+  m_Layer: 0
+  m_Name: JobSystemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1204623218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204623217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13836438ba201b846a580a1bbba0b96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1204623219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204623217}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1209574597
 GameObject:
   m_ObjectHideFlags: 0
@@ -24122,6 +24170,8 @@ MonoBehaviour:
   actionButtons: 
   buildingOpeningTime: 0
   buildingClosingTime: 0
+  totalWorkHours: 0
+  currentlyHired: 0
   universityOverlay: {fileID: 2097173935}
   course: {fileID: 1731721722}
   duration: {fileID: 758093524}
@@ -24969,6 +25019,8 @@ MonoBehaviour:
   actionButtons: 
   buildingOpeningTime: 0
   buildingClosingTime: 0
+  totalWorkHours: 0
+  currentlyHired: 0
 --- !u!114 &1517769847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27683,6 +27735,8 @@ MonoBehaviour:
   actionButtons: 
   buildingOpeningTime: 0
   buildingClosingTime: 0
+  totalWorkHours: 0
+  currentlyHired: 0
 --- !u!114 &1681729805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33196,7 +33250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1924926498
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33235,6 +33289,8 @@ MonoBehaviour:
   actionButtons: 
   buildingOpeningTime: 0
   buildingClosingTime: 0
+  totalWorkHours: 0
+  currentlyHired: 0
 --- !u!114 &1924926500
 MonoBehaviour:
   m_ObjectHideFlags: 0

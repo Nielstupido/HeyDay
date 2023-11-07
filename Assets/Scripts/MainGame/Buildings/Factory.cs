@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElectricCoop : Building
+public class Factory: Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.ELECTRICCOOP;
+        this.buildingName = Buildings.FACTORY;
         this.buildingOpeningTime = 8f;
-        this.buildingClosingTime = 17f;
+        this.buildingClosingTime = 18f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.APPLY};     
+        this.actionButtons = new List<Buttons>(){Buttons.APPLY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

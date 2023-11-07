@@ -7,8 +7,8 @@ public class NightClub : Building
     private void Start()
     {
         this.buildingName = Buildings.NIGHTCLUB;
-        this.buildingOpeningTime = 20;
-        this.buildingClosingTime = 5;
+        this.buildingOpeningTime = 20f;
+        this.buildingClosingTime = 5f;
 
         this.actionButtons = new List<Buttons>(){Buttons.PARTY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
@@ -30,5 +30,10 @@ public class NightClub : Building
                     Debug.Log("party party");
                     break;
             }
+    }
+
+
+    public override void CheckButtons()
+    {
     }
 }

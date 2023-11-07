@@ -7,10 +7,10 @@ public class ConvenienceStore : Building
     private void Start()
     {
         this.buildingName = Buildings.CONVENIENCESTORE;
-        this.buildingOpeningTime = 0;
-        this.buildingClosingTime = 0;
+        this.buildingOpeningTime = 0f;
+        this.buildingClosingTime = 0f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.BUYFOOD, Buttons.BUYDRINK, Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
+        this.actionButtons = new List<Buttons>(){Buttons.BUY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -26,10 +26,7 @@ public class ConvenienceStore : Building
         if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
             switch (clickedBtn)
             {
-                case Buttons.BUYFOOD:
-                    Debug.Log("money deposited");
-                    break;
-                case Buttons.BUYDRINK:
+                case Buttons.BUY:
                     Debug.Log("money deposited");
                     break;
                 case Buttons.APPLY:
@@ -42,5 +39,19 @@ public class ConvenienceStore : Building
                     Debug.Log("money deposited");
                     break;
             }
+    }
+
+
+    public override void CheckButtons()
+    {
+        if (this.currentlyHired)
+        {
+            this.actionButtons.Add(Buttons.WORK);
+            this.actionButtons.Add(Buttons.QUIT);   
+        }
+        else
+        {
+            this.actionButtons.Add(Buttons.APPLY);   
+        }
     }
 }

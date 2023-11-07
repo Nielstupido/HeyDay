@@ -109,6 +109,8 @@ public class BuildingManager : MonoBehaviour
 
     private void PrepareButtons(Building selectedBuilding)
     {
+        selectedBuilding.CheckButtons();
+        
         foreach(Buttons btn in selectedBuilding.actionButtons)
         {
             GameObject newBtn = Instantiate(btnPrefab, Vector3.zero, Quaternion.identity, buttonsHolder);

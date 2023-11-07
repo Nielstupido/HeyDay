@@ -33,6 +33,7 @@ public class University : Building
 
     public static University Instance { get; private set; }
 
+
     private void Awake() 
     { 
         if (Instance != null && Instance != this) 
@@ -45,13 +46,14 @@ public class University : Building
         } 
     }
 
+
     private void Start()
     {
         this.buildingName = Buildings.UNIVERSITY;
-        this.buildingOpeningTime = 7;
-        this.buildingClosingTime = 17;
+        this.buildingOpeningTime = 7f;
+        this.buildingClosingTime = 17f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.STUDY, Buttons.ENROL};
+        this.actionButtons = new List<Buttons>(){Buttons.APPLY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -67,6 +69,15 @@ public class University : Building
         if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
             switch (clickedBtn)
             {
+                case Buttons.APPLY:
+                    Debug.Log("money deposited");
+                    break;
+                case Buttons.WORK:
+                    Debug.Log("money deposited");
+                    break;
+                case Buttons.QUIT:
+                    Debug.Log("money deposited");
+                    break;
                 case Buttons.STUDY:
                     studyPromptOverlay.SetActive(true);
                     break;
@@ -75,6 +86,25 @@ public class University : Building
                     break;
             }
     }
+
+
+    public override void CheckButtons()
+    {
+        if (this.currentlyHired)
+        {
+            this.actionButtons = new List<Buttons>(){Buttons.WORK, Buttons.QUIT};     
+        }
+
+        if (Player.Instance.PlayerEnrolledCourse == null)
+        {
+            this.actionButtons.Add(Buttons.ENROL);
+        }
+        else
+        {
+            this.actionButtons.Add(Buttons.STUDY);
+        }
+    }
+    
 
     public void ArchitectureAndDesign()
     {

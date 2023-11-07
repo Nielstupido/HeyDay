@@ -104,6 +104,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        courseEnrolled = null;
         playerCash = 5000f;
         playerBankSavings = 0f;
         playerStatsDict.Add(PlayerStats.HAPPINESS, 100f);

@@ -6,10 +6,12 @@ public abstract class Building : MonoBehaviour
 {
     [HideInInspector]public Buildings buildingName;
     [HideInInspector]public List<Buttons> actionButtons;
-    [HideInInspector]public int buildingOpeningTime;
-    [HideInInspector]public int buildingClosingTime;
+    [HideInInspector]public float buildingOpeningTime;
+    [HideInInspector]public float buildingClosingTime;
+    [HideInInspector]public float totalWorkHours;
+    [HideInInspector]public bool currentlyHired;
 
-
+    public abstract void CheckButtons();
     public abstract void CheckBtnClicked(Buttons clickedBtn);
 }
 
@@ -34,14 +36,14 @@ public enum Buildings
     ELECTRICCOOP,
     WASTEFACILITY,
     FIRESTATION,
-    CITYHALL
+    CITYHALL,
+    FACTORY
 }
 
 
 public enum Buttons
 {
-    BUYDRINK,
-    BUYFOOD,
+    BUY,
     APPLY,
     QUIT,
     WORK,
