@@ -6,6 +6,7 @@ using TMPro;
 
 public enum PlayerStats
 {
+    NONE,
     ALL,
     HAPPINESS,
     HUNGER,
