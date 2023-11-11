@@ -13,9 +13,14 @@ MonoBehaviour:
   m_Name: NovaDriveSedan(Automatic)
   m_EditorClassIdentifier: 
   itemName: NovaDrive Sedan (Automatic)
-  itemType: 0
+  itemType: 1
   itemImage: {fileID: 21300000, guid: 7e63d6a92c097a64cafcb309702b5932, type: 3}
   itemPrice: 120000
   itemCondition: 2
   vehicleType: 2
   vehicleColor: 1
+  energyBarValue: 0
+  hungerBarValue: 0
+  happinessBarValue: 0
+  eatingTime: 0
+  electricBillValue: 0

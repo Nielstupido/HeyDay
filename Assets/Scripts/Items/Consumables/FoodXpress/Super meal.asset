@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Super meal
   m_EditorClassIdentifier: 
   itemName: Super meal
-  itemType: 2
+  itemType: 3
   itemImage: {fileID: 21300000, guid: 75f34509de408e4448bc10792e147e38, type: 3}
   itemPrice: 150
   itemCondition: 0

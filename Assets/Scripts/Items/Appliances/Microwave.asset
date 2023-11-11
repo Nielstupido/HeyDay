@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Microwave
   m_EditorClassIdentifier: 
   itemName: Microwave
-  itemType: 1
+  itemType: 2
   itemImage: {fileID: 21300000, guid: 2b16b6fa947dc474bad729f58c2968c6, type: 3}
   itemPrice: 1999
   itemCondition: 0
@@ -22,4 +22,5 @@ MonoBehaviour:
   energyBarValue: 0
   hungerBarValue: 30
   happinessBarValue: 10
+  eatingTime: 0
   electricBillValue: 120

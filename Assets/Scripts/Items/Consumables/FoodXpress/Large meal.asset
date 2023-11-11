@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Large meal
   m_EditorClassIdentifier: 
   itemName: Large meal
-  itemType: 2
+  itemType: 3
   itemImage: {fileID: 21300000, guid: 495597df84d723f469c7c552550269d7, type: 3}
   itemPrice: 120
   itemCondition: 0

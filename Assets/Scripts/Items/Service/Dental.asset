@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Dental
   m_EditorClassIdentifier: 
   itemName: Dental Service
-  itemType: 3
+  itemType: 4
   itemImage: {fileID: 21300000, guid: 3f3ab22e94daf4f4382321c166cdd670, type: 3}
   itemPrice: 500
   itemCondition: 0
@@ -22,4 +22,5 @@ MonoBehaviour:
   energyBarValue: 0
   hungerBarValue: 0
   happinessBarValue: 50
+  eatingTime: 0
   electricBillValue: 0

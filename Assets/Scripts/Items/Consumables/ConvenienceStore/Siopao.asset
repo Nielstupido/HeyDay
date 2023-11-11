@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Siopao
   m_EditorClassIdentifier: 
   itemName: Siopao
-  itemType: 2
+  itemType: 3
   itemImage: {fileID: 21300000, guid: 7888dc7c7e1cc5948b1b08e9ad71e392, type: 3}
   itemPrice: 35
   itemCondition: 0

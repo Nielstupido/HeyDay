@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Veggies and Rice
   m_EditorClassIdentifier: 
   itemName: Veggies and Rice
-  itemType: 2
+  itemType: 3
   itemImage: {fileID: 21300000, guid: 39c7f0a4a9de44b4a91ec8f9f86990aa, type: 3}
   itemPrice: 40
   itemCondition: 0

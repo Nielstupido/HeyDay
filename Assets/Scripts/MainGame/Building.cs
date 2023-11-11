@@ -18,6 +18,7 @@ public abstract class Building : MonoBehaviour
 
 public enum Buildings
 {
+    NONE,
     HOSPITAL,
     CAFE,
     BANK,

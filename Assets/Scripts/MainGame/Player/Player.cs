@@ -46,6 +46,7 @@ public enum VehicleColor
 
 public enum ItemType
 {
+    NA,
     VEHICLE,
     APPLIANCE,
     CONSUMABLE,

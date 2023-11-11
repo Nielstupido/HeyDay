@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Iced Latte & Bread
   m_EditorClassIdentifier: 
   itemName: Iced Latte and Bread
-  itemType: 2
+  itemType: 3
   itemImage: {fileID: 21300000, guid: ee6290ce39b0e0e45a3b68afc599979d, type: 3}
   itemPrice: 220
   itemCondition: 0

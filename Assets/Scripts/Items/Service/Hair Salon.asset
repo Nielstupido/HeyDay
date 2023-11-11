@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hair Salon
   m_EditorClassIdentifier: 
   itemName: Hair Salon Service
-  itemType: 3
+  itemType: 4
   itemImage: {fileID: 21300000, guid: e32469bc7c2c7c745bcc8c3c984cf9b3, type: 3}
   itemPrice: 150
   itemCondition: 0
@@ -22,4 +22,5 @@ MonoBehaviour:
   energyBarValue: 0
   hungerBarValue: 0
   happinessBarValue: 20
+  eatingTime: 0
   electricBillValue: 0

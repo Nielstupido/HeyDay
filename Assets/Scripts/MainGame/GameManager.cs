@@ -16,7 +16,9 @@ public class GameManager : MonoBehaviour
     private IDictionary<PlayerStats, float> playerStatsDictTemp = new Dictionary<PlayerStats, float>();
     private float numOfdays = 0;
     private float hospitalFee = 1500; // hospital fee per day
-
+    private int currentGameLevel;
+    
+    public int CurrentGameLevel {get{return currentGameLevel;}}
     public static GameManager Instance { get; private set; }
 
     private void Awake() 

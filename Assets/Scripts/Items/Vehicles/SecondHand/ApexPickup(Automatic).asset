@@ -13,9 +13,14 @@ MonoBehaviour:
   m_Name: ApexPickup(Automatic)
   m_EditorClassIdentifier: 
   itemName: Apex Pickup (Automatic)
-  itemType: 0
+  itemType: 1
   itemImage: {fileID: 21300000, guid: 5d79c8a756afb6747834069b8b9467ef, type: 3}
   itemPrice: 370000
   itemCondition: 2
   vehicleType: 5
   vehicleColor: 3
+  energyBarValue: 0
+  hungerBarValue: 0
+  happinessBarValue: 0
+  eatingTime: 0
+  electricBillValue: 0
