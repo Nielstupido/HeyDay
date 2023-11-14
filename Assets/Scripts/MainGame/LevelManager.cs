@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 
 public enum MissionType
@@ -50,12 +52,21 @@ public enum APPS
 
 public class LevelManager : MonoBehaviour
 {
-    public delegate void OnFinishedPlayerAction(MissionType missionType, float addedNumber = 0, Building building = null, PlayerStats playerStats = PlayerStats.NONE);
+    public delegate void OnFinishedPlayerAction(
+        MissionType actionMissionType, 
+        float actionAddedNumber = 0, 
+        Buildings interactedBuilding = Buildings.NONE, 
+        PlayerStats affectedPlayerStats = PlayerStats.NONE, 
+        ItemType interactedItemType = ItemType.NA,
+        APPS interactedApp = APPS.NONE,
+        PlayerStats interactedPlayerStats = PlayerStats.NONE);
     public static OnFinishedPlayerAction onFinishedPlayerAction;
 
     [SerializeField] private MissionsHolder missionsHolder;
+    [SerializeField] private Transform missionPrefabsHolder;
+    [SerializeField] private GameObject missionPrefab;
     private IDictionary<string, List<MissionsScriptableObj>> allMissions = new Dictionary<string, List<MissionsScriptableObj>>();
-    private List<MissionsScriptableObj> currentMissions = new List<MissionsScriptableObj>();
+    private List<MissionsScriptableObj> currentActiveMissions = new List<MissionsScriptableObj>();
     private string tempLevelName;
     private string[] tempSplitIdHolder;
     private int levelCounter;
@@ -68,6 +79,7 @@ public class LevelManager : MonoBehaviour
     }
 
 
+    //loads all missions to a dictionary for easy access during gameplay
     private void LoadAllMissions()
     {
         levelCounter = 1;
@@ -93,18 +105,30 @@ public class LevelManager : MonoBehaviour
                 allMissions.Add(tempLevelName, new List<MissionsScriptableObj>{mission});
             }
         }
+
+        PrepareCurrentLevelMissions();
     }
 
 
+    //prepares all assigned missions for the current level
     public void PrepareCurrentLevelMissions()
     {
-        currentMissions.Clear();
+        currentActiveMissions.Clear();
         tempLevelName = "Level ";
         tempLevelName += GameManager.Instance.CurrentGameLevel.ToString();
 
         foreach (MissionsScriptableObj mission in allMissions[tempLevelName])
         {
-            currentMissions.Add(mission);
+            currentActiveMissions.Add(mission);
+        }
+
+        foreach(MissionsScriptableObj mission in currentActiveMissions)
+        {
+            GameObject newMissionObj = Instantiate(missionPrefab, Vector3.zero, Quaternion.identity, missionPrefabsHolder);
+            Missions newMission = newMissionObj.GetComponent<Missions>();
+            newMission.LoadMissionDets(mission);
+            newMission.MissionCheckBox = newMissionObj.transform.GetChild(0).GetComponent<Image>();
+            newMission.MissionDetsText = newMissionObj.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         }
     }
 }

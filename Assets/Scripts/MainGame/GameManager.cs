@@ -6,6 +6,47 @@ using System.IO;
 using System;
 using Newtonsoft.Json;
 
+
+public enum ItemCondition
+{
+    NA,
+    HEAVILYUSED,
+    WELLUSED,
+    BRANDNEW
+}
+
+public enum VehicleType
+{
+    NA,
+    SCOOTER,
+    SEDAN,
+    SUV,
+    COUPE,
+    PICKUP
+}
+
+public enum VehicleColor
+{
+    NA,
+    BLUE,
+    RED,
+    BLACK,
+    CREAM,
+    YELLOW,
+    GREY,
+    BROWN
+}
+
+public enum ItemType
+{
+    NA,
+    VEHICLE,
+    APPLIANCE,
+    CONSUMABLE,
+    SERVICE
+}
+
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject bottomOverlay;
@@ -16,10 +57,11 @@ public class GameManager : MonoBehaviour
     private IDictionary<PlayerStats, float> playerStatsDictTemp = new Dictionary<PlayerStats, float>();
     private float numOfdays = 0;
     private float hospitalFee = 1500; // hospital fee per day
-    private int currentGameLevel;
+    private int currentGameLevel = 1;
     
     public int CurrentGameLevel {get{return currentGameLevel;}}
     public static GameManager Instance { get; private set; }
+
 
     private void Awake() 
     { 
@@ -33,12 +75,14 @@ public class GameManager : MonoBehaviour
         } 
     }
 
+
     public void StartGame()
     {
         bottomOverlay.SetActive(true);
         pauseBtn.SetActive(true);
         //AudioManager.Instance.PlayMusic("Theme");
     }
+
 
     public void LoadSavedGame()
     {

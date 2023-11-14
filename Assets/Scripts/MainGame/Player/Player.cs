@@ -14,45 +14,6 @@ public enum PlayerStats
     MONEY
 }
 
-public enum ItemCondition
-{
-    NA,
-    HEAVILYUSED,
-    WELLUSED,
-    BRANDNEW
-}
-
-public enum VehicleType
-{
-    NA,
-    SCOOTER,
-    SEDAN,
-    SUV,
-    COUPE,
-    PICKUP
-}
-
-public enum VehicleColor
-{
-    NA,
-    BLUE,
-    RED,
-    BLACK,
-    CREAM,
-    YELLOW,
-    GREY,
-    BROWN
-}
-
-public enum ItemType
-{
-    NA,
-    VEHICLE,
-    APPLIANCE,
-    CONSUMABLE,
-    SERVICE
-}
-
 public enum Gender
 {
     MALE,
@@ -128,6 +89,7 @@ public class Player : MonoBehaviour
 
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
         StatsChecker();
+        playerOwnedGroceries.Remove(foodToConsume);
     }
 
 
@@ -182,10 +144,10 @@ public class Player : MonoBehaviour
                 playerStatsDict[PlayerStats.HAPPINESS] += item.happinessBarValue;
                 break;
             case ItemType.APPLIANCE:
-                //stats
                 playerOwnedAppliances.Add(item);
                 playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
                 playerStatsDict[PlayerStats.HAPPINESS] += item.happinessBarValue;
+                LevelManager.onFinishedPlayerAction(MissionType.BUY, interactedItemType:ItemType.APPLIANCE);
                 break;
             case ItemType.CONSUMABLE:
                 playerOwnedGroceries.Add(item);
@@ -260,17 +222,20 @@ public class Player : MonoBehaviour
         }
 
         //Checks if stats reaches the upper limit
-        if (playerStatsDict[PlayerStats.ENERGY] > 100)
+        if (playerStatsDict[PlayerStats.ENERGY] >= 100)
         {
             playerStatsDict[PlayerStats.ENERGY] = 100;
+            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.ENERGY);
         }
-        if (playerStatsDict[PlayerStats.HAPPINESS] > 100)
+        if (playerStatsDict[PlayerStats.HAPPINESS] >= 100)
         {
             playerStatsDict[PlayerStats.HAPPINESS] = 100;
+            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HAPPINESS);
         }
-        if (playerStatsDict[PlayerStats.HUNGER] > 100)
+        if (playerStatsDict[PlayerStats.HUNGER] >= 100)
         {
             playerStatsDict[PlayerStats.HUNGER] = 100;
+            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HUNGER);
         }
     }
 }

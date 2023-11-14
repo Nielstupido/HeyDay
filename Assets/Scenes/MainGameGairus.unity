@@ -1364,6 +1364,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionsHolder: {fileID: 11400000, guid: 0a45a99dfbb65664b9d4203e21cdeda1, type: 2}
+  missionPrefabsHolder: {fileID: 413398855}
+  missionPrefab: {fileID: 356742637122987874, guid: 80891771fc48fcb489b994e174f7580d, type: 3}
 --- !u!1 &105702043
 GameObject:
   m_ObjectHideFlags: 0
@@ -6108,7 +6110,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -638.3231}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &413398856
 MonoBehaviour:
@@ -6402,6 +6404,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419460525}
   m_CullTransparentMesh: 1
+--- !u!1 &420582392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 420582394}
+  - component: {fileID: 420582393}
+  m_Layer: 0
+  m_Name: BankSystemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &420582393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420582392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b08ccaab4ee18fb4a9f4715fa40e7b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bankSystemOverlay: {fileID: 6386970846028328528}
+  menuOverlay: {fileID: 6386970846542207706}
+  depositOverlay: {fileID: 6386970846358408435}
+  depositProcessOverlay: {fileID: 438302068123433586}
+  depositProcessingOverlay: {fileID: 438302069341703979}
+  depositProcessedOverlay: {fileID: 438302069443848858}
+  withdrawOverlay: {fileID: 6386970847774601761}
+  withdrawProcessOverlay: {fileID: 438302068022278735}
+  withdrawProcessingOverlay: {fileID: 438302068274020963}
+  withdrawProcessedOverlay: {fileID: 438302069478610504}
+  balanceOverlay: {fileID: 438302068574937202}
+  createAccPrompt: {fileID: 11400000, guid: cf610470e079317498385f6700665097, type: 2}
+  balanceText: {fileID: 438302067769605875}
+  depositAmountField: {fileID: 6386970847008717802}
+  withdrawAmountField: {fileID: 6386970846890352826}
+--- !u!4 &420582394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420582392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &426997265
 GameObject:
   m_ObjectHideFlags: 0
@@ -10069,21 +10130,6 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  bankSystemOverlay: {fileID: 6386970846028328528}
-  menuOverlay: {fileID: 6386970846542207706}
-  depositOverlay: {fileID: 6386970846358408435}
-  depositProcessOverlay: {fileID: 438302068123433586}
-  depositProcessingOverlay: {fileID: 438302069341703979}
-  depositProcessedOverlay: {fileID: 438302069443848858}
-  withdrawOverlay: {fileID: 6386970847774601761}
-  withdrawProcessOverlay: {fileID: 438302068022278735}
-  withdrawProcessingOverlay: {fileID: 438302068274020963}
-  withdrawProcessedOverlay: {fileID: 438302069478610504}
-  balanceOverlay: {fileID: 438302068574937202}
-  createAccPrompt: {fileID: 0}
-  balanceText: {fileID: 438302067769605875}
-  depositAmountField: {fileID: 6386970847008717802}
-  withdrawAmountField: {fileID: 6386970846890352826}
 --- !u!114 &670205248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31398,7 +31444,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1773205519
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38889,8 +38935,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670205247}
-        m_TargetAssemblyTypeName: Bank, Assembly-CSharp
+      - m_Target: {fileID: 420582393}
+        m_TargetAssemblyTypeName: BankSystemManager, Assembly-CSharp
         m_MethodName: CancelTransaction
         m_Mode: 1
         m_Arguments:
@@ -39188,8 +39234,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670205247}
-        m_TargetAssemblyTypeName: Bank, Assembly-CSharp
+      - m_Target: {fileID: 420582393}
+        m_TargetAssemblyTypeName: BankSystemManager, Assembly-CSharp
         m_MethodName: OpenBalanceMenu
         m_Mode: 1
         m_Arguments:
@@ -39548,8 +39594,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670205247}
-        m_TargetAssemblyTypeName: Bank, Assembly-CSharp
+      - m_Target: {fileID: 420582393}
+        m_TargetAssemblyTypeName: BankSystemManager, Assembly-CSharp
         m_MethodName: OpenWithdrawMenu
         m_Mode: 1
         m_Arguments:
@@ -40043,8 +40089,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670205247}
-        m_TargetAssemblyTypeName: Bank, Assembly-CSharp
+      - m_Target: {fileID: 420582393}
+        m_TargetAssemblyTypeName: BankSystemManager, Assembly-CSharp
         m_MethodName: CancelTransaction
         m_Mode: 1
         m_Arguments:
@@ -43187,8 +43233,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670205247}
-        m_TargetAssemblyTypeName: Bank, Assembly-CSharp
+      - m_Target: {fileID: 420582393}
+        m_TargetAssemblyTypeName: BankSystemManager, Assembly-CSharp
         m_MethodName: CancelTransaction
         m_Mode: 1
         m_Arguments:
@@ -43388,7 +43434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6386970846028328529
 RectTransform:
   m_ObjectHideFlags: 0
@@ -43876,8 +43922,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670205247}
-        m_TargetAssemblyTypeName: Bank, Assembly-CSharp
+      - m_Target: {fileID: 420582393}
+        m_TargetAssemblyTypeName: BankSystemManager, Assembly-CSharp
         m_MethodName: DepositMoney
         m_Mode: 1
         m_Arguments:
@@ -45485,8 +45531,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670205247}
-        m_TargetAssemblyTypeName: Bank, Assembly-CSharp
+      - m_Target: {fileID: 420582393}
+        m_TargetAssemblyTypeName: BankSystemManager, Assembly-CSharp
         m_MethodName: WithdrawMoney
         m_Mode: 1
         m_Arguments:
@@ -45699,8 +45745,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670205247}
-        m_TargetAssemblyTypeName: Bank, Assembly-CSharp
+      - m_Target: {fileID: 420582393}
+        m_TargetAssemblyTypeName: BankSystemManager, Assembly-CSharp
         m_MethodName: CancelTransaction
         m_Mode: 1
         m_Arguments:
@@ -45833,8 +45879,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670205247}
-        m_TargetAssemblyTypeName: Bank, Assembly-CSharp
+      - m_Target: {fileID: 420582393}
+        m_TargetAssemblyTypeName: BankSystemManager, Assembly-CSharp
         m_MethodName: OpenDepositMenu
         m_Mode: 1
         m_Arguments:

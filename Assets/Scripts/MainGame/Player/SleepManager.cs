@@ -62,6 +62,7 @@ public class SleepManager : MonoBehaviour
         TimeManager.Instance.AddClockTime(sleepHrs);
         Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += (sleepHrs * adtnlEnergyForSleep);
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, Player.Instance.PlayerStatsDict);
+        LevelManager.onFinishedPlayerAction(MissionType.SLEEPHR, sleepHrs);
     }
 
 
