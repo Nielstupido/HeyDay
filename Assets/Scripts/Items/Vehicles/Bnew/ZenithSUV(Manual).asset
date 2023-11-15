@@ -13,9 +13,14 @@ MonoBehaviour:
   m_Name: ZenithSUV(Manual)
   m_EditorClassIdentifier: 
   itemName: Zenith SUV (Manual)
-  itemType: 0
+  itemType: 1
   itemImage: {fileID: 21300000, guid: 2e1407d315939b940b2ad85d54a7f8b6, type: 3}
   itemPrice: 1500000
   itemCondition: 3
   vehicleType: 3
   vehicleColor: 7
+  energyBarValue: 0
+  hungerBarValue: 0
+  happinessBarValue: 0
+  eatingTime: 0
+  electricBillValue: 0

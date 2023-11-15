@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Iced Matcha and Donut
   m_EditorClassIdentifier: 
   itemName: Iced Matcha and Donut
-  itemType: 2
+  itemType: 3
   itemImage: {fileID: 21300000, guid: 705c8f594d6f425479adf62ef3162cf3, type: 3}
   itemPrice: 260
   itemCondition: 0

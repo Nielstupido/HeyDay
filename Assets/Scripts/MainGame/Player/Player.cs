@@ -6,49 +6,12 @@ using TMPro;
 
 public enum PlayerStats
 {
+    NONE,
     ALL,
     HAPPINESS,
     HUNGER,
     ENERGY,
     MONEY
-}
-
-public enum ItemCondition
-{
-    NA,
-    HEAVILYUSED,
-    WELLUSED,
-    BRANDNEW
-}
-
-public enum VehicleType
-{
-    NA,
-    SCOOTER,
-    SEDAN,
-    SUV,
-    COUPE,
-    PICKUP
-}
-
-public enum VehicleColor
-{
-    NA,
-    BLUE,
-    RED,
-    BLACK,
-    CREAM,
-    YELLOW,
-    GREY,
-    BROWN
-}
-
-public enum ItemType
-{
-    VEHICLE,
-    APPLIANCE,
-    CONSUMABLE,
-    SERVICE
 }
 
 public enum Gender
@@ -104,6 +67,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        courseEnrolled = null;
         playerCash = 5000f;
         playerBankSavings = 0f;
         playerStatsDict.Add(PlayerStats.HAPPINESS, 100f);
@@ -125,6 +89,7 @@ public class Player : MonoBehaviour
 
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
         StatsChecker();
+        playerOwnedGroceries.Remove(foodToConsume);
     }
 
 
@@ -179,13 +144,23 @@ public class Player : MonoBehaviour
                 playerStatsDict[PlayerStats.HAPPINESS] += item.happinessBarValue;
                 break;
             case ItemType.APPLIANCE:
-                //stats
                 playerOwnedAppliances.Add(item);
                 playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
                 playerStatsDict[PlayerStats.HAPPINESS] += item.happinessBarValue;
+                LevelManager.onFinishedPlayerAction(MissionType.BUY, interactedItemType:ItemType.APPLIANCE);
                 break;
             case ItemType.CONSUMABLE:
                 playerOwnedGroceries.Add(item);
+                break;
+            case ItemType.SERVICE:
+                if (item.itemName == "Spa Service")
+                {
+                    LevelManager.onFinishedPlayerAction(MissionType.MASSAGE);
+                }
+                else if (item.itemName == "Hair Salon Service")
+                {
+                    LevelManager.onFinishedPlayerAction(MissionType.HAIRSERVICE);
+                }
                 break;
         }
         
@@ -198,6 +173,7 @@ public class Player : MonoBehaviour
         if (toConsume)
         {
             EatDrink(item);
+            LevelManager.onFinishedPlayerAction(MissionType.EAT, interactedBuilding:BuildingManager.Instance.CurrentSelectedBuilding.buildingName);
         }
     }
 
@@ -257,17 +233,20 @@ public class Player : MonoBehaviour
         }
 
         //Checks if stats reaches the upper limit
-        if (playerStatsDict[PlayerStats.ENERGY] > 100)
+        if (playerStatsDict[PlayerStats.ENERGY] >= 100)
         {
             playerStatsDict[PlayerStats.ENERGY] = 100;
+            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.ENERGY);
         }
-        if (playerStatsDict[PlayerStats.HAPPINESS] > 100)
+        if (playerStatsDict[PlayerStats.HAPPINESS] >= 100)
         {
             playerStatsDict[PlayerStats.HAPPINESS] = 100;
+            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HAPPINESS);
         }
-        if (playerStatsDict[PlayerStats.HUNGER] > 100)
+        if (playerStatsDict[PlayerStats.HUNGER] >= 100)
         {
             playerStatsDict[PlayerStats.HUNGER] = 100;
+            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HUNGER);
         }
     }
 }

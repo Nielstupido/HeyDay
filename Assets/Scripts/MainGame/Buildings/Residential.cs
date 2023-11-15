@@ -7,8 +7,8 @@ public class Residential : Building
     private void Start()
     {
         this.buildingName = Buildings.RESIDENTIAL;
-        this.buildingOpeningTime = 0;
-        this.buildingClosingTime = 0;
+        this.buildingOpeningTime = 0f;
+        this.buildingClosingTime = 0f;
 
         this.actionButtons = new List<Buttons>(){Buttons.ENTER};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
@@ -30,5 +30,10 @@ public class Residential : Building
                     BuildingManager.Instance.EnterResidentialArea();
                     break;
             }
+    }
+
+
+    public override void CheckButtons()
+    {
     }
 }

@@ -7,8 +7,8 @@ public class Cinema : Building
     private void Start()
     {
         this.buildingName = Buildings.CINEMA;
-        this.buildingOpeningTime = 13;
-        this.buildingClosingTime = 23;
+        this.buildingOpeningTime = 13f;
+        this.buildingClosingTime = 23f;
 
         this.actionButtons = new List<Buttons>(){Buttons.WATCHMOVIE};     
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
@@ -30,5 +30,10 @@ public class Cinema : Building
                     Debug.Log("WATCHED MOVIE");
                     break;
             }
+    }
+
+
+    public override void CheckButtons()
+    {
     }
 }

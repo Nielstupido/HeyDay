@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Seafood and Rice
   m_EditorClassIdentifier: 
   itemName: Seafood and Rice
-  itemType: 2
+  itemType: 3
   itemImage: {fileID: 21300000, guid: b52c36fece1edf644a48f1ece81379cf, type: 3}
   itemPrice: 70
   itemCondition: 0

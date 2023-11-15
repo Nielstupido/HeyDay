@@ -7,6 +7,8 @@ using UnityEngine.AI;
 public class Player3dController : MonoBehaviour
 {
     public NavMeshAgent playerNavMesh;
+    private float clickTimeThres = 0.3f;
+    private float firstClickTime = 0f;
 
 
     private void Start()
@@ -18,11 +20,20 @@ public class Player3dController : MonoBehaviour
     private void Update()
     {
         if (Input.anyKeyDown)
+        // if(Input.touchCount > 0) //for mobile
         {
-            Ray movePos = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(movePos, out var targetInfo))
+            if (Time.time - firstClickTime < clickTimeThres)
             {
-                playerNavMesh.SetDestination(targetInfo.point);
+                Ray movePos = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if(Physics.Raycast(movePos, out var targetInfo))
+                {
+                    playerNavMesh.SetDestination(targetInfo.point);
+                }
+                firstClickTime = 0;
+            }
+            else
+            {
+                firstClickTime = Time.time;
             }
         }
     }

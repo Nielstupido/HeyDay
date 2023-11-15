@@ -7,10 +7,12 @@ public class Hospital : Building
     private void Start()
     {
         this.buildingName = Buildings.HOSPITAL;
-        this.buildingOpeningTime = 0;
-        this.buildingClosingTime = 0;
+        this.buildingOpeningTime = 0f;
+        this.buildingClosingTime = 0f;
+        this.totalWorkHours = 0f;
+        this.currentlyHired = false;
 
-        this.actionButtons = new List<Buttons>(){Buttons.APPLY, Buttons.QUIT};     
+        this.actionButtons = new List<Buttons>(){Buttons.APPLY};     
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -36,5 +38,14 @@ public class Hospital : Building
                     Debug.Log("money deposited");
                     break;
             }
+    }
+
+
+    public override void CheckButtons()
+    {
+        if (this.currentlyHired)
+        {
+            this.actionButtons = new List<Buttons>(){Buttons.WORK, Buttons.QUIT};     
+        }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Slushie and Nachos
   m_EditorClassIdentifier: 
   itemName: Slushie and Nachos
-  itemType: 2
+  itemType: 3
   itemImage: {fileID: 21300000, guid: bba79ffc66e371a408cca1133c9856e0, type: 3}
   itemPrice: 160
   itemCondition: 0

@@ -119,6 +119,7 @@ public class ResBuildingManager : MonoBehaviour
         stayCount = 0;
         Player.Instance.CurrentPlayerPlace = selectedBuilding;
         EnterRoom(selectedBuilding);
+        LevelManager.onFinishedPlayerAction(MissionType.RENTROOM);
     }
 
 
