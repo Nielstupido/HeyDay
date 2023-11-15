@@ -152,6 +152,16 @@ public class Player : MonoBehaviour
             case ItemType.CONSUMABLE:
                 playerOwnedGroceries.Add(item);
                 break;
+            case ItemType.SERVICE:
+                if (item.itemName == "Spa Service")
+                {
+                    LevelManager.onFinishedPlayerAction(MissionType.MASSAGE);
+                }
+                else if (item.itemName == "Hair Salon Service")
+                {
+                    LevelManager.onFinishedPlayerAction(MissionType.HAIRSERVICE);
+                }
+                break;
         }
         
         TimeManager.Instance.AddClockTime(timeAdded);
@@ -163,6 +173,7 @@ public class Player : MonoBehaviour
         if (toConsume)
         {
             EatDrink(item);
+            LevelManager.onFinishedPlayerAction(MissionType.EAT, interactedBuilding:BuildingManager.Instance.CurrentSelectedBuilding.buildingName);
         }
     }
 

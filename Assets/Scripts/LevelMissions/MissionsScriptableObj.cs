@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Game Missions")]
+[CreateAssetMenu(menuName = "Game Missions", fileName = "Mission")]
 public class MissionsScriptableObj : ScriptableObject
 {
     public string id;
@@ -13,4 +13,6 @@ public class MissionsScriptableObj : ScriptableObject
     public Buildings targetBuilding;
     public ItemType targetIitemType;
     public APPS targetApp;
+    public PlayerStats targetPlayerStats;
+
 }

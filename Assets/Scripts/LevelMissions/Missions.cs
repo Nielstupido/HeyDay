@@ -34,6 +34,7 @@ public class Missions : MonoBehaviour
         this.targetBuilding = mission.targetBuilding;
         this.targetIitemType = mission.targetIitemType;
         this.targetApp = mission.targetApp;
+        this.targetPlayerStats = mission.targetPlayerStats;
 
         LevelManager.onFinishedPlayerAction += OnPlayerActionCompleted;
     }

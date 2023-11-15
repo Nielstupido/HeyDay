@@ -29,7 +29,8 @@ public enum MissionType
     HAIRSERVICE,
     INTERACT,
     UPRELATIONSHIP,
-    COMMUTE
+    COMMUTE,
+    MASSAGE
 }
 
 

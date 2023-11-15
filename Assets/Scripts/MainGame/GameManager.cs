@@ -108,7 +108,6 @@ public class GameManager : MonoBehaviour
         playerStatsDictTemp[PlayerStats.ENERGY] = 100;
         playerStatsDictTemp[PlayerStats.HUNGER] = 100;
         Player.Instance.PlayerStatsDict = playerStatsDictTemp;
-
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDictTemp);
         hospitalizedPrompt.SetActive(false);
     }

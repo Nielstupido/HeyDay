@@ -38,12 +38,15 @@ public class PlayerPhone : MonoBehaviour
     [SerializeField] private GameObject callBtn;
     [SerializeField] private TextMeshProUGUI AINameValue;
 
+
     public void GoalTracker()
     {
         goalTrackerOverlay.SetActive(true);
         courseValue.text = chosenCourse;
         savingsValue.text = "₱" + totalSavings.ToString() + "/100000";
+        LevelManager.onFinishedPlayerAction(MissionType.USEAPP, interactedApp:APPS.GOALTRACKER);
     }
+
 
     public void FinanceTracker()
     {
@@ -55,13 +58,17 @@ public class PlayerPhone : MonoBehaviour
         taxValue.text = taxRate.ToString() + "%";
         debtValue.text = "₱" + totalDebt.ToString();
         monthlyOutflowValue.text = "₱" + (rentRate + waterBillRate + electricityBillRate).ToString();
+        LevelManager.onFinishedPlayerAction(MissionType.USEAPP, interactedApp:APPS.FINANCETRACKER);
     }
+
 
     public void OLShop()
     {
         oLShopOverlay.SetActive(true);
         groceryPriceValue.text = "₱" + groceryPrice.ToString();
+        LevelManager.onFinishedPlayerAction(MissionType.USEAPP, interactedApp:APPS.OLSHOP);
     }
+
 
     public void BuyGrocery()
     {
@@ -69,10 +76,13 @@ public class PlayerPhone : MonoBehaviour
         player.BuyGrocery(200f);
     }
 
+
     public void PhoneBook()
     {
         phoneBookOverlay.SetActive(true); 
+        LevelManager.onFinishedPlayerAction(MissionType.USEAPP, interactedApp:APPS.PHONEBOOK);
     }
+
 
     public void SelectAIName()
     {

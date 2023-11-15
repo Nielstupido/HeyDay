@@ -65,6 +65,7 @@ public class BuildingManager : MonoBehaviour
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
         playerTravelManager.PlayerTravel(currentSelectedBuilding);
+        LevelManager.onFinishedPlayerAction(MissionType.WALK);
     }
 
 
@@ -75,6 +76,7 @@ public class BuildingManager : MonoBehaviour
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
         playerTravelManager.PlayerTravel(currentSelectedBuilding);
+        LevelManager.onFinishedPlayerAction(MissionType.COMMUTE);
     }
 
 
@@ -90,6 +92,8 @@ public class BuildingManager : MonoBehaviour
             buildingInteriorOverlay.SetActive(true);
             PrepareButtons(selectedBuilding);
         }
+
+        LevelManager.onFinishedPlayerAction(MissionType.VISIT, interactedBuilding:selectedBuilding.buildingName);
     }
 
 
