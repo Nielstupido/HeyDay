@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public abstract class Building : MonoBehaviour
 {
-    [HideInInspector]public Buildings buildingName;
+    [HideInInspector]public string buildingStringName;
+    [HideInInspector]public Buildings buildingEnumName;
     [HideInInspector]public List<Buttons> actionButtons;
     [HideInInspector]public float buildingOpeningTime;
     [HideInInspector]public float buildingClosingTime;
@@ -38,7 +39,8 @@ public enum Buildings
     WASTEFACILITY,
     FIRESTATION,
     CITYHALL,
-    FACTORY
+    FACTORY,
+    CALLCENTER
 }
 
 

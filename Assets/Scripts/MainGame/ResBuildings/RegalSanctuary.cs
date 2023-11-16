@@ -6,7 +6,7 @@ public class RegalSanctuary : ResBuilding
 {
     private void Start()
     {
-        this.buildingName = ResBuildings.REGALSANCTUARY;
+        this.buildingEnumName = ResBuildings.REGALSANCTUARY;
         this.buildingNameStr = "Regal Sanctuary";
         this.monthlyRent = 6000f;
         this.monthlyElecCharge = 1000f;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class ResBuilding : MonoBehaviour
 {
-    [HideInInspector]public ResBuildings buildingName;
+    [HideInInspector]public ResBuildings buildingEnumName;
     [HideInInspector]public List<Buttons> actionButtons;
     [HideInInspector]public string buildingNameStr;
     [HideInInspector]public float monthlyRent;

@@ -6,7 +6,8 @@ public class Cinema : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.CINEMA;
+        this.buildingStringName = "Heyday Cinema";
+        this.buildingEnumName = Buildings.CINEMA;
         this.buildingOpeningTime = 13f;
         this.buildingClosingTime = 23f;
 
@@ -23,7 +24,7 @@ public class Cinema : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.WATCHMOVIE:

@@ -83,7 +83,7 @@ public class BuildingManager : MonoBehaviour
     public void EnterBuilding(Building selectedBuilding)
     {
         smallStatsOverlay.SetActive(true);
-        if (selectedBuilding.buildingName == Buildings.RESIDENTIAL)
+        if (selectedBuilding.buildingEnumName == Buildings.RESIDENTIAL)
         {
             EnterResidentialArea();
         }
@@ -93,7 +93,7 @@ public class BuildingManager : MonoBehaviour
             PrepareButtons(selectedBuilding);
         }
 
-        LevelManager.onFinishedPlayerAction(MissionType.VISIT, interactedBuilding:selectedBuilding.buildingName);
+        LevelManager.onFinishedPlayerAction(MissionType.VISIT, interactedBuilding:selectedBuilding.buildingEnumName);
     }
 
 

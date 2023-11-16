@@ -6,7 +6,8 @@ public class ElectricCoop : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.ELECTRICCOOP;
+        this.buildingStringName = "Heyday Electric Cooperative";
+        this.buildingEnumName = Buildings.ELECTRICCOOP;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
 
@@ -23,7 +24,7 @@ public class ElectricCoop : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.APPLY:

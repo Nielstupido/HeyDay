@@ -7,7 +7,8 @@ public class Bank : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.BANK;
+        this.buildingStringName = "Intelli Cash Bank";
+        this.buildingEnumName = Buildings.BANK;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 16f;
 
@@ -24,7 +25,7 @@ public class Bank : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.OPENSAVINGSACCOUNT:

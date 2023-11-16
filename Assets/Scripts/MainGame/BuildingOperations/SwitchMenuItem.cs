@@ -56,7 +56,7 @@ public class SwitchMenuItem : MonoBehaviour
       currentItem = 0;
 
       switch (selectedBuilding)
-      // switch (BuildingManager.Instance.CurrentSelectedBuilding.buildingName)
+      // switch (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName)
       {
          case Buildings.CAFE:
             foodList = cafeFoodList;

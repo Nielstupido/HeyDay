@@ -6,7 +6,8 @@ public class BeeUSolutions : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.BEEUSOLUTIONS;
+        this.buildingStringName = "Bee U Solutions";
+        this.buildingEnumName = Buildings.BEEUSOLUTIONS;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
 
@@ -23,7 +24,7 @@ public class BeeUSolutions : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.APPLY:

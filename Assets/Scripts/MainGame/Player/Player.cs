@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Prompts notEnoughMoneyPrompt;
     private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
     private string playerName;
-    private string courseEnrolled;
+    private UniversityCourses courseEnrolled;
     private float playerCash;
     private float playerBankSavings;
     private bool isPlayerHasBankAcc;
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
     public string PlayerName { set{playerName = value;} get{return playerName;}}
     public float PlayerCash { set{playerCash = value;} get{return playerCash;}}
-    public string PlayerEnrolledCourse { set{courseEnrolled = value;} get{return courseEnrolled;}}
+    public UniversityCourses PlayerEnrolledCourse { set{courseEnrolled = value;} get{return courseEnrolled;}}
     public float PlayerEnrolledCourseDuration { set; get;}
     public float PlayerStudyHours { set; get;}
     public float PlayerBankSavings { set{playerBankSavings = value;} get{return playerBankSavings;}}
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        courseEnrolled = null;
+        courseEnrolled = UniversityCourses.NONE;
         playerCash = 5000f;
         playerBankSavings = 0f;
         playerStatsDict.Add(PlayerStats.HAPPINESS, 100f);
@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HUNGER, playerStatsDict);
 
         StatsChecker();
-        University.Instance.UpdateStudyHours(studyDurationValue);
+        UniversityManager.Instance.UpdateStudyHours(studyDurationValue);
     }
 
 
@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
         if (toConsume)
         {
             EatDrink(item);
-            LevelManager.onFinishedPlayerAction(MissionType.EAT, interactedBuilding:BuildingManager.Instance.CurrentSelectedBuilding.buildingName);
+            LevelManager.onFinishedPlayerAction(MissionType.EAT, interactedBuilding:BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName);
         }
     }
 

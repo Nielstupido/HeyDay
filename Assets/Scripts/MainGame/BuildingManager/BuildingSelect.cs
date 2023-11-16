@@ -53,10 +53,9 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            BuildingManager.Instance.BuildingNameText = eventData.selectedObject.gameObject.name;
-            BuildingManager.Instance.CurrentSelectedBuilding = eventData.selectedObject.GetComponent<Building>();
-            Debug.Log("building name " + BuildingManager.Instance.CurrentSelectedBuilding);
-
+            Building currentSelectedBuilding = eventData.selectedObject.GetComponent<Building>();
+            BuildingManager.Instance.BuildingNameText = currentSelectedBuilding.buildingStringName;
+            BuildingManager.Instance.CurrentSelectedBuilding = currentSelectedBuilding;
             RefreshSelectOverlayUI();
 
             if (!BuildingManager.Instance.BuildingSelectOverlay.activeSelf)

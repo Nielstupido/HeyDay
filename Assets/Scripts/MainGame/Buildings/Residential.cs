@@ -6,7 +6,7 @@ public class Residential : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.RESIDENTIAL;
+        this.buildingEnumName = Buildings.RESIDENTIAL;
         this.buildingOpeningTime = 0f;
         this.buildingClosingTime = 0f;
 
@@ -23,7 +23,7 @@ public class Residential : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.ENTER:

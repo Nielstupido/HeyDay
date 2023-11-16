@@ -6,7 +6,8 @@ public class NightClub : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.NIGHTCLUB;
+        this.buildingStringName = "Kapuntukan Night Club";
+        this.buildingEnumName = Buildings.NIGHTCLUB;
         this.buildingOpeningTime = 20f;
         this.buildingClosingTime = 5f;
 
@@ -23,7 +24,7 @@ public class NightClub : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.PARTY:

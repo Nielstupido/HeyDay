@@ -6,7 +6,7 @@ public class UTPsuite : ResBuilding
 {
     private void Start()
     {
-        this.buildingName = ResBuildings.UTPSUITE;
+        this.buildingEnumName = ResBuildings.UTPSUITE;
         this.buildingNameStr = "UTP Suite";
         this.monthlyRent = 4500f;
         this.monthlyElecCharge = 800f;

@@ -6,7 +6,8 @@ public class ConvenienceStore : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.CONVENIENCESTORE;
+        this.buildingStringName = "Uncle Ben Convenience Store";
+        this.buildingEnumName = Buildings.CONVENIENCESTORE;
         this.buildingOpeningTime = 0f;
         this.buildingClosingTime = 0f;
 
@@ -23,7 +24,7 @@ public class ConvenienceStore : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.BUY:

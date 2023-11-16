@@ -6,7 +6,7 @@ public class SampaguitaCondotel : ResBuilding
 {
     private void Start()
     {
-        this.buildingName = ResBuildings.SAMPAGUITACONDOTEL;
+        this.buildingEnumName = ResBuildings.SAMPAGUITACONDOTEL;
         this.buildingNameStr = "Sampaguita Condotel";
         this.monthlyRent = 10500f;
         this.monthlyElecCharge = 1500f;

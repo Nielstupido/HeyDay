@@ -6,7 +6,8 @@ public class WasteFacility : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.WASTEFACILITY;
+        this.buildingStringName = "Heyday Solid Waste Management Facility";
+        this.buildingEnumName = Buildings.WASTEFACILITY;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
 
@@ -23,7 +24,7 @@ public class WasteFacility : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.APPLY:

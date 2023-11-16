@@ -6,7 +6,8 @@ public class Mall : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.MALL;
+        this.buildingStringName = "Luz Mall";
+        this.buildingEnumName = Buildings.MALL;
         this.buildingOpeningTime = 10f;
         this.buildingClosingTime = 22f;
 
@@ -23,7 +24,7 @@ public class Mall : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.SHOP:

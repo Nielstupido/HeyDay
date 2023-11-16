@@ -6,7 +6,8 @@ public class Cafeteria : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.CAFETERIA;
+        this.buildingStringName = "Gracianna's Cafeteria";
+        this.buildingEnumName = Buildings.CAFETERIA;
         this.buildingOpeningTime = 6f;
         this.buildingClosingTime = 20f;
 
@@ -23,7 +24,7 @@ public class Cafeteria : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.BUY:

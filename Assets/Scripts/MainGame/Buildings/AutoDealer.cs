@@ -6,7 +6,8 @@ public class AutoDealer : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.AUTODEALER;
+        this.buildingStringName = "Auto Dealer";
+        this.buildingEnumName = Buildings.AUTODEALER;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 16f;
 
@@ -23,7 +24,7 @@ public class AutoDealer : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.SHOP:

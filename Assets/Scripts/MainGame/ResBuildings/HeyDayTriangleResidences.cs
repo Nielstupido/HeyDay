@@ -6,7 +6,7 @@ public class HeyDayTriangleResidences : ResBuilding
 {
     private void Start()
     {
-        this.buildingName = ResBuildings.HEYDAYTRIANGLERESIDENCES;
+        this.buildingEnumName = ResBuildings.HEYDAYTRIANGLERESIDENCES;
         this.buildingNameStr = "HeyDay Triangle Residences";
         this.monthlyRent = 7000f;
         this.monthlyElecCharge = 1100f;

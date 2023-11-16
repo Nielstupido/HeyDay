@@ -6,7 +6,7 @@ public class BayonLuxeResidences : ResBuilding
 {
     private void Start()
     {
-        this.buildingName = ResBuildings.BAYONLUXERESIDENCES;
+        this.buildingEnumName = ResBuildings.BAYONLUXERESIDENCES;
         this.buildingNameStr = "Bayon Luxe Residences";
         this.monthlyRent = 10000f;
         this.monthlyElecCharge = 1500f;

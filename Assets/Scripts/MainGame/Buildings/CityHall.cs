@@ -6,7 +6,8 @@ public class CityHall : Building
 {
     private void Start()
     {
-        this.buildingName = Buildings.CITYHALL;
+        this.buildingStringName = "Heyday City Hall";
+        this.buildingEnumName = Buildings.CITYHALL;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
 
@@ -23,7 +24,7 @@ public class CityHall : Building
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingName == this.buildingName)
+        if (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName == this.buildingEnumName)
             switch (clickedBtn)
             {
                 case Buttons.APPLY:
