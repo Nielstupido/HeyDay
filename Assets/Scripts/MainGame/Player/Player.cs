@@ -57,9 +57,11 @@ public class Player : MonoBehaviour
     public List<Items> PlayerOwnedGroceries { get{return playerOwnedGroceries;}}
 
     //Work
-    private JobFields playerJobField;
+    private JobPositions currentPlayerJob;
+    private IDictionary<JobFields,float> playerWorkFieldHistory = new Dictionary<JobFields, float>();
     private float currentWorkHours;
-    public JobFields PlayerJobField { set{playerJobField = value;} get{return playerJobField;}}
+    public JobPositions CurrentPlayerJob { set{currentPlayerJob = value;} get{return currentPlayerJob;}}
+    public IDictionary<JobFields, float> PlayerWorkFieldHistory {set{playerWorkFieldHistory = value;} get{return playerWorkFieldHistory;}}
     public float CurrentWorkHours { set{currentWorkHours = value;} get{return currentWorkHours;}}
 
     //Misc.
@@ -84,6 +86,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        currentPlayerJob = null;
         courseEnrolled = UniversityCourses.NONE;
         playerCash = 5000f;
         playerBankSavings = 0f;
@@ -264,6 +267,31 @@ public class Player : MonoBehaviour
         {
             playerStatsDict[PlayerStats.HUNGER] = 100;
             LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HUNGER);
+        }
+    }
+
+
+    public float GetTotalWorkHours()
+    {
+        float totalWorkHours = 0;
+
+        if (playerWorkFieldHistory.Count > 0)
+        {
+            foreach (KeyValuePair<JobFields, float> workHistory in playerWorkFieldHistory)
+            {
+                if (workHistory.Key != currentPlayerJob.workField)
+                {
+                    totalWorkHours += workHistory.Value;
+                }
+            }
+            
+            totalWorkHours += currentWorkHours;
+
+            return totalWorkHours;
+        }
+        else
+        {
+            return currentWorkHours;
         }
     }
 }

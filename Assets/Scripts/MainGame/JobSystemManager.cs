@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 
 public enum JobFields
@@ -37,6 +38,7 @@ public class JobSystemManager : MonoBehaviour
     [SerializeField] private GameObject jobPositionPrefab;
     [SerializeField] private Prompts notQualifiedPrompt;
     [SerializeField] private GameObject qualifiedMsgOverlay;
+    [SerializeField] private TextMeshProUGUI congratulatoryMsg;
     [SerializeField] private List<JobPositions> hospitalJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> cityHallJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> universityJobPositions = new List<JobPositions>();
@@ -54,6 +56,7 @@ public class JobSystemManager : MonoBehaviour
     [SerializeField] private List<JobPositions> factoryJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> callCenterJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> electricCompanyJobPositions = new List<JobPositions>();
+    private Player Player;
     private List<JobPositions> jobPositionsList = new List<JobPositions>();
 
     public static JobSystemManager Instance {private set; get;}
@@ -93,11 +96,43 @@ public class JobSystemManager : MonoBehaviour
     }
 
 
-    public void ApplyJob(JobPositions jobData)
+    public void ApplyJob(JobPositions newJobData)
     {
-        if (IsPlayerQualified(jobData))
+        Player = Player.Instance;
+
+        if (IsPlayerQualified(newJobData))
         {
             qualifiedMsgOverlay.SetActive(true);
+
+            congratulatoryMsg.text = ("Congratulations on applying for the " + newJobData.jobPosName + " position at " + 
+                                        BuildingManager.Instance.CurrentSelectedBuilding.buildingStringName + "! Wishing you the best of luck in this exciting opportunity.");
+
+            if (Player.CurrentPlayerJob != null)
+            {
+                if (Player.CurrentPlayerJob.workField != newJobData.workField)
+                {
+                    if (Player.PlayerWorkFieldHistory.ContainsKey(Player.CurrentPlayerJob.workField))
+                    {
+                        Player.PlayerWorkFieldHistory[Player.CurrentPlayerJob.workField] = Player.CurrentWorkHours;
+                    }
+                    else
+                    {
+                        Player.PlayerWorkFieldHistory.Add(Player.CurrentPlayerJob.workField, Player.CurrentWorkHours);
+                    }
+
+                    if (Player.PlayerWorkFieldHistory.ContainsKey(newJobData.workField))
+                    {
+                        Player.CurrentWorkHours = Player.PlayerWorkFieldHistory[newJobData.workField];
+                    }
+                    else
+                    {
+                        Player.CurrentWorkHours = 0;
+                    }
+                }
+            }
+
+            Player.CurrentPlayerJob = newJobData;
+            //game save
         }
         else
         {
@@ -108,20 +143,53 @@ public class JobSystemManager : MonoBehaviour
 
     private bool IsPlayerQualified(JobPositions jobData)
     {
-        if (jobData.reqWorkField != JobFields.NONE && jobData.reqWorkField != Player.Instance.PlayerJobField)
+        Player = Player.Instance;
+
+        if (jobData.reqCourse != UniversityCourses.NONE && jobData.reqCourse != Player.PlayerEnrolledCourse)
         {
-            return false;
+            return false; //if player's course doesn't meet the job's required course 
         }
 
-        if (jobData.reqStudyField != StudyFields.NONE && jobData.reqStudyField != Player.Instance.PlayerEnrolledStudyField)
+        if (jobData.reqStudyField != StudyFields.NONE && jobData.reqStudyField != Player.PlayerEnrolledStudyField)
         {
-            return false;
+            return false; //if player's study field doesn't meet the job's required study field 
         }
 
-        if (jobData.reqWorkHrs > Player.Instance.CurrentWorkHours)
+        if (jobData.reqWorkHrs > 0f)
         {
-            return false;
+            if (jobData.reqWorkField != JobFields.NONE)
+            {
+                if (Player.CurrentPlayerJob.workField == jobData.reqWorkField)
+                {
+                    if (jobData.reqWorkHrs > Player.CurrentWorkHours) 
+                    {
+                        return false; //if player doesn't have "enough" experience of the required work field
+                    }
+                }
+                else
+                {
+                    if (Player.PlayerWorkFieldHistory.ContainsKey(jobData.reqWorkField))
+                    {
+                        if (jobData.reqWorkHrs > Player.PlayerWorkFieldHistory[jobData.reqWorkField])
+                        {
+                            return false; //if player doesn't have "enough" experience of the required work field
+                        }
+                    }
+                    else
+                    {
+                        return false; //if player doesn't have "any" experience of the required work field
+                    }
+                }
+            }
+            else
+            {
+                if (jobData.reqWorkHrs > Player.GetTotalWorkHours())
+                {
+                    return false;
+                }
+            }
         }
+
 
         return true;
     }
