@@ -4,9 +4,10 @@ using UnityEngine;
 public class JobPositions : ScriptableObject
 {
     public string jobPosName;
-    public string jobPosDets;
-    public StudyFields reqField;
+    public string jobPosReqs;
+    public StudyFields reqStudyField;
     public UniversityCourses reqCourse;
+    public JobFields reqWorkField;
     public float reqWorkHrs;
     public float salaryPerHr;
 }

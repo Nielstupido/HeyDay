@@ -43,7 +43,7 @@ public class PlayerItemsListManager : MonoBehaviour
             if (playerItem.itemType == ItemType.CONSUMABLE)
             {
                 newItem.GetComponent<ItemsObjPrefab>().ItemEatBtn.gameObject.SetActive(true);
-                newItem.GetComponent<ItemsObjPrefab>().ItemEatBtn.onClick.AddListener(delegate {
+                newItem.GetComponent<ItemsObjPrefab>().ItemEatBtn.onClick.AddListener( () => {
                     Player.Instance.EatDrink(playerItem); 
                     newItem.GetComponent<ItemsObjPrefab>().DestroyObj();
                 });

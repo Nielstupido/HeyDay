@@ -270,6 +270,7 @@ public class UniversityManager : MonoBehaviour
         enrollPrompt.SetActive(false);
         courseSelectionOverlay.SetActive(false);
         fieldSelectionOverlay.SetActive(false);
+        Player.Instance.PlayerEnrolledStudyField = selectedField;
         Player.Instance.PlayerEnrolledCourse = selectedCourse;
         Player.Instance.PlayerEnrolledCourseDuration = selectedCourseDuration;
         course.text = EnumStringParser(selectedCourse);

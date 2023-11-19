@@ -1,13 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+
+
+public enum JobFields
+{
+    NONE,
+    ASSISTANTNURSE,
+    ASSISTANTMIDWIFE,
+    ASSISTANTMEDTECH,
+    ASSISTANTRADTECH,
+    ASSISTANTPHARMACIST,
+    ASSISTANTRESEARCHLAB,
+    OFFICEASSISTANT,
+    HRASSISTANT,
+    ITASSISTANT,
+    ASSISTANTENGINEER,
+    ASSISTANTARCHITECT,
+    ASSISTANTTEACHER,
+    ASSISTANTMANAGER,
+    BOOKKEEPER,
+    ASSISTANTPROGRAMMER,
+    ASSISTANTDATAANALYST,
+    DATAANALYST,
+    ASSISTANTSALESREP,
+    ASSISTANTMECHANIC
+}
+
 
 public class JobSystemManager : MonoBehaviour
 {
+    [SerializeField] private GameObject jobSystemOverlay;
     [SerializeField] private Transform availableJobPositionsHolder;
+    [SerializeField] private GameObject jobDetailedViewOverlay;
     [SerializeField] private GameObject jobPositionPrefab;
-    [SerializeField] private GameObject applicationConfirmationOverlay;
-    [SerializeField] private GameObject jobApplicationOverlay;
+    [SerializeField] private Prompts notQualifiedPrompt;
+    [SerializeField] private GameObject qualifiedMsgOverlay;
     [SerializeField] private List<JobPositions> hospitalJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> cityHallJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> universityJobPositions = new List<JobPositions>();
@@ -45,23 +74,56 @@ public class JobSystemManager : MonoBehaviour
 
     public void ShowAvailablePositons(Building currentBuilding)
     {
-        jobApplicationOverlay.SetActive(true);
+        jobSystemOverlay.SetActive(true);
         jobPositionsList = JobPositionsList(currentBuilding.buildingEnumName);
 
         foreach(JobPositions jobPosition in jobPositionsList)
         {
             GameObject newJobPositionObj = Instantiate(jobPositionPrefab, Vector3.zero, Quaternion.identity, availableJobPositionsHolder);
             JobPositionObj newJobPosition = newJobPositionObj.GetComponent<JobPositionObj>();
-            newJobPosition.jobPositionData = jobPosition;
+            newJobPosition.PrepareJobDets(jobPosition);
         }
     }
 
 
-    public void ShowSelectedPosition()
+    public void ShowSelectedJobPosition(JobPositions selectedJobPosition)
     {
-        applicationConfirmationOverlay.SetActive(true);
+        jobDetailedViewOverlay.GetComponent<JobDetailedViewObj>().PrepareDetailedJobDets(selectedJobPosition);
+        jobDetailedViewOverlay.SetActive(true);
+    }
 
-        
+
+    public void ApplyJob(JobPositions jobData)
+    {
+        if (IsPlayerQualified(jobData))
+        {
+            qualifiedMsgOverlay.SetActive(true);
+        }
+        else
+        {
+            PromptManager.Instance.ShowPrompt(notQualifiedPrompt);
+        }
+    }
+
+
+    private bool IsPlayerQualified(JobPositions jobData)
+    {
+        if (jobData.reqWorkField != JobFields.NONE && jobData.reqWorkField != Player.Instance.PlayerJobField)
+        {
+            return false;
+        }
+
+        if (jobData.reqStudyField != StudyFields.NONE && jobData.reqStudyField != Player.Instance.PlayerEnrolledStudyField)
+        {
+            return false;
+        }
+
+        if (jobData.reqWorkHrs > Player.Instance.CurrentWorkHours)
+        {
+            return false;
+        }
+
+        return true;
     }
 
 

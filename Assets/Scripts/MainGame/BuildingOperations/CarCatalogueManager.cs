@@ -23,7 +23,7 @@ public class CarCatalogueManager : MonoBehaviour
 
     private void Start()
     {
-        buyBtn.onClick.AddListener(delegate { BuyCar(); });
+        buyBtn.onClick.AddListener( () => {BuyCar();} );
     }
 
     

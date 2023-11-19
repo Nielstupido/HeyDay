@@ -52,11 +52,11 @@ public class ResBuildingManager : MonoBehaviour
 
     private void Start()
     {
-        vechiclesBtn.onClick.AddListener(delegate { ShowItems(ItemType.VEHICLE); });
-        appliancesBtn.onClick.AddListener(delegate { ShowItems(ItemType.APPLIANCE); });
-        groceriesBtn.onClick.AddListener(delegate { ShowItems(ItemType.CONSUMABLE); });
-        enterBtn.GetComponent<Button>().onClick.AddListener(delegate { EnterRoom(currentSelectedResBuilding); });
-        rentBtn.GetComponent<Button>().onClick.AddListener(delegate { Rent(currentSelectedResBuilding); });
+        vechiclesBtn.onClick.AddListener( () => {ShowItems(ItemType.VEHICLE);} );
+        appliancesBtn.onClick.AddListener( () => {ShowItems(ItemType.APPLIANCE);} );
+        groceriesBtn.onClick.AddListener( () => {ShowItems(ItemType.CONSUMABLE);} );
+        enterBtn.GetComponent<Button>().onClick.AddListener( () => {EnterRoom(currentSelectedResBuilding);} );
+        rentBtn.GetComponent<Button>().onClick.AddListener( () => {Rent(currentSelectedResBuilding);} );
         TimeManager.onDayAdded += ComputeBillings;
         stayCount = 0;
         totalBilling = 0;
@@ -109,7 +109,7 @@ public class ResBuildingManager : MonoBehaviour
         {
             GameObject newBtn = Instantiate(btnPrefab, Vector3.zero, Quaternion.identity, buttonsHolder);
             newBtn.GetComponent<Image>().sprite = BuildingManager.Instance.ButtonImages[((int)btn)];
-            newBtn.GetComponent<Button>().onClick.AddListener(delegate { BuildingManager.Instance.onBuildingBtnClicked(btn); });
+            newBtn.GetComponent<Button>().onClick.AddListener( () => {BuildingManager.Instance.onBuildingBtnClicked(btn);} );
         }
     }
 

@@ -52,7 +52,7 @@ public class BuildingManager : MonoBehaviour
     private void Start()
     {
         camera2.SetActive(false);
-        enterBtn.GetComponent<Button>().onClick.AddListener(delegate { EnterBuilding(currentSelectedBuilding); });
+        enterBtn.GetComponent<Button>().onClick.AddListener( () => { EnterBuilding(currentSelectedBuilding); } );
         buildingSelectOverlay.SetActive(false);
         Debug.Log(currentSelectedBuilding);
     }
@@ -119,7 +119,7 @@ public class BuildingManager : MonoBehaviour
         {
             GameObject newBtn = Instantiate(btnPrefab, Vector3.zero, Quaternion.identity, buttonsHolder);
             newBtn.GetComponent<Image>().sprite = buttonImages[((int)btn)];
-            newBtn.GetComponent<Button>().onClick.AddListener(delegate { onBuildingBtnClicked(btn); });
+            newBtn.GetComponent<Button>().onClick.AddListener( () => {onBuildingBtnClicked(btn);} );
         }
     }
 
