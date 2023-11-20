@@ -57,6 +57,7 @@ public class JobSystemManager : MonoBehaviour
     [SerializeField] private List<JobPositions> callCenterJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> electricCompanyJobPositions = new List<JobPositions>();
     private Player Player;
+    private bool isHalfQuali;
     private List<JobPositions> jobPositionsList = new List<JobPositions>();
 
     public static JobSystemManager Instance {private set; get;}
@@ -144,15 +145,31 @@ public class JobSystemManager : MonoBehaviour
     private bool IsPlayerQualified(JobPositions jobData)
     {
         Player = Player.Instance;
+        isHalfQuali = false;
 
-        if (jobData.reqCourse != UniversityCourses.NONE && jobData.reqCourse != Player.PlayerEnrolledCourse)
+        if (jobData.reqCourse.Count > 0)
         {
-            return false; //if player's course doesn't meet the job's required course 
+            if (Player.PlayerEnrolledCourse == UniversityCourses.NONE && jobData.reqStudyField == StudyFields.NONE)
+            {
+                return false; //if player is not yet enrolled to any course
+            }
+
+            if (!jobData.reqCourse.Contains(UniversityCourses.ANY))
+            {
+                if (!jobData.reqCourse.Contains(Player.PlayerEnrolledCourse) && jobData.reqStudyField == StudyFields.NONE)
+                {
+                    return false; //if player's course doesn't meet the job's required course 
+                }
+            }
+            isHalfQuali = true;
         }
 
-        if (jobData.reqStudyField != StudyFields.NONE && jobData.reqStudyField != Player.PlayerEnrolledStudyField)
+        if (!isHalfQuali && jobData.reqStudyField != StudyFields.NONE)
         {
-            return false; //if player's study field doesn't meet the job's required study field 
+            if (jobData.reqStudyField != Player.PlayerEnrolledStudyField)
+            {
+                return false; //if player's study field doesn't meet the job's required study field 
+            }
         }
 
         if (jobData.reqWorkHrs > 0f)
@@ -189,7 +206,6 @@ public class JobSystemManager : MonoBehaviour
                 }
             }
         }
-
 
         return true;
     }

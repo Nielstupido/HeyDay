@@ -21,6 +21,7 @@ public enum StudyFields
 public enum UniversityCourses
 {
     NONE,
+    ANY,
 
     Bachelor_of_Science_in_Architecture,
     Bachelor_of_Science_in_Interior_Design,
