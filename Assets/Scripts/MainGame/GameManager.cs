@@ -111,4 +111,10 @@ public class GameManager : MonoBehaviour
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDictTemp);
         hospitalizedPrompt.SetActive(false);
     }
+
+
+    public string EnumStringParser<T>(T enumElement)
+    {
+        return enumElement.ToString().Replace("_", " ");
+    }
 }

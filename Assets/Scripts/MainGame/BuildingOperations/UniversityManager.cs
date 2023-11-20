@@ -121,7 +121,7 @@ public class UniversityManager : MonoBehaviour
     public void ArchitectureAndDesign()
     {
         selectedField = StudyFields.Architecture_and_Design;
-        fieldNameText.text = EnumStringParser(selectedField);
+        fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
         courses = new UniversityCourses[] {UniversityCourses.Bachelor_of_Science_in_Architecture, 
                                 UniversityCourses.Bachelor_of_Science_in_Interior_Design,
@@ -135,7 +135,7 @@ public class UniversityManager : MonoBehaviour
     public void BusinessAndManagement()
     {
         selectedField = StudyFields.Business_and_Management;
-        fieldNameText.text = EnumStringParser(selectedField);
+        fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
         courses = new UniversityCourses[] {UniversityCourses.Bachelor_of_Science_in_Accountancy, 
                                 UniversityCourses.Bachelor_of_Science_in_Business_Administration,
@@ -153,7 +153,7 @@ public class UniversityManager : MonoBehaviour
     public void Education()
     {
         selectedField = StudyFields.Education;
-        fieldNameText.text = EnumStringParser(selectedField);
+        fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
         courses = new UniversityCourses[] {UniversityCourses.Bachelor_of_Early_Childhood_Education, 
                                 UniversityCourses.Bachelor_of_Elementary_Education,
@@ -170,7 +170,7 @@ public class UniversityManager : MonoBehaviour
     public void Engineering()
     {
         selectedField = StudyFields.Engineering_and_Technology;
-        fieldNameText.text = EnumStringParser(selectedField);
+        fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
         courses = new UniversityCourses[] {UniversityCourses.Bachelor_of_Science_in_Automotive_Technology, 
                                 UniversityCourses.Bachelor_of_Science_in_Civil_Engineering,
@@ -189,7 +189,7 @@ public class UniversityManager : MonoBehaviour
     public void HealthSciences()
     {
         selectedField = StudyFields.Health_Sciences;
-        fieldNameText.text = EnumStringParser(selectedField);
+        fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
         courses = new UniversityCourses[] {UniversityCourses.Bachelor_of_Science_in_Medical_Technology, 
                                 UniversityCourses.Bachelor_of_Science_in_Midwifery,
@@ -205,7 +205,7 @@ public class UniversityManager : MonoBehaviour
     public void SocialSciences()
     {
         selectedField = StudyFields.Social_Sciences;
-        fieldNameText.text = EnumStringParser(selectedField);
+        fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
         courses = new UniversityCourses[] {UniversityCourses.Bachelor_of_Arts_in_Communication, 
                                 UniversityCourses.Bachelor_of_Science_in_Criminal_Justice,
@@ -223,7 +223,7 @@ public class UniversityManager : MonoBehaviour
     public void ScienceAndTech()
     {
         selectedField = StudyFields.Science_and_Technology;
-        fieldNameText.text = EnumStringParser(selectedField);
+        fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
         courses = new UniversityCourses[] {UniversityCourses.Bachelor_of_Science_in_Biology, 
                                 UniversityCourses.Bachelor_of_Science_in_Chemistry,
@@ -247,7 +247,7 @@ public class UniversityManager : MonoBehaviour
             GameObject newButton = Instantiate(courseButtonPrefab, courseButtonParent.transform);
 
             CourseButton courseButton = newButton.GetComponent<CourseButton>();
-            courseButton.courseName.text = EnumStringParser(courses[i]);
+            courseButton.courseName.text = GameManager.Instance.EnumStringParser(courses[i]);
             courseButton.courseDuration.text = courseDuration[i].ToString() + " hrs";
             
             int index = i; 
@@ -261,7 +261,7 @@ public class UniversityManager : MonoBehaviour
         selectedCourse = courses[index];
         selectedCourseDuration = courseDuration[index];
 
-        courseNamePrompt.text = EnumStringParser(selectedCourse);
+        courseNamePrompt.text = GameManager.Instance.EnumStringParser(selectedCourse);
         enrollPrompt.SetActive(true);
     }
 
@@ -274,7 +274,7 @@ public class UniversityManager : MonoBehaviour
         Player.Instance.PlayerEnrolledStudyField = selectedField;
         Player.Instance.PlayerEnrolledCourse = selectedCourse;
         Player.Instance.PlayerEnrolledCourseDuration = selectedCourseDuration;
-        course.text = EnumStringParser(selectedCourse);
+        course.text = GameManager.Instance.EnumStringParser(selectedCourse);
         duration.text = "/" + selectedCourseDuration.ToString();
         universityOverlay.SetActive(true);
         UpdateStudyHours(0);
@@ -330,11 +330,5 @@ public class UniversityManager : MonoBehaviour
         
         studyAnimationOverlay.SetActive(false);
 
-    }
-
-
-    private string EnumStringParser<T>(T enumElement)
-    {
-        return enumElement.ToString().Replace("_", " ");
     }
 }
