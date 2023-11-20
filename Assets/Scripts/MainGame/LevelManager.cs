@@ -30,7 +30,10 @@ public enum MissionType
     INTERACT,
     UPRELATIONSHIP,
     COMMUTE,
-    MASSAGE
+    MASSAGE,
+    BORROWMONEY,
+    MAKEFRIEND,
+    MAKECLOSEFRIEND
 }
 
 

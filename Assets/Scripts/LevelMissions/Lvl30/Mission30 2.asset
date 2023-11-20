@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 30.2
   missionStatus: 0
-  missionType: 0
+  missionType: 1
   missionDets: Browse Job Positions at the Call Center Agency
   currentNumberForMission: 0
   requiredNumberForMission: 0
-  targetBuilding: 0
+  targetBuilding: 21
   targetIitemType: 0
   targetApp: 0
   targetPlayerStats: 0

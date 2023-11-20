@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 38.1
   missionStatus: 0
-  missionType: 21
+  missionType: 26
   missionDets: Have atleast 1 close friends
   currentNumberForMission: 0
   requiredNumberForMission: 0

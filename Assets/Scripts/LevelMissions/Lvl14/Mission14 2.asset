@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 14.2
   missionStatus: 0
-  missionType: 0
-  missionDets: Borrow money from an NPC (PA VOID)
+  missionType: 24
+  missionDets: Borrow money from an NPC
   currentNumberForMission: 0
   requiredNumberForMission: 0
   targetBuilding: 0

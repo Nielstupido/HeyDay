@@ -15,10 +15,10 @@ MonoBehaviour:
   id: 19.3
   missionStatus: 0
   missionType: 0
-  missionDets: Visit Call Center Agency (PA EDIT)
+  missionDets: Visit Call Center Agency
   currentNumberForMission: 0
   requiredNumberForMission: 0
-  targetBuilding: 0
+  targetBuilding: 21
   targetIitemType: 0
   targetApp: 0
   targetPlayerStats: 0

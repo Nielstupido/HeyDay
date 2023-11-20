@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 26.1
   missionStatus: 0
-  missionType: 0
+  missionType: 24
   missionDets: Borrow money from a HeyDay citizen
   currentNumberForMission: 0
   requiredNumberForMission: 0
