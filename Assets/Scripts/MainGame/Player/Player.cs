@@ -254,23 +254,23 @@ public class Player : MonoBehaviour
 
             if ((sumOfStats*100) / 300 <= 10)
             {
-                GameManager.Instance.Hospitalized(5);
+                HospitalManager.Instance.Hospitalized(5);
             }
             else if ((sumOfStats*100) / 300 <= 30)
             {
-                GameManager.Instance.Hospitalized(4);
+                HospitalManager.Instance.Hospitalized(4);
             }
             else if ((sumOfStats*100) / 300 <= 50)
             {
-                GameManager.Instance.Hospitalized(3);
+                HospitalManager.Instance.Hospitalized(3);
             }
             else if ((sumOfStats*100) / 300 <= 70)
             {
-                GameManager.Instance.Hospitalized(2);
+                HospitalManager.Instance.Hospitalized(2);
             }
             else
             {
-                GameManager.Instance.Hospitalized(1);
+                HospitalManager.Instance.Hospitalized(1);
             }
         }
 
