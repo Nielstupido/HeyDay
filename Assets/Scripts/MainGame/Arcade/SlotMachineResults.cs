@@ -42,8 +42,7 @@ public class SlotMachineResults : MonoBehaviour
         Player.Instance.PlayerCash -= amount;
         Player.Instance.PlayerStatsDict[PlayerStats.MONEY] -= amount;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
-        Player.Instance.StatsChecker();
-
+        
         return true;
     }
 

@@ -31,10 +31,10 @@ public class ConvenienceStore : Building
                     Debug.Log("money deposited");
                     break;
                 case Buttons.APPLY:
-                    Debug.Log("money deposited");
+                    JobManager.Instance.Apply(this);
                     break;
                 case Buttons.WORK:
-                    Debug.Log("money deposited");
+                    JobManager.Instance.Work();
                     break;
                 case Buttons.QUIT:
                     Debug.Log("money deposited");

@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerTravelManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerModel;
-    [SerializeField] private GameObject travelingOverlay;
     [SerializeField] private Player3dController player3DController;
     [SerializeField] private BuildingSelect buildingSelect;
     private Building currentVisitedBuilding;
@@ -43,10 +42,10 @@ public class PlayerTravelManager : MonoBehaviour
 
     private IEnumerator StartTravelingOverlay(float travelingTime, Building selectedBuilding)
     {
-        travelingOverlay.SetActive(true);
+        AnimOverlayManager.Instance.StartAnim(Animations.TRAVELING);
         MovePlayerModel(selectedBuilding);
         yield return new WaitForSeconds(travelingTime);
-        travelingOverlay.SetActive(false);
+        AnimOverlayManager.Instance.StopAnim();
         yield return null;
     }
 }

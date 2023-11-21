@@ -6,7 +6,6 @@ using TMPro;
 
 public class SleepManager : MonoBehaviour
 {
-    [SerializeField] private GameObject sleepingAnimOverlay;
     [SerializeField] private GameObject sleepingManagerOverlay;
     [SerializeField] private TextMeshProUGUI sleepHrsText;
     private float adtnlEnergyForSleep;
@@ -68,10 +67,10 @@ public class SleepManager : MonoBehaviour
 
     private IEnumerator DoSleep(float waitingTime)
     {
-        sleepingAnimOverlay.SetActive(true);
+        AnimOverlayManager.Instance.StartAnim(Animations.RESIGNING);
         yield return new WaitForSeconds(waitingTime);
         sleepingManagerOverlay.SetActive(false);
-        sleepingAnimOverlay.SetActive(false);
+        AnimOverlayManager.Instance.StopAnim();
         yield return null;
     }
 }

@@ -9,15 +9,20 @@ public class JobPositionObj : MonoBehaviour
     [SerializeField] private TextMeshProUGUI jobTitleText;
     [SerializeField] private TextMeshProUGUI jobReqsText;
     [SerializeField] private TextMeshProUGUI jobSalary;
+    [SerializeField] private TextMeshProUGUI moreDetsText;
     private JobPositions jobPositionData;
 
 
-    public void PrepareJobDets(JobPositions jobData)
+    public void PrepareJobDets(JobPositions jobData, string jobPosStat = null)
     {
         this.jobPositionData = jobData;
         jobTitleText.text = this.jobPositionData.jobPosName;
         jobReqsText.text = "Qualifications : " + this.jobPositionData.jobPosReqs;
         jobSalary.text = this.jobPositionData.salaryPerHr.ToString() + "per hour";
-        this.gameObject.GetComponent<Button>().onClick.AddListener( () => {JobSystemManager.Instance.ShowSelectedJobPosition(this.jobPositionData);} );
+        if (jobPosStat != null)
+        {
+            moreDetsText.text = jobPosStat;
+        }
+        this.gameObject.GetComponent<Button>().onClick.AddListener( () => {JobApplicationManager.Instance.ShowSelectedJobPosition(this.jobPositionData);} );
     }
 }

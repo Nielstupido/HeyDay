@@ -1502,6 +1502,52 @@ MonoBehaviour:
   missionsHolder: {fileID: 11400000, guid: 0a45a99dfbb65664b9d4203e21cdeda1, type: 2}
   missionPrefabsHolder: {fileID: 413398855}
   missionPrefab: {fileID: 356742637122987874, guid: 80891771fc48fcb489b994e174f7580d, type: 3}
+--- !u!1 &96117945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 96117947}
+  - component: {fileID: 96117946}
+  m_Layer: 0
+  m_Name: AnimOverlayManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &96117946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96117945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efdbca32e1afeba45965cf62c9a415dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationOverlay: {fileID: 0}
+  tempAnimText: {fileID: 0}
+--- !u!4 &96117947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96117945}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &105702043
 GameObject:
   m_ObjectHideFlags: 0
@@ -4268,6 +4314,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 962846304}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1627214223}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -7205,7 +7263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f50be75db412d49b59ec81b0e86ffc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sleepingAnimOverlay: {fileID: 484068888}
   sleepingManagerOverlay: {fileID: 731161805}
   sleepHrsText: {fileID: 1715818563}
 --- !u!114 &433560205
@@ -7773,6 +7830,7 @@ GameObject:
   - component: {fileID: 484068889}
   - component: {fileID: 484068891}
   - component: {fileID: 484068890}
+  - component: {fileID: 484068892}
   m_Layer: 5
   m_Name: AnimOverlay
   m_TagString: Untagged
@@ -7787,14 +7845,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 484068888}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 402558851}
-  m_Father: {fileID: 731161806}
-  m_RootOrder: 1
+  m_Father: {fileID: 1138957115}
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7839,6 +7897,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 484068888}
   m_CullTransparentMesh: 1
+--- !u!114 &484068892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 484068888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efdbca32e1afeba45965cf62c9a415dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationOverlay: {fileID: 0}
+  tempAnimText: {fileID: 0}
 --- !u!1 &484582873
 GameObject:
   m_ObjectHideFlags: 0
@@ -12175,7 +12247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &731161806
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12189,7 +12261,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1401384375}
-  - {fileID: 484068889}
   m_Father: {fileID: 1138957115}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15903,18 +15974,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1199265691}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 962846304}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -18956,7 +19015,7 @@ Transform:
   - {fileID: 184015388}
   - {fileID: 1329454673}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1012855970
 GameObject:
@@ -21722,6 +21781,7 @@ RectTransform:
   - {fileID: 1248060381}
   - {fileID: 1012855971}
   - {fileID: 1812526035}
+  - {fileID: 484068889}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1.479}
@@ -23009,6 +23069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1204623219}
   - component: {fileID: 1204623218}
+  - component: {fileID: 1204623220}
   m_Layer: 0
   m_Name: JobSystemManager
   m_TagString: Untagged
@@ -23029,6 +23090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jobSystemOverlay: {fileID: 962846304}
+  jobPosListOverlay: {fileID: 1627214223}
   availableJobPositionsHolder: {fileID: 2069980595}
   jobDetailedViewOverlay: {fileID: 1199265691}
   jobPositionPrefab: {fileID: 6587674324198784087, guid: 3db07fcd80f19d349a4376465851dfd7, type: 3}
@@ -23067,6 +23129,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1204623220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204623217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b288c357a4034409254c5f5e12d4a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1209574597
 GameObject:
   m_ObjectHideFlags: 0
@@ -25501,7 +25575,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerModel: {fileID: 1328888003}
-  travelingOverlay: {fileID: 266221833}
   player3DController: {fileID: 1328888009}
   buildingSelect: {fileID: 1517769848}
 --- !u!1 &1329454671
@@ -43833,6 +43906,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 962846305}
     m_Modifications:
+    - target: {fileID: 585106565648103207, guid: 0e491338ef884f64a9839b4774bdfcfa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 585106565648103207, guid: 0e491338ef884f64a9839b4774bdfcfa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 585106565648103207, guid: 0e491338ef884f64a9839b4774bdfcfa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 585106565648103207, guid: 0e491338ef884f64a9839b4774bdfcfa, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 585106565789828464, guid: 0e491338ef884f64a9839b4774bdfcfa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -56716,6 +56805,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 962846305}
     m_Modifications:
+    - target: {fileID: 1402240602503817514, guid: 3b4223c6718912b4a8d2636becdd56ca, type: 3}
+      propertyPath: jobSystemOverlay
+      value: 
+      objectReference: {fileID: 962846304}
     - target: {fileID: 7934195338338838964, guid: 3b4223c6718912b4a8d2636becdd56ca, type: 3}
       propertyPath: m_Content
       value: 
@@ -56814,7 +56907,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7934195338338838966, guid: 3b4223c6718912b4a8d2636becdd56ca, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934195339895751907, guid: 3b4223c6718912b4a8d2636becdd56ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934195339895751907, guid: 3b4223c6718912b4a8d2636becdd56ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934195339895751907, guid: 3b4223c6718912b4a8d2636becdd56ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 962846304}
+    - target: {fileID: 7934195339895751907, guid: 3b4223c6718912b4a8d2636becdd56ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934195339895751907, guid: 3b4223c6718912b4a8d2636becdd56ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934195339895751907, guid: 3b4223c6718912b4a8d2636becdd56ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934195339895751907, guid: 3b4223c6718912b4a8d2636becdd56ca, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b4223c6718912b4a8d2636becdd56ca, type: 3}

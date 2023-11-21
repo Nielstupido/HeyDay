@@ -32,9 +32,10 @@ public enum JobFields
 }
 
 
-public class JobSystemManager : MonoBehaviour
+public class JobApplicationManager : MonoBehaviour
 {
     [SerializeField] private GameObject jobSystemOverlay;
+    [SerializeField] private GameObject jobPosListOverlay;
     [SerializeField] private Transform availableJobPositionsHolder;
     [SerializeField] private GameObject jobDetailedViewOverlay;
     [SerializeField] private GameObject jobPositionPrefab;
@@ -62,7 +63,7 @@ public class JobSystemManager : MonoBehaviour
     private bool isHalfQuali;
     private List<JobPositions> jobPositionsList = new List<JobPositions>();
 
-    public static JobSystemManager Instance {private set; get;}
+    public static JobApplicationManager Instance {private set; get;}
 
 
     private void Awake()
@@ -81,13 +82,31 @@ public class JobSystemManager : MonoBehaviour
     public void ShowAvailablePositons(Building currentBuilding)
     {
         jobSystemOverlay.SetActive(true);
+        jobPosListOverlay.SetActive(true);
         jobPositionsList = JobPositionsList(currentBuilding.buildingEnumName);
 
         foreach(JobPositions jobPosition in jobPositionsList)
         {
             GameObject newJobPositionObj = Instantiate(jobPositionPrefab, Vector3.zero, Quaternion.identity, availableJobPositionsHolder);
             JobPositionObj newJobPosition = newJobPositionObj.GetComponent<JobPositionObj>();
-            newJobPosition.PrepareJobDets(jobPosition);
+
+            if (jobPosition == Player.Instance.CurrentPlayerJob)
+            {
+                newJobPosition.PrepareJobDets(jobPosition, "Current Job");
+                newJobPositionObj.GetComponent<Button>().enabled = false;
+                
+                Color newCol1 = Color.grey;
+                Color newCol2;
+                if (ColorUtility.TryParseHtmlString("C5C5C5", out newCol2))
+                {
+                    newCol1 = newCol2;
+                }
+                newJobPositionObj.GetComponent<Image>().color = newCol1;
+            }
+            else
+            {
+                newJobPosition.PrepareJobDets(jobPosition);
+            }
         }
     }
 
@@ -106,6 +125,8 @@ public class JobSystemManager : MonoBehaviour
         if (IsPlayerQualified(newJobData))
         {
             qualifiedMsgOverlay.SetActive(true);
+            jobDetailedViewOverlay.SetActive(false);
+            jobPosListOverlay.SetActive(false);
 
             congratulatoryMsg.text = ("Congratulations on applying for the " + newJobData.jobPosName + " position at " + 
                                         BuildingManager.Instance.CurrentSelectedBuilding.buildingStringName + "! Wishing you the best of luck in this exciting opportunity.");

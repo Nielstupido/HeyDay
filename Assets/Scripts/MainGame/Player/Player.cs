@@ -64,6 +64,14 @@ public class Player : MonoBehaviour
     public IDictionary<JobFields, float> PlayerWorkFieldHistory {set{playerWorkFieldHistory = value;} get{return playerWorkFieldHistory;}}
     public float CurrentWorkHours { set{currentWorkHours = value;} get{return currentWorkHours;}}
 
+    //Consts
+    private const float STUDY_ENERGY_CUT_VALUE = 10;
+    private const float STUDY_HAPPINESS_CUT_VALUE = 3;
+    private const float STUDY_HUNGER_CUT_VALUE = 5;
+    private const float WORK_ENERGY_CUT_VALUE = 12;
+    private const float WORK_HAPPINESS_CUT_VALUE = 3;
+    private const float WORK_HUNGER_CUT_VALUE = 7;
+
     //Misc.
     private ResBuilding currentPlayerPlace;
     public ResBuilding CurrentPlayerPlace { set{currentPlayerPlace = value;} get{return currentPlayerPlace;}}
@@ -96,6 +104,7 @@ public class Player : MonoBehaviour
         playerStatsDict.Add(PlayerStats.MONEY, PlayerCash);
         currentPlayerPlace = null;
         isPlayerHasBankAcc = false;
+        PlayerStatsObserver.onPlayerStatChanged += StatsChecker;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
     }
 
@@ -108,43 +117,35 @@ public class Player : MonoBehaviour
         playerStatsDict[PlayerStats.HUNGER] += foodToConsume.hungerBarValue;
 
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
-        StatsChecker();
         playerOwnedGroceries.Remove(foodToConsume);
     }
 
 
-    public void Work(float salary)
+    public void Work(bool isGettingSalary, float workHrsDone, float totalWorkHrs)
     {
-        playerStatsDict[PlayerStats.MONEY] += salary;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
+        if (isGettingSalary)
+        {
+            playerCash += totalWorkHrs * currentPlayerJob.salaryPerHr;
+            playerStatsDict[PlayerStats.MONEY] = playerCash;
+        }
+
+        playerStatsDict[PlayerStats.ENERGY] -= workHrsDone * WORK_ENERGY_CUT_VALUE;
+        playerStatsDict[PlayerStats.HAPPINESS] -= workHrsDone * WORK_HAPPINESS_CUT_VALUE;
+        playerStatsDict[PlayerStats.HUNGER] -= workHrsDone * WORK_HUNGER_CUT_VALUE;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
+        //save game
     }
 
 
     public void Study(float studyDurationValue)
     {
         TimeManager.Instance.AddClockTime(studyDurationValue);
-        playerStatsDict[PlayerStats.ENERGY] -= studyDurationValue * 10;
-        playerStatsDict[PlayerStats.HAPPINESS] -= studyDurationValue * 3;
-        playerStatsDict[PlayerStats.HUNGER] -= studyDurationValue * 5;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HAPPINESS, playerStatsDict);
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HUNGER, playerStatsDict);
+        playerStatsDict[PlayerStats.ENERGY] -= studyDurationValue * STUDY_ENERGY_CUT_VALUE;
+        playerStatsDict[PlayerStats.HAPPINESS] -= studyDurationValue * STUDY_HAPPINESS_CUT_VALUE;
+        playerStatsDict[PlayerStats.HUNGER] -= studyDurationValue * STUDY_HUNGER_CUT_VALUE;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
 
-        StatsChecker();
         UniversityManager.Instance.UpdateStudyHours(studyDurationValue);
-    }
-
-
-    public void UpdateStudyHours(float studyDurationValue)
-    {
-        PlayerStudyHours += studyDurationValue;
-        //studyHours.text = PlayerStudyHours.ToString();
-    }
-
-
-    public void Enroll(string courseName, float courseDuration)
-    {
-        UpdateStudyHours(0);
     }
 
 
@@ -188,7 +189,6 @@ public class Player : MonoBehaviour
         playerCash -= item.itemPrice;
         playerStatsDict[PlayerStats.MONEY] -= item.itemPrice;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
-        StatsChecker();
 
         if (toConsume)
         {
@@ -201,7 +201,6 @@ public class Player : MonoBehaviour
     public void Walk(float energyLevelCutValue)
     {
         TimeManager.Instance.AddClockTime(2);
-        StatsChecker();
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
     }
@@ -210,7 +209,6 @@ public class Player : MonoBehaviour
     public void Ride(float energyLevelCutValue)
     {
         TimeManager.Instance.AddClockTime(0.5f);
-        StatsChecker();
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
     }
@@ -223,11 +221,35 @@ public class Player : MonoBehaviour
     }
 
 
-    public void StatsChecker()
+    public float GetTotalWorkHours()
+    {
+        float totalWorkHours = 0;
+
+        if (playerWorkFieldHistory.Count > 0)
+        {
+            foreach (KeyValuePair<JobFields, float> workHistory in playerWorkFieldHistory)
+            {
+                if (workHistory.Key != currentPlayerJob.workField)
+                {
+                    totalWorkHours += workHistory.Value;
+                }
+            }
+            
+            totalWorkHours += currentWorkHours;
+
+            return totalWorkHours;
+        }
+        else
+        {
+            return currentWorkHours;
+        }
+    }
+
+
+    private void StatsChecker(PlayerStats statName, IDictionary<PlayerStats, float> playerStatsDict)
     {
         if (playerStatsDict[PlayerStats.ENERGY] <= 10 | playerStatsDict[PlayerStats.HAPPINESS] <= 10 | playerStatsDict[PlayerStats.HUNGER] <= 10)//checks if any of the stats reaches lower limit
         {
-            Debug.Log("LUH");
             float sumOfStats = playerStatsDict[PlayerStats.ENERGY] + playerStatsDict[PlayerStats.HAPPINESS] + playerStatsDict[PlayerStats.HUNGER];
 
             if ((sumOfStats*100) / 300 <= 10)
@@ -267,31 +289,6 @@ public class Player : MonoBehaviour
         {
             playerStatsDict[PlayerStats.HUNGER] = 100;
             LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HUNGER);
-        }
-    }
-
-
-    public float GetTotalWorkHours()
-    {
-        float totalWorkHours = 0;
-
-        if (playerWorkFieldHistory.Count > 0)
-        {
-            foreach (KeyValuePair<JobFields, float> workHistory in playerWorkFieldHistory)
-            {
-                if (workHistory.Key != currentPlayerJob.workField)
-                {
-                    totalWorkHours += workHistory.Value;
-                }
-            }
-            
-            totalWorkHours += currentWorkHours;
-
-            return totalWorkHours;
-        }
-        else
-        {
-            return currentWorkHours;
         }
     }
 }

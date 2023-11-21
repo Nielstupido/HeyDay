@@ -354,7 +354,7 @@ MonoBehaviour:
   jobTitleText: {fileID: 6587674324494376795}
   jobReqsText: {fileID: 6587674324871427712}
   jobSalary: {fileID: 6587674324510361973}
-  jobPositionData: {fileID: 0}
+  moreDetsText: {fileID: 6587674325959711840}
 --- !u!1 &6587674324295453487
 GameObject:
   m_ObjectHideFlags: 0
