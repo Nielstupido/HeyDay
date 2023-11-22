@@ -65,12 +65,12 @@ public class Player : MonoBehaviour
     public float CurrentWorkHours { set{currentWorkHours = value;} get{return currentWorkHours;}}
 
     //Consts
-    private const float STUDY_ENERGY_CUT_VALUE = 10;
-    private const float STUDY_HAPPINESS_CUT_VALUE = 3;
-    private const float STUDY_HUNGER_CUT_VALUE = 5;
-    private const float WORK_ENERGY_CUT_VALUE = 12;
-    private const float WORK_HAPPINESS_CUT_VALUE = 3;
-    private const float WORK_HUNGER_CUT_VALUE = 7;
+    private const float StudyEnergyCutValue = 10;
+    private const float StudyHappinessCutValue = 3;
+    private const float StudyHungerCutValue = 5;
+    private const float WorkEnergyCutValue = 10;
+    private const float WorkHappinessCutValue = 10;
+    private const float WorkHungerCutValue = 10;
 
     //Misc.
     private ResBuilding currentPlayerPlace;
@@ -129,9 +129,9 @@ public class Player : MonoBehaviour
             playerStatsDict[PlayerStats.MONEY] = playerCash;
         }
 
-        playerStatsDict[PlayerStats.ENERGY] -= workHrsDone * WORK_ENERGY_CUT_VALUE;
-        playerStatsDict[PlayerStats.HAPPINESS] -= workHrsDone * WORK_HAPPINESS_CUT_VALUE;
-        playerStatsDict[PlayerStats.HUNGER] -= workHrsDone * WORK_HUNGER_CUT_VALUE;
+        playerStatsDict[PlayerStats.ENERGY] -= workHrsDone * WorkEnergyCutValue;
+        playerStatsDict[PlayerStats.HAPPINESS] -= workHrsDone * WorkHappinessCutValue;
+        playerStatsDict[PlayerStats.HUNGER] -= workHrsDone * WorkHungerCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
         //save game
     }
@@ -140,9 +140,9 @@ public class Player : MonoBehaviour
     public void Study(float studyDurationValue)
     {
         TimeManager.Instance.AddClockTime(studyDurationValue);
-        playerStatsDict[PlayerStats.ENERGY] -= studyDurationValue * STUDY_ENERGY_CUT_VALUE;
-        playerStatsDict[PlayerStats.HAPPINESS] -= studyDurationValue * STUDY_HAPPINESS_CUT_VALUE;
-        playerStatsDict[PlayerStats.HUNGER] -= studyDurationValue * STUDY_HUNGER_CUT_VALUE;
+        playerStatsDict[PlayerStats.ENERGY] -= studyDurationValue * StudyEnergyCutValue;
+        playerStatsDict[PlayerStats.HAPPINESS] -= studyDurationValue * StudyHappinessCutValue;
+        playerStatsDict[PlayerStats.HUNGER] -= studyDurationValue * StudyHungerCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
 
         UniversityManager.Instance.UpdateStudyHours(studyDurationValue);
