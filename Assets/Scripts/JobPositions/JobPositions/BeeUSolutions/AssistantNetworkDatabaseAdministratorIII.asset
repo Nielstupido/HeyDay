@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc7bbd351fbdf149acb81d2b7c75426, type: 3}
+  m_Name: AssistantNetworkDatabaseAdministratorIII
+  m_EditorClassIdentifier: 
+  jobPosName: Assistant Network/Database Administrator III
+  jobPosReqs: Enrolled in BS Computer Science/Information Technology +800 WH (Asst.
+    Programmer)
+  establishment: 12
+  workField: 0
+  reqStudyField: 0
+  reqCourse: 2800000029000000
+  reqWorkField: 15
+  reqWorkHrs: 800
+  salaryPerHr: 60
