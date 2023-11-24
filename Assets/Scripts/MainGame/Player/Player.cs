@@ -40,6 +40,16 @@ public class Player : MonoBehaviour
     public float PlayerBankSavings { set{playerBankSavings = value;} get{return playerBankSavings;}}
     public bool IsPlayerHasBankAcc { set{isPlayerHasBankAcc = value;} get{return isPlayerHasBankAcc;}}
 
+    //Budget tracking
+    private float playerLvlBillExpenses;
+    private float playerLvlSavings;
+    private float playerLvlConsumablesExpenses;
+    private float playerLvlEmergencyFunds;
+    public float PlayerLvlBillExpenses { set{playerLvlBillExpenses = value;} get{return playerLvlBillExpenses;}}
+    public float PlayerLvlSavings { set{playerLvlSavings = value;} get{return playerLvlSavings;}}
+    public float PlayerLvlConsumablesExpenses { set{playerLvlConsumablesExpenses = value;} get{return playerLvlConsumablesExpenses;}}
+    public float PlayerLvlEmergencyFunds { set{playerLvlEmergencyFunds = value;} get{return playerLvlEmergencyFunds;}}
+
     //Studies
     private UniversityCourses courseEnrolled;
     private StudyFields studyFieldEnrolled;
@@ -218,6 +228,12 @@ public class Player : MonoBehaviour
     {
         playerStatsDict[PlayerStats.MONEY] -= amount;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
+    }
+
+
+    public float GetLvlTotalExpenses()
+    {
+        return playerLvlBillExpenses + playerLvlSavings + playerLvlConsumablesExpenses + playerLvlEmergencyFunds;
     }
 
 

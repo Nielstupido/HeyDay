@@ -15,7 +15,6 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject enterBtn;
     [SerializeField] private GameObject closedBtn;
     [SerializeField] private Transform buttonsHolder;
-    [SerializeField] private Player player;
     [SerializeField] private GameObject btnPrefab;
     [SerializeField] private GameObject smallStatsOverlay;
     [SerializeField] private GameObject camera1;
@@ -60,7 +59,7 @@ public class BuildingManager : MonoBehaviour
 
     public void Walk()
     {
-        player.Walk(10f);
+        Player.Instance.Walk(10f);
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
@@ -71,7 +70,7 @@ public class BuildingManager : MonoBehaviour
 
     public void Ride()
     {
-        player.Ride(5f);
+        Player.Instance.Ride(5f);
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);

@@ -80,6 +80,13 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         LoadAllMissions();
+        onFinishedPlayerAction += CheckMissionsState;
+    }
+
+
+    private void OnDestroy()
+    {
+        onFinishedPlayerAction -= CheckMissionsState;
     }
 
 
@@ -134,5 +141,24 @@ public class LevelManager : MonoBehaviour
             newMission.MissionCheckBox = newMissionObj.transform.GetChild(0).GetComponent<Image>();
             newMission.MissionDetsText = newMissionObj.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         }
+    }
+
+
+    private void CheckMissionsState(
+        MissionType actionMissionType, 
+        float actionAddedNumber = 0, 
+        Buildings interactedBuilding = Buildings.NONE, 
+        PlayerStats affectedPlayerStats = PlayerStats.NONE,
+        ItemType interactedItemType = ItemType.NA,
+        APPS interactedApp = APPS.NONE,
+        PlayerStats interactedPlayerStats = PlayerStats.NONE)
+    {
+
+    }
+
+
+    private void OnLevelFinished()
+    {
+        BudgetSystem.Instance.ShowLevelBudgetResult();
     }
 }

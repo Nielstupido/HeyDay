@@ -17,7 +17,7 @@ public class JobProfileView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerSalaryPerHr;
     [SerializeField] private TextMeshProUGUI workHrsText;
     private float workHrs;
-    private Player Player;
+    private Player currentPlayer;
 
 
     public void SetupJobProfileView()
@@ -25,16 +25,16 @@ public class JobProfileView : MonoBehaviour
         jobSystemOverlay.SetActive(true);
         this.gameObject.SetActive(true);
 
-        Player = Player.Instance;
+        currentPlayer = Player.Instance;
 
-        playerNameText.text = Player.PlayerName;
-        playerPositionText.text = Player.CurrentPlayerJob.jobPosName;
-        playerEducationText.text = GameManager.Instance.EnumStringParser(Player.PlayerEnrolledCourse);
-        playerCompanyText.text = Player.CurrentPlayerJob.establishment.ToString();
-        playerTotalWHtext.text = Player.GetTotalWorkHours().ToString() + "hrs";
-        playerCurrentWHLabel.text = "Current Work Hours [" + GameManager.Instance.EnumStringParser(Player.CurrentPlayerJob.workField) +"]";
-        playerCurrentWHtext.text = Player.CurrentWorkHours.ToString() + "hrs";
-        playerCurrentWHtext.text = "₱" + Player.CurrentPlayerJob.salaryPerHr.ToString();
+        playerNameText.text = currentPlayer.PlayerName;
+        playerPositionText.text = currentPlayer.CurrentPlayerJob.jobPosName;
+        playerEducationText.text = GameManager.Instance.EnumStringParser(currentPlayer.PlayerEnrolledCourse);
+        playerCompanyText.text = currentPlayer.CurrentPlayerJob.establishment.ToString();
+        playerTotalWHtext.text = currentPlayer.GetTotalWorkHours().ToString() + "hrs";
+        playerCurrentWHLabel.text = "Current Work Hours [" + GameManager.Instance.EnumStringParser(currentPlayer.CurrentPlayerJob.workField) +"]";
+        playerCurrentWHtext.text = currentPlayer.CurrentWorkHours.ToString() + "hrs";
+        playerCurrentWHtext.text = "₱" + currentPlayer.CurrentPlayerJob.salaryPerHr.ToString();
     }
 
 

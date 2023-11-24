@@ -47,13 +47,14 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (BuildingManager.Instance.BuildingSelectOverlay.activeSelf && BuildingManager.Instance.CurrentSelectedBuilding == eventData.selectedObject.GetComponent<Building>())
+        Building currentSelectedBuilding = eventData.selectedObject.GetComponentInParent<Building>();
+
+        if (BuildingManager.Instance.BuildingSelectOverlay.activeSelf && BuildingManager.Instance.CurrentSelectedBuilding == currentSelectedBuilding)
         {
             AnimationManager.ScaleObj(BuildingManager.Instance.BuildingSelectOverlay, scaleDown, 0.4f, true, LeanTweenType.easeInOutBack);
         }
         else
         {
-            Building currentSelectedBuilding = eventData.selectedObject.GetComponent<Building>();
             BuildingManager.Instance.BuildingNameText = currentSelectedBuilding.buildingStringName;
             BuildingManager.Instance.CurrentSelectedBuilding = currentSelectedBuilding;
             RefreshSelectOverlayUI();

@@ -19,7 +19,6 @@ public class PlayerPhone : MonoBehaviour
     private float electricityBillRate = 250; //Temporary variable
     private float groceryPrice = 200; //Temporary variable
     
-    [SerializeField] private Player player;
     [SerializeField] private GameObject goalTrackerOverlay;
     [SerializeField] private GameObject financeTrackerOverlay;
     [SerializeField] private GameObject phoneBookOverlay;
@@ -73,7 +72,7 @@ public class PlayerPhone : MonoBehaviour
     public void BuyGrocery()
     {
         groceryBar.value += 10;
-        player.BuyGrocery(200f);
+        Player.Instance.BuyGrocery(200f);
     }
 
 

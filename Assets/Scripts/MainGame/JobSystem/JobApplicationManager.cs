@@ -59,7 +59,7 @@ public class JobApplicationManager : MonoBehaviour
     [SerializeField] private List<JobPositions> factoryJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> callCenterJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> electricCompanyJobPositions = new List<JobPositions>();
-    private Player Player;
+    private Player currentPlayer;
     private bool isHalfQuali;
     private List<JobPositions> jobPositionsList = new List<JobPositions>();
 
@@ -120,7 +120,7 @@ public class JobApplicationManager : MonoBehaviour
 
     public void ApplyJob(JobPositions newJobData)
     {
-        Player = Player.Instance;
+        currentPlayer = Player.Instance;
 
         if (IsPlayerQualified(newJobData))
         {
@@ -131,31 +131,31 @@ public class JobApplicationManager : MonoBehaviour
             congratulatoryMsg.text = ("Congratulations on applying for the " + newJobData.jobPosName + " position at " + 
                                         BuildingManager.Instance.CurrentSelectedBuilding.buildingStringName + "! Wishing you the best of luck in this exciting opportunity.");
 
-            if (Player.CurrentPlayerJob != null)
+            if (currentPlayer.CurrentPlayerJob != null)
             {
-                if (Player.CurrentPlayerJob.workField != newJobData.workField)
+                if (currentPlayer.CurrentPlayerJob.workField != newJobData.workField)
                 {
-                    if (Player.PlayerWorkFieldHistory.ContainsKey(Player.CurrentPlayerJob.workField))
+                    if (currentPlayer.PlayerWorkFieldHistory.ContainsKey(currentPlayer.CurrentPlayerJob.workField))
                     {
-                        Player.PlayerWorkFieldHistory[Player.CurrentPlayerJob.workField] = Player.CurrentWorkHours;
+                        currentPlayer.PlayerWorkFieldHistory[currentPlayer.CurrentPlayerJob.workField] = currentPlayer.CurrentWorkHours;
                     }
                     else
                     {
-                        Player.PlayerWorkFieldHistory.Add(Player.CurrentPlayerJob.workField, Player.CurrentWorkHours);
+                        currentPlayer.PlayerWorkFieldHistory.Add(currentPlayer.CurrentPlayerJob.workField, currentPlayer.CurrentWorkHours);
                     }
 
-                    if (Player.PlayerWorkFieldHistory.ContainsKey(newJobData.workField))
+                    if (currentPlayer.PlayerWorkFieldHistory.ContainsKey(newJobData.workField))
                     {
-                        Player.CurrentWorkHours = Player.PlayerWorkFieldHistory[newJobData.workField];
+                        currentPlayer.CurrentWorkHours = currentPlayer.PlayerWorkFieldHistory[newJobData.workField];
                     }
                     else
                     {
-                        Player.CurrentWorkHours = 0;
+                        currentPlayer.CurrentWorkHours = 0;
                     }
                 }
             }
 
-            Player.CurrentPlayerJob = newJobData;
+            currentPlayer.CurrentPlayerJob = newJobData;
             //game save
         }
         else
@@ -167,19 +167,19 @@ public class JobApplicationManager : MonoBehaviour
 
     private bool IsPlayerQualified(JobPositions jobData)
     {
-        Player = Player.Instance;
+        currentPlayer = Player.Instance;
         isHalfQuali = false;
 
         if (jobData.reqCourse.Count > 0)
         {
-            if (Player.PlayerEnrolledCourse == UniversityCourses.NONE && jobData.reqStudyField == StudyFields.NONE)
+            if (currentPlayer.PlayerEnrolledCourse == UniversityCourses.NONE && jobData.reqStudyField == StudyFields.NONE)
             {
                 return false; //if player is not yet enrolled to any course
             }
 
             if (!jobData.reqCourse.Contains(UniversityCourses.ANY))
             {
-                if (!jobData.reqCourse.Contains(Player.PlayerEnrolledCourse) && jobData.reqStudyField == StudyFields.NONE)
+                if (!jobData.reqCourse.Contains(currentPlayer.PlayerEnrolledCourse) && jobData.reqStudyField == StudyFields.NONE)
                 {
                     return false; //if player's course doesn't meet the job's required course 
                 }
@@ -189,7 +189,7 @@ public class JobApplicationManager : MonoBehaviour
 
         if (!isHalfQuali && jobData.reqStudyField != StudyFields.NONE)
         {
-            if (jobData.reqStudyField != Player.PlayerEnrolledStudyField)
+            if (jobData.reqStudyField != currentPlayer.PlayerEnrolledStudyField)
             {
                 return false; //if player's study field doesn't meet the job's required study field 
             }
@@ -199,18 +199,18 @@ public class JobApplicationManager : MonoBehaviour
         {
             if (jobData.reqWorkField != JobFields.NONE)
             {
-                if (Player.CurrentPlayerJob.workField == jobData.reqWorkField)
+                if (currentPlayer.CurrentPlayerJob.workField == jobData.reqWorkField)
                 {
-                    if (jobData.reqWorkHrs > Player.CurrentWorkHours) 
+                    if (jobData.reqWorkHrs > currentPlayer.CurrentWorkHours) 
                     {
                         return false; //if player doesn't have "enough" experience of the required work field
                     }
                 }
                 else
                 {
-                    if (Player.PlayerWorkFieldHistory.ContainsKey(jobData.reqWorkField))
+                    if (currentPlayer.PlayerWorkFieldHistory.ContainsKey(jobData.reqWorkField))
                     {
-                        if (jobData.reqWorkHrs > Player.PlayerWorkFieldHistory[jobData.reqWorkField])
+                        if (jobData.reqWorkHrs > currentPlayer.PlayerWorkFieldHistory[jobData.reqWorkField])
                         {
                             return false; //if player doesn't have "enough" experience of the required work field
                         }
@@ -223,7 +223,7 @@ public class JobApplicationManager : MonoBehaviour
             }
             else
             {
-                if (jobData.reqWorkHrs > Player.GetTotalWorkHours())
+                if (jobData.reqWorkHrs > currentPlayer.GetTotalWorkHours())
                 {
                     return false;
                 }

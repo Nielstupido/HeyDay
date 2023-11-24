@@ -1,0 +1,11 @@
+Model Information:
+* title:	Football Field
+* source:	https://sketchfab.com/3d-models/football-field-60331aee1f2e4c7fb545c464855bb378
+* author:	Gazi Akviran (https://sketchfab.com/akviran)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Football Field" (https://sketchfab.com/3d-models/football-field-60331aee1f2e4c7fb545c464855bb378) by Gazi Akviran (https://sketchfab.com/akviran) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
