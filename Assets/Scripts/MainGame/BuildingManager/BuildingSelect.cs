@@ -11,10 +11,17 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
     private void Start()
     {
         BuildingManager.Instance.BuildingSelectOverlay.transform.localScale = scaleDown;
+        PlayerActionObservers.onPlayerTraveled += RefreshSelectOverlayUI;
+    }
+
+
+    private void OnDestroy()
+    {
+        PlayerActionObservers.onPlayerTraveled -= RefreshSelectOverlayUI;
     }
     
 
-    public void RefreshSelectOverlayUI()
+    public void RefreshSelectOverlayUI(ModeOfTravels modeOfTravel = ModeOfTravels.NA)
     {
         if (PlayerTravelManager.Instance.CurrentVisitedBuilding != null)
         {

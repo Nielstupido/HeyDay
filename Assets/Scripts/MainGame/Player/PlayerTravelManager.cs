@@ -2,12 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum ModeOfTravels
+{
+    NA,
+    WALK,
+    COMMUTE,
+    RIDE
+}
+
+
+public class PlayerActionObservers : MonoBehaviour
+{
+    public delegate void OnPlayerTraveled(ModeOfTravels modeOfTravel);
+    public static OnPlayerTraveled onPlayerTraveled;
+}
+
+
 public class PlayerTravelManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerModel;
     [SerializeField] private Player3dController player3DController;
-    [SerializeField] private BuildingSelect buildingSelect;
     private Building currentVisitedBuilding;
+    private ModeOfTravels currentModeOfTravel;
     public Building CurrentVisitedBuilding { get{return currentVisitedBuilding;}}
     public static PlayerTravelManager Instance { get; private set; }
 
@@ -25,8 +42,9 @@ public class PlayerTravelManager : MonoBehaviour
     }
 
 
-    public void PlayerTravel(Building selectedBuilding)
+    public void PlayerTravel(Building selectedBuilding, ModeOfTravels modeOfTravel)
     {
+        currentModeOfTravel = modeOfTravel;
         StartCoroutine(StartTravelingOverlay(2f, selectedBuilding));
     }
 
@@ -36,7 +54,7 @@ public class PlayerTravelManager : MonoBehaviour
         player3DController.playerNavMesh.isStopped = true;
         playerModel.gameObject.transform.position = selectedBuilding.transform.GetChild(selectedBuilding.transform.childCount - 1).transform.position;
         currentVisitedBuilding = selectedBuilding;
-        buildingSelect.RefreshSelectOverlayUI();
+        PlayerActionObservers.onPlayerTraveled(currentModeOfTravel);
     }
 
 

@@ -11,7 +11,6 @@ public class AutoDealer : Building
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 16f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.SHOP};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -28,7 +27,7 @@ public class AutoDealer : Building
             switch (clickedBtn)
             {
                 case Buttons.SHOP:
-                    Debug.Log("money deposited");
+                    BuildingManager.Instance.OpenCarCatalogueOverlay();
                     break;
                 case Buttons.APPLY:
                     JobManager.Instance.Apply(this);
@@ -37,7 +36,7 @@ public class AutoDealer : Building
                     JobManager.Instance.Work();
                     break;
                 case Buttons.QUIT:
-                    Debug.Log("money deposited");
+                    JobManager.Instance.QuitWork();
                     break;
             }
     }
@@ -45,14 +44,12 @@ public class AutoDealer : Building
 
     public override void CheckButtons()
     {
+        this.actionButtons = new List<Buttons>(){Buttons.SHOP, Buttons.APPLY};
+
         if (this.currentlyHired)
         {
             this.actionButtons.Add(Buttons.WORK);
             this.actionButtons.Add(Buttons.QUIT);   
-        }
-        else
-        {
-            this.actionButtons.Add(Buttons.APPLY);   
         }
     }
 }

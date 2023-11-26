@@ -11,7 +11,6 @@ public class Cinema : Building
         this.buildingOpeningTime = 13f;
         this.buildingClosingTime = 23f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.WATCHMOVIE};     
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -36,5 +35,6 @@ public class Cinema : Building
 
     public override void CheckButtons()
     {
+        this.actionButtons = new List<Buttons>(){Buttons.WATCHMOVIE};     
     }
 }

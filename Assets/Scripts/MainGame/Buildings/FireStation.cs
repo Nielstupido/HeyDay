@@ -11,7 +11,6 @@ public class FireStation : Building
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.APPLY};     
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -34,7 +33,7 @@ public class FireStation : Building
                     JobManager.Instance.Work();
                     break;
                 case Buttons.QUIT:
-                    Debug.Log("money deposited");
+                    JobManager.Instance.QuitWork();
                     break;
             }
     }
@@ -42,9 +41,12 @@ public class FireStation : Building
 
     public override void CheckButtons()
     {
+        this.actionButtons = new List<Buttons>(){Buttons.APPLY};     
+
         if (this.currentlyHired)
         {
-            this.actionButtons = new List<Buttons>(){Buttons.WORK, Buttons.QUIT};     
+            this.actionButtons.Add(Buttons.WORK);
+            this.actionButtons.Add(Buttons.QUIT);   
         }
     }
 }

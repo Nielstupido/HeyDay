@@ -11,7 +11,6 @@ public class NightClub : Building
         this.buildingOpeningTime = 20f;
         this.buildingClosingTime = 5f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.PARTY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -36,5 +35,6 @@ public class NightClub : Building
 
     public override void CheckButtons()
     {
+        this.actionButtons = new List<Buttons>(){Buttons.PARTY};
     }
 }

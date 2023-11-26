@@ -6,6 +6,7 @@ using TMPro;
 
 public class CarCatalogueManager : MonoBehaviour
 {
+    [SerializeField] private GameObject carCatalogueOverlay;
     [SerializeField] private GameObject vehicleListOverlay;
     [SerializeField] private GameObject buyCarPopUp;
     [SerializeField] private Button buyBtn;
@@ -24,6 +25,12 @@ public class CarCatalogueManager : MonoBehaviour
     private void Start()
     {
         buyBtn.onClick.AddListener( () => {BuyCar();} );
+    }
+
+
+    public void ShowCarCatalogue()
+    {
+        carCatalogueOverlay.SetActive(true);
     }
 
     

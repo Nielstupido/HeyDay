@@ -27,16 +27,6 @@ public class JobDetailedViewObj : MonoBehaviour
 
     public void Apply()
     {
-        StartCoroutine(JobAppProcessingAnim(2f));
         JobApplicationManager.Instance.ApplyJob(jobPositionData);
-    }
-
-
-    private IEnumerator JobAppProcessingAnim(float waitingTime)
-    {
-        AnimOverlayManager.Instance.StartAnim(Animations.JOBAPPLICATIONPROCESSING);
-        yield return new WaitForSeconds(waitingTime);
-        AnimOverlayManager.Instance.StopAnim();
-        yield return null;
     }
 }

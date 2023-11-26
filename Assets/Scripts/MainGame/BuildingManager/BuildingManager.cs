@@ -21,6 +21,9 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject camera2;
     [SerializeField] private GameObject buildingInteriorOverlay;
     [SerializeField] private PlayerTravelManager playerTravelManager;
+    [SerializeField] private CarCatalogueManager carCatalogueManager;
+    [SerializeField] private SwitchMenuItem switchMenuItem;
+    [SerializeField] private MallManager mallManager;
     private Building currentSelectedBuilding;
     public delegate void OnBuildingBtnClicked(Buttons clickedBtn);
     public OnBuildingBtnClicked onBuildingBtnClicked;
@@ -53,7 +56,6 @@ public class BuildingManager : MonoBehaviour
         camera2.SetActive(false);
         enterBtn.GetComponent<Button>().onClick.AddListener( () => { EnterBuilding(currentSelectedBuilding); } );
         buildingSelectOverlay.SetActive(false);
-        Debug.Log(currentSelectedBuilding);
     }
 
 
@@ -63,7 +65,7 @@ public class BuildingManager : MonoBehaviour
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
-        playerTravelManager.PlayerTravel(currentSelectedBuilding);
+        playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.WALK);
         LevelManager.onFinishedPlayerAction(MissionType.WALK);
     }
 
@@ -74,14 +76,15 @@ public class BuildingManager : MonoBehaviour
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
-        playerTravelManager.PlayerTravel(currentSelectedBuilding);
+        playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.RIDE);
         LevelManager.onFinishedPlayerAction(MissionType.COMMUTE);
     }
 
 
     public void EnterBuilding(Building selectedBuilding)
     {
-        smallStatsOverlay.SetActive(true);
+        GameUiController.onScreenOverlayChanged(UIactions.SHOW);
+
         if (selectedBuilding.buildingEnumName == Buildings.RESIDENTIAL)
         {
             EnterResidentialArea();
@@ -98,27 +101,34 @@ public class BuildingManager : MonoBehaviour
 
     public void ExitBuilding()
     {
-        for (var i = buttonsHolder.childCount - 1; i >= 0; i--)
-        {
-            Object.Destroy(buttonsHolder.GetChild(i).gameObject);
-        }
-        walkBtn.SetActive(true);
-        rideBtn.SetActive(true);
-        enterBtn.SetActive(false);
+        RemoveBuildingActionBtns();
+        currentSelectedBuilding.actionButtons.Clear();
         smallStatsOverlay.SetActive(false);
         buildingInteriorOverlay.SetActive(false);
+        GameUiController.onScreenOverlayChanged(UIactions.HIDE);
     }
 
 
-    private void PrepareButtons(Building selectedBuilding)
+    public void PrepareButtons(Building selectedBuilding)
     {
+        buildingInteriorOverlay.GetComponent<Image>().sprite = selectedBuilding.buildingBgImage;
         selectedBuilding.CheckButtons();
+        RemoveBuildingActionBtns();
         
         foreach(Buttons btn in selectedBuilding.actionButtons)
         {
             GameObject newBtn = Instantiate(btnPrefab, Vector3.zero, Quaternion.identity, buttonsHolder);
             newBtn.GetComponent<Image>().sprite = buttonImages[((int)btn)];
             newBtn.GetComponent<Button>().onClick.AddListener( () => {onBuildingBtnClicked(btn);} );
+        }
+    }
+
+
+    private void RemoveBuildingActionBtns()
+    {
+        for (var i = buttonsHolder.childCount - 1; i >= 0; i--)
+        {
+            Object.Destroy(buttonsHolder.GetChild(i).gameObject);
         }
     }
 
@@ -136,5 +146,23 @@ public class BuildingManager : MonoBehaviour
         camera1.SetActive(true);
         smallStatsOverlay.SetActive(false);
         camera2.SetActive(false);
+    }
+
+
+    public void OpenCarCatalogueOverlay()
+    {
+        carCatalogueManager.ShowCarCatalogue();
+    }
+
+
+    public void OpenConsumablesOverlay()
+    {
+        switchMenuItem.ShowConsumablesMenu();
+    }
+
+
+    public void OpenMallOverlay()
+    {
+        mallManager.ShowMallOverlay();
     }
 }

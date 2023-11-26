@@ -41,10 +41,15 @@ public class JobProfileView : MonoBehaviour
     public void StartWorkShift()
     {
         workHrs = float.Parse(workHrsText.text);
-        StartCoroutine(WorkingAnim(workHrs));
         TimeManager.Instance.AddClockTime(workHrs);
+        StartCoroutine(WorkingAnim(workHrs));
+    }
+
+
+    private void WorkShiftDone()
+    {
         LevelManager.onFinishedPlayerAction(MissionType.WORKHR, workHrs);
-        JobManager.Instance.WorkShiftFinished(workHrs);
+        JobManager.Instance.WorkShiftFinished(workHrs, this.gameObject, jobSystemOverlay);
     }
 
 
@@ -52,9 +57,8 @@ public class JobProfileView : MonoBehaviour
     {
         AnimOverlayManager.Instance.StartAnim(Animations.WORKING);
         yield return new WaitForSeconds(waitingTime);
-        this.gameObject.SetActive(false);
-        jobSystemOverlay.SetActive(false);
         AnimOverlayManager.Instance.StopAnim();
+        WorkShiftDone();
         yield return null;
     }
 
@@ -62,23 +66,29 @@ public class JobProfileView : MonoBehaviour
     public void Resign()
     {
         resignationOverlay.SetActive(true);
+        jobSystemOverlay.SetActive(true);
     }
 
 
     public void ConfirmResign()
     {
-        StartCoroutine(ResigningAnim(workHrs));
-        JobManager.Instance.Resign();
+        StartCoroutine(ResigningAnim(2f));
     }
 
+
+    private void ProceedResignation()
+    {
+        JobManager.Instance.ArrangeResignation(this.gameObject, jobSystemOverlay);
+    }
+    
 
     private IEnumerator ResigningAnim(float waitingTime)
     {
         AnimOverlayManager.Instance.StartAnim(Animations.RESIGNING);
         yield return new WaitForSeconds(waitingTime);
         resignationOverlay.SetActive(false);
-        jobSystemOverlay.SetActive(false);
         AnimOverlayManager.Instance.StopAnim();
+        ProceedResignation();
         yield return null;
     }
 

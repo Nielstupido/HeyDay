@@ -75,6 +75,8 @@ public enum UniversityCourses
 
 public class UniversityManager : MonoBehaviour
 {
+    [SerializeField] private GameObject universitySystemOverlay;
+
     [SerializeField] private GameObject universityOverlay;
     [SerializeField] private TextMeshProUGUI course;
     [SerializeField] private TextMeshProUGUI duration;

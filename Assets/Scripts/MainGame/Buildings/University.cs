@@ -11,7 +11,6 @@ public class University : Building
         this.buildingOpeningTime = 7f;
         this.buildingClosingTime = 17f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.APPLY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -34,7 +33,7 @@ public class University : Building
                     JobManager.Instance.Work();
                     break;
                 case Buttons.QUIT:
-                    Debug.Log("money deposited");
+                    JobManager.Instance.QuitWork();
                     break;
                 case Buttons.STUDY:
                     UniversityManager.Instance.StudyPromptOverlay.SetActive(true);
@@ -48,10 +47,7 @@ public class University : Building
 
     public override void CheckButtons()
     {
-        if (this.currentlyHired)
-        {
-            this.actionButtons = new List<Buttons>(){Buttons.WORK, Buttons.QUIT};     
-        }
+        this.actionButtons = new List<Buttons>(){Buttons.APPLY};
 
         if (Player.Instance.PlayerEnrolledCourse == UniversityCourses.NONE)
         {
@@ -60,6 +56,12 @@ public class University : Building
         else
         {
             this.actionButtons.Add(Buttons.STUDY);
+        }
+
+        if (this.currentlyHired)
+        {
+            this.actionButtons.Add(Buttons.WORK);
+            this.actionButtons.Add(Buttons.QUIT);  
         }
     }
 }

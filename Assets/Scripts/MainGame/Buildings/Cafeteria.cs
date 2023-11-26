@@ -11,7 +11,6 @@ public class Cafeteria : Building
         this.buildingOpeningTime = 6f;
         this.buildingClosingTime = 20f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.BUY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -28,7 +27,7 @@ public class Cafeteria : Building
             switch (clickedBtn)
             {
                 case Buttons.BUY:
-                    Debug.Log("money deposited");
+                    BuildingManager.Instance.OpenConsumablesOverlay();
                     break;
                 case Buttons.APPLY:
                     JobManager.Instance.Apply(this);
@@ -37,7 +36,7 @@ public class Cafeteria : Building
                     JobManager.Instance.Work();
                     break;
                 case Buttons.QUIT:
-                    Debug.Log("money deposited");
+                    JobManager.Instance.QuitWork();
                     break;
             }
     }
@@ -45,14 +44,12 @@ public class Cafeteria : Building
 
     public override void CheckButtons()
     {
+        this.actionButtons = new List<Buttons>(){Buttons.BUY, Buttons.APPLY};
+
         if (this.currentlyHired)
         {
             this.actionButtons.Add(Buttons.WORK);
             this.actionButtons.Add(Buttons.QUIT);   
-        }
-        else
-        {
-            this.actionButtons.Add(Buttons.APPLY);   
         }
     }
 }

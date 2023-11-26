@@ -12,6 +12,7 @@ public abstract class ResBuilding : MonoBehaviour
     [HideInInspector]public float monthlyWaterCharge;
     [HideInInspector]public float dailyAdtnlHappiness;
     [HideInInspector]public float adtnlEnergyForSleep;
+    public Sprite apartmentBgImage;
 
 
     public virtual void Sleep()

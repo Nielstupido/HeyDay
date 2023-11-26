@@ -83,29 +83,33 @@ public class JobApplicationManager : MonoBehaviour
     {
         jobSystemOverlay.SetActive(true);
         jobPosListOverlay.SetActive(true);
-        jobPositionsList = JobPositionsList(currentBuilding.buildingEnumName);
 
-        foreach(JobPositions jobPosition in jobPositionsList)
+        if (availableJobPositionsHolder.childCount == 0)
         {
-            GameObject newJobPositionObj = Instantiate(jobPositionPrefab, Vector3.zero, Quaternion.identity, availableJobPositionsHolder);
-            JobPositionObj newJobPosition = newJobPositionObj.GetComponent<JobPositionObj>();
+            jobPositionsList = JobPositionsList(currentBuilding.buildingEnumName);
 
-            if (jobPosition == Player.Instance.CurrentPlayerJob)
+            foreach(JobPositions jobPosition in jobPositionsList)
             {
-                newJobPosition.PrepareJobDets(jobPosition, "Current Job");
-                newJobPositionObj.GetComponent<Button>().enabled = false;
-                
-                Color newCol1 = Color.grey;
-                Color newCol2;
-                if (ColorUtility.TryParseHtmlString("C5C5C5", out newCol2))
+                GameObject newJobPositionObj = Instantiate(jobPositionPrefab, Vector3.zero, Quaternion.identity, availableJobPositionsHolder);
+                JobPositionObj newJobPosition = newJobPositionObj.GetComponent<JobPositionObj>();
+
+                if (jobPosition == Player.Instance.CurrentPlayerJob)
                 {
-                    newCol1 = newCol2;
+                    newJobPosition.PrepareJobDets(jobPosition, "Current Job");
+                    newJobPositionObj.GetComponent<Button>().enabled = false;
+                    
+                    Color newCol1 = Color.grey;
+                    Color newCol2;
+                    if (ColorUtility.TryParseHtmlString("C5C5C5", out newCol2))
+                    {
+                        newCol1 = newCol2;
+                    }
+                    newJobPositionObj.GetComponent<Image>().color = newCol1;
                 }
-                newJobPositionObj.GetComponent<Image>().color = newCol1;
-            }
-            else
-            {
-                newJobPosition.PrepareJobDets(jobPosition);
+                else
+                {
+                    newJobPosition.PrepareJobDets(jobPosition);
+                }
             }
         }
     }
@@ -120,8 +124,12 @@ public class JobApplicationManager : MonoBehaviour
 
     public void ApplyJob(JobPositions newJobData)
     {
-        currentPlayer = Player.Instance;
+        StartCoroutine(JobAppProcessingAnim(2f, newJobData));
+    }
 
+
+    private void JobApplicationProcessDone(JobPositions newJobData)
+    {
         if (IsPlayerQualified(newJobData))
         {
             qualifiedMsgOverlay.SetActive(true);
@@ -131,37 +139,28 @@ public class JobApplicationManager : MonoBehaviour
             congratulatoryMsg.text = ("Congratulations on applying for the " + newJobData.jobPosName + " position at " + 
                                         BuildingManager.Instance.CurrentSelectedBuilding.buildingStringName + "! Wishing you the best of luck in this exciting opportunity.");
 
-            if (currentPlayer.CurrentPlayerJob != null)
+            for (int i = 0; i < availableJobPositionsHolder.childCount; i++)
             {
-                if (currentPlayer.CurrentPlayerJob.workField != newJobData.workField)
-                {
-                    if (currentPlayer.PlayerWorkFieldHistory.ContainsKey(currentPlayer.CurrentPlayerJob.workField))
-                    {
-                        currentPlayer.PlayerWorkFieldHistory[currentPlayer.CurrentPlayerJob.workField] = currentPlayer.CurrentWorkHours;
-                    }
-                    else
-                    {
-                        currentPlayer.PlayerWorkFieldHistory.Add(currentPlayer.CurrentPlayerJob.workField, currentPlayer.CurrentWorkHours);
-                    }
-
-                    if (currentPlayer.PlayerWorkFieldHistory.ContainsKey(newJobData.workField))
-                    {
-                        currentPlayer.CurrentWorkHours = currentPlayer.PlayerWorkFieldHistory[newJobData.workField];
-                    }
-                    else
-                    {
-                        currentPlayer.CurrentWorkHours = 0;
-                    }
-                }
+                Object.Destroy(availableJobPositionsHolder.GetChild(i).gameObject);
             }
 
-            currentPlayer.CurrentPlayerJob = newJobData;
+            JobManager.Instance.ArrangeJobAcceptance(newJobData);
             //game save
         }
         else
         {
             PromptManager.Instance.ShowPrompt(notQualifiedPrompt);
         }
+    }
+
+
+    private IEnumerator JobAppProcessingAnim(float waitingTime, JobPositions newJobData)
+    {
+        AnimOverlayManager.Instance.StartAnim(Animations.JOBAPPLICATIONPROCESSING);
+        yield return new WaitForSeconds(waitingTime);
+        AnimOverlayManager.Instance.StopAnim();
+        JobApplicationProcessDone(newJobData);
+        yield return null;
     }
 
 

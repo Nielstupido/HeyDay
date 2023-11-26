@@ -6,6 +6,7 @@ using TMPro;
 
 public class SwitchMenuItem : MonoBehaviour
 {
+   [SerializeField] private GameObject menuOverlay;
    [SerializeField] private TextMeshProUGUI foodName;
    [SerializeField] private TextMeshProUGUI priceValue;
    [SerializeField] private Image targetImage;
@@ -14,12 +15,13 @@ public class SwitchMenuItem : MonoBehaviour
    [SerializeField] private List<Items> convenienceStoreFoodList = new List<Items>();
    [SerializeField] private List<Items> foodxPressFoodList = new List<Items>();
    private List<Items> foodList = new List<Items>();
-   private Buildings selectedBuilding = Buildings.CAFE; //temporary
    private int currentItem = 0;
 
 
-   public void Start()
+   public void ShowConsumablesMenu()
    {
+      menuOverlay.SetActive(true);
+      
       AssignMenu();
       DisplayItem();
    }  
@@ -51,12 +53,11 @@ public class SwitchMenuItem : MonoBehaviour
    }
 
 
-   public void AssignMenu()
+   private void AssignMenu()
    {
       currentItem = 0;
 
-      switch (selectedBuilding)
-      // switch (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName)
+      switch (BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName)
       {
          case Buildings.CAFE:
             foodList = cafeFoodList;
@@ -74,7 +75,7 @@ public class SwitchMenuItem : MonoBehaviour
    }
 
 
-   public void DisplayItem()
+   private void DisplayItem()
    {
       foodName.text = foodList[currentItem].itemName;
       priceValue.text = "₱" + foodList[currentItem].itemPrice.ToString();
@@ -82,7 +83,7 @@ public class SwitchMenuItem : MonoBehaviour
    }
 
 
-   public void ItemBought()
+   public void BuyItem()
    {
       Player.Instance.Purchase(true, foodList[currentItem], 0.3f);
    }

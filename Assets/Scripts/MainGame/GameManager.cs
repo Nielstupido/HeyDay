@@ -46,10 +46,24 @@ public enum ItemType
     SERVICE
 }
 
+public enum UIactions
+{
+    SHOW,
+    HIDE
+}
+
+
+public class GameUiController : MonoBehaviour
+{
+    public delegate void OnScreenOverlayChanged(UIactions uIaction);
+    public static OnScreenOverlayChanged onScreenOverlayChanged;
+}
+
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject bottomOverlay;
+    [SerializeField] private GameObject defaultBottomOverlay;
+    [SerializeField] private GameObject smallBottomOverlay;
     [SerializeField] private GameObject pauseBtn;
     [SerializeField] private BudgetSetter budgetSetter;
     private int currentGameLevel = 1;
@@ -68,13 +82,20 @@ public class GameManager : MonoBehaviour
         { 
             Instance = this; 
         } 
-        StartLevel();
+    
+        GameUiController.onScreenOverlayChanged += UpdateBottomOverlay;
+    }
+
+
+    private void OnDestroy()
+    {
+        GameUiController.onScreenOverlayChanged -= UpdateBottomOverlay;
     }
 
 
     public void StartGame()
     {
-        bottomOverlay.SetActive(true);
+        defaultBottomOverlay.SetActive(true);
         pauseBtn.SetActive(true);
         //AudioManager.Instance.PlayMusic("Theme");
     }
@@ -89,6 +110,19 @@ public class GameManager : MonoBehaviour
     private void StartLevel()
     {
         budgetSetter.PrepareBudgeSetter(100f);
+    }
+
+
+    private void UpdateBottomOverlay(UIactions uIaction)
+    {
+        if (uIaction == UIactions.SHOW)
+        {
+            smallBottomOverlay.SetActive(true);
+        }
+        else if (uIaction == UIactions.HIDE)
+        {
+            smallBottomOverlay.SetActive(false);
+        }
     }
 
 

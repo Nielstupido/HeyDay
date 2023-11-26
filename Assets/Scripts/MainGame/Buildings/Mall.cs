@@ -11,7 +11,6 @@ public class Mall : Building
         this.buildingOpeningTime = 10f;
         this.buildingClosingTime = 22f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.SHOP, Buttons.APPLY, Buttons.WORK, Buttons.QUIT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -28,7 +27,7 @@ public class Mall : Building
             switch (clickedBtn)
             {
                 case Buttons.SHOP:
-                    Debug.Log("money deposited");
+                    BuildingManager.Instance.OpenMallOverlay();
                     break;
                 case Buttons.APPLY:
                     JobManager.Instance.Apply(this);
@@ -37,7 +36,7 @@ public class Mall : Building
                     JobManager.Instance.Work();
                     break;
                 case Buttons.QUIT:
-                    Debug.Log("money deposited");
+                    JobManager.Instance.QuitWork();
                     break;
             }
     }
@@ -45,5 +44,12 @@ public class Mall : Building
 
     public override void CheckButtons()
     {
+        this.actionButtons = new List<Buttons>(){Buttons.SHOP, Buttons.APPLY};
+
+        if (this.currentlyHired)
+        {
+            this.actionButtons.Add(Buttons.WORK);
+            this.actionButtons.Add(Buttons.QUIT);     
+        }
     }
 }

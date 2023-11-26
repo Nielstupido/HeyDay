@@ -12,7 +12,6 @@ public class Bank : Building
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 16f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.OPENSAVINGSACCOUNT, Buttons.ACCESSSAVINGSACCOUNT};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -41,7 +40,7 @@ public class Bank : Building
                     JobManager.Instance.Work();
                     break;
                 case Buttons.QUIT:
-                    Debug.Log("money deposited");
+                    JobManager.Instance.QuitWork();
                     break;
             }
     }
@@ -49,14 +48,12 @@ public class Bank : Building
 
     public override void CheckButtons()
     {
+        this.actionButtons = new List<Buttons>(){Buttons.OPENSAVINGSACCOUNT, Buttons.ACCESSSAVINGSACCOUNT, Buttons.APPLY};
+
         if (this.currentlyHired)
         {
             this.actionButtons.Add(Buttons.WORK);
             this.actionButtons.Add(Buttons.QUIT);   
-        }
-        else
-        {
-            this.actionButtons.Add(Buttons.APPLY);   
         }
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class MallManager : MonoBehaviour
 {
+    [SerializeField] private GameObject mallOverlay;
     [SerializeField] private GameObject shopOptionsOverlay;
     [SerializeField] private GameObject shopBrowserOverlay;
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private GameObject itemsHolder;
-    [SerializeField] private GameObject itemBoughtOverlay;
     [SerializeField] private Image mallItemHeader;
     [SerializeField] private Sprite appliancesHeader;
     [SerializeField] private Sprite servicesHeader;
@@ -31,16 +31,18 @@ public class MallManager : MonoBehaviour
             Instance = this; 
         } 
     }
+
+
+    public void ShowMallOverlay()
+    {
+        mallOverlay.SetActive(true);
+    }
     
 
     public void ShopAppliances()
     {
         mallItemHeader.sprite = appliancesHeader;
         mallItems = appliancesAvailable;
-        // mallItems = new string[] {"Electric Water Kettle", "Speakers", "Electric Stove", "Microwave", "Flat Screen TV", "Refrigerator", "Air Conditioner", "Computer", "Laptop"};
-        // mallItemsPrice = new float[] {499, 699, 1499, 1999, 4999, 6499, 9499, 14599, 14699};
-        // mallItemsPerks = new float[] {5, 5, 10, 10, 10, 15, 15, 15, 15};
-        // mallItemsImages = new Sprite[] {kettle, speakers, stove, microwave, tv, fridge, aircon, computer, laptop};
         shopBrowserOverlay.SetActive(true);
         shopOptionsOverlay.SetActive(false);
         DisplayItems();
@@ -51,10 +53,6 @@ public class MallManager : MonoBehaviour
     {
         mallItemHeader.sprite = servicesHeader;
         mallItems = servicesAvailable;
-        // mallItems = new string[] {"Barber Shop Service", "Hair Salon Service", "Gym Service", "Spa Service", "Dental Service"};
-        // mallItemsPrice = new float[] {150, 150, 150, 350, 500};
-        // mallItemsPerks = new float[] {20, 20, 20, 30, 50};
-        // mallItemsImages = new Sprite[] {barbershop, salon, gym, spa, dental};
         shopBrowserOverlay.SetActive(true);
         shopOptionsOverlay.SetActive(false);
         DisplayItems();
