@@ -24,10 +24,10 @@ public enum Gender
 public class Player : MonoBehaviour
 {
     //Player Basic Data
-    private IDictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
+    private Dictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
     private string playerName;
     private Gender playerGender;
-    public IDictionary<PlayerStats, float> PlayerStatsDict {set{playerStatsDict = value;} get{return playerStatsDict;}}
+    public Dictionary<PlayerStats, float> PlayerStatsDict {set{playerStatsDict = value;} get{return playerStatsDict;}}
     public string PlayerName { set{playerName = value;} get{return playerName;}}
     public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
 
@@ -68,10 +68,10 @@ public class Player : MonoBehaviour
 
     //Work
     private JobPositions currentPlayerJob;
-    private IDictionary<JobFields,float> playerWorkFieldHistory = new Dictionary<JobFields, float>();
+    private Dictionary<JobFields,float> playerWorkFieldHistory = new Dictionary<JobFields, float>();
     private float currentWorkHours;
     public JobPositions CurrentPlayerJob { set{currentPlayerJob = value;} get{return currentPlayerJob;}}
-    public IDictionary<JobFields, float> PlayerWorkFieldHistory {set{playerWorkFieldHistory = value;} get{return playerWorkFieldHistory;}}
+    public Dictionary<JobFields, float> PlayerWorkFieldHistory {set{playerWorkFieldHistory = value;} get{return playerWorkFieldHistory;}}
     public float CurrentWorkHours { set{currentWorkHours = value;} get{return currentWorkHours;}}
 
     //Consts
@@ -91,14 +91,14 @@ public class Player : MonoBehaviour
 
     private void Awake() 
     { 
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(this); 
-        } 
-        else 
-        { 
-            Instance = this; 
-        } 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 
@@ -262,7 +262,7 @@ public class Player : MonoBehaviour
     }
 
 
-    private void StatsChecker(PlayerStats statName, IDictionary<PlayerStats, float> playerStatsDict)
+    private void StatsChecker(PlayerStats statName, Dictionary<PlayerStats, float> playerStatsDict)
     {
         if (playerStatsDict[PlayerStats.ENERGY] <= 10 | playerStatsDict[PlayerStats.HAPPINESS] <= 10 | playerStatsDict[PlayerStats.HUNGER] <= 10)//checks if any of the stats reaches lower limit
         {

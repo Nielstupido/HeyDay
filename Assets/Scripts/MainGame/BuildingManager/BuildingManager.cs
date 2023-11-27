@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    [SerializeField] private IDictionary<string, GameObject> buildings = new Dictionary<string, GameObject>();
+    [SerializeField] private Dictionary<string, GameObject> buildings = new Dictionary<string, GameObject>();
     [SerializeField] private GameObject buildingSelectOverlay;
     [SerializeField] private Text buildingNameText;
     [SerializeField] private List<Sprite> buttonImages = new List<Sprite>();
@@ -40,14 +40,14 @@ public class BuildingManager : MonoBehaviour
 
     private void Awake() 
     { 
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(this); 
-        } 
-        else 
-        { 
-            Instance = this; 
-        } 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 
@@ -126,7 +126,7 @@ public class BuildingManager : MonoBehaviour
 
     private void RemoveBuildingActionBtns()
     {
-        for (var i = buttonsHolder.childCount - 1; i >= 0; i--)
+        for (var i = 0; i < buttonsHolder.childCount; i++)
         {
             Object.Destroy(buttonsHolder.GetChild(i).gameObject);
         }

@@ -5,9 +5,6 @@ using System;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private GameObject music_controlBtn;
-    [SerializeField] private GameObject sfx_controlBtn;
-    
     public static AudioManager Instance;
 
     public Sound[] musicSounds, sfxSounds;
@@ -16,7 +13,7 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance==null)
+        if(Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -48,6 +45,7 @@ public class AudioManager : MonoBehaviour
             musicSource.Play();
         }
     }
+
 
     public void StopMusic()
     {

@@ -18,7 +18,7 @@ public class PlayerStatsUiManager : MonoBehaviour
     }
 
 
-    private void UpdateStatsText(PlayerStats statName, IDictionary<PlayerStats, float> playerStatsDict)
+    private void UpdateStatsText(PlayerStats statName, Dictionary<PlayerStats, float> playerStatsDict)
     {
         switch (statName)
         {

@@ -27,14 +27,14 @@ public class BudgetSystem : MonoBehaviour
 
     private void Awake() 
     { 
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(this); 
-        } 
-        else 
-        { 
-            Instance = this; 
-        } 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 
@@ -78,15 +78,18 @@ public class BudgetSystem : MonoBehaviour
     }
 
 
-    public void ShowLevelBudgetResult()
+    public float[] GetCurrentBudgetList()
     {
-        currentPlayer = Player.Instance;
-
-        budgetTrackerEndLevelView.PrepareEndLvlBudgetView(
-            new float[] {currentBillsBudget, currentSavingsBudget, currentConsumablesBudget, currentEmergencyBudget, totalCurrentBudget},
-            new float[] {currentPlayer.PlayerLvlBillExpenses, currentPlayer.PlayerLvlSavings, currentPlayer.PlayerLvlConsumablesExpenses, currentPlayer.PlayerLvlEmergencyFunds, currentPlayer.GetLvlTotalExpenses()}
-            );
+        return new float[] {currentBillsBudget, currentSavingsBudget, currentConsumablesBudget, currentEmergencyBudget, totalCurrentBudget};
     }
+
+
+    public float[] GetCurrentExpensesList()
+    {
+        return new float[] {currentPlayer.PlayerLvlBillExpenses, currentPlayer.PlayerLvlSavings, currentPlayer.PlayerLvlConsumablesExpenses, 
+                        currentPlayer.PlayerLvlEmergencyFunds, currentPlayer.GetLvlTotalExpenses()};
+    }
+
 
 
     private float GetResPoints(bool isSavingsEmergency, float percentageResult)

@@ -30,35 +30,26 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Sprite rank5;
     [SerializeField] private Sprite[] rankSpriteImages;
 
-    public Dictionary<string, int> playerScores = new Dictionary<string, int>();
     public static MainMenuManager Instance { get; private set; }
+
 
     private void Awake() 
     { 
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(this); 
-        } 
-        else 
-        { 
-            Instance = this; 
-        } 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
+
 
     private void Start()
     {
         AnimateMainMenu();
         rankSpriteImages = new Sprite[] {rank1, rank2, rank3, rank4, rank5};
-
-        string filePath = Application.dataPath + "/Files/PlayerScores.json";
-        if (!File.Exists(filePath))
-        {
-            File.WriteAllText(filePath, "{}");
-        }
-        
-        string jsonString = File.ReadAllText(filePath);
-        playerScores = JsonConvert.DeserializeObject<Dictionary<string, int>>(jsonString);
-        Debug.Log("Main Menu: " + jsonString);
     }
 
 
@@ -113,6 +104,7 @@ public class MainMenuManager : MonoBehaviour
         dictionaryOverlay.SetActive(true);
     }
 
+
     public void ShowLeaderboards()
     {
         DisplayPlayers();
@@ -120,19 +112,19 @@ public class MainMenuManager : MonoBehaviour
         SequenceAnimator.Instance.EnableAnimation();
     }
 
+
     public void DisplayPlayers()
     {
         int index = 0;
-        foreach (var savedPlayer in playerScores.OrderByDescending(kvp => kvp.Value))
+        foreach (var savedPlayer in GameDataManager.Instance.PlayerRecords.OrderByDescending(x => x.Value.Values.Sum()))
         {
             GameObject newEntry = Instantiate(leaderboardEntryPrefab, leaderboardEntryParent.transform);
             LeaderboardTemplate leaderboardEntry = newEntry.GetComponent<LeaderboardTemplate>();
 
             leaderboardEntry.playerNameText.text = savedPlayer.Key;
-            leaderboardEntry.playerScoreText.text = savedPlayer.Value.ToString();
+            leaderboardEntry.playerScoreText.text = savedPlayer.Value.Values.Sum().ToString();
             leaderboardEntry.rankImage.sprite = rankSpriteImages[index];
             index++;
-            Debug.Log("Key: " + savedPlayer.Key + ", Value: " + savedPlayer.Value);
         }
     }
 

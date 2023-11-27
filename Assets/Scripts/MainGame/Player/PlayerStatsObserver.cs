@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class PlayerStatsObserver : MonoBehaviour
 {
-    public delegate void OnPlayerStatChanged(PlayerStats statName, IDictionary<PlayerStats, float> playerStatsDict);
+    public delegate void OnPlayerStatChanged(PlayerStats statName, Dictionary<PlayerStats, float> playerStatsDict);
     public static OnPlayerStatChanged onPlayerStatChanged;
 }

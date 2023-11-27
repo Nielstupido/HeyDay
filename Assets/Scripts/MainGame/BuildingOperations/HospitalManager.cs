@@ -8,7 +8,7 @@ public class HospitalManager : MonoBehaviour
     [SerializeField] private GameObject hospitalizedPrompt;
     [SerializeField] private TextMeshProUGUI daysHospitalized;
     [SerializeField] private TextMeshProUGUI totalBill; 
-    private IDictionary<PlayerStats, float> playerStatsDictTemp = new Dictionary<PlayerStats, float>();
+    private Dictionary<PlayerStats, float> playerStatsDictTemp = new Dictionary<PlayerStats, float>();
     private float numOfdays = 0;
     private float hospitalFee = 1500; // hospital fee per day
     public static HospitalManager Instance { get; private set; }
@@ -16,14 +16,14 @@ public class HospitalManager : MonoBehaviour
 
     private void Awake() 
     { 
-        if (Instance != null && Instance != this) 
-        { 
-            Destroy(this); 
-        } 
-        else 
-        { 
-            Instance = this; 
-        } 
+         if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 

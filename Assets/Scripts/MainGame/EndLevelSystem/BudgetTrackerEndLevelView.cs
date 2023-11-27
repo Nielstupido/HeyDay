@@ -38,6 +38,7 @@ public class BudgetTrackerEndLevelView : MonoBehaviour
 
     public void Continue()
     {
-
+        this.gameObject.SetActive(false);
+        EndLevelManager.Instance.OpenBadgeAwardView();
     }
 }

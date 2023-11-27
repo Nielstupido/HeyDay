@@ -69,7 +69,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private MissionsHolder missionsHolder;
     [SerializeField] private Transform missionPrefabsHolder;
     [SerializeField] private GameObject missionPrefab;
-    private IDictionary<string, List<MissionsScriptableObj>> allMissions = new Dictionary<string, List<MissionsScriptableObj>>();
+    private Dictionary<string, List<MissionsScriptableObj>> allMissions = new Dictionary<string, List<MissionsScriptableObj>>();
     private List<MissionsScriptableObj> currentActiveMissions = new List<MissionsScriptableObj>();
     private string tempLevelName;
     private string[] tempSplitIdHolder;
@@ -159,6 +159,6 @@ public class LevelManager : MonoBehaviour
 
     private void OnLevelFinished()
     {
-        BudgetSystem.Instance.ShowLevelBudgetResult();
+        EndLevelManager.Instance.LevelFinished();
     }
 }
