@@ -58,19 +58,23 @@ public class SleepManager : MonoBehaviour
     {
         sleepHrs = float.Parse(sleepHrsText.text);
         StartCoroutine(DoSleep(sleepHrs));
-        TimeManager.Instance.AddClockTime(sleepHrs);
-        Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += (sleepHrs * adtnlEnergyForSleep);
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, Player.Instance.PlayerStatsDict);
-        LevelManager.onFinishedPlayerAction(MissionType.SLEEPHR, sleepHrs);
     }
 
 
     private IEnumerator DoSleep(float waitingTime)
     {
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.RESIGN);
+        TimeManager.Instance.AddClockTime(sleepHrs);
+        Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += (sleepHrs * adtnlEnergyForSleep);
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, Player.Instance.PlayerStatsDict);
+        LevelManager.onFinishedPlayerAction(MissionType.SLEEPHR, sleepHrs);
+
         yield return new WaitForSeconds(waitingTime);
+
         sleepingManagerOverlay.SetActive(false);
         AnimOverlayManager.Instance.StopAnim();
+        LifeEventsManager.Instance.StartLifeEvent(); //random (earthquake, inflation)
+
         yield return null;
     }
 }

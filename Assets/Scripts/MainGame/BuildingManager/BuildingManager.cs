@@ -67,6 +67,7 @@ public class BuildingManager : MonoBehaviour
         enterBtn.SetActive(true);
         playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.WALK);
         LevelManager.onFinishedPlayerAction(MissionType.WALK);
+        LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ROBBERY);
     }
 
 
@@ -76,8 +77,17 @@ public class BuildingManager : MonoBehaviour
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
-        playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.RIDE);
-        LevelManager.onFinishedPlayerAction(MissionType.COMMUTE);
+
+        if (Player.Instance.PlayerOwnedVehicles.Count == 0)
+        {
+            playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.COMMUTE);
+            LevelManager.onFinishedPlayerAction(MissionType.COMMUTE);
+            LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ACCIDENT);
+        }
+        else
+        {
+            playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.DRIVE);
+        }
     }
 
 

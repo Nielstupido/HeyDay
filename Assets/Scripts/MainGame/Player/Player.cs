@@ -208,6 +208,25 @@ public class Player : MonoBehaviour
     }
 
 
+    //for non-consumable
+    public bool Pay(float price, float timeAdded, float happinessAdded, Prompts errorMoneyPrompt, float energyLevelCutValue = 10f)
+    {
+        if (price > playerCash)
+        {
+            PromptManager.Instance.ShowPrompt(errorMoneyPrompt);
+            return false;
+        }
+
+        TimeManager.Instance.AddClockTime(timeAdded);
+        playerCash -= price;
+        playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
+        playerStatsDict[PlayerStats.HAPPINESS] += happinessAdded;
+        playerStatsDict[PlayerStats.MONEY] -= price;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
+        return true;
+    }
+
+
     public void Walk(float energyLevelCutValue)
     {
         TimeManager.Instance.AddClockTime(2);
@@ -221,13 +240,6 @@ public class Player : MonoBehaviour
         TimeManager.Instance.AddClockTime(0.5f);
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
-    }
-
-
-    public void BuyGrocery(float amount)
-    {
-        playerStatsDict[PlayerStats.MONEY] -= amount;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDict);
     }
 
 

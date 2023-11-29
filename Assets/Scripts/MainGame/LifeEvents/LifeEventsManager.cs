@@ -8,7 +8,6 @@ public enum LifeEvents
     ROBBERY, 
     INFLATION,
     EARTHQUAKE,
-    TYPHOON,
     ACCIDENT
 }
 

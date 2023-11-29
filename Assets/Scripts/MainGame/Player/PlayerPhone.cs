@@ -72,7 +72,7 @@ public class PlayerPhone : MonoBehaviour
     public void BuyGrocery()
     {
         groceryBar.value += 10;
-        Player.Instance.BuyGrocery(200f);
+        // Player.Instance.Purchase(false, 200f);
     }
 
 

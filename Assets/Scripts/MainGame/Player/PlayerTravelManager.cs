@@ -8,7 +8,7 @@ public enum ModeOfTravels
     NA,
     WALK,
     COMMUTE,
-    RIDE
+    DRIVE
 }
 
 
