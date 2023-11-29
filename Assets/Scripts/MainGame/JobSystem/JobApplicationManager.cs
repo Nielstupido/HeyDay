@@ -156,7 +156,7 @@ public class JobApplicationManager : MonoBehaviour
 
     private IEnumerator JobAppProcessingAnim(float waitingTime, JobPositions newJobData)
     {
-        AnimOverlayManager.Instance.StartAnim(Animations.JOBAPPLICATIONPROCESSING);
+        AnimOverlayManager.Instance.StartAnim(ActionAnimations.JOBAPPLICATION);
         yield return new WaitForSeconds(waitingTime);
         AnimOverlayManager.Instance.StopAnim();
         JobApplicationProcessDone(newJobData);

@@ -60,7 +60,7 @@ public class PlayerTravelManager : MonoBehaviour
 
     private IEnumerator StartTravelingOverlay(float travelingTime, Building selectedBuilding)
     {
-        AnimOverlayManager.Instance.StartAnim(Animations.TRAVELING);
+        AnimOverlayManager.Instance.StartAnim(ActionAnimations.COMMUTE);
         MovePlayerModel(selectedBuilding);
         yield return new WaitForSeconds(travelingTime);
         AnimOverlayManager.Instance.StopAnim();

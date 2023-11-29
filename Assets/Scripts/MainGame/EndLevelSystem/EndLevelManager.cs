@@ -45,7 +45,7 @@ public class EndLevelManager : MonoBehaviour
 
     public void OpenLeaderboardView()
     {
-        Dictionary<string, int> playerRecords =  GameDataManager.Instance.GetCurrentLevelScores(GameManager.Instance.CurrentGameLevel);
+        Dictionary<string, int> playerRecords =  GameDataManager.Instance.GetCurrentLevelScores();
         lvlLeaderboardView.SetupLeaderboard(playerRecords);
     }
 

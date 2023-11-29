@@ -90,6 +90,8 @@ public class ResBuildingManager : MonoBehaviour
             if (Player.Instance.PlayerCash > totalBilling)
             {
                 Player.Instance.PlayerCash = Player.Instance.PlayerCash - totalBilling;
+                Player.Instance.PlayerStatsDict[PlayerStats.MONEY] = Player.Instance.PlayerCash;
+                PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
             }
             else if (Player.Instance.PlayerBankSavings > totalBilling)
             {

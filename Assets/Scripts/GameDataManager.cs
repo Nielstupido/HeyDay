@@ -8,10 +8,10 @@ using System;
 public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance {private set; get;}
-    private Dictionary<string, Dictionary<int, int>> playerRecords = new Dictionary<string, Dictionary<int, int>>(); //player's total points dict key is 0
+    private Dictionary<string, int> playerRecords = new Dictionary<string, int>();
     private List<GameStateData> allPlayersGameStateData;
     private GameStateData currentPlayerGameStateData;
-    public Dictionary<string, Dictionary<int, int>> PlayerRecords { set{playerRecords = value;} get{return playerRecords;}}
+    public Dictionary<string, int> PlayerRecords { set{playerRecords = value;} get{return playerRecords;}}
     public GameStateData CurrentPlayerGameStateData { set{currentPlayerGameStateData = value;} get{return currentPlayerGameStateData;}}
 
 
@@ -42,7 +42,7 @@ public class GameDataManager : MonoBehaviour
             }
             
             string jsonString = File.ReadAllText(filePath);
-            playerRecords = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<int, int>>>(jsonString);
+            playerRecords = JsonConvert.DeserializeObject<Dictionary<string, int>>(jsonString);
         }
         catch (Exception e)
         {
@@ -53,11 +53,15 @@ public class GameDataManager : MonoBehaviour
     }
 
 
-    public ValueTuple<bool, string> SavePlayerRecords(string playerName, int level, int score)
+    public ValueTuple<bool, string> SavePlayerRecords(string playerName, int score)
     {
         try
         {
-            playerRecords[playerName].Add(level, score);
+            if (!playerRecords.ContainsKey(playerName))
+            {
+                playerRecords.Add(playerName, 0);
+            }
+            playerRecords[playerName] += score;
             string filePath = Application.dataPath + "/DoNotDelete/PlayerScores.json";
             string jsonString = JsonConvert.SerializeObject(playerRecords);
             File.WriteAllText(filePath, jsonString);
@@ -71,7 +75,7 @@ public class GameDataManager : MonoBehaviour
     }
 
 
-    public Dictionary<string, int> GetCurrentLevelScores(int level)
+    public Dictionary<string, int> GetCurrentLevelScores()
     {
         Dictionary<string, int> currentLevelScores = new Dictionary<string, int>();
 
@@ -79,7 +83,7 @@ public class GameDataManager : MonoBehaviour
         {
             try
             {
-                currentLevelScores.Add(item.Key, playerRecords[item.Key][level]);
+                currentLevelScores.Add(item.Key, item.Value);
             }
             catch (Exception)
             {

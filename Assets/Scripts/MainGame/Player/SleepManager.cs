@@ -67,7 +67,7 @@ public class SleepManager : MonoBehaviour
 
     private IEnumerator DoSleep(float waitingTime)
     {
-        AnimOverlayManager.Instance.StartAnim(Animations.RESIGNING);
+        AnimOverlayManager.Instance.StartAnim(ActionAnimations.RESIGN);
         yield return new WaitForSeconds(waitingTime);
         sleepingManagerOverlay.SetActive(false);
         AnimOverlayManager.Instance.StopAnim();

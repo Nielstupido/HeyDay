@@ -105,6 +105,8 @@ public class SlotMachineResults : MonoBehaviour
         }
         else
         {
+            Player.Instance.PlayerStatsDict[PlayerStats.MONEY] = Player.Instance.PlayerCash;
+            PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
             winPrompt.SetActive(true);
         }
     }

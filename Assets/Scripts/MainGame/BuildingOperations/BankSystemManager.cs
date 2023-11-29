@@ -167,6 +167,9 @@ public class BankSystemManager : MonoBehaviour
             LevelManager.onFinishedPlayerAction(MissionType.DEPOSITSAVINGSACC);
         }
 
+        Player.Instance.PlayerStatsDict[PlayerStats.MONEY] = Player.Instance.PlayerCash;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
+        
         yield return null;
     }
 }

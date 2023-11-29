@@ -55,7 +55,7 @@ public class JobProfileView : MonoBehaviour
 
     private IEnumerator WorkingAnim(float waitingTime)
     {
-        AnimOverlayManager.Instance.StartAnim(Animations.WORKING);
+        AnimOverlayManager.Instance.StartAnim(ActionAnimations.WORK);
         yield return new WaitForSeconds(waitingTime);
         AnimOverlayManager.Instance.StopAnim();
         WorkShiftDone();
@@ -84,7 +84,7 @@ public class JobProfileView : MonoBehaviour
 
     private IEnumerator ResigningAnim(float waitingTime)
     {
-        AnimOverlayManager.Instance.StartAnim(Animations.RESIGNING);
+        AnimOverlayManager.Instance.StartAnim(ActionAnimations.RESIGN);
         yield return new WaitForSeconds(waitingTime);
         resignationOverlay.SetActive(false);
         AnimOverlayManager.Instance.StopAnim();

@@ -116,13 +116,13 @@ public class MainMenuManager : MonoBehaviour
     public void DisplayPlayers()
     {
         int index = 0;
-        foreach (var savedPlayer in GameDataManager.Instance.PlayerRecords.OrderByDescending(x => x.Value.Values.Sum()))
+        foreach (var savedPlayer in GameDataManager.Instance.PlayerRecords.OrderByDescending(x => x.Value))
         {
             GameObject newEntry = Instantiate(leaderboardEntryPrefab, leaderboardEntryParent.transform);
             LeaderboardTemplate leaderboardEntry = newEntry.GetComponent<LeaderboardTemplate>();
 
             leaderboardEntry.playerNameText.text = savedPlayer.Key;
-            leaderboardEntry.playerScoreText.text = savedPlayer.Value.Values.Sum().ToString();
+            leaderboardEntry.playerScoreText.text = savedPlayer.Value.ToString();
             leaderboardEntry.rankImage.sprite = rankSpriteImages[index];
             index++;
         }

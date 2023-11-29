@@ -268,7 +268,7 @@ public class Player : MonoBehaviour
         {
             float sumOfStats = playerStatsDict[PlayerStats.ENERGY] + playerStatsDict[PlayerStats.HAPPINESS] + playerStatsDict[PlayerStats.HUNGER];
 
-            if ((sumOfStats*100) / 300 <= 10)
+            if ((sumOfStats * 100) / 300 <= 10)
             {
                 HospitalManager.Instance.Hospitalized(5);
             }

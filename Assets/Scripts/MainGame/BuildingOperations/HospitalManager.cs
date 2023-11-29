@@ -10,7 +10,7 @@ public class HospitalManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI totalBill; 
     private Dictionary<PlayerStats, float> playerStatsDictTemp = new Dictionary<PlayerStats, float>();
     private float numOfdays = 0;
-    private float hospitalFee = 1500; // hospital fee per day
+    private float hospitalBill = 1500; 
     public static HospitalManager Instance { get; private set; }
 
 
@@ -27,25 +27,28 @@ public class HospitalManager : MonoBehaviour
     }
 
 
-    public void Hospitalized(float dayCount)
+    public void Hospitalized(float dayCount, float bill = 800)
     {
+        hospitalBill = bill * dayCount;
         hospitalizedPrompt.SetActive(true);
         daysHospitalized.text = dayCount.ToString();
-        float bill = hospitalFee*dayCount;
-        totalBill.text = bill.ToString();
+        totalBill.text = hospitalBill.ToString();
 
         numOfdays = dayCount;
-    }
-    
-    
-    public void PayHospitalFees()
-    {
-        playerStatsDictTemp[PlayerStats.MONEY] = Player.Instance.PlayerStatsDict[PlayerStats.MONEY] - numOfdays*hospitalFee;
+
         playerStatsDictTemp[PlayerStats.HAPPINESS] = 100;
         playerStatsDictTemp[PlayerStats.ENERGY] = 100;
         playerStatsDictTemp[PlayerStats.HUNGER] = 100;
         Player.Instance.PlayerStatsDict = playerStatsDictTemp;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDictTemp);
+    }
+    
+    
+    public void PayHospitalFees()
+    {
+        playerStatsDictTemp[PlayerStats.MONEY] = Player.Instance.PlayerStatsDict[PlayerStats.MONEY] - (hospitalBill);
+        Player.Instance.PlayerStatsDict = playerStatsDictTemp;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, playerStatsDictTemp);
         hospitalizedPrompt.SetActive(false);
     }
 }
