@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.IO;
-using Newtonsoft.Json;
+using UnityEngine.UI;
 
 
 public class PlayerInfoManager : MonoBehaviour
 {
+    [SerializeField] private GameObject characterCreationOverlay;
+    [SerializeField] private GameObject selectGenderOverlay;
+    [SerializeField] private GameObject selectCharacterOverlay;
+    [SerializeField] private Transform charactersHolder;
+    [SerializeField] private GameObject setNameOverlay;
     [SerializeField] private TextMeshProUGUI playerNameTextInput;
     [SerializeField] private TextMeshProUGUI playerNameTextDisplay;
-    [SerializeField] private GameObject selectGenderOverlay;
-    [SerializeField] private GameObject setNameOverlay;
-    [SerializeField] private GameObject characterCreationOverlay;
     [SerializeField] private IntroCutsceneMannager introCutsceneMannager;
+    private List<CharactersScriptableObj> currentCharacters = new List<CharactersScriptableObj>();
 
 
     public void StartIntroScene()
@@ -26,26 +28,53 @@ public class PlayerInfoManager : MonoBehaviour
     }
 
 
+    public void OpenCharacterCreationOVerlay()
+    {
+        characterCreationOverlay.SetActive(true);
+        selectGenderOverlay.SetActive(true);
+        selectCharacterOverlay.SetActive(false);
+        setNameOverlay.SetActive(false);
+    }
+
+
     public void SetGender(bool isBoy)
     {
         if (isBoy)
         {
             Player.Instance.PlayerGender = Gender.MALE;
-            Debug.Log("it's a boy!");
         }
         else
         {
             Player.Instance.PlayerGender = Gender.FEMALE;
-            //gender selected girl
-            Debug.Log("it's a girl!");
         }
         selectGenderOverlay.SetActive(false);
-        setNameOverlay.SetActive(true);
+        selectCharacterOverlay.SetActive(true);
+        ShowCharacters();
     }
 
 
-    public void SetAge(int ageValue)
+    private void ShowCharacters()
     {
+        if (Player.Instance.PlayerGender == Gender.MALE)
+        {
+            currentCharacters = GameManager.Instance.Characters.GetRange(0, 3);
+        }
+        else
+        {
+            currentCharacters = GameManager.Instance.Characters.GetRange(3, 3);
+        }
 
+        for (int i = 0; i < currentCharacters.Count; i++)
+        {
+            charactersHolder.GetChild(i).GetComponent<CharactersObj>().SetupCharacter(currentCharacters[i], this);
+        }
+    }
+
+
+    public void OnCharacterSelected(int characterID)
+    {
+        Player.Instance.CurrentCharacter = currentCharacters.Find((characterItem) => characterItem.characterID == characterID);
+        selectCharacterOverlay.SetActive(false);
+        setNameOverlay.SetActive(true);
     }
 }

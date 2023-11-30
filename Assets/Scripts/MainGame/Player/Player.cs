@@ -27,9 +27,11 @@ public class Player : MonoBehaviour
     private Dictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
     private string playerName;
     private Gender playerGender;
+    private CharactersScriptableObj currentCharacter;
     public Dictionary<PlayerStats, float> PlayerStatsDict {set{playerStatsDict = value;} get{return playerStatsDict;}}
     public string PlayerName { set{playerName = value;} get{return playerName;}}
     public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
+    public CharactersScriptableObj CurrentCharacter { set{currentCharacter = value;} get{return currentCharacter;}}
 
     //Finance
     [SerializeField] private Prompts notEnoughMoneyPrompt;

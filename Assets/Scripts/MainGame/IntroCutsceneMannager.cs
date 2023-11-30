@@ -37,7 +37,6 @@ public class IntroCutsceneMannager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
-        GameManager.Instance.StartGame();
     }
 
 

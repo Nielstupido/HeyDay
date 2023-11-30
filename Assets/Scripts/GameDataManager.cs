@@ -10,9 +10,7 @@ public class GameDataManager : MonoBehaviour
     public static GameDataManager Instance {private set; get;}
     private Dictionary<string, int> playerRecords = new Dictionary<string, int>();
     private List<GameStateData> allPlayersGameStateData;
-    private GameStateData currentPlayerGameStateData;
     public Dictionary<string, int> PlayerRecords { set{playerRecords = value;} get{return playerRecords;}}
-    public GameStateData CurrentPlayerGameStateData { set{currentPlayerGameStateData = value;} get{return currentPlayerGameStateData;}}
 
 
     private void Awake()
@@ -120,7 +118,7 @@ public class GameDataManager : MonoBehaviour
     }
 
 
-    public ValueTuple<bool, string> SaveGameStateData()
+    public ValueTuple<bool, string> SaveGameStateData(GameStateData currentPlayerGameStateData)
     {
         try
         {
@@ -143,6 +141,22 @@ public class GameDataManager : MonoBehaviour
         }
 
         return (true, "");
+    }
+
+    
+    public ValueTuple<GameStateData, string> GetCurrentGameState(string playerName)
+    {
+        GameStateData currentGameState = null;
+        try
+        {
+            currentGameState = allPlayersGameStateData.Find( (gameState) => gameState.playerName == playerName);
+        }
+        catch (Exception e)
+        {
+            return (currentGameState, e.ToString());
+        }
+
+        return (currentGameState, "");
     }
     //===>> PLAYERS' GAME STATE DATA <<===//
 }

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990bc42e7e295a74291254d230eab176, type: 3}
+  m_Name: Boy3
+  m_EditorClassIdentifier: 
+  characterID: 3
+  bustIcon: {fileID: 21300000, guid: 4071704b65cf7634192e55476654cc99, type: 3}
+  defaultCharacter: {fileID: 21300000, guid: 545ddb5d9beb67842972719fcad5b223, type: 3}
+  defaultBody: {fileID: 21300000, guid: 4d822f6cb13201b498866c5b9fcfb28b, type: 3}
+  confusedBody: {fileID: 21300000, guid: 56933275f4cd86f4f97d12ac66445bed, type: 3}
+  armRaisedBody: {fileID: 21300000, guid: b92b7aa217c287d4cbab3f416cd5b9ae, type: 3}
+  defaultEmo: {fileID: 21300000, guid: 52792cac67100264ca089e9a4aeaa3d0, type: 3}
+  angryEmo: {fileID: 21300000, guid: 8a06b0c42eb842a488fd92cd44cb77ca, type: 3}
+  happyEmo: {fileID: 21300000, guid: ee6bf5d3d168c884ebf53b82e3e2ccea, type: 3}
+  sadEmo: {fileID: 21300000, guid: 2ccb72d20ed0caa42bc0453f0b0994c8, type: 3}
+  confusedEmo: {fileID: 21300000, guid: 1ce67403ee71d2f4b90c3126dd1ef573, type: 3}
+  neutralEmo: {fileID: 21300000, guid: a1a096bd7b100bb43a2967dc15b6757d, type: 3}
+  relStatus: 0

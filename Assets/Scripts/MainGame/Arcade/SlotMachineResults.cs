@@ -32,18 +32,7 @@ public class SlotMachineResults : MonoBehaviour
 
     private bool Pay(float energyLevelCutValue, float amount, float timeAdded)
     {
-        if (amount > Player.Instance.PlayerCash)
-        {
-            PromptManager.Instance.ShowPrompt(notEnoughMoneyPrompt);
-            return false;
-        }
-
-        TimeManager.Instance.AddClockTime(timeAdded);
-        Player.Instance.PlayerCash -= amount;
-        Player.Instance.PlayerStatsDict[PlayerStats.MONEY] -= amount;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
-        
-        return true;
+        return Player.Instance.Pay(amount, 15f, timeAdded, notEnoughMoneyPrompt, energyLevelCutValue);
     }
 
 

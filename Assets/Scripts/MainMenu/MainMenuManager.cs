@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
@@ -20,7 +19,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject creditsPanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject leaderboardsPanel;
-    [SerializeField] private GameObject closeBtn;
+    [SerializeField] private GameObject gameModePanel;
     [SerializeField] private GameObject leaderboardEntryPrefab;
     [SerializeField] private GameObject leaderboardEntryParent;
     [SerializeField] private Sprite rank1;
@@ -72,9 +71,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        MenuObjManager.onGameStart();
-        SceneManager.LoadScene("MainGame");
-        AudioManager.Instance.StopMusic();
+        gameModePanel.SetActive(true);
     }
 
 
