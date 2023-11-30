@@ -19,4 +19,5 @@ public class CharactersScriptableObj : ScriptableObject
     public Sprite confusedEmo;
     public Sprite neutralEmo;
     public RelStatus relStatus;
+    public int relStatBarValue;
 }

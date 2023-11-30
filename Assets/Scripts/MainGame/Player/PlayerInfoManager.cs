@@ -74,6 +74,7 @@ public class PlayerInfoManager : MonoBehaviour
     public void OnCharacterSelected(int characterID)
     {
         Player.Instance.CurrentCharacter = currentCharacters.Find((characterItem) => characterItem.characterID == characterID);
+        GameManager.Instance.Characters.Remove(Player.Instance.CurrentCharacter);
         selectCharacterOverlay.SetActive(false);
         setNameOverlay.SetActive(true);
     }

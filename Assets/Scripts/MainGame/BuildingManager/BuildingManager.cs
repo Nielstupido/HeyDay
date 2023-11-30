@@ -24,6 +24,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private CarCatalogueManager carCatalogueManager;
     [SerializeField] private SwitchMenuItem switchMenuItem;
     [SerializeField] private MallManager mallManager;
+    [SerializeField] private BoxCollider resBuildingCollider;
     private Building currentSelectedBuilding;
     public delegate void OnBuildingBtnClicked(Buttons clickedBtn);
     public OnBuildingBtnClicked onBuildingBtnClicked;
@@ -148,6 +149,7 @@ public class BuildingManager : MonoBehaviour
         buildingSelectOverlay.SetActive(false);
         camera2.SetActive(true);
         camera1.SetActive(false);
+        resBuildingCollider.enabled = false;
     }
 
 
@@ -156,6 +158,7 @@ public class BuildingManager : MonoBehaviour
         camera1.SetActive(true);
         smallStatsOverlay.SetActive(false);
         camera2.SetActive(false);
+        resBuildingCollider.enabled = true;
     }
 
 
