@@ -6,7 +6,7 @@ public class Mall : Building
 {
     private void Start()
     {
-        this.buildingStringName = "Luz Mall";
+        this.buildingStringName = "Laz Mall";
         this.buildingEnumName = Buildings.MALL;
         this.buildingOpeningTime = 10f;
         this.buildingClosingTime = 22f;
