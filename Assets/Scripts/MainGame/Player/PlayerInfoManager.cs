@@ -15,6 +15,7 @@ public class PlayerInfoManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerNameTextInput;
     [SerializeField] private TextMeshProUGUI playerNameTextDisplay;
     [SerializeField] private IntroCutsceneMannager introCutsceneMannager;
+    [SerializeField] private Image playerBustIcon;
     private List<CharactersScriptableObj> currentCharacters = new List<CharactersScriptableObj>();
 
 
@@ -77,5 +78,7 @@ public class PlayerInfoManager : MonoBehaviour
         GameManager.Instance.Characters.Remove(Player.Instance.CurrentCharacter);
         selectCharacterOverlay.SetActive(false);
         setNameOverlay.SetActive(true);
+        playerBustIcon.sprite = currentCharacters.Find((characterItem) => characterItem.characterID == characterID).bustIcon;
+        playerBustIcon.SetNativeSize();
     }
 }

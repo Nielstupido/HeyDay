@@ -15,7 +15,7 @@ MonoBehaviour:
   characterID: 6
   bustIcon: {fileID: 21300000, guid: 5dad3650e3b98cb4c860f5fbf1d45622, type: 3}
   defaultCharacter: {fileID: 21300000, guid: 5c7f9c70b8df0134e8cc3d0f0c5432c1, type: 3}
-  defaultBody: {fileID: 21300000, guid: 5c7f9c70b8df0134e8cc3d0f0c5432c1, type: 3}
+  defaultBody: {fileID: 21300000, guid: a56716e76d9e4a34fb341dbe4a4ea55d, type: 3}
   confusedBody: {fileID: 21300000, guid: 906598c4a268c8a45a672f6a618b4a2a, type: 3}
   armRaisedBody: {fileID: 21300000, guid: 0e2a82dcec890644687f47bd484e75d0, type: 3}
   defaultEmo: {fileID: 21300000, guid: d5630711f0eb19743be77911fdbc22ea, type: 3}
@@ -25,3 +25,4 @@ MonoBehaviour:
   confusedEmo: {fileID: 21300000, guid: 5f7cfe082c35d2049b7f261a328c2b27, type: 3}
   neutralEmo: {fileID: 21300000, guid: 908200d525d57e84f8e3d318cf785f86, type: 3}
   relStatus: 0
+  relStatBarValue: 0
