@@ -7,6 +7,8 @@ public class BuildingManager : MonoBehaviour
 {
     [SerializeField] private Dictionary<string, GameObject> buildings = new Dictionary<string, GameObject>();
     [SerializeField] private GameObject buildingSelectOverlay;
+    [SerializeField] private GameObject cinemaOverlay;
+    [SerializeField] private GameObject barOverlay;
     [SerializeField] private Text buildingNameText;
     [SerializeField] private List<Sprite> buttonImages = new List<Sprite>();
     [SerializeField] private GameManager gameManager;
@@ -177,5 +179,17 @@ public class BuildingManager : MonoBehaviour
     public void OpenMallOverlay()
     {
         mallManager.ShowMallOverlay();
+    }
+
+
+    public void OpenCinemaOverlay()
+    {
+        cinemaOverlay.SetActive(true);
+    }
+
+
+    public void OpenBarOverlay()
+    {
+        barOverlay.SetActive(true);
     }
 }

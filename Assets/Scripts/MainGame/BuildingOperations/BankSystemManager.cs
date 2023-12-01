@@ -16,6 +16,7 @@ public class BankSystemManager : MonoBehaviour
     [SerializeField] private GameObject withdrawProcessingOverlay;
     [SerializeField] private GameObject withdrawProcessedOverlay;
     [SerializeField] private GameObject balanceOverlay;
+    [SerializeField] private GameObject createAccountOverlay;
     [SerializeField] private Prompts createAccPrompt;
     [SerializeField] private TextMeshProUGUI balanceText;
     [SerializeField] private TMP_InputField depositAmountField;
@@ -50,7 +51,16 @@ public class BankSystemManager : MonoBehaviour
 
     public void CreateSavingsAcc()
     {
+        createAccountOverlay.SetActive(true);
+    }
+
+
+    public void OnCreateSavingsAcc()
+    {
+        Player.Instance.IsPlayerHasBankAcc = true;
+        BuildingManager.Instance.PrepareButtons(BuildingManager.Instance.CurrentSelectedBuilding);
         LevelManager.onFinishedPlayerAction(MissionType.OPENSAVINGSACC);
+        createAccountOverlay.SetActive(false);
     }
 
 
