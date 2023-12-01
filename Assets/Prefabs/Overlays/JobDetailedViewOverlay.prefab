@@ -594,7 +594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -706.8, y: -196.7}
+  m_AnchoredPosition: {x: -704.43, y: -219}
   m_SizeDelta: {x: 1080, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &585106565648103201
@@ -786,6 +786,7 @@ MonoBehaviour:
   jobTitleText: {fileID: 585106564586953897}
   jobReqsText: {fileID: 585106565108728892}
   jobSalary: {fileID: 585106566496301767}
+  applyBtn: {fileID: 0}
 --- !u!1 &585106565842700970
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,8 +862,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 5c15e99f2556350469896a9593674f18, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
