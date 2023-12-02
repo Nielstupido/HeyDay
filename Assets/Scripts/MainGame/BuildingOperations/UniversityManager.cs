@@ -75,9 +75,6 @@ public enum UniversityCourses
 
 public class UniversityManager : MonoBehaviour
 {
-    [SerializeField] private GameObject universitySystemOverlay;
-
-    [SerializeField] private GameObject universityOverlay;
     [SerializeField] private TextMeshProUGUI course;
     [SerializeField] private TextMeshProUGUI duration;
     [SerializeField] private TextMeshProUGUI totalStudyHours;
@@ -94,7 +91,6 @@ public class UniversityManager : MonoBehaviour
     [SerializeField] private GameObject enrollPrompt;
     [SerializeField] private TextMeshProUGUI courseNamePrompt;
 
-    [SerializeField] private GameObject studyAnimationOverlay;
 
     private StudyFields selectedField; 
     private UniversityCourses selectedCourse;
@@ -102,8 +98,6 @@ public class UniversityManager : MonoBehaviour
     private UniversityCourses[] courses;
     private float[] courseDuration;
  
-    public GameObject StudyPromptOverlay {get{return studyPromptOverlay;}}
-    public GameObject FieldSelectionOverlay {get{return fieldSelectionOverlay;}}
     public static UniversityManager Instance { get; private set; }
 
 
@@ -129,7 +123,6 @@ public class UniversityManager : MonoBehaviour
                                 UniversityCourses.Bachelor_of_Science_in_Interior_Design,
                                 UniversityCourses.Bachelor_of_Science_in_Industrial_Design};
         courseDuration = new float[] {2300, 1800, 1800};
-        courseSelectionOverlay.SetActive(true);
         DisplayCourses();
     }
 
@@ -147,7 +140,6 @@ public class UniversityManager : MonoBehaviour
                                 UniversityCourses.Bachelor_of_Science_in_Marketing_Management,
                                 UniversityCourses.Bachelor_of_Science_in_Office_Administration};
         courseDuration = new float[] {2200, 1600, 1600, 1450, 1350, 1600, 1350};
-        courseSelectionOverlay.SetActive(true);
         DisplayCourses();
     }
 
@@ -164,7 +156,6 @@ public class UniversityManager : MonoBehaviour
                                 UniversityCourses.Bachelor_of_Special_Education,
                                 UniversityCourses.Bachelor_of_Technical_Teacher_Education};
         courseDuration = new float[] {1450, 1800, 1800, 1450, 1450, 1600};
-        courseSelectionOverlay.SetActive(true);
         DisplayCourses();
     }
 
@@ -183,7 +174,6 @@ public class UniversityManager : MonoBehaviour
                                 UniversityCourses.Bachelor_of_Science_in_Industrial_Technology,
                                 UniversityCourses.Bachelor_of_Science_in_Mechanical_Engineering};
         courseDuration = new float[] {1700, 2200, 2200, 2200, 2000, 2000, 1500, 2200};
-        courseSelectionOverlay.SetActive(true);
         DisplayCourses();
     }
 
@@ -199,7 +189,6 @@ public class UniversityManager : MonoBehaviour
                                 UniversityCourses.Bachelor_of_Science_in_Pharmacy,
                                 UniversityCourses.Bachelor_of_Science_in_Radiologic_Technology};
         courseDuration = new float[] {1800, 1450, 2000, 2200, 1800};
-        courseSelectionOverlay.SetActive(true);
         DisplayCourses();
     }
 
@@ -217,7 +206,6 @@ public class UniversityManager : MonoBehaviour
                                 UniversityCourses.Bachelor_of_Arts_in_Sociology,
                                 UniversityCourses.Bachelor_of_Science_in_Social_Work};
         courseDuration = new float[] {1450, 1500, 1450, 1350, 1500, 1450, 1350};
-        courseSelectionOverlay.SetActive(true);
         DisplayCourses();
     }
 
@@ -232,13 +220,32 @@ public class UniversityManager : MonoBehaviour
                                 UniversityCourses.Bachelor_of_Science_in_Computer_Science,
                                 UniversityCourses.Bachelor_of_Science_in_Information_Technology};
         courseDuration = new float[] {1800, 1800, 1450, 1450};
-        courseSelectionOverlay.SetActive(true);
         DisplayCourses();
     }
 
 
-    public void DisplayCourses()
+    public void OnEnteredUniversity()
     {
+        UpdateCourseDetsHUD();
+    }
+
+
+    public void ShowEnrollOverlay()
+    {
+        fieldSelectionOverlay.SetActive(true);
+    }
+
+
+    public void ShowStudyOverlay()
+    {
+        studyPromptOverlay.SetActive(true);
+    }
+
+    
+    private void DisplayCourses()
+    {
+        courseSelectionOverlay.SetActive(true);
+
         foreach (Transform child in courseButtonParent.transform)
         {
             Destroy(child.gameObject);
@@ -276,9 +283,7 @@ public class UniversityManager : MonoBehaviour
         Player.Instance.PlayerEnrolledStudyField = selectedField;
         Player.Instance.PlayerEnrolledCourse = selectedCourse;
         Player.Instance.PlayerEnrolledCourseDuration = selectedCourseDuration;
-        course.text = GameManager.Instance.EnumStringParser(selectedCourse);
-        duration.text = "/" + selectedCourseDuration.ToString();
-        universityOverlay.SetActive(true);
+        UpdateCourseDetsHUD();
         UpdateStudyHours(0);
     }
 
@@ -294,8 +299,6 @@ public class UniversityManager : MonoBehaviour
         float studyDuration = CheckInputDuration(float.Parse(studyDurationField.text));
         Player.Instance.Study(studyDuration);
         studyPromptOverlay.SetActive(false);
-        studyAnimationOverlay.SetActive(true);
-
         StartCoroutine(EndStudyAnimation(3));
     }
 
@@ -326,11 +329,16 @@ public class UniversityManager : MonoBehaviour
     }
 
 
+    private void UpdateCourseDetsHUD()
+    {
+        course.text = GameManager.Instance.EnumStringParser(selectedCourse);
+        duration.text = "/" + selectedCourseDuration.ToString();
+    }
+
     private IEnumerator EndStudyAnimation(float seconds)
     {
+        AnimOverlayManager.Instance.StartAnim(ActionAnimations.STUDY);
         yield return new WaitForSeconds(seconds);
-        
-        studyAnimationOverlay.SetActive(false);
-
+        AnimOverlayManager.Instance.StopAnim();
     }
 }

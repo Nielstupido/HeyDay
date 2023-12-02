@@ -183,6 +183,18 @@ public class BuildingManager : MonoBehaviour
         mallManager.ShowMallOverlay();
     }
 
+    
+    public void OpenUniversityEnrollOverlay()
+    {
+        UniversityManager.Instance.ShowEnrollOverlay();
+    }   
+
+
+    public void OpenUniversityStudyOverlay()
+    {
+        UniversityManager.Instance.ShowStudyOverlay();
+    }   
+
 
     public void OpenCinemaOverlay()
     {

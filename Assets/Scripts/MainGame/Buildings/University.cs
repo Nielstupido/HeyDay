@@ -36,10 +36,10 @@ public class University : Building
                     JobManager.Instance.QuitWork();
                     break;
                 case Buttons.STUDY:
-                    UniversityManager.Instance.StudyPromptOverlay.SetActive(true);
+                    BuildingManager.Instance.OpenUniversityStudyOverlay();
                     break;
                 case Buttons.ENROL:
-                    UniversityManager.Instance.FieldSelectionOverlay.SetActive(true);
+                    BuildingManager.Instance.OpenUniversityEnrollOverlay();
                     break;
             }
     }
@@ -47,9 +47,10 @@ public class University : Building
 
     public override void CheckButtons()
     {
+        UniversityManager.Instance.OnEnteredUniversity();
         this.actionButtons = new List<Buttons>(){Buttons.APPLY};
 
-        if (Player.Instance.PlayerEnrolledCourse == UniversityCourses.NONE)
+        if (GameManager.Instance.CurrentGameLevel == 1)
         {
             this.actionButtons.Add(Buttons.ENROL);
         }

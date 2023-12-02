@@ -57,6 +57,7 @@ public class TimeManager : MonoBehaviour
                 currentTime = hours;
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":00";
+                clockValueSmallOverlay.text = transposedValue.ToString() + ":00";
             }
             else if (minutes < 10)
             {
@@ -67,6 +68,7 @@ public class TimeManager : MonoBehaviour
                 }
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":0" + minutes.ToString();
+                clockValueSmallOverlay.text = transposedValue.ToString() + ":0" + minutes.ToString();
             }
             else if (hours > 24)
             {
@@ -74,12 +76,14 @@ public class TimeManager : MonoBehaviour
                 currentTime = hours + (minutes / 100);
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":" + minutes.ToString();
+                clockValueSmallOverlay.text = transposedValue.ToString() + ":" + minutes.ToString();
                 toggleCounter++;
             }
             else
             {
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":" + minutes.ToString();
+                clockValueSmallOverlay.text = transposedValue.ToString() + ":" + minutes.ToString();
             }
         }
         else
@@ -90,12 +94,14 @@ public class TimeManager : MonoBehaviour
                 currentTime = hours + (minutes / 100);
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":00";
+                clockValueSmallOverlay.text = transposedValue.ToString() + ":00";
                 toggleCounter++;
             }
             else
             {
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":00";
+                clockValueSmallOverlay.text = transposedValue.ToString() + ":00";
             }
         }
         //Debug.Log(currentTime);
@@ -129,10 +135,12 @@ public class TimeManager : MonoBehaviour
         if (currentTime >= 12)
         {
             indicatorAMPM.text = "PM";
+            indicatorAMPMSmallOverlay.text = "PM";
         }
         else
         {
             indicatorAMPM.text = "AM";
+            indicatorAMPMSmallOverlay.text = "AM";
         }
     }
 
