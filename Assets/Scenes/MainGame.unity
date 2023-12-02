@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37089851, g: 0.3783701, b: 0.3572253, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1035,7 +1035,7 @@ MonoBehaviour:
   monthlyWaterCharge: 0
   dailyAdtnlHappiness: 0
   adtnlEnergyForSleep: 0
-  apartmentBgImage: {fileID: 0}
+  apartmentBgImage: {fileID: 21300000, guid: adef2e6e534b4004eb555f4445849e34, type: 3}
 --- !u!114 &48297038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5374,8 +5374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa3ed97b8272cf4cbbcc02a9263a998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  universitySystemOverlay: {fileID: 1467327161}
-  universityOverlay: {fileID: 2097173935}
   course: {fileID: 1731721722}
   duration: {fileID: 758093524}
   totalStudyHours: {fileID: 1030789229}
@@ -14979,7 +14977,7 @@ MonoBehaviour:
   monthlyWaterCharge: 0
   dailyAdtnlHappiness: 0
   adtnlEnergyForSleep: 0
-  apartmentBgImage: {fileID: 0}
+  apartmentBgImage: {fileID: 21300000, guid: 33d5b51b2e64cb14a88a55bf1d1ad160, type: 3}
 --- !u!114 &759104323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20176,7 +20174,7 @@ MonoBehaviour:
   monthlyWaterCharge: 0
   dailyAdtnlHappiness: 0
   adtnlEnergyForSleep: 0
-  apartmentBgImage: {fileID: 0}
+  apartmentBgImage: {fileID: 21300000, guid: 14b3a9d249b241b4d92afd7c00a6639a, type: 3}
 --- !u!114 &971506681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20560,7 +20558,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -525, y: -9.027954}
+  m_AnchoredPosition: {x: -525, y: -9.027893}
   m_SizeDelta: {x: 868.5508, y: -219.2813}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &982245484
@@ -31540,7 +31538,7 @@ MonoBehaviour:
   monthlyWaterCharge: 0
   dailyAdtnlHappiness: 0
   adtnlEnergyForSleep: 0
-  apartmentBgImage: {fileID: 0}
+  apartmentBgImage: {fileID: 21300000, guid: 4fef4a3462b0be5468323908d8fcc94a, type: 3}
 --- !u!114 &1466003081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31625,7 +31623,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1467327162
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49995,7 +49993,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 2f059853050674048a76800562816349, type: 3}
 --- !u!1 &919132147606023270
 GameObject:
   m_ObjectHideFlags: 0
@@ -50211,7 +50209,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 50eecfa6ba31f964da01420e1e94b9d2, type: 3}
 --- !u!1 &919132148360581875
 GameObject:
   m_ObjectHideFlags: 0
@@ -50306,7 +50304,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 10f1d94471c557d43a892d78285733f4, type: 3}
 --- !u!1 &919132148414889426
 GameObject:
   m_ObjectHideFlags: 0
@@ -50417,7 +50415,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 1ba348c0de353df4abb0ea28dfd883e8, type: 3}
 --- !u!1 &919132148506775123
 GameObject:
   m_ObjectHideFlags: 0
@@ -50621,7 +50619,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: b3b2d71c1654cb04eb06bb07f50383b2, type: 3}
 --- !u!1 &919132148644934306
 GameObject:
   m_ObjectHideFlags: 0
@@ -50716,7 +50714,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 53c925aa9d5b71948bd7c1548396ae4a, type: 3}
 --- !u!1 &919132148672196732
 GameObject:
   m_ObjectHideFlags: 0
@@ -50811,7 +50809,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 2899c9747d09eec4ba9e63add8bf40de, type: 3}
 --- !u!1 &919132148765386969
 GameObject:
   m_ObjectHideFlags: 0
@@ -50906,7 +50904,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: ab4f28b390d5e7a43a715c6de4a4ff7e, type: 3}
 --- !u!1 &919132148773197861
 GameObject:
   m_ObjectHideFlags: 0
@@ -50977,7 +50975,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: a875390a91381dc418e5017395e369a6, type: 3}
 --- !u!1 &919132148960232143
 GameObject:
   m_ObjectHideFlags: 0
@@ -51032,7 +51030,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 6748c79ff5eb69b40a4d012db5f2e89c, type: 3}
 --- !u!1 &919132148969978134
 GameObject:
   m_ObjectHideFlags: 0
@@ -51127,7 +51125,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 1336e226c3250184d96aa41b1045ee61, type: 3}
 --- !u!1 &919132149025244052
 GameObject:
   m_ObjectHideFlags: 0
@@ -51222,7 +51220,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: a39cbc5b48f4cd24f8d834c491cdbf21, type: 3}
 --- !u!1 &919132149041345857
 GameObject:
   m_ObjectHideFlags: 0
@@ -51277,7 +51275,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 968fe0f1215d05740a244c35a08e97f4, type: 3}
 --- !u!1 &919132149253500168
 GameObject:
   m_ObjectHideFlags: 0
@@ -51372,7 +51370,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 0af917fe47b01a647907f1fbb7374cc5, type: 3}
 --- !u!1 &919132149418387589
 GameObject:
   m_ObjectHideFlags: 0
@@ -52286,7 +52284,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 600fea217b6891c4298c61eb58b4e5d7, type: 3}
 --- !u!114 &1117413019794750903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65614,7 +65612,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: f61a4d77bde881d4fbb41b95e8705fc4, type: 3}
 --- !u!1 &3469311692838570114
 GameObject:
   m_ObjectHideFlags: 0
@@ -71338,7 +71336,7 @@ MonoBehaviour:
   monthlyWaterCharge: 0
   dailyAdtnlHappiness: 0
   adtnlEnergyForSleep: 0
-  apartmentBgImage: {fileID: 0}
+  apartmentBgImage: {fileID: 21300000, guid: 5278beadac4fdd543a7aae916c212b19, type: 3}
 --- !u!114 &4778886640495290640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74119,7 +74117,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: de4ab161a5f906949b0ba716b331e8a1, type: 3}
 --- !u!114 &5390446138128199272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74526,7 +74524,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 38458c40fa211b149a21c17eb1b5d908, type: 3}
 --- !u!114 &5469463318570846433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91910,7 +91908,7 @@ MonoBehaviour:
   buildingClosingTime: 0
   totalWorkHours: 0
   currentlyHired: 0
-  buildingBgImage: {fileID: 0}
+  buildingBgImage: {fileID: 21300000, guid: 4970c75de5fed1642a8dd2c28364a31f, type: 3}
 --- !u!114 &8992732124707871692
 MonoBehaviour:
   m_ObjectHideFlags: 0
