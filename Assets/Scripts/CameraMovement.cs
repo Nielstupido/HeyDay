@@ -5,7 +5,7 @@ public class CameraMovement : MonoBehaviour
 {
     private Vector3 touchStart, newPos;
     private float zoomOutMin = 4;
-    private float zoomOutMax = 15;
+    private float zoomOutMax = 30;
 
 
 	private void Update () 
@@ -47,11 +47,11 @@ public class CameraMovement : MonoBehaviour
     private void zoom(float increment)
     {
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, zoomOutMin, zoomOutMax);
-        Camera.main.transform.position = new Vector3(
-                ClampPos(Camera.main.orthographicSize, Camera.main.transform.position.x, 'x'),
-                Camera.main.transform.position.y,
-                ClampPos(Camera.main.orthographicSize, Camera.main.transform.position.z, 'z')
-            );
+        // Camera.main.transform.position = new Vector3(
+        //         ClampPos(Camera.main.orthographicSize, Camera.main.transform.position.x, 'x'),
+        //         Camera.main.transform.position.y,
+        //         ClampPos(Camera.main.orthographicSize, Camera.main.transform.position.z, 'z')
+        //     );
     }
     
 

@@ -23,30 +23,27 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
 
     public void RefreshSelectOverlayUI(ModeOfTravels modeOfTravel = ModeOfTravels.NA)
     {
-        if (PlayerTravelManager.Instance.CurrentVisitedBuilding != null)
+        if (PlayerTravelManager.Instance.CurrentVisitedBuilding != BuildingManager.Instance.CurrentSelectedBuilding)
         {
-            if (PlayerTravelManager.Instance.CurrentVisitedBuilding != BuildingManager.Instance.CurrentSelectedBuilding)
+            BuildingManager.Instance.WalkBtn.SetActive(true);
+            BuildingManager.Instance.RideBtn.SetActive(true);
+            BuildingManager.Instance.EnterBtn.SetActive(false);
+            BuildingManager.Instance.ClosedBtn.SetActive(false);
+        }
+        else
+        {
+            BuildingManager.Instance.WalkBtn.SetActive(false);
+            BuildingManager.Instance.RideBtn.SetActive(false);
+
+            if (CheckIsBuildingOpen(PlayerTravelManager.Instance.CurrentVisitedBuilding))
             {
-                BuildingManager.Instance.WalkBtn.SetActive(true);
-                BuildingManager.Instance.RideBtn.SetActive(true);
-                BuildingManager.Instance.EnterBtn.SetActive(false);
                 BuildingManager.Instance.ClosedBtn.SetActive(false);
+                BuildingManager.Instance.EnterBtn.SetActive(true);
             }
             else
             {
-                BuildingManager.Instance.WalkBtn.SetActive(false);
-                BuildingManager.Instance.RideBtn.SetActive(false);
-
-                if (CheckIsBuildingOpen(PlayerTravelManager.Instance.CurrentVisitedBuilding))
-                {
-                    BuildingManager.Instance.ClosedBtn.SetActive(false);
-                    BuildingManager.Instance.EnterBtn.SetActive(true);
-                }
-                else
-                {
-                    BuildingManager.Instance.EnterBtn.SetActive(false);
-                    BuildingManager.Instance.ClosedBtn.SetActive(true);
-                }
+                BuildingManager.Instance.EnterBtn.SetActive(false);
+                BuildingManager.Instance.ClosedBtn.SetActive(true);
             }
         }
     }
