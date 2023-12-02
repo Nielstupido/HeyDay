@@ -48,8 +48,8 @@ public enum ItemType
 
 public enum UIactions
 {
-    SHOW,
-    HIDE
+    SHOW_DEFAULT_BOTTOM_OVERLAY,
+    SHOW_SMALL_BOTTOM_OVERLAY
 }
 
 
@@ -99,20 +99,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.GetInt("GameMode") == 0)
-        {
-            playerInfoManager.OpenCharacterCreationOVerlay();
-        }
-        else
-        {
-            LoadSavedGame();
-        }
+        StartGame(); //for debugging
+        // if (PlayerPrefs.GetInt("GameMode") == 0) 
+        // {
+        //     playerInfoManager.OpenCharacterCreationOVerlay();
+        // }
+        // else
+        // {
+        //     LoadSavedGame();
+        // }
     }
 
 
     public void StartGame()
     {
-        defaultBottomOverlay.SetActive(true);
+        UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         pauseBtn.SetActive(true);
         //AudioManager.Instance.PlayMusic("Theme");
     }
@@ -141,15 +142,17 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void UpdateBottomOverlay(UIactions uIaction)
+    public void UpdateBottomOverlay(UIactions uIaction)
     {
-        if (uIaction == UIactions.SHOW)
+        if (uIaction == UIactions.SHOW_SMALL_BOTTOM_OVERLAY)
         {
             smallBottomOverlay.SetActive(true);
+            defaultBottomOverlay.SetActive(false);
         }
-        else if (uIaction == UIactions.HIDE)
+        else if (uIaction == UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY)
         {
             smallBottomOverlay.SetActive(false);
+            defaultBottomOverlay.SetActive(true);
         }
     }
 

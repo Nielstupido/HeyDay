@@ -49,6 +49,10 @@ public class AnimOverlayManager : MonoBehaviour
 
     public void StartAnim(ActionAnimations currentActionAnim)
     {
+        if (!animationObjects.Exists((animObj) => animObj.actionAnimation == currentActionAnim))
+        {
+            return;
+        }
         animationImage.sprite = animationObjects.Find((animObj) => animObj.actionAnimation == currentActionAnim).firstImage;
         animationImage.SetNativeSize();
         animator.runtimeAnimatorController = animationObjects.Find((animObj) => animObj.actionAnimation == currentActionAnim).animController;

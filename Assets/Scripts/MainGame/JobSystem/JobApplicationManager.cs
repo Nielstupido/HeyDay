@@ -84,32 +84,34 @@ public class JobApplicationManager : MonoBehaviour
         jobSystemOverlay.SetActive(true);
         jobPosListOverlay.SetActive(true);
 
-        if (availableJobPositionsHolder.childCount == 0)
+        for (var i = 0; i < availableJobPositionsHolder.childCount; i++)
         {
-            jobPositionsList = JobPositionsList(currentBuilding.buildingEnumName);
+            Object.Destroy(availableJobPositionsHolder.GetChild(i).gameObject);
+        }
 
-            foreach(JobPositions jobPosition in jobPositionsList)
+        jobPositionsList = JobPositionsList(currentBuilding.buildingEnumName);
+
+        foreach(JobPositions jobPosition in jobPositionsList)
+        {
+            GameObject newJobPositionObj = Instantiate(jobPositionPrefab, Vector3.zero, Quaternion.identity, availableJobPositionsHolder);
+            JobPositionObj newJobPosition = newJobPositionObj.GetComponent<JobPositionObj>();
+
+            if (jobPosition == Player.Instance.CurrentPlayerJob)
             {
-                GameObject newJobPositionObj = Instantiate(jobPositionPrefab, Vector3.zero, Quaternion.identity, availableJobPositionsHolder);
-                JobPositionObj newJobPosition = newJobPositionObj.GetComponent<JobPositionObj>();
-
-                if (jobPosition == Player.Instance.CurrentPlayerJob)
+                newJobPosition.PrepareJobDets(jobPosition, "Current Job");
+                newJobPositionObj.GetComponent<Button>().enabled = false;
+                
+                Color newCol1 = Color.grey;
+                Color newCol2;
+                if (ColorUtility.TryParseHtmlString("C5C5C5", out newCol2))
                 {
-                    newJobPosition.PrepareJobDets(jobPosition, "Current Job");
-                    newJobPositionObj.GetComponent<Button>().enabled = false;
-                    
-                    Color newCol1 = Color.grey;
-                    Color newCol2;
-                    if (ColorUtility.TryParseHtmlString("C5C5C5", out newCol2))
-                    {
-                        newCol1 = newCol2;
-                    }
-                    newJobPositionObj.GetComponent<Image>().color = newCol1;
+                    newCol1 = newCol2;
                 }
-                else
-                {
-                    newJobPosition.PrepareJobDets(jobPosition);
-                }
+                newJobPositionObj.GetComponent<Image>().color = newCol1;
+            }
+            else
+            {
+                newJobPosition.PrepareJobDets(jobPosition);
             }
         }
     }

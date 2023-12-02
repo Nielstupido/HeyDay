@@ -9,6 +9,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject buildingSelectOverlay;
     [SerializeField] private GameObject cinemaOverlay;
     [SerializeField] private GameObject barOverlay;
+    [SerializeField] private GameObject resViewHUD;
     [SerializeField] private Text buildingNameText;
     [SerializeField] private List<Sprite> buttonImages = new List<Sprite>();
     [SerializeField] private GameManager gameManager;
@@ -18,7 +19,6 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject closedBtn;
     [SerializeField] private Transform buttonsHolder;
     [SerializeField] private GameObject btnPrefab;
-    [SerializeField] private GameObject smallStatsOverlay;
     [SerializeField] private GameObject camera1;
     [SerializeField] private GameObject camera2;
     [SerializeField] private GameObject buildingInteriorOverlay;
@@ -96,7 +96,7 @@ public class BuildingManager : MonoBehaviour
 
     public void EnterBuilding(Building selectedBuilding)
     {
-        GameUiController.onScreenOverlayChanged(UIactions.SHOW);
+        GameUiController.onScreenOverlayChanged(UIactions.SHOW_SMALL_BOTTOM_OVERLAY);
 
         if (selectedBuilding.buildingEnumName == Buildings.RESIDENTIAL)
         {
@@ -116,9 +116,8 @@ public class BuildingManager : MonoBehaviour
     {
         RemoveBuildingActionBtns();
         currentSelectedBuilding.actionButtons.Clear();
-        smallStatsOverlay.SetActive(false);
         buildingInteriorOverlay.SetActive(false);
-        GameUiController.onScreenOverlayChanged(UIactions.HIDE);
+        GameUiController.onScreenOverlayChanged(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
     }
 
 
@@ -148,7 +147,9 @@ public class BuildingManager : MonoBehaviour
 
     public void EnterResidentialArea()
     {
+        GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_SMALL_BOTTOM_OVERLAY);
         buildingSelectOverlay.SetActive(false);
+        resViewHUD.SetActive(true);
         camera2.SetActive(true);
         camera1.SetActive(false);
         resBuildingCollider.enabled = false;
@@ -157,8 +158,9 @@ public class BuildingManager : MonoBehaviour
 
     public void ExitResidential()
     {
+        GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         camera1.SetActive(true);
-        smallStatsOverlay.SetActive(false);
+        resViewHUD.SetActive(false);
         camera2.SetActive(false);
         resBuildingCollider.enabled = true;
     }

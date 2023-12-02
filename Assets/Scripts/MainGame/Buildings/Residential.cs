@@ -6,6 +6,7 @@ public class Residential : Building
 {
     private void Start()
     {
+        this.buildingStringName = "Residential Area";
         this.buildingEnumName = Buildings.RESIDENTIAL;
         this.buildingOpeningTime = 0f;
         this.buildingClosingTime = 0f;
