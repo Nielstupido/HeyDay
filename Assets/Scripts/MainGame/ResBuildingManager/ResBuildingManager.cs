@@ -129,6 +129,7 @@ public class ResBuildingManager : MonoBehaviour
     {
         resBuildingSelectOverlay.SetActive(false);
         roomBgOverlay.SetActive(true);
+        roomBgOverlay.GetComponent<Image>().sprite = selectedBuilding.apartmentBgImage;
         miniBtnsHolder.SetActive(true);
         PrepareButtons(selectedBuilding);
         Debug.Log(selectedBuilding.actionButtons);

@@ -54,7 +54,8 @@ public class University : Building
         {
             this.actionButtons.Add(Buttons.ENROL);
         }
-        else
+
+        if (Player.Instance.PlayerEnrolledCourse != UniversityCourses.NONE)
         {
             this.actionButtons.Add(Buttons.STUDY);
         }

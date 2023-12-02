@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public void Study(float studyDurationValue)
+    public void Study(int studyDurationValue)
     {
         TimeManager.Instance.AddClockTime(studyDurationValue);
         playerStatsDict[PlayerStats.ENERGY] -= studyDurationValue * StudyEnergyCutValue;
@@ -284,23 +284,23 @@ public class Player : MonoBehaviour
 
             if ((sumOfStats * 100) / 300 <= 10)
             {
-                HospitalManager.Instance.Hospitalized(5);
+                HospitalManager.Instance.Hospitalized(5f);
             }
             else if ((sumOfStats*100) / 300 <= 30)
             {
-                HospitalManager.Instance.Hospitalized(4);
+                HospitalManager.Instance.Hospitalized(4f);
             }
             else if ((sumOfStats*100) / 300 <= 50)
             {
-                HospitalManager.Instance.Hospitalized(3);
+                HospitalManager.Instance.Hospitalized(3f);
             }
             else if ((sumOfStats*100) / 300 <= 70)
             {
-                HospitalManager.Instance.Hospitalized(2);
+                HospitalManager.Instance.Hospitalized(2f);
             }
             else
             {
-                HospitalManager.Instance.Hospitalized(1);
+                HospitalManager.Instance.Hospitalized(1f);
             }
         }
 

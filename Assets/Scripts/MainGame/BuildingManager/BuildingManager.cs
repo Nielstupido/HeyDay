@@ -115,6 +115,7 @@ public class BuildingManager : MonoBehaviour
     public void ExitBuilding()
     {
         RemoveBuildingActionBtns();
+        UniversityManager.Instance.OnExitedUniversity();
         currentSelectedBuilding.actionButtons.Clear();
         buildingInteriorOverlay.SetActive(false);
         GameUiController.onScreenOverlayChanged(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);

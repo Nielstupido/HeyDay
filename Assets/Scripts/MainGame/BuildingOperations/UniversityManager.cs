@@ -75,6 +75,7 @@ public enum UniversityCourses
 
 public class UniversityManager : MonoBehaviour
 {
+    [SerializeField] private GameObject universitySystemOverlay;
     [SerializeField] private TextMeshProUGUI course;
     [SerializeField] private TextMeshProUGUI duration;
     [SerializeField] private TextMeshProUGUI totalStudyHours;
@@ -86,17 +87,19 @@ public class UniversityManager : MonoBehaviour
     [SerializeField] private GameObject courseButtonParent;
 
     [SerializeField] private GameObject studyPromptOverlay;
-    [SerializeField] private TMP_InputField studyDurationField;
+    [SerializeField] private TextMeshProUGUI studyDurationText;
 
     [SerializeField] private GameObject enrollPrompt;
     [SerializeField] private TextMeshProUGUI courseNamePrompt;
 
+    [SerializeField] private University university;
 
     private StudyFields selectedField; 
     private UniversityCourses selectedCourse;
     private float selectedCourseDuration;
     private UniversityCourses[] courses;
     private float[] courseDuration;
+    private int studyDuration;
  
     public static UniversityManager Instance { get; private set; }
 
@@ -226,7 +229,14 @@ public class UniversityManager : MonoBehaviour
 
     public void OnEnteredUniversity()
     {
+        universitySystemOverlay.SetActive(true);
         UpdateCourseDetsHUD();
+    }
+
+
+    public void OnExitedUniversity()
+    {
+        universitySystemOverlay.SetActive(false);
     }
 
 
@@ -285,6 +295,7 @@ public class UniversityManager : MonoBehaviour
         Player.Instance.PlayerEnrolledCourseDuration = selectedCourseDuration;
         UpdateCourseDetsHUD();
         UpdateStudyHours(0);
+        BuildingManager.Instance.PrepareButtons(BuildingManager.Instance.CurrentSelectedBuilding);
     }
 
 
@@ -296,9 +307,9 @@ public class UniversityManager : MonoBehaviour
 
     public void ContinueStudy()
     {
-        float studyDuration = CheckInputDuration(float.Parse(studyDurationField.text));
         Player.Instance.Study(studyDuration);
         studyPromptOverlay.SetActive(false);
+        studyDurationText.text = "0";
         StartCoroutine(EndStudyAnimation(3));
     }
 
@@ -306,19 +317,6 @@ public class UniversityManager : MonoBehaviour
     public void CancelStudy()
     {
         studyPromptOverlay.SetActive(false);
-    }
-
-
-    public float CheckInputDuration(float duration)
-    {
-        float targetTime = duration + TimeManager.Instance.CurrentTime;
-        if (targetTime > 17.0f)
-        {
-            float excessTime = targetTime - 17;
-            duration -= excessTime;
-        }
-
-        return duration;
     }
 
 
@@ -334,6 +332,27 @@ public class UniversityManager : MonoBehaviour
         course.text = GameManager.Instance.EnumStringParser(selectedCourse);
         duration.text = "/" + selectedCourseDuration.ToString();
     }
+
+
+    public void IncrementStudyHrs()
+    {
+        studyDuration = int.Parse(studyDurationText.text);
+        if (studyDuration < ((university.buildingClosingTime - TimeManager.Instance.CurrentTime)))
+        {
+            studyDurationText.text = (++studyDuration).ToString();
+        }
+    }
+
+    
+    public void DecrementStudyHrs()
+    {
+        studyDuration = int.Parse(studyDurationText.text);
+        if (studyDuration > 0f)
+        {
+            studyDurationText.text = (--studyDuration).ToString();
+        }
+    }
+
 
     private IEnumerator EndStudyAnimation(float seconds)
     {
