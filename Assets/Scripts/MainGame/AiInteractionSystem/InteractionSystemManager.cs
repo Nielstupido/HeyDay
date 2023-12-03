@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 
 public enum RelStatus
@@ -25,28 +26,80 @@ public class InteractionSystemManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI debtValue;
     [SerializeField] private TextMeshProUGUI speechBubbleText;
     [SerializeField] private Slider relStatusBar;
+    private CharactersScriptableObj interactingCharacter;
+    private string npcGreetings;
+    private ValueTuple<bool, int, string> response;
+
+
+    public void Interact(CharactersScriptableObj character)
+    {
+        interactionOverlay.SetActive(true);
+        interactingCharacter = character;
+        npcGreetings = interactingCharacter.Interact();
+        if (npcGreetings != null)
+        {
+            StartCoroutine(GreetPlayer());
+        }
+    }
+
+
+    public void EndInteraction()
+    {
+        interactingCharacter.OnInteractionEnded();
+        interactingCharacter = null;
+        speechBubbleImage.SetActive(false);
+        interactionOverlay.SetActive(false);
+    }
 
 
     public void Chat()
     {
-        StartCoroutine(ChattingAnim(2f));
+        response = interactingCharacter.Chat();
+        if ((interactingCharacter.Chat()).Item1)
+        {
+            StartCoroutine(ChattingAnim(2f));
+        }
     }
 
 
     public void Hug()
     {
-        StartCoroutine(ChattingAnim(2f));
     }
 
 
     public void SayBye()
     {
-        StartCoroutine(ChattingAnim(2f));
+    }
+
+
+    public void PayDebt()
+    {
+    }
+
+
+    public void AskForContactNum()
+    {
+    }
+
+
+    public void YellAt()
+    {
+    }
+
+
+    public void TellJoke()
+    {
+    }
+
+
+    public void BorrowMoney()
+    {
     }
 
 
     private void OnDoneChatting()
     {
+        UpdateInteractionUI();
         TimeManager.Instance.AddClockTime(0.1f);
     }
     
@@ -58,5 +111,21 @@ public class InteractionSystemManager : MonoBehaviour
         AnimOverlayManager.Instance.StopAnim();
         OnDoneChatting();
         yield return null;
+    }
+
+
+    private IEnumerator GreetPlayer()
+    {
+        speechBubbleImage.SetActive(true);
+        speechBubbleText.text = npcGreetings;
+        yield return new WaitForSeconds(1.5f);
+        speechBubbleImage.SetActive(false);
+        yield return null;
+    }
+
+
+    private void UpdateInteractionUI()
+    {
+        relStatusBar.value = interactingCharacter.relStatBarValue;
     }
 }

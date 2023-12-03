@@ -111,8 +111,18 @@ public class GameManager : MonoBehaviour
     }
 
 
+    private void PrepareCharacters()
+    {
+        foreach (var character in characters)
+        {
+            character.PrepareCharacter();
+        }
+    }
+
+
     public void StartGame()
     {
+        PrepareCharacters();
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         pauseBtn.SetActive(true);
         //AudioManager.Instance.PlayMusic("Theme");
