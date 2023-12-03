@@ -20,4 +20,6 @@ public class CharactersScriptableObj : ScriptableObject
     public Sprite neutralEmo;
     public RelStatus relStatus;
     public int relStatBarValue;
+    public float currentDebt;
+    public bool numberObtained = false;
 }
