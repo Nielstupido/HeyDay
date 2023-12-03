@@ -21,7 +21,8 @@ public enum ActionAnimations
     GYM,
     DENTALSERVICE,
     EAT,
-    STUDY
+    STUDY,
+    CHAT
 }
 
 
