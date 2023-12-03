@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 90e6d02cabb9e6646b123bf21a2ac860
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Movie Filmstrip
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 097b42eec6ed98b4e8ef6a4943aa9fe9, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
