@@ -68,8 +68,35 @@ public class GameManager : MonoBehaviour
     [SerializeField] private BudgetSetter budgetSetter;
     [SerializeField] private PlayerInfoManager playerInfoManager;
     [SerializeField] private List<CharactersScriptableObj> characters = new List<CharactersScriptableObj>();
+    [SerializeField] private List<string> characterNamesMale = new List<string>(){
+                                                            "Jose Reyes",
+                                                            "Andres Cruz",
+                                                            "Gabriel Santos",
+                                                            "Juan Rivera",
+                                                            "Ricardo Dela Cruz",
+                                                            "Antonio Ramos",
+                                                            "Miguel Castro",
+                                                            "Eduardo Lim",
+                                                            "Manuel Ocampo",
+                                                            "Rodrigo Gonzales"
+                                                            };
+
+    [SerializeField] private List<string> characterNamesFemale = new List<string>(){
+                                                            "Maria Rodriguez",
+                                                            "Sofia Garcia",
+                                                            "Isabella Fernandez",
+                                                            "Andrea Lopez",
+                                                            "Beatriz Santos",
+                                                            "Carla Reyes",
+                                                            "Elena Cruz",
+                                                            "Patricia Reyes",
+                                                            "Angelica Rivera",
+                                                            "Camila Villanueva"
+                                                            };
+
     private GameStateData currentGameStateData;
     private int currentGameLevel = 1;
+    private int randomNum;
     
     public int CurrentGameLevel {get{return currentGameLevel;}}
     public List<CharactersScriptableObj> Characters {set{characters = value;} get{return characters;}}
@@ -115,7 +142,19 @@ public class GameManager : MonoBehaviour
     {
         foreach (var character in characters)
         {
-            character.PrepareCharacter();
+            if (character.characterGender == Gender.MALE)
+            {
+                randomNum = UnityEngine.Random.Range(0, characterNamesMale.Count);
+                character.PrepareCharacter(characterNamesMale[randomNum], 15);
+                characterNamesMale.RemoveAt(randomNum);
+            }
+            else
+            {
+                randomNum = UnityEngine.Random.Range(0, characterNamesFemale.Count);
+                character.PrepareCharacter(characterNamesFemale[randomNum], 15);
+                characterNamesFemale.RemoveAt(randomNum);
+            }
+
         }
     }
 

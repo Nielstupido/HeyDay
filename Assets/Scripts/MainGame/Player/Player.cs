@@ -28,10 +28,12 @@ public class Player : MonoBehaviour
     private string playerName;
     private Gender playerGender;
     private CharactersScriptableObj currentCharacter;
+    private List<string> contactList = new List<string>();
     public Dictionary<PlayerStats, float> PlayerStatsDict {set{playerStatsDict = value;} get{return playerStatsDict;}}
     public string PlayerName { set{playerName = value;} get{return playerName;}}
     public Gender PlayerGender { set{playerGender = value;} get{return playerGender;}}
     public CharactersScriptableObj CurrentCharacter { set{currentCharacter = value;} get{return currentCharacter;}}
+    public List<string> ContactList { set{contactList = value;} get{return contactList;}}
 
     //Finance
     [SerializeField] private Prompts notEnoughMoneyPrompt;

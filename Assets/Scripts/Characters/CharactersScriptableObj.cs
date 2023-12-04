@@ -7,6 +7,8 @@ using UnityEngine.UI;
 [CreateAssetMenu( menuName = "Character Asset Container")]
 public class CharactersScriptableObj : ScriptableObject
 {
+    public string characterName;
+    public Gender characterGender;
     public int characterID;
     public Sprite bustIcon;
     public Sprite defaultCharacter;
@@ -23,9 +25,11 @@ public class CharactersScriptableObj : ScriptableObject
     public int relStatBarValue = 0;
     public float currentDebt = 0f;
     public bool numberObtained = false;
-    private int patienceLevel = 0;
-    private int currentPatienceLevel = 0;
+    public bool beenFriends;
+    private int socialEnergyLvl = 0;
+    private int currentSocialEnergyLvl = 0;
     private int randomNum;
+    private int percentage;
 
     //Greetings
     private string[] greetingsStrangers = {
@@ -44,7 +48,7 @@ public class CharactersScriptableObj : ScriptableObject
                             };
     private string[] greetingsBestBuddies = {
                             "Hey!!",
-                            "Wazzuuup",
+                            "Wazzuuup"
                             };
     private string[] greetingsEnemies = {
                             "??",
@@ -55,7 +59,7 @@ public class CharactersScriptableObj : ScriptableObject
     //Bye-byes
     private string[] byeStrangers = {
                             "Eh",
-                            "Find someone else",
+                            "Find someone else"
                             };
     private string[] byeFriends = {
                             "Bye sorry",
@@ -67,23 +71,51 @@ public class CharactersScriptableObj : ScriptableObject
                             };
     private string[] byeBestBuddies = {
                             "Hey!!",
-                            "Wazzuuup",
+                            "Wazzuuup"
                             };
     private string[] byeEnemies = {
                             "Bye",
                             "Nah bye"
                             };
 
+    //Rejections
+    private string[] rejectStrangers = {
+                            "Weirdo!",
+                            "Get away from me!"
+                            };
+    private string[] rejectFriends = {
+                            "No thanks hehe",
+                            "Hmm not now"
+                            };
+    private string[] rejectGoodFriends = {
+                            "No thanks hehe",
+                            "Hmm not now"
+                            };
+    private string[] rejectBestBuddies = {
+                            "No thanks hehe",
+                            "Hmm not now"
+                            };
+    private string[] rejectEnemies = {
+                            "No thanks hehe",
+                            "Hmm not now"
+                            };
 
-    public void PrepareCharacter()
+
+    //<<<<<<<<<<<<<<<<<<<< PUBLIC METHODS >>>>>>>>>>>>>>>>>>>>>>//
+    public void PrepareCharacter(string name, int relStatVal)
     {
-        patienceLevel = UnityEngine.Random.Range(1, 3);
-        currentPatienceLevel = patienceLevel;
+        socialEnergyLvl = UnityEngine.Random.Range(1, 3);
+        currentSocialEnergyLvl = socialEnergyLvl;
+        characterName = name;
+        relStatBarValue = relStatVal;
+        beenFriends = false;
     }
     
 
     public string Interact()
     {
+        currentSocialEnergyLvl = socialEnergyLvl;
+
         switch (this.relStatus)
         {
             case RelStatus.STRANGERS:
@@ -109,41 +141,225 @@ public class CharactersScriptableObj : ScriptableObject
 
     public void OnInteractionEnded()
     {
-        currentPatienceLevel = patienceLevel;
+        currentSocialEnergyLvl = socialEnergyLvl;
+    }
+
+
+    public string SayBye()
+    {
+        switch (this.relStatus)
+        {
+            case RelStatus.STRANGERS:
+                randomNum = UnityEngine.Random.Range(0, byeStrangers.Length);
+                return byeStrangers[randomNum];
+            case RelStatus.FRIENDS:
+                randomNum = UnityEngine.Random.Range(0, byeFriends.Length);
+                return byeFriends[randomNum];
+            case RelStatus.GOOD_FRIENDS:
+                randomNum = UnityEngine.Random.Range(0, byeGoodFriends.Length);
+                return byeGoodFriends[randomNum];
+            case RelStatus.BEST_BUDDIES:
+                randomNum = UnityEngine.Random.Range(0, byeBestBuddies.Length);
+                return byeBestBuddies[randomNum];
+            case RelStatus.ENEMIES:
+                randomNum = UnityEngine.Random.Range(0, byeEnemies.Length);
+                return byeEnemies[randomNum];
+            default:
+                return "";
+        }
     }
 
 
     public ValueTuple<bool, int, string> Chat()
     {
-        relStatBarValue += 2;
-        currentPatienceLevel--;
-
-        if (currentPatienceLevel == 0)
+        if (currentSocialEnergyLvl == 0)
         {
             relStatBarValue--;
+            return (false, 0, SayBye());
+        }
+        
+        relStatBarValue += 2;
+        currentSocialEnergyLvl--;
+        return (true, currentSocialEnergyLvl, "");
+    }
 
-            switch (this.relStatus)
+
+    public ValueTuple<bool, int, string> Hug()
+    {
+        switch (this.relStatus)
+        {
+            case RelStatus.STRANGERS:
+                return HugDecision(2, rejectStrangers);
+            case RelStatus.FRIENDS:
+                return HugDecision(6, rejectFriends);
+            case RelStatus.GOOD_FRIENDS:
+                return HugDecision(8, rejectGoodFriends);
+            case RelStatus.BEST_BUDDIES:
+                return HugDecision(9, rejectBestBuddies);
+            case RelStatus.ENEMIES:
+                return HugDecision(1, rejectEnemies);
+            default:
+                return (false, 0, "");
+        }
+    }
+
+
+    public bool PayDebt()
+    {
+        relStatBarValue += 5;
+        currentDebt = 0;
+        return CheckRelStatus();;
+    }
+
+
+    public ValueTuple<bool, int, string> GetNumber()
+    {
+        currentSocialEnergyLvl--;
+        CheckRelStatus();
+
+        if (this.relStatus == RelStatus.STRANGERS || this.relStatus == RelStatus.ENEMIES)
+        {
+            randomNum = UnityEngine.Random.Range(1, 11);
+
+            if (randomNum > (relStatBarValue / 4))
             {
-                case RelStatus.STRANGERS:
-                    randomNum = UnityEngine.Random.Range(0, byeStrangers.Length);
-                    return (false, 0, byeStrangers[randomNum]);
-                case RelStatus.FRIENDS:
-                    randomNum = UnityEngine.Random.Range(0, byeFriends.Length);
-                    return (false, 0, byeFriends[randomNum]);
-                case RelStatus.GOOD_FRIENDS:
-                    randomNum = UnityEngine.Random.Range(0, byeGoodFriends.Length);
-                    return (false, 0, byeGoodFriends[randomNum]);
-                case RelStatus.BEST_BUDDIES:
-                    randomNum = UnityEngine.Random.Range(0, byeBestBuddies.Length);
-                    return (false, 0, byeBestBuddies[randomNum]);
-                case RelStatus.ENEMIES:
-                    randomNum = UnityEngine.Random.Range(0, byeEnemies.Length);
-                    return (false, 0, byeEnemies[randomNum]);
-                default:
-                    return (false, 0, "");
+                if (this.relStatus == RelStatus.STRANGERS)
+                {
+                    return (false, currentSocialEnergyLvl, GetRejected(rejectStrangers));
+                }
+                
+                return (false, currentSocialEnergyLvl, GetRejected(rejectEnemies));
             }
         }
-    
-        return (true, currentPatienceLevel, "");
+        
+        numberObtained = true;
+        relStatBarValue += 10;
+        return (CheckRelStatus(), currentSocialEnergyLvl, "");
     }
+
+
+    public ValueTuple<CharacterEmotions, CharacterStance, int> YellAt()
+    {
+        randomNum = UnityEngine.Random.Range(1, 11);
+
+        if (relStatus == RelStatus.STRANGERS)
+        {
+            if (randomNum < 7)
+            {
+                relStatBarValue -= 5;
+                currentSocialEnergyLvl -= 2;
+                CheckRelStatus();
+                return (CharacterEmotions.ANGRY, CharacterStance.DEFAULT, currentSocialEnergyLvl);
+            }
+        }
+        else if (relStatus == RelStatus.ENEMIES)
+        {
+            relStatBarValue -= 5;
+            currentSocialEnergyLvl -= 2;
+            CheckRelStatus();
+            return (CharacterEmotions.ANGRY, CharacterStance.DEFAULT, currentSocialEnergyLvl);
+        }
+        else
+        {
+            if (randomNum > ((relStatBarValue / 9) + (100 / relStatBarValue)))
+            {
+                relStatBarValue -= 10;
+                currentSocialEnergyLvl -= 2;
+                CheckRelStatus();
+                return (CharacterEmotions.ANGRY, CharacterStance.DEFAULT, currentSocialEnergyLvl);
+            }
+        }
+
+        return (CharacterEmotions.CONFFUSED, CharacterStance.CONFUSED, currentSocialEnergyLvl);
+    } 
+    //<<<<<<<<<<<<<<<<<<<< PUBLIC METHODS >>>>>>>>>>>>>>>>>>>>>>//
+
+
+
+
+    //<<<<<<<<<<<<<<<<<<<< PRIVATE METHODS >>>>>>>>>>>>>>>>>>>>>>//
+    private string GetRejected(string[] rejections)
+    {
+        relStatBarValue--;
+        CheckRelStatus();
+        randomNum = UnityEngine.Random.Range(0, rejections.Length);
+        return rejections[randomNum];
+    }
+
+
+    private ValueTuple<bool, int, string> HugDecision(int possibilityRate, string[] rejections)
+    {
+        if (currentSocialEnergyLvl == 0)
+        {
+            relStatBarValue--;
+            randomNum = UnityEngine.Random.Range(0, rejections.Length);
+            return (false, currentSocialEnergyLvl, rejections[randomNum]);
+        }
+
+        randomNum = UnityEngine.Random.Range(1, 11);
+
+        if (randomNum <= percentage)
+        {
+            relStatBarValue += 5;
+            return (true, currentSocialEnergyLvl, "");
+        }
+
+        currentSocialEnergyLvl--;
+        randomNum = UnityEngine.Random.Range(0, rejections.Length);
+        CheckRelStatus();
+        return (false, currentSocialEnergyLvl, rejections[randomNum]);
+    }
+
+
+    private bool CheckRelStatus()
+    {
+        if (currentSocialEnergyLvl < 0)
+        {
+            currentSocialEnergyLvl = 0;
+        }
+
+        if (relStatBarValue < 0)
+        {
+            relStatBarValue = 0;
+        }
+
+        if (relStatBarValue > 100)
+        {
+            relStatBarValue = 100;
+        }
+
+        if (beenFriends)
+        {
+            switch (relStatBarValue)
+            {
+                case <= 30:
+                    relStatus = RelStatus.ENEMIES;
+                    break;
+                case <= 60:
+                    relStatus = RelStatus.FRIENDS;
+                    break;
+                case <= 80:
+                    relStatus = RelStatus.GOOD_FRIENDS;
+                    break;
+                case <= 100:
+                    relStatus = RelStatus.BEST_BUDDIES;
+                    break;
+            }
+        }
+        else
+        {
+            switch (relStatBarValue)
+            {
+                case <= 30:
+                    relStatus = RelStatus.ENEMIES;
+                    break;
+                case <= 60:
+                    relStatus = RelStatus.FRIENDS;
+                    beenFriends = true;
+                    break;
+            }
+        }
+        return true;
+    }
+    //<<<<<<<<<<<<<<<<<<<< PRIVATE METHODS >>>>>>>>>>>>>>>>>>>>>>//
 }
