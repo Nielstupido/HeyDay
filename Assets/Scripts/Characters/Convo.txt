@@ -1,0 +1,23 @@
+private string[] greetingsStrangers = {
+                            "Yes?",
+                            "Whut?",
+                            "Hm?"
+                            };
+    private string[] greetingsFriends = {
+                            "Hi",
+                            "Hello"
+                            };
+    private string[] greetingsGoodFriends = {
+                            "Hi!",
+                            "Hello!",
+                            "Zup!"
+                            };
+    private string[] greetingsBestBuddies = {
+                            "Hey!!",
+                            "Wazzuuup",
+                            };
+    private string[] greetingsEnemies = {
+                            "??",
+                            "What do you need???",
+                            "What?!"
+                            };
