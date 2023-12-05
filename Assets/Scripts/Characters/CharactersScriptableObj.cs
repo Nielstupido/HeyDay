@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 [CreateAssetMenu( menuName = "Character Asset Container")]
 public class CharactersScriptableObj : ScriptableObject
 {
@@ -175,11 +176,13 @@ public class CharactersScriptableObj : ScriptableObject
         if (currentSocialEnergyLvl == 0)
         {
             relStatBarValue--;
+            CheckRelStatus();
             return (false, 0, SayBye());
         }
         
         relStatBarValue += 2;
         currentSocialEnergyLvl--;
+        CheckRelStatus();
         return (true, currentSocialEnergyLvl, "");
     }
 
@@ -189,15 +192,15 @@ public class CharactersScriptableObj : ScriptableObject
         switch (this.relStatus)
         {
             case RelStatus.STRANGERS:
-                return HugDecision(2, rejectStrangers);
+                return NpcDecision(2, rejectStrangers);
             case RelStatus.FRIENDS:
-                return HugDecision(6, rejectFriends);
+                return NpcDecision(6, rejectFriends);
             case RelStatus.GOOD_FRIENDS:
-                return HugDecision(8, rejectGoodFriends);
+                return NpcDecision(8, rejectGoodFriends);
             case RelStatus.BEST_BUDDIES:
-                return HugDecision(9, rejectBestBuddies);
+                return NpcDecision(9, rejectBestBuddies);
             case RelStatus.ENEMIES:
-                return HugDecision(1, rejectEnemies);
+                return NpcDecision(1, rejectEnemies);
             default:
                 return (false, 0, "");
         }
@@ -272,6 +275,65 @@ public class CharactersScriptableObj : ScriptableObject
 
         return (CharacterEmotions.CONFFUSED, CharacterStance.CONFUSED, currentSocialEnergyLvl);
     } 
+
+
+    public ValueTuple<CharacterEmotions, CharacterStance, int> TellJoke()
+    {
+        randomNum = UnityEngine.Random.Range(1, 11);
+
+        if (relStatus == RelStatus.STRANGERS)
+        {
+            if (randomNum > 6)
+            {
+                relStatBarValue += 8;
+                currentSocialEnergyLvl --;
+                CheckRelStatus();
+                return (CharacterEmotions.HAPPY, CharacterStance.DEFAULT, currentSocialEnergyLvl);
+            }
+        }
+        else if (relStatus == RelStatus.ENEMIES)
+        {
+            if (randomNum > 5)
+            {
+                relStatBarValue += 8;
+                currentSocialEnergyLvl --;
+                CheckRelStatus();
+                return (CharacterEmotions.HAPPY, CharacterStance.DEFAULT, currentSocialEnergyLvl);
+            }
+        }
+        else
+        {
+            if (randomNum > ((relStatBarValue / 9) + (100 / relStatBarValue)))
+            {
+                relStatBarValue += 5;
+                currentSocialEnergyLvl --;
+                CheckRelStatus();
+                return (CharacterEmotions.HAPPY, CharacterStance.DEFAULT, currentSocialEnergyLvl);
+            }
+        }
+
+        return (CharacterEmotions.CONFFUSED, CharacterStance.CONFUSED, currentSocialEnergyLvl);
+    } 
+
+
+    public ValueTuple<bool, int, string> TryBorrowMoney()
+    {
+        switch (this.relStatus)
+        {
+            case RelStatus.STRANGERS:
+                return NpcDecision(3, rejectStrangers);
+            case RelStatus.FRIENDS:
+                return NpcDecision(6, rejectFriends);
+            case RelStatus.GOOD_FRIENDS:
+                return NpcDecision(8, rejectGoodFriends);
+            case RelStatus.BEST_BUDDIES:
+                return NpcDecision(9, rejectBestBuddies);
+            case RelStatus.ENEMIES:
+                return NpcDecision(2, rejectEnemies);
+            default:
+                return (false, 0, "");
+        }
+    }
     //<<<<<<<<<<<<<<<<<<<< PUBLIC METHODS >>>>>>>>>>>>>>>>>>>>>>//
 
 
@@ -287,20 +349,22 @@ public class CharactersScriptableObj : ScriptableObject
     }
 
 
-    private ValueTuple<bool, int, string> HugDecision(int possibilityRate, string[] rejections)
+    private ValueTuple<bool, int, string> NpcDecision(int possibilityRate, string[] rejections)
     {
         if (currentSocialEnergyLvl == 0)
         {
             relStatBarValue--;
+            CheckRelStatus();
             randomNum = UnityEngine.Random.Range(0, rejections.Length);
             return (false, currentSocialEnergyLvl, rejections[randomNum]);
         }
 
         randomNum = UnityEngine.Random.Range(1, 11);
 
-        if (randomNum <= percentage)
+        if (randomNum <= possibilityRate)
         {
             relStatBarValue += 5;
+            CheckRelStatus();
             return (true, currentSocialEnergyLvl, "");
         }
 

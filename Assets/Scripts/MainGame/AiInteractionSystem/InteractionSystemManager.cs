@@ -40,11 +40,17 @@ public class InteractionSystemManager : MonoBehaviour
     [SerializeField] private GameObject interactionOverlay;
     [SerializeField] private GameObject touchBlockerOverlay;
     [SerializeField] private GameObject speechBubbleImage;
+    [SerializeField] private GameObject borrowAmountOverlay;
     [SerializeField] private Button getContactNumBtn;
     [SerializeField] private Button payDebtBtn;
+    [SerializeField] private Button borrowMoneyBtn;
+    [SerializeField] private Button borrowMoneyOptBtn1;
+    [SerializeField] private Button borrowMoneyOptBtn2;
+    [SerializeField] private Button borrowMoneyOptBtn3;
     [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private TextMeshProUGUI debtValue;
     [SerializeField] private TextMeshProUGUI speechBubbleText;
+    [SerializeField] private TextMeshProUGUI relStatusText;
     [SerializeField] private Slider relStatusBar;
     [SerializeField] private Image characterBodyImageObj;
     [SerializeField] private Image characterEmotionImageObj;
@@ -53,16 +59,19 @@ public class InteractionSystemManager : MonoBehaviour
     private string npcGreetings;
     private ValueTuple<bool, int, string> npcResponse;
     private ValueTuple<CharacterEmotions, CharacterStance, int> npcEmoResponse;
+    private float borrowMoneyAmount1, borrowMoneyAmount2, borrowMoneyAmount3;
 
 
     public void Interact(CharactersScriptableObj character)
     {
         payDebtBtn.enabled = true;
         getContactNumBtn.enabled = true;
+        borrowMoneyBtn.enabled = true;
 
         interactionOverlay.SetActive(true);
         interactingCharacter = character;
         npcGreetings = interactingCharacter.Interact();
+
         if (npcGreetings != null)
         {
             StartCoroutine(GreetPlayer());
@@ -72,14 +81,19 @@ public class InteractionSystemManager : MonoBehaviour
         {
             payDebtBtn.enabled = false;
         }
+        else
+        {
+            borrowMoneyBtn.enabled = false;
+        }
 
         if (interactingCharacter.numberObtained)
         {
             getContactNumBtn.enabled = false;
         }
 
-        debtValue.text = interactingCharacter.currentDebt.ToString();
+        debtValue.text = "₱" + interactingCharacter.currentDebt.ToString();
         characterNameText.text = interactingCharacter.characterName;
+        UpdateRelStatusUI();
     }
 
 
@@ -100,7 +114,7 @@ public class InteractionSystemManager : MonoBehaviour
         {
             ToggleSpeechBubble(false, npcResponse.Item3);
         }
-        UpdateInteractionUI();
+        UpdateRelStatusUI();
     }
 
 
@@ -110,7 +124,7 @@ public class InteractionSystemManager : MonoBehaviour
         if (npcResponse.Item1)
         {
             UpdateCharacterEmo(CharacterEmotions.HAPPY, CharacterStance.DEFAULT);
-            UpdateInteractionUI();
+            UpdateRelStatusUI();
             StartCoroutine(ReturnToDefaultEmo());
         }
         else
@@ -124,7 +138,7 @@ public class InteractionSystemManager : MonoBehaviour
                 ToggleSpeechBubble(false, npcResponse.Item3);
             }
         }
-        UpdateInteractionUI();
+        UpdateRelStatusUI();
     }
 
 
@@ -145,9 +159,10 @@ public class InteractionSystemManager : MonoBehaviour
 
         interactingCharacter.PayDebt();
         UpdateCharacterEmo(CharacterEmotions.HAPPY, CharacterStance.DEFAULT);
-        UpdateInteractionUI();
+        UpdateRelStatusUI();
         StartCoroutine(ReturnToDefaultEmo());
         payDebtBtn.enabled = false;
+        debtValue.text = "₱" + interactingCharacter.currentDebt.ToString();
     }
 
 
@@ -172,7 +187,7 @@ public class InteractionSystemManager : MonoBehaviour
             }
         }
 
-        UpdateInteractionUI();
+        UpdateRelStatusUI();
     }
 
 
@@ -180,28 +195,129 @@ public class InteractionSystemManager : MonoBehaviour
     {
         npcEmoResponse = interactingCharacter.YellAt();
 
-        if (npcEmoResponse.Item2 == 0)
-        {
-            UpdateCharacterEmo(npcEmoResponse.Item1, npcEmoResponse.Item2);
-            UpdateInteractionUI();
-            SayBye();
-        }
-
         UpdateCharacterEmo(npcEmoResponse.Item1, npcEmoResponse.Item2);
         StartCoroutine(ReturnToDefaultEmo());
-        UpdateInteractionUI();
+        UpdateRelStatusUI();
+
+        if (npcEmoResponse.Item3 == 0)
+        {
+            SayBye();
+        }
     }
 
 
     public void TellJoke()
     {
+        npcEmoResponse = interactingCharacter.TellJoke();
 
+        if (npcEmoResponse.Item1 == CharacterEmotions.HAPPY)
+        {
+            StartCoroutine(Laugh());
+        }
+
+        UpdateCharacterEmo(npcEmoResponse.Item1, npcEmoResponse.Item2);
+        StartCoroutine(ReturnToDefaultEmo());
+        UpdateRelStatusUI();
+
+        if (npcEmoResponse.Item3 == 0)
+        {
+            SayBye();
+        }
     }
 
 
     public void BorrowMoney()
     {
+        npcResponse = interactingCharacter.TryBorrowMoney();
 
+        if (npcResponse.Item1)
+        {
+            borrowAmountOverlay.SetActive(true);
+        }
+        else
+        {
+            if (npcResponse.Item2 == 0)
+            {
+                StartCoroutine(DoConsecutiveSpeech(npcResponse.Item3, interactingCharacter.SayBye()));
+            }
+            else
+            {
+                ToggleSpeechBubble(false, npcResponse.Item3);
+            }
+        }
+
+        UpdateRelStatusUI();
+    }
+
+
+    public void ProceedBorrowMoney(float amount)
+    {
+        borrowAmountOverlay.SetActive(false);
+        interactingCharacter.currentDebt = amount;
+        Player.Instance.PlayerCash += amount;
+        Player.Instance.PlayerStatsDict[PlayerStats.MONEY] = Player.Instance.PlayerCash;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, Player.Instance.PlayerStatsDict);
+        debtValue.text = "₱" + interactingCharacter.currentDebt.ToString();
+    }
+
+
+    private void UpdateBorrowMoneyOpts()
+    {
+        switch (interactingCharacter.relStatus)
+        {
+            case RelStatus.STRANGERS:
+                borrowMoneyAmount1 = 200f;
+                borrowMoneyAmount2 = 400f;
+                borrowMoneyAmount3 = 500f;
+                break;
+            case RelStatus.FRIENDS:
+                borrowMoneyAmount1 = 600f;
+                borrowMoneyAmount2 = 1000f;
+                borrowMoneyAmount3 = 1200f;
+                break;
+            case RelStatus.GOOD_FRIENDS:
+                borrowMoneyAmount1 = 1300f;
+                borrowMoneyAmount2 = 1500f;
+                borrowMoneyAmount3 = 2000f;
+                break;
+            case RelStatus.BEST_BUDDIES:
+                borrowMoneyAmount1 = 2500f;
+                borrowMoneyAmount2 = 3500f;
+                borrowMoneyAmount3 = 5000f;
+                break;
+            case RelStatus.ENEMIES:
+                borrowMoneyAmount1 = 300f;
+                borrowMoneyAmount2 = 500f;
+                borrowMoneyAmount3 = 800f;
+                break;
+            default:
+                borrowMoneyAmount1 = 200f;
+                borrowMoneyAmount2 = 400f;
+                borrowMoneyAmount3 = 500f;
+                break;
+        }
+
+        borrowMoneyOptBtn1.onClick.RemoveAllListeners();
+        borrowMoneyOptBtn2.onClick.RemoveAllListeners();
+        borrowMoneyOptBtn3.onClick.RemoveAllListeners();
+
+        borrowMoneyOptBtn1.onClick.AddListener( () => {ProceedBorrowMoney(borrowMoneyAmount1);} );
+        borrowMoneyOptBtn2.onClick.AddListener( () => {ProceedBorrowMoney(borrowMoneyAmount2);} );
+        borrowMoneyOptBtn3.onClick.AddListener( () => {ProceedBorrowMoney(borrowMoneyAmount3);} );
+
+        borrowMoneyOptBtn1.transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().text = "₱" + borrowMoneyAmount1.ToString();
+        borrowMoneyOptBtn2.transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().text = "₱" + borrowMoneyAmount2.ToString();
+        borrowMoneyOptBtn3.transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().text = "₱" + borrowMoneyAmount3.ToString();
+    }
+
+
+    private IEnumerator Laugh()
+    {
+        speechBubbleImage.SetActive(true);
+        ToggleSpeechBubble(false, "Hahahah");
+        yield return new WaitForSeconds(1.5f);
+        ToggleSpeechBubble(true, "");
+        yield return null;
     }
 
 
@@ -242,9 +358,11 @@ public class InteractionSystemManager : MonoBehaviour
     }
 
 
-    private void UpdateInteractionUI()
+    private void UpdateRelStatusUI()
     {
         relStatusBar.value = interactingCharacter.relStatBarValue;
+        relStatusText.text = interactingCharacter.relStatus.ToString();
+        UpdateBorrowMoneyOpts();
     }
 
 
