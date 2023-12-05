@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a340b1c7b532e147bf3a96d081e895f, type: 3}
+  m_Name: DriveAnim
+  m_EditorClassIdentifier: 
+  actionAnimation: 5
+  firstImage: {fileID: 178538411, guid: a1849cca14574ae4588646ec8cc2200f, type: 3}
+  animController: {fileID: 9100000, guid: 8c03cffd06eb21342baca0a51ba67e5a, type: 2}

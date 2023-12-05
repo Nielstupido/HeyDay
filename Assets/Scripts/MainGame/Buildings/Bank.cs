@@ -50,6 +50,11 @@ public class Bank : Building
     {
         this.actionButtons = new List<Buttons>(){Buttons.OPENSAVINGSACCOUNT, Buttons.ACCESSSAVINGSACCOUNT, Buttons.APPLY};
 
+        if (Player.Instance.IsPlayerHasBankAcc)
+        {
+            this.actionButtons.Remove(Buttons.OPENSAVINGSACCOUNT);   
+        }
+
         if (this.currentlyHired)
         {
             this.actionButtons.Add(Buttons.WORK);

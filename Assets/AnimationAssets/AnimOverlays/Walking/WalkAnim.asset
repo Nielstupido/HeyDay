@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a340b1c7b532e147bf3a96d081e895f, type: 3}
+  m_Name: WalkAnim
+  m_EditorClassIdentifier: 
+  actionAnimation: 0
+  firstImage: {fileID: 1367470238, guid: cb8cc03cb91fa1640a0ff607537b9386, type: 3}
+  animController: {fileID: 9100000, guid: 63728251714a0b44d9d17322f597cca2, type: 2}

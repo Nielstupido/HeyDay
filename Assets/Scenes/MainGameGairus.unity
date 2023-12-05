@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37089851, g: 0.3783701, b: 0.3572253, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1370,7 +1370,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 560.3648, y: 420}
+  m_SizeDelta: {x: 241.157, y: 243}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &64523686
 MonoBehaviour:
@@ -1392,7 +1392,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -729656177, guid: f01fc4ce51f15634c9269564afbc827d, type: 3}
+  m_Sprite: {fileID: -1429451106, guid: 3d3b8ef12e93f0442a36774eb9b405f0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1420,7 +1420,7 @@ Animator:
   m_GameObject: {fileID: 64523683}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2d500997db0650c408ec404459b5a586, type: 2}
+  m_Controller: {fileID: 9100000, guid: fd14d9645d8570a409e2767dc4dac96d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2112,7 +2112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationOverlay: {fileID: 484068888}
   animationImage: {fileID: 64523686}
-  animator: {fileID: 64523688}
+  animator: {fileID: 0}
   animationObjects:
   - {fileID: 11400000, guid: 08eaaddbc6051004394b873be83cbceb, type: 2}
   - {fileID: 11400000, guid: ef6c1938f97553f438accf62694a5b23, type: 2}
@@ -3991,6 +3991,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingSelectOverlay: {fileID: 434310656}
+  cinemaOverlay: {fileID: 0}
+  barOverlay: {fileID: 0}
   buildingNameText: {fileID: 1850773246}
   buttonImages:
   - {fileID: 21300000, guid: 73ff6891f10116448b6feb5f92c21949, type: 3}
@@ -5311,6 +5313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mallOverlay: {fileID: 1924926497}
+  arcadeOverlay: {fileID: 0}
   shopOptionsOverlay: {fileID: 1492944830}
   shopBrowserOverlay: {fileID: 456104996}
   itemPrefab: {fileID: 2102737512118225616, guid: 3aa0ad154499c72428ae3e9679381ebf, type: 3}
@@ -5441,6 +5444,7 @@ MonoBehaviour:
   withdrawProcessingOverlay: {fileID: 438302068274020963}
   withdrawProcessedOverlay: {fileID: 438302069478610504}
   balanceOverlay: {fileID: 438302068574937202}
+  createAccountOverlay: {fileID: 0}
   createAccPrompt: {fileID: 11400000, guid: cf610470e079317498385f6700665097, type: 2}
   balanceText: {fileID: 438302067769605875}
   depositAmountField: {fileID: 6386970847008717802}
@@ -8373,6 +8377,7 @@ MonoBehaviour:
   playerNameTextInput: {fileID: 8987504603984673095}
   playerNameTextDisplay: {fileID: 1064102319}
   introCutsceneMannager: {fileID: 2725949413771607798}
+  playerBustIcon: {fileID: 0}
 --- !u!114 &433560204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8972,7 +8977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &484068889
 RectTransform:
   m_ObjectHideFlags: 0

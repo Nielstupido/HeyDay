@@ -27,7 +27,7 @@ public class Cinema : Building
             switch (clickedBtn)
             {
                 case Buttons.WATCHMOVIE:
-                    Debug.Log("WATCHED MOVIE");
+                    BuildingManager.Instance.OpenCinemaOverlay();
                     break;
             }
     }

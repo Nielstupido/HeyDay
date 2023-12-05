@@ -27,7 +27,7 @@ public class NightClub : Building
             switch (clickedBtn)
             {
                 case Buttons.PARTY:
-                    Debug.Log("party party");
+                    BuildingManager.Instance.OpenBarOverlay();
                     break;
             }
     }

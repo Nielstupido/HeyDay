@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class MallManager : MonoBehaviour
 {
     [SerializeField] private GameObject mallOverlay;
+    [SerializeField] private GameObject arcadeOverlay;
     [SerializeField] private GameObject shopOptionsOverlay;
     [SerializeField] private GameObject shopBrowserOverlay;
     [SerializeField] private GameObject itemPrefab;
@@ -56,6 +57,12 @@ public class MallManager : MonoBehaviour
         shopBrowserOverlay.SetActive(true);
         shopOptionsOverlay.SetActive(false);
         DisplayItems();
+    }
+
+
+    public void OpenArcade()
+    {
+        arcadeOverlay.SetActive(true);
     }
 
 
