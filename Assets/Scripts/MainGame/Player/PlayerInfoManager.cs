@@ -67,7 +67,7 @@ public class PlayerInfoManager : MonoBehaviour
 
         for (int i = 0; i < currentCharacters.Count; i++)
         {
-            charactersHolder.GetChild(i).GetComponent<CharactersObj>().SetupCharacter(currentCharacters[i], this);
+            charactersHolder.GetChild(i).GetComponent<CharactersObj>().SetupCharacter(currentCharacters[i], true, this);
         }
     }
 

@@ -27,6 +27,7 @@ public class CharactersScriptableObj : ScriptableObject
     public float currentDebt = 0f;
     public bool numberObtained = false;
     public bool beenFriends;
+    public Buildings currentBuildiing;
     private int socialEnergyLvl = 0;
     private int currentSocialEnergyLvl = 0;
     private int randomNum;

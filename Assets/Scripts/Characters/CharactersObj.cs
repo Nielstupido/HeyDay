@@ -10,11 +10,15 @@ public class CharactersObj : MonoBehaviour
     public int characterID;
 
 
-    public void SetupCharacter(CharactersScriptableObj characterData, PlayerInfoManager currentPlayerInfoManager)
+    public void SetupCharacter(CharactersScriptableObj characterData, bool doSetupBtn, PlayerInfoManager currentPlayerInfoManager = null)
     {
         this.characterID = characterData.characterID;
         characterImage.sprite = characterData.defaultCharacter;
-        playerInfoManager = currentPlayerInfoManager;
-        this.gameObject.GetComponent<Button>().onClick.AddListener(delegate{playerInfoManager.OnCharacterSelected(this.characterID);});
+        
+        if (doSetupBtn)
+        {
+            playerInfoManager = currentPlayerInfoManager;
+            this.gameObject.GetComponent<Button>().onClick.AddListener(delegate{playerInfoManager.OnCharacterSelected(this.characterID);});
+        }
     }
 }

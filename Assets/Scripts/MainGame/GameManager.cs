@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.IO;
 using System;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -67,8 +68,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseBtn;
     [SerializeField] private BudgetSetter budgetSetter;
     [SerializeField] private PlayerInfoManager playerInfoManager;
+    [SerializeField] private InteractionSystemManager interactionSystemManager;
     [SerializeField] private List<CharactersScriptableObj> characters = new List<CharactersScriptableObj>();
-    [SerializeField] private List<string> characterNamesMale = new List<string>(){
+    private List<string> characterNamesMale = new List<string>(){
                                                             "Jose Reyes",
                                                             "Andres Cruz",
                                                             "Gabriel Santos",
@@ -81,7 +83,7 @@ public class GameManager : MonoBehaviour
                                                             "Rodrigo Gonzales"
                                                             };
 
-    [SerializeField] private List<string> characterNamesFemale = new List<string>(){
+    private List<string> characterNamesFemale = new List<string>(){
                                                             "Maria Rodriguez",
                                                             "Sofia Garcia",
                                                             "Isabella Fernandez",
@@ -97,7 +99,7 @@ public class GameManager : MonoBehaviour
     private GameStateData currentGameStateData;
     private int currentGameLevel = 1;
     private int randomNum;
-    
+    private List<Buildings> buildingsArr = new List<Buildings>();
     public int CurrentGameLevel {get{return currentGameLevel;}}
     public List<CharactersScriptableObj> Characters {set{characters = value;} get{return characters;}}
     public static GameManager Instance { get; private set; }
@@ -115,18 +117,22 @@ public class GameManager : MonoBehaviour
         }
     
         GameUiController.onScreenOverlayChanged += UpdateBottomOverlay;
+        TimeManager.onDayAdded += AssignNpcToBuilding;
+        buildingsArr = Enum.GetValues(typeof(Buildings)).Cast<Buildings>().ToList();
     }
 
 
     private void OnDestroy()
     {
         GameUiController.onScreenOverlayChanged -= UpdateBottomOverlay;
+        TimeManager.onDayAdded -= AssignNpcToBuilding;
     }
 
 
     private void Start()
     {
-        StartGame(); //for debugging
+        StartGame(); 
+        //>>>>>>>for debugging<<<<<
         // if (PlayerPrefs.GetInt("GameMode") == 0) 
         // {
         //     playerInfoManager.OpenCharacterCreationOVerlay();
@@ -164,6 +170,7 @@ public class GameManager : MonoBehaviour
         PrepareCharacters();
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         pauseBtn.SetActive(true);
+        AssignNpcToBuilding(0f);
         //AudioManager.Instance.PlayMusic("Theme");
     }
 
@@ -185,9 +192,17 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void StartLevel()
+    public void SaveNpcData(CharactersScriptableObj npcData)
     {
-        budgetSetter.PrepareBudgeSetter(100f);
+        characters[characters.FindIndex( (character) => character.name == npcData.name )] = npcData;
+        characters[characters.FindIndex( (character) => character.name == npcData.name )].currentBuildiing = Buildings.NONE;
+        BuildingManager.Instance.PrepareNpc();
+    }
+
+
+    public void InteractWithNPC(string characterName)
+    {
+        interactionSystemManager.Interact( characters.Find((character) => character.name == characterName) );
     }
 
 
@@ -209,5 +224,21 @@ public class GameManager : MonoBehaviour
     public string EnumStringParser<T>(T enumElement)
     {
         return enumElement.ToString().Replace("_", " ");
+    }
+
+
+    private void AssignNpcToBuilding(float dayCount)
+    {
+        foreach (var character in characters)
+        {
+            randomNum = UnityEngine.Random.Range(0, buildingsArr.Count);
+            character.currentBuildiing = buildingsArr[randomNum];
+        }
+    }
+
+
+    private void StartLevel()
+    {
+        budgetSetter.PrepareBudgeSetter(100f);
     }
 }

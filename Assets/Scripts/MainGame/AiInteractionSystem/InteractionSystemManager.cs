@@ -100,6 +100,7 @@ public class InteractionSystemManager : MonoBehaviour
     public void EndInteraction()
     {
         StartCoroutine(DoEndInteraction());
+        GameManager.Instance.SaveNpcData(interactingCharacter);
     }
 
 

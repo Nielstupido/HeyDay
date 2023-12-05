@@ -19,10 +19,24 @@ public class PlayerPhone : MonoBehaviour
     private float electricityBillRate = 250; //Temporary variable
     private float groceryPrice = 200; //Temporary variable
     
-    [SerializeField] private GameObject goalTrackerOverlay;
-    [SerializeField] private GameObject financeTrackerOverlay;
+    [SerializeField] private GameObject phoneOverlay;
+
+    //Phonebook
     [SerializeField] private GameObject phoneBookOverlay;
+    [SerializeField] private Transform contactListHolder;
+    [SerializeField] private GameObject contactItemPrefab;
+
+    //Goaltracker
+    [SerializeField] private GameObject goalTrackerOverlay;
+
+    //Financetracker
+    [SerializeField] private GameObject financeTrackerOverlay;
+
+    //Olshop
     [SerializeField] private GameObject oLShopOverlay;
+    [SerializeField] private TextMeshProUGUI groceryPriceValue;
+    [SerializeField] private Slider groceryBar;
+
     [SerializeField] private TextMeshProUGUI courseValue;
     [SerializeField] private TextMeshProUGUI savingsValue;
     [SerializeField] private TextMeshProUGUI bankBalValue;
@@ -32,10 +46,12 @@ public class PlayerPhone : MonoBehaviour
     [SerializeField] private TextMeshProUGUI taxValue;
     [SerializeField] private TextMeshProUGUI debtValue;
     [SerializeField] private TextMeshProUGUI monthlyOutflowValue;
-    [SerializeField] private TextMeshProUGUI groceryPriceValue;
-    [SerializeField] private Slider groceryBar;
-    [SerializeField] private GameObject callBtn;
-    [SerializeField] private TextMeshProUGUI AINameValue;
+
+
+    public void OpenPhone()
+    {
+        phoneOverlay.SetActive(true);
+    }
 
 
     public void GoalTracker()
@@ -76,6 +92,8 @@ public class PlayerPhone : MonoBehaviour
     }
 
 
+
+    //<<<<<<<< Phonebook >>>>>>>
     public void PhoneBook()
     {
         phoneBookOverlay.SetActive(true); 
@@ -83,8 +101,31 @@ public class PlayerPhone : MonoBehaviour
     }
 
 
-    public void SelectAIName()
+    public void CallCharacter(string characterName)
     {
-        callBtn.SetActive(true);
+
     }
+
+    
+    public void PrepareContactList()
+    {
+        RemoveContacts();
+        
+        foreach(string characterName in Player.Instance.ContactList)
+        {
+            GameObject newNpc = Instantiate(contactItemPrefab, Vector3.zero, Quaternion.identity, contactListHolder);
+            newNpc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = characterName;
+            newNpc.GetComponent<Button>().onClick.AddListener( () => {CallCharacter(characterName);} );
+        }
+    } 
+
+
+    private void RemoveContacts()
+    {
+        for (var i = 0; i < contactListHolder.childCount; i++)
+        {
+            Object.Destroy(contactListHolder.GetChild(i).gameObject);
+        }
+    }
+    //<<<<<<<< Phonebook >>>>>>>
 }

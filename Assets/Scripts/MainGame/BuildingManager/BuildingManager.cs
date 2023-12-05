@@ -22,6 +22,8 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject camera1;
     [SerializeField] private GameObject camera2;
     [SerializeField] private GameObject buildingInteriorOverlay;
+    [SerializeField] private GameObject npcPrefab;
+    [SerializeField] private Transform npcHolder;
     [SerializeField] private PlayerTravelManager playerTravelManager;
     [SerializeField] private CarCatalogueManager carCatalogueManager;
     [SerializeField] private SwitchMenuItem switchMenuItem;
@@ -106,6 +108,7 @@ public class BuildingManager : MonoBehaviour
         {
             buildingInteriorOverlay.SetActive(true);
             PrepareButtons(selectedBuilding);
+            PrepareNpc();
         }
 
         LevelManager.onFinishedPlayerAction(MissionType.VISIT, interactedBuilding:selectedBuilding.buildingEnumName);
@@ -115,6 +118,7 @@ public class BuildingManager : MonoBehaviour
     public void ExitBuilding()
     {
         RemoveBuildingActionBtns();
+        RemoveNpc();
         UniversityManager.Instance.OnExitedUniversity();
         currentSelectedBuilding.actionButtons.Clear();
         buildingInteriorOverlay.SetActive(false);
@@ -133,6 +137,31 @@ public class BuildingManager : MonoBehaviour
             GameObject newBtn = Instantiate(btnPrefab, Vector3.zero, Quaternion.identity, buttonsHolder);
             newBtn.GetComponent<Image>().sprite = buttonImages[((int)btn)];
             newBtn.GetComponent<Button>().onClick.AddListener( () => {onBuildingBtnClicked(btn);} );
+        }
+    }
+
+
+    public void PrepareNpc()
+    {
+        RemoveNpc();
+        
+        foreach(CharactersScriptableObj character in GameManager.Instance.Characters)
+        {
+            if (character.currentBuildiing == currentSelectedBuilding.buildingEnumName)
+            {
+                GameObject newNpc = Instantiate(npcPrefab, Vector3.zero, Quaternion.identity, npcHolder);
+                newNpc.GetComponent<CharactersObj>().SetupCharacter(character, false);
+                newNpc.GetComponent<Button>().onClick.AddListener( () => {GameManager.Instance.InteractWithNPC(character.characterName);} );
+            }
+        }
+    } 
+
+
+    private void RemoveNpc()
+    {
+        for (var i = 0; i < buttonsHolder.childCount; i++)
+        {
+            Object.Destroy(buttonsHolder.GetChild(i).gameObject);
         }
     }
 
