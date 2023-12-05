@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CinemaAnim
   m_EditorClassIdentifier: 
   actionAnimation: 10
-  firstImage: {fileID: -69470155, guid: 3bf612d04d9cce64ba78b6f7bbbc940a, type: 3}
-  animController: {fileID: 9100000, guid: 2efc8d387b163f84f9c9c62cdbb63b6a, type: 2}
+  firstImage: {fileID: -574221368, guid: effaf0f6438dda54ab20d326b0ddac3b, type: 3}
+  animController: {fileID: 9100000, guid: dafa3cc58625c084a8a698b6040697f3, type: 2}
