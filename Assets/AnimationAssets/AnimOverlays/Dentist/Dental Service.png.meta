@@ -131,10 +131,10 @@ TextureImporter:
       name: Dental Service_0
       rect:
         serializedVersion: 2
-        x: 69
-        y: 748
-        width: 98
-        height: 76
+        x: 0
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,10 +152,10 @@ TextureImporter:
       name: Dental Service_1
       rect:
         serializedVersion: 2
-        x: 630
-        y: 748
-        width: 98
-        height: 76
+        x: 560
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,10 +173,10 @@ TextureImporter:
       name: Dental Service_2
       rect:
         serializedVersion: 2
-        x: 1189
-        y: 748
-        width: 98
-        height: 76
+        x: 1120
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,10 +194,10 @@ TextureImporter:
       name: Dental Service_3
       rect:
         serializedVersion: 2
-        x: 1736
-        y: 735
-        width: 121
-        height: 99
+        x: 1680
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,10 +215,10 @@ TextureImporter:
       name: Dental Service_4
       rect:
         serializedVersion: 2
-        x: 1767
-        y: 469
-        width: 323
-        height: 292
+        x: 2240
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,10 +236,10 @@ TextureImporter:
       name: Dental Service_5
       rect:
         serializedVersion: 2
-        x: 2296
-        y: 735
-        width: 122
-        height: 99
+        x: 0
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,10 +257,10 @@ TextureImporter:
       name: Dental Service_6
       rect:
         serializedVersion: 2
-        x: 2328
-        y: 469
-        width: 322
-        height: 292
+        x: 560
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,10 +278,10 @@ TextureImporter:
       name: Dental Service_7
       rect:
         serializedVersion: 2
-        x: 59
-        y: 470
-        width: 350
-        height: 272
+        x: 1120
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,10 +299,10 @@ TextureImporter:
       name: Dental Service_8
       rect:
         serializedVersion: 2
-        x: 619
-        y: 470
-        width: 351
-        height: 272
+        x: 1680
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,10 +320,10 @@ TextureImporter:
       name: Dental Service_9
       rect:
         serializedVersion: 2
-        x: 1179
-        y: 470
-        width: 350
-        height: 272
+        x: 2240
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -333,216 +333,6 @@ TextureImporter:
       bones: []
       spriteID: 01cd203deebbd414a930fd51a275798d
       internalID: 293790886
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dental Service_10
-      rect:
-        serializedVersion: 2
-        x: 57
-        y: 315
-        width: 120
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 873d3862b324ade4bbeb56c8ecb11096
-      internalID: -698431998
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dental Service_11
-      rect:
-        serializedVersion: 2
-        x: 87
-        y: 49
-        width: 322
-        height: 292
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f8a68b878aab7354ab5e5d33ce91dcdd
-      internalID: 1800090429
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dental Service_12
-      rect:
-        serializedVersion: 2
-        x: 616
-        y: 315
-        width: 122
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cefbe165c4382584c9ceec7ec7ecc779
-      internalID: 1066690560
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dental Service_13
-      rect:
-        serializedVersion: 2
-        x: 647
-        y: 49
-        width: 323
-        height: 292
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e25f352e936ac3c42a2a3b24cceeeb89
-      internalID: 18249409
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dental Service_14
-      rect:
-        serializedVersion: 2
-        x: 1209
-        y: 340
-        width: 49
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f02f712991196f49b422a60c63cb2d3
-      internalID: 1570991343
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dental Service_15
-      rect:
-        serializedVersion: 2
-        x: 1770
-        y: 340
-        width: 49
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ad356dba1de48034889f6b31989ff475
-      internalID: 869309226
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dental Service_16
-      rect:
-        serializedVersion: 2
-        x: 2329
-        y: 340
-        width: 49
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e87d7615ae796f4da4ec9e034759292
-      internalID: 2075472236
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dental Service_17
-      rect:
-        serializedVersion: 2
-        x: 1205
-        y: 50
-        width: 324
-        height: 276
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 42cb6af29e3d1664bb24dc806d6d9c87
-      internalID: -1668127124
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dental Service_18
-      rect:
-        serializedVersion: 2
-        x: 1766
-        y: 50
-        width: 324
-        height: 276
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 733f10fb3baba99498446f6292640288
-      internalID: 285993588
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dental Service_19
-      rect:
-        serializedVersion: 2
-        x: 2325
-        y: 50
-        width: 325
-        height: 276
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c01c9efa981bcc47a366f6ce5f5a02e
-      internalID: -1179843144
       vertices: []
       indices: 
       edges: []
@@ -558,24 +348,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Dental Service_12: 1066690560
       Dental Service_4: 922468529
       Dental Service_0: 156613855
-      Dental Service_19: -1179843144
       Dental Service_7: -1976582845
-      Dental Service_18: 285993588
       Dental Service_8: -1853169815
-      Dental Service_17: -1668127124
       Dental Service_9: 293790886
       Dental Service_1: 199717232
-      Dental Service_15: 869309226
       Dental Service_2: -621862167
-      Dental Service_14: 1570991343
-      Dental Service_11: 1800090429
       Dental Service_5: 1230430526
-      Dental Service_16: 2075472236
-      Dental Service_10: -698431998
-      Dental Service_13: 18249409
       Dental Service_6: 564124131
       Dental Service_3: 648048668
   spritePackingTag: 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3708985, g: 0.3783704, b: 0.35722548, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1392,7 +1392,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1078074385, guid: 8cd1fb341fbe07a4381fae01fa520729, type: 3}
+  m_Sprite: {fileID: -560593235, guid: 1110017182f0fd94191a7991ec7b1d9e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1420,7 +1420,7 @@ Animator:
   m_GameObject: {fileID: 64523683}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c68a7bdad33118a488e0c013edf73256, type: 2}
+  m_Controller: {fileID: 9100000, guid: 93747de4907c37747ab31bee0aafcdd4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1969,7 +1969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationOverlay: {fileID: 484068888}
   animationImage: {fileID: 64523686}
-  animator: {fileID: 64523688}
+  animator: {fileID: 0}
   animationObjects:
   - {fileID: 11400000, guid: 08eaaddbc6051004394b873be83cbceb, type: 2}
   - {fileID: 11400000, guid: ef6c1938f97553f438accf62694a5b23, type: 2}
