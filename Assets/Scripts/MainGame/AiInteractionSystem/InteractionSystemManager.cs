@@ -53,7 +53,7 @@ public class InteractionSystemManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI relStatusText;
     [SerializeField] private Slider relStatusBar;
     [SerializeField] private Image characterBodyImageObj;
-    [SerializeField] private Image characterEmotionImageObj;
+    [SerializeField] private List<Image> characterEmotionImageObj = new List<Image>();
     [SerializeField] private Prompts notEnoughMoney;
     private CharactersScriptableObj interactingCharacter;
     private string npcGreetings;
@@ -64,9 +64,14 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void Interact(CharactersScriptableObj character)
     {
-        payDebtBtn.enabled = true;
-        getContactNumBtn.enabled = true;
-        borrowMoneyBtn.enabled = true;
+        payDebtBtn.interactable = true;
+        getContactNumBtn.interactable = true;
+        borrowMoneyBtn.interactable = true;
+        
+        foreach (Image emoImage in characterEmotionImageObj)
+        {
+            emoImage.gameObject.SetActive(false);
+        }
 
         interactionOverlay.SetActive(true);
         interactingCharacter = character;
@@ -79,21 +84,22 @@ public class InteractionSystemManager : MonoBehaviour
 
         if (interactingCharacter.currentDebt == 0f)
         {
-            payDebtBtn.enabled = false;
+            payDebtBtn.interactable = false;
         }
         else
         {
-            borrowMoneyBtn.enabled = false;
+            borrowMoneyBtn.interactable = false;
         }
 
         if (interactingCharacter.numberObtained)
         {
-            getContactNumBtn.enabled = false;
+            getContactNumBtn.interactable = false;
         }
 
         debtValue.text = "₱" + interactingCharacter.currentDebt.ToString();
         characterNameText.text = interactingCharacter.characterName;
         UpdateRelStatusUI();
+        UpdateCharacterEmo(CharacterEmotions.DEFAULT, CharacterStance.DEFAULT);
     }
 
 
@@ -126,13 +132,13 @@ public class InteractionSystemManager : MonoBehaviour
         {
             UpdateCharacterEmo(CharacterEmotions.HAPPY, CharacterStance.DEFAULT);
             UpdateRelStatusUI();
-            StartCoroutine(ReturnToDefaultEmo());
+            StartCoroutine(ReturnToDefaultEmo(1));
         }
         else
         {
             if (npcResponse.Item2 == 0)
             {
-                StartCoroutine(DoConsecutiveSpeech(npcResponse.Item3, interactingCharacter.SayBye()));
+                StartCoroutine(DoConsecutiveSpeech(npcResponse.Item3, interactingCharacter.SayBye(), 0f));
             }
             else
             {
@@ -161,7 +167,7 @@ public class InteractionSystemManager : MonoBehaviour
         interactingCharacter.PayDebt();
         UpdateCharacterEmo(CharacterEmotions.HAPPY, CharacterStance.DEFAULT);
         UpdateRelStatusUI();
-        StartCoroutine(ReturnToDefaultEmo());
+        StartCoroutine(ReturnToDefaultEmo(1));
         payDebtBtn.enabled = false;
         debtValue.text = "₱" + interactingCharacter.currentDebt.ToString();
     }
@@ -180,7 +186,7 @@ public class InteractionSystemManager : MonoBehaviour
         {
             if (npcResponse.Item2 == 0)
             {
-                StartCoroutine(DoConsecutiveSpeech(npcResponse.Item3, interactingCharacter.SayBye()));
+                StartCoroutine(DoConsecutiveSpeech(npcResponse.Item3, interactingCharacter.SayBye(), 0f));
             }
             else
             {
@@ -197,13 +203,8 @@ public class InteractionSystemManager : MonoBehaviour
         npcEmoResponse = interactingCharacter.YellAt();
 
         UpdateCharacterEmo(npcEmoResponse.Item1, npcEmoResponse.Item2);
-        StartCoroutine(ReturnToDefaultEmo());
+        StartCoroutine(ReturnToDefaultEmo(npcEmoResponse.Item3));
         UpdateRelStatusUI();
-
-        if (npcEmoResponse.Item3 == 0)
-        {
-            SayBye();
-        }
     }
 
 
@@ -217,13 +218,8 @@ public class InteractionSystemManager : MonoBehaviour
         }
 
         UpdateCharacterEmo(npcEmoResponse.Item1, npcEmoResponse.Item2);
-        StartCoroutine(ReturnToDefaultEmo());
+        StartCoroutine(ReturnToDefaultEmo(npcEmoResponse.Item3));
         UpdateRelStatusUI();
-
-        if (npcEmoResponse.Item3 == 0)
-        {
-            SayBye();
-        }
     }
 
 
@@ -239,7 +235,7 @@ public class InteractionSystemManager : MonoBehaviour
         {
             if (npcResponse.Item2 == 0)
             {
-                StartCoroutine(DoConsecutiveSpeech(npcResponse.Item3, interactingCharacter.SayBye()));
+                StartCoroutine(DoConsecutiveSpeech(npcResponse.Item3, interactingCharacter.SayBye(), 0f));
             }
             else
             {
@@ -306,9 +302,9 @@ public class InteractionSystemManager : MonoBehaviour
         borrowMoneyOptBtn2.onClick.AddListener( () => {ProceedBorrowMoney(borrowMoneyAmount2);} );
         borrowMoneyOptBtn3.onClick.AddListener( () => {ProceedBorrowMoney(borrowMoneyAmount3);} );
 
-        borrowMoneyOptBtn1.transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().text = "₱" + borrowMoneyAmount1.ToString();
-        borrowMoneyOptBtn2.transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().text = "₱" + borrowMoneyAmount2.ToString();
-        borrowMoneyOptBtn3.transform.parent.GetChild(0).GetComponent<TextMeshProUGUI>().text = "₱" + borrowMoneyAmount3.ToString();
+        borrowMoneyOptBtn1.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "₱" + borrowMoneyAmount1.ToString();
+        borrowMoneyOptBtn2.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "₱" + borrowMoneyAmount2.ToString();
+        borrowMoneyOptBtn3.gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "₱" + borrowMoneyAmount3.ToString();
     }
 
 
@@ -380,19 +376,32 @@ public class InteractionSystemManager : MonoBehaviour
     }
 
 
-    private IEnumerator DoConsecutiveSpeech(string msg1, string msg2)
+    private IEnumerator DoConsecutiveSpeech(string msg1, string msg2, float npcResponse3)
     {
         ToggleSpeechBubble(false, msg1);
         yield return new WaitForSeconds(1f);
         ToggleSpeechBubble(false, msg2);
+        yield return new WaitForSeconds(1f);
+
+        if (npcEmoResponse.Item3 == 0)
+        {
+            EndInteraction();
+        }
+
         yield return null;
     }
 
 
-    private IEnumerator ReturnToDefaultEmo()
+    private IEnumerator ReturnToDefaultEmo(float npcResponse3)
     {
         yield return new WaitForSeconds(2f);
         UpdateCharacterEmo(CharacterEmotions.DEFAULT, CharacterStance.DEFAULT);
+        
+        if (npcEmoResponse.Item3 == 0)
+        {
+            SayBye();
+        }
+
         yield return null;
     }
 
@@ -402,25 +411,25 @@ public class InteractionSystemManager : MonoBehaviour
         switch (emotion)
         {
             case CharacterEmotions.DEFAULT:
-                characterEmotionImageObj.sprite = interactingCharacter.defaultEmo;
+                characterEmotionImageObj[interactingCharacter.characterID - 1].sprite = interactingCharacter.defaultEmo;
                 break;
             case CharacterEmotions.ANGRY:
-                characterEmotionImageObj.sprite = interactingCharacter.angryEmo;
+                characterEmotionImageObj[interactingCharacter.characterID - 1].sprite = interactingCharacter.angryEmo;
                 break;
             case CharacterEmotions.CONFFUSED:
-                characterEmotionImageObj.sprite = interactingCharacter.confusedEmo;
+                characterEmotionImageObj[interactingCharacter.characterID - 1].sprite = interactingCharacter.confusedEmo;
                 break;
             case CharacterEmotions.HAPPY:
-                characterEmotionImageObj.sprite = interactingCharacter.happyEmo;
+                characterEmotionImageObj[interactingCharacter.characterID - 1].sprite = interactingCharacter.happyEmo;
                 break;
             case CharacterEmotions.NEUTRAL:
-                characterEmotionImageObj.sprite = interactingCharacter.neutralEmo;
+                characterEmotionImageObj[interactingCharacter.characterID - 1].sprite = interactingCharacter.neutralEmo;
                 break;
             case CharacterEmotions.SAD:
-                characterEmotionImageObj.sprite = interactingCharacter.sadEmo;
+                characterEmotionImageObj[interactingCharacter.characterID - 1].sprite = interactingCharacter.sadEmo;
                 break;
             default:
-                characterEmotionImageObj.sprite = interactingCharacter.defaultEmo;
+                characterEmotionImageObj[interactingCharacter.characterID - 1].sprite = interactingCharacter.defaultEmo;
                 break;
         }
 
@@ -439,5 +448,7 @@ public class InteractionSystemManager : MonoBehaviour
                 characterBodyImageObj.sprite = interactingCharacter.defaultBody;
                 break;
         }
+        characterEmotionImageObj[interactingCharacter.characterID - 1].gameObject.SetActive(true);
+        characterEmotionImageObj[interactingCharacter.characterID - 1].SetNativeSize();
     }
 }

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990bc42e7e295a74291254d230eab176, type: 3}
   m_Name: Girl3
   m_EditorClassIdentifier: 
+  characterName: Eduardo Lim
+  characterGender: 1
   characterID: 6
   bustIcon: {fileID: 21300000, guid: 5dad3650e3b98cb4c860f5fbf1d45622, type: 3}
   defaultCharacter: {fileID: 21300000, guid: 5c7f9c70b8df0134e8cc3d0f0c5432c1, type: 3}
@@ -25,4 +27,8 @@ MonoBehaviour:
   confusedEmo: {fileID: 21300000, guid: 5f7cfe082c35d2049b7f261a328c2b27, type: 3}
   neutralEmo: {fileID: 21300000, guid: 908200d525d57e84f8e3d318cf785f86, type: 3}
   relStatus: 0
-  relStatBarValue: 0
+  relStatBarValue: 15
+  currentDebt: 0
+  numberObtained: 0
+  beenFriends: 0
+  currentBuildiing: 16

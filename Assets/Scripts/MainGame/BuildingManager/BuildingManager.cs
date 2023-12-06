@@ -163,6 +163,7 @@ public class BuildingManager : MonoBehaviour
             {
                 GameObject newNpc = Instantiate(npcPrefab, Vector3.zero, Quaternion.identity, npcHolder);
                 newNpc.GetComponent<CharactersObj>().SetupCharacter(character, false);
+                newNpc.GetComponent<Button>().onClick.AddListener( () => {GameManager.Instance.InteractWithNPC(character.characterName);;});
             }
         }
     } 

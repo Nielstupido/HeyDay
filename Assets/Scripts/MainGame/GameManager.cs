@@ -151,13 +151,13 @@ public class GameManager : MonoBehaviour
             if (character.characterGender == Gender.MALE)
             {
                 randomNum = UnityEngine.Random.Range(0, characterNamesMale.Count);
-                character.PrepareCharacter(characterNamesMale[randomNum], 15);
+                character.PrepareCharacter(characterNamesMale[randomNum], 15, RelStatus.STRANGERS);
                 characterNamesMale.RemoveAt(randomNum);
             }
             else
             {
                 randomNum = UnityEngine.Random.Range(0, characterNamesFemale.Count);
-                character.PrepareCharacter(characterNamesFemale[randomNum], 15);
+                character.PrepareCharacter(characterNamesFemale[randomNum], 15, RelStatus.STRANGERS);
                 characterNamesFemale.RemoveAt(randomNum);
             }
 
@@ -202,8 +202,15 @@ public class GameManager : MonoBehaviour
 
     public void InteractWithNPC(string characterName)
     {
-        Debug.Log("npc clicked");
-        interactionSystemManager.Interact( characters.Find((character) => character.name == characterName) );
+        Debug.Log("current player is = " + characterName);
+        foreach(CharactersScriptableObj character in characters)
+        {
+            if (characterName == character.characterName)
+            {
+                interactionSystemManager.Interact(character);
+                break;
+            }
+        }
     }
 
 

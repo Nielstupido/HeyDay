@@ -104,13 +104,14 @@ public class CharactersScriptableObj : ScriptableObject
 
 
     //<<<<<<<<<<<<<<<<<<<< PUBLIC METHODS >>>>>>>>>>>>>>>>>>>>>>//
-    public void PrepareCharacter(string name, int relStatVal)
+    public void PrepareCharacter(string name, int relStatVal, RelStatus savedRelStatus)
     {
         socialEnergyLvl = UnityEngine.Random.Range(1, 3);
         currentSocialEnergyLvl = socialEnergyLvl;
         characterName = name;
         relStatBarValue = relStatVal;
         beenFriends = false;
+        relStatus = savedRelStatus;
     }
     
 
