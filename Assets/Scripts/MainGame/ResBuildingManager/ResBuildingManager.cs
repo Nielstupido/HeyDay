@@ -80,6 +80,11 @@ public class ResBuildingManager : MonoBehaviour
 
     private void ComputeBillings(float currentDayCount)
     {
+        if (Player.Instance.CurrentPlayerPlace == null)
+        {
+            return;
+        }
+        
         stayCount++;
         totalBilling = 0;
 

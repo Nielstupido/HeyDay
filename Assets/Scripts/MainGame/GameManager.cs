@@ -202,6 +202,7 @@ public class GameManager : MonoBehaviour
 
     public void InteractWithNPC(string characterName)
     {
+        Debug.Log("npc clicked");
         interactionSystemManager.Interact( characters.Find((character) => character.name == characterName) );
     }
 

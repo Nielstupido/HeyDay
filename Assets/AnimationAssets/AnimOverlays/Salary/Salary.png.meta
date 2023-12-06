@@ -119,10 +119,10 @@ TextureImporter:
       name: Salary_0
       rect:
         serializedVersion: 2
-        x: 301
-        y: 492
-        width: 241
-        height: 243
+        x: 0
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: Salary_1
       rect:
         serializedVersion: 2
-        x: 861
-        y: 492
-        width: 240
-        height: 243
+        x: 560
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,10 +161,10 @@ TextureImporter:
       name: Salary_2
       rect:
         serializedVersion: 2
-        x: 1122
-        y: 492
-        width: 239
-        height: 245
+        x: 1120
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +182,10 @@ TextureImporter:
       name: Salary_3
       rect:
         serializedVersion: 2
-        x: 1681
-        y: 492
-        width: 239
-        height: 245
+        x: 1680
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +203,10 @@ TextureImporter:
       name: Salary_4
       rect:
         serializedVersion: 2
-        x: 2426
-        y: 492
-        width: 241
-        height: 242
+        x: 2240
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,10 +224,10 @@ TextureImporter:
       name: Salary_5
       rect:
         serializedVersion: 2
-        x: 120
-        y: 75
-        width: 242
-        height: 240
+        x: 0
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,10 +245,10 @@ TextureImporter:
       name: Salary_6
       rect:
         serializedVersion: 2
-        x: 680
-        y: 75
-        width: 242
-        height: 240
+        x: 560
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,10 +266,10 @@ TextureImporter:
       name: Salary_7
       rect:
         serializedVersion: 2
-        x: 1192
-        y: 69
-        width: 240
-        height: 241
+        x: 1120
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,10 +287,10 @@ TextureImporter:
       name: Salary_8
       rect:
         serializedVersion: 2
-        x: 1707
-        y: 68
-        width: 241
-        height: 243
+        x: 1680
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,10 +308,10 @@ TextureImporter:
       name: Salary_9
       rect:
         serializedVersion: 2
-        x: 2267
-        y: 68
-        width: 241
-        height: 243
+        x: 2240
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

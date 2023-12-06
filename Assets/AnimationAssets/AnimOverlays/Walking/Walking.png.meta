@@ -119,10 +119,10 @@ TextureImporter:
       name: Walking_0
       rect:
         serializedVersion: 2
-        x: 1409
-        y: 715
-        width: 63
-        height: 57
+        x: 0
+        y: 0
+        width: 560
+        height: 840
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: Walking_1
       rect:
         serializedVersion: 2
-        x: 1435
-        y: 757
-        width: 94
-        height: 82
+        x: 560
+        y: 0
+        width: 560
+        height: 840
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,10 +161,10 @@ TextureImporter:
       name: Walking_2
       rect:
         serializedVersion: 2
-        x: 2095
-        y: 738
-        width: 84
-        height: 90
+        x: 1120
+        y: 0
+        width: 560
+        height: 840
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +182,10 @@ TextureImporter:
       name: Walking_3
       rect:
         serializedVersion: 2
-        x: 2656
-        y: 738
-        width: 83
-        height: 90
+        x: 1680
+        y: 0
+        width: 560
+        height: 840
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +203,10 @@ TextureImporter:
       name: Walking_4
       rect:
         serializedVersion: 2
-        x: 2072
-        y: 705
-        width: 53
-        height: 52
+        x: 2240
+        y: 0
+        width: 560
+        height: 840
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,90 +216,6 @@ TextureImporter:
       bones: []
       spriteID: 94bc8175354ae3d49999ad4c5b0f2d87
       internalID: 62241406
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walking_5
-      rect:
-        serializedVersion: 2
-        x: 2631
-        y: 705
-        width: 53
-        height: 52
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0720ee6aaaef43a4aab0518ffd9a7e2c
-      internalID: 1989338951
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walking_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 578
-        width: 99
-        height: 109
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ea31cdfc9b1b40c4dabb4c68070b1d4b
-      internalID: -1402291642
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walking_7
-      rect:
-        serializedVersion: 2
-        x: 129
-        y: 458
-        width: 104
-        height: 110
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 90142296d7b6cd04b94b694742cd5f93
-      internalID: 649145715
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Walking_8
-      rect:
-        serializedVersion: 2
-        x: 1349
-        y: 38
-        width: 74
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c47e2a7bfb3903c4ba769ad0942f60be
-      internalID: 1001549173
       vertices: []
       indices: 
       edges: []
@@ -316,12 +232,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Walking_3: -1265775216
-      Walking_6: -1402291642
-      Walking_7: 649145715
       Walking_1: 659003491
-      Walking_5: 1989338951
       Walking_2: 281989232
-      Walking_8: 1001549173
       Walking_4: 62241406
       Walking_0: 1367470238
   spritePackingTag: 

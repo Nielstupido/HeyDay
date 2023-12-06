@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a340b1c7b532e147bf3a96d081e895f, type: 3}
   m_Name: WalkAnim
   m_EditorClassIdentifier: 
-  actionAnimation: 0
+  actionAnimation: 18
   firstImage: {fileID: 1367470238, guid: cb8cc03cb91fa1640a0ff607537b9386, type: 3}
-  animController: {fileID: 9100000, guid: 63728251714a0b44d9d17322f597cca2, type: 2}
+  animController: {fileID: 9100000, guid: 152052c592cf351428c1dd6075d78756, type: 2}

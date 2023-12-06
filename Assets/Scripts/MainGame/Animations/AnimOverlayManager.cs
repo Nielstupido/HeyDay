@@ -22,7 +22,10 @@ public enum ActionAnimations
     DENTALSERVICE,
     EAT,
     STUDY,
-    CHAT
+    CHAT, 
+    BUY,
+    SALARY, 
+    WALK
 }
 
 

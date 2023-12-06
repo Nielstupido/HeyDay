@@ -64,6 +64,15 @@ public class BuildingManager : MonoBehaviour
     }
 
 
+    private IEnumerator StartTravel(ActionAnimations anim, float waitingTime)
+    {
+        AnimOverlayManager.Instance.StartAnim(anim);
+        yield return new WaitForSeconds(waitingTime);
+        AnimOverlayManager.Instance.StopAnim();
+        yield return null;
+    }
+
+
     public void Walk()
     {
         Player.Instance.Walk(10f);
@@ -71,6 +80,7 @@ public class BuildingManager : MonoBehaviour
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
         playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.WALK);
+        StartTravel(ActionAnimations.WALK, 3f);
         LevelManager.onFinishedPlayerAction(MissionType.WALK);
         LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ROBBERY);
     }
@@ -86,12 +96,14 @@ public class BuildingManager : MonoBehaviour
         if (Player.Instance.PlayerOwnedVehicles.Count == 0)
         {
             playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.COMMUTE);
+            StartTravel(ActionAnimations.COMMUTE, 3f);
             LevelManager.onFinishedPlayerAction(MissionType.COMMUTE);
             LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ACCIDENT);
         }
         else
         {
             playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.DRIVE);
+            StartTravel(ActionAnimations.DRIVE, 3f);
         }
     }
 
@@ -151,7 +163,6 @@ public class BuildingManager : MonoBehaviour
             {
                 GameObject newNpc = Instantiate(npcPrefab, Vector3.zero, Quaternion.identity, npcHolder);
                 newNpc.GetComponent<CharactersObj>().SetupCharacter(character, false);
-                newNpc.GetComponent<Button>().onClick.AddListener( () => {GameManager.Instance.InteractWithNPC(character.characterName);} );
             }
         }
     } 
@@ -159,9 +170,9 @@ public class BuildingManager : MonoBehaviour
 
     private void RemoveNpc()
     {
-        for (var i = 0; i < buttonsHolder.childCount; i++)
+        for (var i = 0; i < npcHolder.childCount; i++)
         {
-            Object.Destroy(buttonsHolder.GetChild(i).gameObject);
+            Object.Destroy(npcHolder.GetChild(i).gameObject);
         }
     }
 

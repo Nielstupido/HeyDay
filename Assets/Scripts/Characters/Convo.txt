@@ -3,21 +3,21 @@ private string[] greetingsStrangers = {
                             "Whut?",
                             "Hm?"
                             };
-    private string[] greetingsFriends = {
-                            "Hi",
-                            "Hello"
-                            };
-    private string[] greetingsGoodFriends = {
-                            "Hi!",
-                            "Hello!",
-                            "Zup!"
-                            };
-    private string[] greetingsBestBuddies = {
-                            "Hey!!",
-                            "Wazzuuup",
-                            };
-    private string[] greetingsEnemies = {
-                            "??",
-                            "What do you need???",
-                            "What?!"
-                            };
+private string[] greetingsFriends = {
+                        "Hi",
+                        "Hello"
+                        };
+private string[] greetingsGoodFriends = {
+                        "Hi!",
+                        "Hello!",
+                        "Zup!"
+                        };
+private string[] greetingsBestBuddies = {
+                        "Hey!!",
+                        "Wazzuuup",
+                        };
+private string[] greetingsEnemies = {
+                        "??",
+                        "What do you need???",
+                        "What?!"
+                        };

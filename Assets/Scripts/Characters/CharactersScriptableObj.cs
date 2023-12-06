@@ -72,8 +72,8 @@ public class CharactersScriptableObj : ScriptableObject
                             "My apologies, I need to go"
                             };
     private string[] byeBestBuddies = {
-                            "Hey!!",
-                            "Wazzuuup"
+                            "Don't get run over",
+                            "See you later, alligator"
                             };
     private string[] byeEnemies = {
                             "Bye",

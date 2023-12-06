@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a340b1c7b532e147bf3a96d081e895f, type: 3}
   m_Name: SalaryAnim
   m_EditorClassIdentifier: 
-  actionAnimation: 0
+  actionAnimation: 17
   firstImage: {fileID: 1078074385, guid: 8cd1fb341fbe07a4381fae01fa520729, type: 3}
   animController: {fileID: 9100000, guid: 61a0860c71690744bbabf11d816b6991, type: 2}
