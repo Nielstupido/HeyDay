@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a340b1c7b532e147bf3a96d081e895f, type: 3}
+  m_Name: HairSalonAnim
+  m_EditorClassIdentifier: 
+  actionAnimation: 8
+  firstImage: {fileID: 1559064521, guid: 777cdb3e4da95a7428d285bdb67bc5c7, type: 3}
+  animController: {fileID: 9100000, guid: a2df2000909f43e48a0beb1043739614, type: 2}

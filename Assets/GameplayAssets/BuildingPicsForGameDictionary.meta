@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/GameplayAssets/BuildingPicsForGameDictionary.meta
 guid: 35ca39fc3ab53de4d8e7cd5f5e59d551
 folderAsset: yes
+========
+guid: a0f6d628e00ac7c49bc64f50a45b4576
+>>>>>>>> pr/24:Assets/Scenes/MainGameGairus.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

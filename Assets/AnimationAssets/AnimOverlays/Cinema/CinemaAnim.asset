@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a340b1c7b532e147bf3a96d081e895f, type: 3}
+  m_Name: CinemaAnim
+  m_EditorClassIdentifier: 
+  actionAnimation: 10
+  firstImage: {fileID: -574221368, guid: effaf0f6438dda54ab20d326b0ddac3b, type: 3}
+  animController: {fileID: 9100000, guid: dafa3cc58625c084a8a698b6040697f3, type: 2}
