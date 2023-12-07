@@ -42,10 +42,10 @@ public class PlayerTravelManager : MonoBehaviour
     }
 
 
-    public void PlayerTravel(Building selectedBuilding, ModeOfTravels modeOfTravel)
+    public void PlayerTravel(Building selectedBuilding, ModeOfTravels modeOfTravel, ActionAnimations actionAnimation)
     {
         currentModeOfTravel = modeOfTravel;
-        StartCoroutine(StartTravelingOverlay(2f, selectedBuilding));
+        StartCoroutine(StartTravelingOverlay(2f, selectedBuilding, actionAnimation));
     }
 
 
@@ -58,9 +58,9 @@ public class PlayerTravelManager : MonoBehaviour
     }
 
 
-    private IEnumerator StartTravelingOverlay(float travelingTime, Building selectedBuilding)
+    private IEnumerator StartTravelingOverlay(float travelingTime, Building selectedBuilding, ActionAnimations actionAnimation)
     {
-        AnimOverlayManager.Instance.StartAnim(ActionAnimations.COMMUTE);
+        AnimOverlayManager.Instance.StartAnim(actionAnimation);
         MovePlayerModel(selectedBuilding);
         yield return new WaitForSeconds(travelingTime);
         AnimOverlayManager.Instance.StopAnim();

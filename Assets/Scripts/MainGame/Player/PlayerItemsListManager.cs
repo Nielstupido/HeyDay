@@ -17,10 +17,10 @@ public class PlayerItemsListManager : MonoBehaviour
 
 
 
-    public void ShowItems(List<Items> playerItems)
+    public void ShowItems(ItemType itemType, List<Items> playerItems)
     {
         itemsHolderOverlay.SetActive(true);
-        switch (playerItems[0].itemType)
+        switch (itemType)
         {
             case ItemType.VEHICLE:
                 titleText.text = "Vehicles Owned";

@@ -50,7 +50,8 @@ public enum ItemType
 public enum UIactions
 {
     SHOW_DEFAULT_BOTTOM_OVERLAY,
-    SHOW_SMALL_BOTTOM_OVERLAY
+    SHOW_SMALL_BOTTOM_OVERLAY,
+    HIDE_BOTTOM_OVERLAY
 }
 
 
@@ -225,6 +226,11 @@ public class GameManager : MonoBehaviour
         {
             smallBottomOverlay.SetActive(false);
             defaultBottomOverlay.SetActive(true);
+        }
+        else if (uIaction == UIactions.HIDE_BOTTOM_OVERLAY)
+        {
+            smallBottomOverlay.SetActive(false);
+            defaultBottomOverlay.SetActive(false);
         }
     }
 

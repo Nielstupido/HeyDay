@@ -25,7 +25,8 @@ public enum ActionAnimations
     CHAT, 
     BUY,
     SALARY, 
-    WALK
+    WALK,
+    DIAL
 }
 
 

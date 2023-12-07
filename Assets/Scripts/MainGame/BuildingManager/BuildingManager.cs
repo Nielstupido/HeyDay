@@ -28,7 +28,8 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private CarCatalogueManager carCatalogueManager;
     [SerializeField] private SwitchMenuItem switchMenuItem;
     [SerializeField] private MallManager mallManager;
-    [SerializeField] private BoxCollider resBuildingCollider;
+    [SerializeField] private BoxCollider resAreaCollider;
+    [SerializeField] private List<BoxCollider> resBuildingColliders = new List<BoxCollider>();
     private Building currentSelectedBuilding;
     public delegate void OnBuildingBtnClicked(Buttons clickedBtn);
     public OnBuildingBtnClicked onBuildingBtnClicked;
@@ -61,15 +62,11 @@ public class BuildingManager : MonoBehaviour
         camera2.SetActive(false);
         enterBtn.GetComponent<Button>().onClick.AddListener( () => { EnterBuilding(currentSelectedBuilding); } );
         buildingSelectOverlay.SetActive(false);
-    }
 
-
-    private IEnumerator StartTravel(ActionAnimations anim, float waitingTime)
-    {
-        AnimOverlayManager.Instance.StartAnim(anim);
-        yield return new WaitForSeconds(waitingTime);
-        AnimOverlayManager.Instance.StopAnim();
-        yield return null;
+        foreach (BoxCollider boxCollider in resBuildingColliders)
+        {
+            boxCollider.enabled = false;
+        }
     }
 
 
@@ -79,8 +76,7 @@ public class BuildingManager : MonoBehaviour
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
-        playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.WALK);
-        StartTravel(ActionAnimations.WALK, 3f);
+        playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.WALK, ActionAnimations.WALK);
         LevelManager.onFinishedPlayerAction(MissionType.WALK);
         LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ROBBERY);
     }
@@ -95,15 +91,13 @@ public class BuildingManager : MonoBehaviour
 
         if (Player.Instance.PlayerOwnedVehicles.Count == 0)
         {
-            playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.COMMUTE);
-            StartTravel(ActionAnimations.COMMUTE, 3f);
+            playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.COMMUTE, ActionAnimations.COMMUTE);
             LevelManager.onFinishedPlayerAction(MissionType.COMMUTE);
             LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ACCIDENT);
         }
         else
         {
-            playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.DRIVE);
-            StartTravel(ActionAnimations.DRIVE, 3f);
+            playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.DRIVE, ActionAnimations.DRIVE);
         }
     }
 
@@ -194,7 +188,12 @@ public class BuildingManager : MonoBehaviour
         resViewHUD.SetActive(true);
         camera2.SetActive(true);
         camera1.SetActive(false);
-        resBuildingCollider.enabled = false;
+        resAreaCollider.enabled = false;
+
+        foreach (BoxCollider boxCollider in resBuildingColliders)
+        {
+            boxCollider.enabled = true;
+        }
     }
 
 
@@ -204,7 +203,12 @@ public class BuildingManager : MonoBehaviour
         camera1.SetActive(true);
         resViewHUD.SetActive(false);
         camera2.SetActive(false);
-        resBuildingCollider.enabled = true;
+        resAreaCollider.enabled = true;
+
+        foreach (BoxCollider boxCollider in resBuildingColliders)
+        {
+            boxCollider.enabled = false;
+        }
     }
 
 

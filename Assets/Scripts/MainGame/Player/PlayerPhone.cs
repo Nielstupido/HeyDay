@@ -25,6 +25,7 @@ public class PlayerPhone : MonoBehaviour
     [SerializeField] private GameObject phoneBookOverlay;
     [SerializeField] private Transform contactListHolder;
     [SerializeField] private GameObject contactItemPrefab;
+    [SerializeField] private GameObject noContactsText;
 
     //Goaltracker
     [SerializeField] private GameObject goalTrackerOverlay;
@@ -51,6 +52,14 @@ public class PlayerPhone : MonoBehaviour
     public void OpenPhone()
     {
         phoneOverlay.SetActive(true);
+        GameUiController.onScreenOverlayChanged(UIactions.SHOW_SMALL_BOTTOM_OVERLAY);
+    }
+
+
+    public void ClosePhone()
+    {
+        phoneOverlay.SetActive(false);
+        GameUiController.onScreenOverlayChanged(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
     }
 
 
@@ -96,26 +105,32 @@ public class PlayerPhone : MonoBehaviour
     //<<<<<<<< Phonebook >>>>>>>
     public void PhoneBook()
     {
+        noContactsText.SetActive(false);
         phoneBookOverlay.SetActive(true); 
         LevelManager.onFinishedPlayerAction(MissionType.USEAPP, interactedApp:APPS.PHONEBOOK);
+        PrepareContactList();
     }
 
 
-    public void CallCharacter(string characterName)
+    public void DialContact(string characterName)
     {
 
     }
 
     
-    public void PrepareContactList()
+    private void PrepareContactList()
     {
         RemoveContacts();
-        
+        if (Player.Instance.ContactList.Count == 0)
+        {
+            noContactsText.SetActive(true);
+            return;
+        }
+
         foreach(string characterName in Player.Instance.ContactList)
         {
             GameObject newNpc = Instantiate(contactItemPrefab, Vector3.zero, Quaternion.identity, contactListHolder);
-            newNpc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = characterName;
-            newNpc.GetComponent<Button>().onClick.AddListener( () => {CallCharacter(characterName);} );
+            newNpc.GetComponent<ContactItem>().SetupContactItem(characterName, this);
         }
     } 
 
