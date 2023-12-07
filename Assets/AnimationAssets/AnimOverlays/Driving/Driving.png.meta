@@ -119,10 +119,10 @@ TextureImporter:
       name: Driving_0
       rect:
         serializedVersion: 2
-        x: 563
-        y: 480
-        width: 542
-        height: 274
+        x: 560
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,10 +140,10 @@ TextureImporter:
       name: Driving_1
       rect:
         serializedVersion: 2
-        x: 1122
-        y: 480
-        width: 543
-        height: 274
+        x: 1120
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,10 +161,10 @@ TextureImporter:
       name: Driving_2
       rect:
         serializedVersion: 2
-        x: 1682
-        y: 480
-        width: 543
-        height: 274
+        x: 1680
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,9 +183,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2240
-        y: 456
-        width: 146
-        height: 108
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +203,10 @@ TextureImporter:
       name: Driving_4
       rect:
         serializedVersion: 2
-        x: 2284
-        y: 474
-        width: 515
-        height: 283
+        x: 0
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,10 +224,10 @@ TextureImporter:
       name: Driving_5
       rect:
         serializedVersion: 2
-        x: 1
-        y: 36
-        width: 146
-        height: 108
+        x: 560
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,10 +245,10 @@ TextureImporter:
       name: Driving_6
       rect:
         serializedVersion: 2
-        x: 44
-        y: 54
-        width: 514
-        height: 283
+        x: 1120
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,10 +266,10 @@ TextureImporter:
       name: Driving_7
       rect:
         serializedVersion: 2
-        x: 560
-        y: 36
-        width: 146
-        height: 108
+        x: 1680
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,10 +287,10 @@ TextureImporter:
       name: Driving_8
       rect:
         serializedVersion: 2
-        x: 604
-        y: 54
-        width: 515
-        height: 283
+        x: 2240
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,132 +300,6 @@ TextureImporter:
       bones: []
       spriteID: c3ea19ce2c8181e438fa96fab7a0814f
       internalID: 1906655882
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Driving_9
-      rect:
-        serializedVersion: 2
-        x: 1120
-        y: 36
-        width: 147
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f67192ac9c1b5e9409c8d869cc88b1d2
-      internalID: 1617083398
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Driving_10
-      rect:
-        serializedVersion: 2
-        x: 1164
-        y: 54
-        width: 514
-        height: 283
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e82e313214646b4458051730a87408d5
-      internalID: -206091716
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Driving_11
-      rect:
-        serializedVersion: 2
-        x: 1681
-        y: 36
-        width: 146
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fd0d7e38b2daa0944978555f855e0fc6
-      internalID: -262042428
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Driving_12
-      rect:
-        serializedVersion: 2
-        x: 1725
-        y: 54
-        width: 514
-        height: 283
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 84ed7e6b98c6982429b63f6b8be03ea3
-      internalID: 302403979
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Driving_13
-      rect:
-        serializedVersion: 2
-        x: 2240
-        y: 36
-        width: 146
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6a16624b96014c44a977de32a8089cfd
-      internalID: -1557283001
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Driving_14
-      rect:
-        serializedVersion: 2
-        x: 2284
-        y: 54
-        width: 515
-        height: 283
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d4389ab5de837fc469d67577c14675a5
-      internalID: -529630298
       vertices: []
       indices: 
       edges: []
@@ -442,19 +316,13 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Driving_4: 48428637
-      Driving_9: 1617083398
       Driving_8: 1906655882
-      Driving_11: -262042428
-      Driving_10: -206091716
       Driving_0: 178538411
       Driving_7: -672116777
       Driving_1: -747504401
       Driving_3: 1196349782
-      Driving_12: 302403979
       Driving_5: -1762950832
-      Driving_14: -529630298
       Driving_2: 1269717766
-      Driving_13: -1557283001
       Driving_6: 1037061285
   spritePackingTag: 
   pSDRemoveMatte: 0

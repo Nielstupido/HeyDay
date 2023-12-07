@@ -131,10 +131,10 @@ TextureImporter:
       name: Hair Salon_0
       rect:
         serializedVersion: 2
-        x: 50
-        y: 447
-        width: 362
-        height: 393
+        x: 0
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,10 +152,10 @@ TextureImporter:
       name: Hair Salon_1
       rect:
         serializedVersion: 2
-        x: 1310
-        y: 737
-        width: 28
-        height: 57
+        x: 560
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,10 +173,10 @@ TextureImporter:
       name: Hair Salon_2
       rect:
         serializedVersion: 2
-        x: 1351
-        y: 705
-        width: 65
-        height: 93
+        x: 1120
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,10 +194,10 @@ TextureImporter:
       name: Hair Salon_3
       rect:
         serializedVersion: 2
-        x: 1706
-        y: 760
-        width: 26
-        height: 40
+        x: 1680
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,10 +215,10 @@ TextureImporter:
       name: Hair Salon_4
       rect:
         serializedVersion: 2
-        x: 1734
-        y: 774
-        width: 25
-        height: 42
+        x: 2240
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,10 +236,10 @@ TextureImporter:
       name: Hair Salon_5
       rect:
         serializedVersion: 2
-        x: 1779
-        y: 789
-        width: 26
-        height: 42
+        x: 0
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,10 +257,10 @@ TextureImporter:
       name: Hair Salon_6
       rect:
         serializedVersion: 2
-        x: 1812
-        y: 781
-        width: 60
-        height: 50
+        x: 560
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,10 +278,10 @@ TextureImporter:
       name: Hair Salon_7
       rect:
         serializedVersion: 2
-        x: 1881
-        y: 793
-        width: 38
-        height: 39
+        x: 1120
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,10 +299,10 @@ TextureImporter:
       name: Hair Salon_8
       rect:
         serializedVersion: 2
-        x: 2430
-        y: 737
-        width: 28
-        height: 57
+        x: 1680
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,10 +320,10 @@ TextureImporter:
       name: Hair Salon_9
       rect:
         serializedVersion: 2
-        x: 2471
-        y: 705
-        width: 64
-        height: 93
+        x: 2240
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -333,300 +333,6 @@ TextureImporter:
       bones: []
       spriteID: bed289ecdd5b958409be2d0d5534aa0d
       internalID: 1386914439
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_10
-      rect:
-        serializedVersion: 2
-        x: 610
-        y: 447
-        width: 357
-        height: 324
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d522808fd7a32c4dbbed6239d298142
-      internalID: 1705158947
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_11
-      rect:
-        serializedVersion: 2
-        x: 1170
-        y: 447
-        width: 362
-        height: 336
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 281f52aab1461ad4587d6931d7a8f969
-      internalID: -1624675947
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_12
-      rect:
-        serializedVersion: 2
-        x: 1714
-        y: 551
-        width: 377
-        height: 169
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ff118ce62856b0648baff3d8768bcc0d
-      internalID: 1185686438
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_13
-      rect:
-        serializedVersion: 2
-        x: 2291
-        y: 447
-        width: 361
-        height: 336
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 99bc460970c862d4f81a40ab97a680b3
-      internalID: 932233000
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_14
-      rect:
-        serializedVersion: 2
-        x: 1524
-        y: 418
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5854eb2a3d520b84f94f3fd590984cfd
-      internalID: -1971428616
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_15
-      rect:
-        serializedVersion: 2
-        x: 2643
-        y: 418
-        width: 9
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5f0b281c05db24149b693258976850ac
-      internalID: -63673731
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_16
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 27
-        width: 362
-        height: 336
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b30a674249808474b978b639141f5bc9
-      internalID: -2126438619
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_17
-      rect:
-        serializedVersion: 2
-        x: 191
-        y: 317
-        width: 27
-        height: 57
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 36b780932c082dc4ba58d6648cde1629
-      internalID: -95463318
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_18
-      rect:
-        serializedVersion: 2
-        x: 232
-        y: 285
-        width: 64
-        height: 93
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e59ef1dbba1e17a4bb69f7c0da6a1c71
-      internalID: -1146464089
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_19
-      rect:
-        serializedVersion: 2
-        x: 610
-        y: 27
-        width: 357
-        height: 324
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 18fcd8e1fa67d824fbd54f687e917a6e
-      internalID: 1755585190
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_20
-      rect:
-        serializedVersion: 2
-        x: 1170
-        y: 27
-        width: 358
-        height: 325
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2ab0e36e6018d5f408198982960ba71b
-      internalID: 123208309
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_21
-      rect:
-        serializedVersion: 2
-        x: 1730
-        y: 27
-        width: 358
-        height: 324
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 79a863f63220b864faa1e222e549cddc
-      internalID: 1848023237
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_22
-      rect:
-        serializedVersion: 2
-        x: 2291
-        y: 27
-        width: 357
-        height: 325
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 67cca05e5c733bd4ba88da072c74ced8
-      internalID: -1652184314
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hair Salon_23
-      rect:
-        serializedVersion: 2
-        x: 403
-        y: 0
-        width: 9
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 94adce800452ab043bd06d9889ee58a1
-      internalID: -289575870
       vertices: []
       indices: 
       edges: []
@@ -644,27 +350,13 @@ TextureImporter:
     nameFileIdTable:
       Hair Salon_1: 1933238005
       Hair Salon_9: 1386914439
-      Hair Salon_10: 1705158947
-      Hair Salon_14: -1971428616
-      Hair Salon_23: -289575870
-      Hair Salon_17: -95463318
       Hair Salon_0: 1559064521
-      Hair Salon_12: 1185686438
       Hair Salon_3: 165314039
-      Hair Salon_15: -63673731
       Hair Salon_6: -1464025654
-      Hair Salon_21: 1848023237
-      Hair Salon_19: 1755585190
-      Hair Salon_22: -1652184314
       Hair Salon_8: 1028057903
-      Hair Salon_20: 123208309
-      Hair Salon_18: -1146464089
       Hair Salon_4: -286353220
       Hair Salon_7: -1096719653
-      Hair Salon_11: -1624675947
-      Hair Salon_13: 932233000
       Hair Salon_2: -1845759638
-      Hair Salon_16: -2126438619
       Hair Salon_5: 1999633299
   spritePackingTag: 
   pSDRemoveMatte: 0

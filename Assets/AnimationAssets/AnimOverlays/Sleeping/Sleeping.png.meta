@@ -131,10 +131,10 @@ TextureImporter:
       name: Sleeping_0
       rect:
         serializedVersion: 2
-        x: 65
-        y: 507
-        width: 120
-        height: 94
+        x: 0
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,10 +152,10 @@ TextureImporter:
       name: Sleeping_1
       rect:
         serializedVersion: 2
-        x: 624
-        y: 507
-        width: 120
-        height: 94
+        x: 560
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,10 +173,10 @@ TextureImporter:
       name: Sleeping_2
       rect:
         serializedVersion: 2
-        x: 1259
-        y: 547
-        width: 127
-        height: 119
+        x: 1120
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,10 +194,10 @@ TextureImporter:
       name: Sleeping_3
       rect:
         serializedVersion: 2
-        x: 1818
-        y: 548
-        width: 127
-        height: 118
+        x: 1680
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,10 +215,10 @@ TextureImporter:
       name: Sleeping_4
       rect:
         serializedVersion: 2
-        x: 2418
-        y: 586
-        width: 5
-        height: 7
+        x: 2240
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,10 +236,10 @@ TextureImporter:
       name: Sleeping_5
       rect:
         serializedVersion: 2
-        x: 2456
-        y: 590
-        width: 138
-        height: 126
+        x: 0
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,10 +257,10 @@ TextureImporter:
       name: Sleeping_6
       rect:
         serializedVersion: 2
-        x: 954
-        y: 330
-        width: 31
-        height: 32
+        x: 560
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,10 +278,10 @@ TextureImporter:
       name: Sleeping_7
       rect:
         serializedVersion: 2
-        x: 999
-        y: 341
-        width: 31
-        height: 32
+        x: 1120
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,10 +299,10 @@ TextureImporter:
       name: Sleeping_8
       rect:
         serializedVersion: 2
-        x: 1514
-        y: 330
-        width: 32
-        height: 33
+        x: 1680
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,10 +320,10 @@ TextureImporter:
       name: Sleeping_9
       rect:
         serializedVersion: 2
-        x: 1559
-        y: 343
-        width: 32
-        height: 30
+        x: 2240
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -333,237 +333,6 @@ TextureImporter:
       bones: []
       spriteID: 796f4f2fb5e81074d8fb3cec554c3a24
       internalID: 57095884
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sleeping_10
-      rect:
-        serializedVersion: 2
-        x: 2634
-        y: 330
-        width: 31
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6c464e4e5456fe74fa64314bbc4bfe52
-      internalID: -1804724309
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sleeping_11
-      rect:
-        serializedVersion: 2
-        x: 2679
-        y: 341
-        width: 31
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3eda3de24d9922e419631b741814ebb8
-      internalID: -2142285841
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sleeping_12
-      rect:
-        serializedVersion: 2
-        x: 980
-        y: 295
-        width: 30
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 18074f738549d5445b72bd25f09d39d2
-      internalID: 1899547163
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sleeping_13
-      rect:
-        serializedVersion: 2
-        x: 1014
-        y: 307
-        width: 31
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f86ba1dce17c4a749ac7666871d446bd
-      internalID: 502707143
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sleeping_14
-      rect:
-        serializedVersion: 2
-        x: 1539
-        y: 295
-        width: 31
-        height: 33
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89166a68588e4004986553c2a9d3d14d
-      internalID: -1152815798
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sleeping_15
-      rect:
-        serializedVersion: 2
-        x: 1573
-        y: 309
-        width: 31
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b16e1811df85da9449d66d1590c4f4d9
-      internalID: -7514785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sleeping_16
-      rect:
-        serializedVersion: 2
-        x: 1978
-        y: 217
-        width: 121
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 24514a4e445949241b8956865c5e3e4e
-      internalID: -9854834
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sleeping_17
-      rect:
-        serializedVersion: 2
-        x: 2659
-        y: 295
-        width: 31
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c3104951c6286ee419c4c1a46a1a2ea0
-      internalID: 593583771
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sleeping_18
-      rect:
-        serializedVersion: 2
-        x: 2693
-        y: 307
-        width: 31
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d3ac41b86fec4874ca3c607bb8cc0510
-      internalID: -130668984
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sleeping_19
-      rect:
-        serializedVersion: 2
-        x: 178
-        y: 166
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fe2a279b15a38ae4bb2c0be5efee45f5
-      internalID: -68547005
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Sleeping_20
-      rect:
-        serializedVersion: 2
-        x: 217
-        y: 169
-        width: 135
-        height: 127
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d75767255c1c5a14695f42dc67eebec8
-      internalID: 2049007812
       vertices: []
       indices: 
       edges: []
@@ -581,25 +350,14 @@ TextureImporter:
     nameFileIdTable:
       Sleeping_5: 1054929371
       Sleeping_3: 1466019626
-      Sleeping_12: 1899547163
-      Sleeping_11: -2142285841
       Sleeping_8: -2100947011
-      Sleeping_18: -130668984
       Sleeping_1: -1204281043
       Sleeping_6: 701396262
-      Sleeping_14: -1152815798
-      Sleeping_20: 2049007812
-      Sleeping_16: -9854834
       Sleeping_0: -561207607
-      Sleeping_19: -68547005
       Sleeping_4: -1802600908
-      Sleeping_13: 502707143
-      Sleeping_17: 593583771
       Sleeping_2: 1370920643
       Sleeping_7: 1250907588
-      Sleeping_15: -7514785
       Sleeping_9: 57095884
-      Sleeping_10: -1804724309
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
