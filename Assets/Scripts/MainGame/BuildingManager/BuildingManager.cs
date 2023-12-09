@@ -153,14 +153,29 @@ public class BuildingManager : MonoBehaviour
         
         foreach(CharactersScriptableObj character in GameManager.Instance.Characters)
         {
+            if (MeetUpSystem.Instance.CheckForPendingMeetup())
+            {
+                if (MeetUpSystem.Instance.GetMeetupDets().Item1 == currentSelectedBuilding && MeetUpSystem.Instance.GetMeetupDets().Item2 == character)
+                {
+                    InstantiateCharacter(character);
+                    continue;
+                }
+            }
+
             if (character.currentBuildiing == currentSelectedBuilding.buildingEnumName)
             {
-                GameObject newNpc = Instantiate(npcPrefab, Vector3.zero, Quaternion.identity, npcHolder);
-                newNpc.GetComponent<CharactersObj>().SetupCharacter(character, false);
-                newNpc.GetComponent<Button>().onClick.AddListener( () => {GameManager.Instance.InteractWithNPC(character.characterName);;});
+                InstantiateCharacter(character);
             }
         }
     } 
+
+
+    private void InstantiateCharacter(CharactersScriptableObj character)
+    {
+        GameObject newNpc = Instantiate(npcPrefab, Vector3.zero, Quaternion.identity, npcHolder);
+        newNpc.GetComponent<CharactersObj>().SetupCharacter(character, false);
+        newNpc.GetComponent<Button>().onClick.AddListener( () => {GameManager.Instance.InteractWithNPC(character.characterName);;});
+    }
 
 
     private void RemoveNpc()

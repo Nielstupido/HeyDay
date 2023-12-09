@@ -28,6 +28,8 @@ public class CharactersScriptableObj : ScriptableObject
     public bool numberObtained = false;
     public bool beenFriends;
     public Buildings currentBuildiing;
+    public bool gotCalledToday;
+
     private int socialEnergyLvl = 0;
     private int currentSocialEnergyLvl = 0;
     private int randomNum;
@@ -35,72 +37,97 @@ public class CharactersScriptableObj : ScriptableObject
 
     //Greetings
     private string[] greetingsStrangers = {
-                            "Yes?",
-                            "Whut?",
-                            "Hm?"
-                            };
+                                "Yes?",
+                                "Can I help you?",
+                                "Uhm, hello."
+                                };
     private string[] greetingsFriends = {
-                            "Hi",
-                            "Hello"
+                            "Nice to see you again!",
+                            "Hello! Long time no see.",
+                            "Hi there, friend!"
                             };
     private string[] greetingsGoodFriends = {
-                            "Hi!",
-                            "Hello!",
-                            "Zup!"
+                            "Well, hello! Long time.",
+                            "Oh Hi! Missed you.",
+                            "Hey! Ready to chat?"
                             };
     private string[] greetingsBestBuddies = {
-                            "Hey!!",
-                            "Wazzuuup"
+                            "Well, look who's here!",
+                            "Hey there, rockstar!",
+                            "Hey you, missed me?"
                             };
     private string[] greetingsEnemies = {
-                            "??",
+                            "Save the pleasantries.",
                             "What do you need???",
-                            "What?!"
+                            "What now?"
                             };
 
     //Bye-byes
     private string[] byeStrangers = {
-                            "Eh",
-                            "Find someone else"
+                            "Buzz off, please.",
+                            "I don't know you.",
+                            "Not interested, thanks."
                             };
     private string[] byeFriends = {
-                            "Bye sorry",
-                            "Sorry gtg"
+                            "Can't talk, apologies",
+                            "Got other plans, sorry.",
+                            "Sorry, maybe later?"
                             };
     private string[] byeGoodFriends = {
-                            "I got to go, I'm sorry",
-                            "My apologies, I need to go"
+                            "Bit busy right now, sorry!",
+                            "Sorry but I have to go!",
+                            "I really gotta run, bye!"
                             };
     private string[] byeBestBuddies = {
-                            "Don't get run over",
-                            "See you later, alligator"
+                            "Hate to go, but I have to!",
+                            "Love to stay, but I need to go!",
+                            "Want to hear more but bye for now!"
                             };
     private string[] byeEnemies = {
-                            "Bye",
-                            "Nah bye"
+                            "Get lost.",
+                            "Shush it.",
+                            "Talk to the hand."
                             };
 
     //Rejections
     private string[] rejectStrangers = {
-                            "Weirdo!",
-                            "Get away from me!"
+                            "Uhm, no. Weirdo.",
+                            "Please leave me alone.",
+                            "Sorry, no."
                             };
     private string[] rejectFriends = {
-                            "No thanks hehe",
-                            "Hmm not now"
+                            "Uhm, no. Sorry,",
+                            "Sorry, not comfortable.",
+                            "I don't want to."
                             };
     private string[] rejectGoodFriends = {
-                            "No thanks hehe",
-                            "Hmm not now"
+                            "Would you mind if I don't?",
+                            "Maybe next time",
+                            "Some other time, maybe?"
                             };
     private string[] rejectBestBuddies = {
-                            "No thanks hehe",
-                            "Hmm not now"
+                            "Not today, sorry.",
+                            "Next time, promise!",
+                            "Rain check!"
                             };
     private string[] rejectEnemies = {
-                            "No thanks hehe",
-                            "Hmm not now"
+                            "Ha! The nerve.",
+                            "Not a chance.",
+                            "Over my dead body!"
                             };
+
+
+    private void Awake()
+    {
+        TimeManager.onDayAdded += (x) => { gotCalledToday = false; };
+    }
+
+    private void OnDestroy()
+    {
+        TimeManager.onDayAdded -= (x) => { gotCalledToday = false; };
+    }
+
+
 
 
     //<<<<<<<<<<<<<<<<<<<< PUBLIC METHODS >>>>>>>>>>>>>>>>>>>>>>//
@@ -336,6 +363,20 @@ public class CharactersScriptableObj : ScriptableObject
                 return (false, 0, "");
         }
     }
+
+
+    public void MeetupDone()
+    {
+        relStatBarValue += 5;
+        CheckRelStatus();
+    }
+
+
+    public void MeetupMissed()
+    {
+        relStatBarValue -= 8;
+        CheckRelStatus();
+    }
     //<<<<<<<<<<<<<<<<<<<< PUBLIC METHODS >>>>>>>>>>>>>>>>>>>>>>//
 
 
@@ -402,12 +443,17 @@ public class CharactersScriptableObj : ScriptableObject
                     relStatus = RelStatus.ENEMIES;
                     break;
                 case <= 60:
+                    LevelManager.onFinishedPlayerAction(MissionType.UPRELATIONSHIP);
+                    LevelManager.onFinishedPlayerAction(MissionType.MAKEFRIEND);
                     relStatus = RelStatus.FRIENDS;
                     break;
                 case <= 80:
+                    LevelManager.onFinishedPlayerAction(MissionType.UPRELATIONSHIP);
+                    LevelManager.onFinishedPlayerAction(MissionType.MAKECLOSEFRIEND);
                     relStatus = RelStatus.GOOD_FRIENDS;
                     break;
                 case <= 100:
+                    LevelManager.onFinishedPlayerAction(MissionType.UPRELATIONSHIP);
                     relStatus = RelStatus.BEST_BUDDIES;
                     break;
             }
@@ -420,6 +466,7 @@ public class CharactersScriptableObj : ScriptableObject
                     relStatus = RelStatus.ENEMIES;
                     break;
                 case <= 60:
+                    LevelManager.onFinishedPlayerAction(MissionType.UPRELATIONSHIP);
                     relStatus = RelStatus.FRIENDS;
                     beenFriends = true;
                     break;

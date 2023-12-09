@@ -16,6 +16,7 @@ public class Missions : MonoBehaviour
     private ItemType targetIitemType;
     private APPS targetApp;
     private PlayerStats targetPlayerStats;
+    private MissionsScriptableObj missionCopy;
 
     private Image missionCheckBox;
     private TextMeshProUGUI missionDetsText;
@@ -25,6 +26,7 @@ public class Missions : MonoBehaviour
 
     public void LoadMissionDets(MissionsScriptableObj mission)
     {
+        this.missionCopy = mission;
         this.missionID = mission.id;
         this.missionStatus = mission.missionStatus;
         this.missionDets = mission.missionDets;
@@ -119,5 +121,6 @@ public class Missions : MonoBehaviour
     private void MissionDone()
     {
         missionStatus = MissionStatus.COMPLETED;
+        LevelManager.Instance.OnMissionFinished(this.missionCopy);
     }
 }

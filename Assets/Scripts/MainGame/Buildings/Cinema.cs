@@ -12,6 +12,7 @@ public class Cinema : Building
         this.buildingClosingTime = 23f;
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
+        GameManager.Instance.MeetupLocBuildings.Add(this);
     }
 
 

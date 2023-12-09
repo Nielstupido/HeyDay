@@ -64,6 +64,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void Interact(CharactersScriptableObj character)
     {
+        LevelManager.onFinishedPlayerAction(MissionType.INTERACT);
         payDebtBtn.interactable = true;
         getContactNumBtn.interactable = true;
         borrowMoneyBtn.interactable = true;
@@ -100,6 +101,11 @@ public class InteractionSystemManager : MonoBehaviour
         characterNameText.text = interactingCharacter.characterName;
         UpdateRelStatusUI();
         UpdateCharacterEmo(CharacterEmotions.DEFAULT, CharacterStance.DEFAULT);
+
+        if (MeetUpSystem.Instance.CheckMeetupPlan(character))
+        {
+            OnSuccessfulMeetup();
+        }
     }
 
 
@@ -450,5 +456,13 @@ public class InteractionSystemManager : MonoBehaviour
         }
         characterEmotionImageObj[interactingCharacter.characterID - 1].gameObject.SetActive(true);
         characterEmotionImageObj[interactingCharacter.characterID - 1].SetNativeSize();
+    }
+
+
+    private void OnSuccessfulMeetup()
+    {
+        interactingCharacter.MeetupDone();
+        MeetUpSystem.Instance.ResetMeetupDets();
+        UpdateRelStatusUI();
     }
 }

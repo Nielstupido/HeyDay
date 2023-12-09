@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class PlayerPhone : MonoBehaviour
 {
@@ -20,13 +21,22 @@ public class PlayerPhone : MonoBehaviour
     private float groceryPrice = 200; //Temporary variable
     
     [SerializeField] private GameObject phoneOverlay;
+    [SerializeField] private MeetUpSystem meetingUpSystem;
 
     //Phonebook
     [SerializeField] private GameObject phoneBookOverlay;
     [SerializeField] private Transform contactListHolder;
     [SerializeField] private GameObject contactItemPrefab;
     [SerializeField] private GameObject noContactsText;
-
+    [SerializeField] private GameObject callConvoView;
+    [SerializeField] private GameObject inviteBtn;
+    [SerializeField] private Prompts contactBusyPrompt;
+    [SerializeField] private GameObject playerBubbleHolder;
+    [SerializeField] private GameObject npcBubbleHolder;
+    [SerializeField] private TextMeshProUGUI playerMsgText;
+    [SerializeField] private TextMeshProUGUI npcResponseText;
+    private string currrentSelectedContact;
+    
     //Goaltracker
     [SerializeField] private GameObject goalTrackerOverlay;
 
@@ -53,6 +63,10 @@ public class PlayerPhone : MonoBehaviour
     {
         phoneOverlay.SetActive(true);
         GameUiController.onScreenOverlayChanged(UIactions.SHOW_SMALL_BOTTOM_OVERLAY);
+        playerMsgText.text = "";
+        npcResponseText.text = "";
+        playerMsgText.gameObject.SetActive(false);
+        npcResponseText.gameObject.SetActive(false);
     }
 
 
@@ -114,7 +128,59 @@ public class PlayerPhone : MonoBehaviour
 
     public void DialContact(string characterName)
     {
+        if (GameManager.Instance.Characters[GameManager.Instance.Characters.FindIndex( (character) => character.name == currrentSelectedContact )].gotCalledToday)
+        {
+            PromptManager.Instance.ShowPrompt(contactBusyPrompt);
+            return;
+        }
 
+        currrentSelectedContact = characterName;
+        StartCoroutine(Dialing());
+    }
+
+
+    public void InviteMeetup()
+    {
+        playerMsgText.text = "Hi " + currrentSelectedContact.Split(' ').First() + "! It's been a minute. Wanna hang out?";
+        playerBubbleHolder.SetActive(true);
+        StartCoroutine(GettingNpcResponse());
+        GameManager.Instance.Characters[GameManager.Instance.Characters.FindIndex( (character) => character.name == currrentSelectedContact )].gotCalledToday = true;
+        inviteBtn.SetActive(false);
+    }
+
+
+    private void GetNpcResponse()
+    {
+        npcResponseText.text = MeetUpSystem.Instance.InviteNpcMeetup(currrentSelectedContact);
+        npcBubbleHolder.SetActive(true);
+        StartCoroutine(CloseCallConvoView());
+    }
+
+
+    private IEnumerator CloseCallConvoView()
+    {
+        yield return new WaitForSeconds(1.5f);
+        callConvoView.SetActive(false);
+        yield return null;
+    }
+
+
+    private IEnumerator GettingNpcResponse()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GetNpcResponse();
+        yield return null;
+    }
+
+
+    private IEnumerator Dialing()
+    {
+        AnimOverlayManager.Instance.StartAnim(ActionAnimations.DIAL);
+        yield return new WaitForSeconds(1.5f);
+        AnimOverlayManager.Instance.StopAnim();
+        callConvoView.SetActive(true);
+        inviteBtn.SetActive(true);
+        yield return null;
     }
 
     

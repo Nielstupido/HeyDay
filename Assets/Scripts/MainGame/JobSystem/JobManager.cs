@@ -5,6 +5,7 @@ using UnityEngine;
 public class JobManager : MonoBehaviour
 {
     [SerializeField] private JobProfileView jobProfileView;
+    [SerializeField] private Prompts salaryReceived;
     private Player currentPlayer;
     private float unpaidWorkHrs;
     private float totalWorkHrs;
@@ -28,6 +29,17 @@ public class JobManager : MonoBehaviour
     private void Start()
     {
         unpaidWorkHrs = 0;
+    }
+
+
+    private IEnumerator SalaryAnim()
+    {
+        yield return new WaitForSeconds(0.2f);
+        AnimOverlayManager.Instance.StartAnim(ActionAnimations.SALARY);
+        yield return new WaitForSeconds(1f);
+        AnimOverlayManager.Instance.StopAnim();
+        PromptManager.Instance.ShowPrompt(salaryReceived);
+        yield return null;
     }
 
 
@@ -55,6 +67,7 @@ public class JobManager : MonoBehaviour
         {
             isGettingSalary = true;
             unpaidWorkHrs = 0;
+            StartCoroutine(SalaryAnim());
         }
 
         Player.Instance.Work(isGettingSalary, workHrs, totalWorkHrs);

@@ -74,19 +74,25 @@ public class LevelManager : MonoBehaviour
     private string tempLevelName;
     private string[] tempSplitIdHolder;
     private int levelCounter;
-    private int currentLevel;
+    public static LevelManager Instance { get; private set; }
+
+
+    private void Awake() 
+    { 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
 
     private void Start()
     {
         LoadAllMissions();
-        onFinishedPlayerAction += CheckMissionsState;
-    }
-
-
-    private void OnDestroy()
-    {
-        onFinishedPlayerAction -= CheckMissionsState;
     }
 
 
@@ -116,17 +122,15 @@ public class LevelManager : MonoBehaviour
                 allMissions.Add(tempLevelName, new List<MissionsScriptableObj>{mission});
             }
         }
-
-        PrepareCurrentLevelMissions();
     }
 
 
     //prepares all assigned missions for the current level
-    public void PrepareCurrentLevelMissions()
+    public void PrepareCurrentLevelMissions(int gameLevel)
     {
         currentActiveMissions.Clear();
         tempLevelName = "Level ";
-        tempLevelName += GameManager.Instance.CurrentGameLevel.ToString();
+        tempLevelName += gameLevel.ToString();
 
         foreach (MissionsScriptableObj mission in allMissions[tempLevelName])
         {
@@ -144,16 +148,14 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    private void CheckMissionsState(
-        MissionType actionMissionType, 
-        float actionAddedNumber = 0, 
-        Buildings interactedBuilding = Buildings.NONE, 
-        PlayerStats affectedPlayerStats = PlayerStats.NONE,
-        ItemType interactedItemType = ItemType.NA,
-        APPS interactedApp = APPS.NONE,
-        PlayerStats interactedPlayerStats = PlayerStats.NONE)
+    public void OnMissionFinished(MissionsScriptableObj mission)
     {
+        currentActiveMissions.Remove(mission);
 
+        if (currentActiveMissions.Count == 0)
+        {
+            OnLevelFinished();
+        }
     }
 
 

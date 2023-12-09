@@ -81,6 +81,7 @@ public class JobApplicationManager : MonoBehaviour
 
     public void ShowAvailablePositons(Building currentBuilding)
     {
+        LevelManager.onFinishedPlayerAction(MissionType.BROWSEJOB, interactedBuilding: currentBuilding.buildingEnumName);
         jobSystemOverlay.SetActive(true);
         jobPosListOverlay.SetActive(true);
 
@@ -126,6 +127,7 @@ public class JobApplicationManager : MonoBehaviour
 
     public void ApplyJob(JobPositions newJobData)
     {
+        LevelManager.onFinishedPlayerAction(MissionType.APPLYJOB);
         StartCoroutine(JobAppProcessingAnim(2f, newJobData));
     }
 

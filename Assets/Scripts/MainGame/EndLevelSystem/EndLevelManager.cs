@@ -37,9 +37,15 @@ public class EndLevelManager : MonoBehaviour
 
     public void LevelFinished()
     {
+        GameManager.Instance.CurrentGameLevel++;
         endLvlOverlay.SetActive(true);
         OpenBudetTrackerLevelView();
         //save game data
+
+        if (GameManager.Instance.CurrentGameLevel == 11 || GameManager.Instance.CurrentGameLevel == 21  || GameManager.Instance.CurrentGameLevel == 31)
+        {
+            Player.Instance.IncrementAge();
+        }
     }
 
 

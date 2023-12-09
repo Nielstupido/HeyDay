@@ -33,7 +33,6 @@ public class SleepManager : MonoBehaviour
         {
             sleepHrsText.text = (++sleepHrs).ToString();
         }
-        Debug.Log(sleepHrs);
     }
 
     
@@ -63,7 +62,7 @@ public class SleepManager : MonoBehaviour
 
     private IEnumerator DoSleep(float waitingTime)
     {
-        AnimOverlayManager.Instance.StartAnim(ActionAnimations.RESIGN);
+        AnimOverlayManager.Instance.StartAnim(ActionAnimations.SLEEP);
         TimeManager.Instance.AddClockTime(sleepHrs);
         Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += (sleepHrs * adtnlEnergyForSleep);
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, Player.Instance.PlayerStatsDict);

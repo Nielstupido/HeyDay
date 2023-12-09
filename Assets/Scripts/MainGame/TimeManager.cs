@@ -10,13 +10,16 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI clockValueSmallOverlay;
     [SerializeField] private TextMeshProUGUI indicatorAMPMSmallOverlay;
     [SerializeField] private TextMeshProUGUI dayValue;
-    private float currentTime = 7; //time will start at 7AM
+    private float currentTime = 0f; //time will start at 7AM
     private int toggleCounter;
-    private float currentDayCount = 1;// number of days that have passed
+    private int currentDayCount = 1;
     public float CurrentTime { get{return currentTime;}}
+    public int CurrentDayCount { get{return currentDayCount;}}
     public static TimeManager Instance { get; private set; }
-    public delegate void OnDayAdded(float dayCount);
+    public delegate void OnDayAdded(int dayCount);
     public static OnDayAdded onDayAdded;
+    public delegate void OnTimeAdded(float time);
+    public static OnTimeAdded onTimeAdded;
 
 
     private void Awake() 
@@ -104,12 +107,14 @@ public class TimeManager : MonoBehaviour
                 clockValueSmallOverlay.text = transposedValue.ToString() + ":00";
             }
         }
-        //Debug.Log(currentTime);
+        
+        onTimeAdded(currentTime);
         AmOrPm();
         IncrementDayCount();
     }
 
-    public static int TransposeTimeValue(int currentTime)
+
+    public int TransposeTimeValue(int currentTime)
     {
         switch (currentTime)
         {
@@ -130,6 +135,7 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+
     public void AmOrPm()
     {
         if (currentTime >= 12)
@@ -144,15 +150,34 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+
+    public string AmOrPm(float time)
+    {
+        if (time >= 12)
+        {
+            return "PM";
+        }
+        else
+        {
+            return "AM";
+        }
+    }
+
+
     public void IncrementDayCount()
     {
         if (toggleCounter == 1)
         {
             currentDayCount++;
-            Debug.Log("Current Day Count = " + currentDayCount);
-            dayValue.text = currentDayCount.ToString();
+            UpdateDayUI(currentDayCount);
             toggleCounter = 0;
             onDayAdded(currentDayCount);
         }
+    }
+
+
+    public void UpdateDayUI(int day)
+    {
+        dayValue.text = day.ToString();
     }
 }

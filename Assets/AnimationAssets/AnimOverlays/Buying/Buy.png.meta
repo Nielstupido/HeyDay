@@ -131,10 +131,10 @@ TextureImporter:
       name: Buy_0
       rect:
         serializedVersion: 2
-        x: 109
-        y: 463
-        width: 326
-        height: 327
+        x: 0
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,10 +152,10 @@ TextureImporter:
       name: Buy_1
       rect:
         serializedVersion: 2
-        x: 687
-        y: 462
-        width: 369
-        height: 328
+        x: 560
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,10 +173,10 @@ TextureImporter:
       name: Buy_2
       rect:
         serializedVersion: 2
-        x: 1402
-        y: 462
-        width: 88
-        height: 328
+        x: 1120
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,10 +194,10 @@ TextureImporter:
       name: Buy_3
       rect:
         serializedVersion: 2
-        x: 1963
-        y: 462
-        width: 87
-        height: 328
+        x: 1680
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,10 +215,10 @@ TextureImporter:
       name: Buy_4
       rect:
         serializedVersion: 2
-        x: 2354
-        y: 462
-        width: 328
-        height: 328
+        x: 2240
+        y: 420
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,10 +236,10 @@ TextureImporter:
       name: Buy_5
       rect:
         serializedVersion: 2
-        x: 228
-        y: 42
-        width: 87
-        height: 328
+        x: 0
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,10 +257,10 @@ TextureImporter:
       name: Buy_6
       rect:
         serializedVersion: 2
-        x: 687
-        y: 42
-        width: 369
-        height: 328
+        x: 560
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,10 +278,10 @@ TextureImporter:
       name: Buy_7
       rect:
         serializedVersion: 2
-        x: 1248
-        y: 42
-        width: 367
-        height: 328
+        x: 1120
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -299,10 +299,10 @@ TextureImporter:
       name: Buy_8
       rect:
         serializedVersion: 2
-        x: 1849
-        y: 43
-        width: 327
-        height: 327
+        x: 1680
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,10 +320,10 @@ TextureImporter:
       name: Buy_9
       rect:
         serializedVersion: 2
-        x: 2410
-        y: 43
-        width: 325
-        height: 327
+        x: 2240
+        y: 0
+        width: 560
+        height: 420
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

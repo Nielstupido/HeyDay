@@ -8,6 +8,7 @@ public class ContactItem : MonoBehaviour
 {
     [SerializeField] private Button contactBtn;
     [SerializeField] private TextMeshProUGUI contactNameText;
+    [SerializeField] private Prompts pendingMeetupPrompt;
     private PlayerPhone playerPhone;
 
 
@@ -21,6 +22,12 @@ public class ContactItem : MonoBehaviour
 
     public void CallContact(string contactName)
     {
+        if (MeetUpSystem.Instance.CheckForPendingMeetup())
+        {
+            PromptManager.Instance.ShowPrompt(pendingMeetupPrompt);
+            return;
+        }
+
         playerPhone.DialContact(contactName);
     }
 }

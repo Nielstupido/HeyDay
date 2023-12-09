@@ -21,8 +21,9 @@ public class BarManager : MonoBehaviour
 
     private void Party()
     {
-        if (Player.Instance.Pay(barEntrance, 2f, 30f, notEnoughMoney, 15f))
+        if (Player.Instance.Pay(barEntrance, 2f, 30f, 15f, notEnoughMoney, 15f))
         {
+            LevelManager.onFinishedPlayerAction(MissionType.PARTY);
             StartCoroutine(StartParty(2f));
         }
     }

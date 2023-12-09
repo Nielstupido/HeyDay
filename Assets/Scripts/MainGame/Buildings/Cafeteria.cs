@@ -12,6 +12,7 @@ public class Cafeteria : Building
         this.buildingClosingTime = 20f;
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
+        GameManager.Instance.MeetupLocBuildings.Add(this);
     }
 
 

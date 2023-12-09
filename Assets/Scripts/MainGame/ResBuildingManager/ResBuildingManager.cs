@@ -22,6 +22,7 @@ public class ResBuildingManager : MonoBehaviour
     [SerializeField] private Button appliancesBtn;
     [SerializeField] private Button groceriesBtn;
     [SerializeField] private PlayerItemsListManager playerItemsListManager;
+    [SerializeField] private Prompts notEnoughMoneyRent;
     private ResBuilding currentSelectedResBuilding;
     private int stayCount;
     private float totalBilling;
@@ -78,7 +79,7 @@ public class ResBuildingManager : MonoBehaviour
     }
 
 
-    private void ComputeBillings(float currentDayCount)
+    private void ComputeBillings(int currentDayCount)
     {
         if (Player.Instance.CurrentPlayerPlace == null)
         {
@@ -123,10 +124,13 @@ public class ResBuildingManager : MonoBehaviour
 
     public void Rent(ResBuilding selectedBuilding)
     {
-        stayCount = 0;
-        Player.Instance.CurrentPlayerPlace = selectedBuilding;
-        EnterRoom(selectedBuilding);
-        LevelManager.onFinishedPlayerAction(MissionType.RENTROOM);
+        if (Player.Instance.Pay(selectedBuilding.monthlyRent, 0.5f, 5f, 3f, notEnoughMoneyRent)) 
+        {
+            stayCount = 0;
+            Player.Instance.CurrentPlayerPlace = selectedBuilding;
+            EnterRoom(selectedBuilding);
+            LevelManager.onFinishedPlayerAction(MissionType.RENTROOM);
+        }
     }
 
 

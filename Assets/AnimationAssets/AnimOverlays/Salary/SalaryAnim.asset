@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionAnimation: 17
   firstImage: {fileID: 1078074385, guid: 8cd1fb341fbe07a4381fae01fa520729, type: 3}
-  animController: {fileID: 9100000, guid: 61a0860c71690744bbabf11d816b6991, type: 2}
+  animController: {fileID: 9100000, guid: c68a7bdad33118a488e0c013edf73256, type: 2}

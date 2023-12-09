@@ -32,7 +32,7 @@ public class SlotMachineResults : MonoBehaviour
 
     private bool Pay(float energyLevelCutValue, float amount, float timeAdded)
     {
-        return Player.Instance.Pay(amount, 15f, timeAdded, notEnoughMoneyPrompt, energyLevelCutValue);
+        return Player.Instance.Pay(amount, 15f, timeAdded, 2f, notEnoughMoneyPrompt, energyLevelCutValue);
     }
 
 

@@ -12,6 +12,7 @@ public class NightClub : Building
         this.buildingClosingTime = 5f;
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
+        GameManager.Instance.MeetupLocBuildings.Add(this);
     }
 
 

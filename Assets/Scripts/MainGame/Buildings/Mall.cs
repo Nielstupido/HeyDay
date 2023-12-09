@@ -12,6 +12,7 @@ public class Mall : Building
         this.buildingClosingTime = 22f;
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
+        GameManager.Instance.MeetupLocBuildings.Add(this);
     }
 
 
@@ -28,15 +29,6 @@ public class Mall : Building
             {
                 case Buttons.SHOP:
                     BuildingManager.Instance.OpenMallOverlay();
-                    break;
-                case Buttons.APPLY:
-                    JobManager.Instance.Apply(this);
-                    break;
-                case Buttons.WORK:
-                    JobManager.Instance.Work();
-                    break;
-                case Buttons.QUIT:
-                    JobManager.Instance.QuitWork();
                     break;
             }
     }

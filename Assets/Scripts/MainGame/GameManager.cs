@@ -70,7 +70,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private BudgetSetter budgetSetter;
     [SerializeField] private PlayerInfoManager playerInfoManager;
     [SerializeField] private InteractionSystemManager interactionSystemManager;
+    [SerializeField] private LevelManager levelManager;
     [SerializeField] private List<CharactersScriptableObj> characters = new List<CharactersScriptableObj>();
+
     private List<string> characterNamesMale = new List<string>(){
                                                             "Jose Reyes",
                                                             "Andres Cruz",
@@ -98,11 +100,13 @@ public class GameManager : MonoBehaviour
                                                             };
 
     private GameStateData currentGameStateData;
-    private int currentGameLevel = 1;
+    private int currentGameLevel;
     private int randomNum;
+    private List<Building> meetupLocBuildings = new List<Building>();
     private List<Buildings> buildingsArr = new List<Buildings>();
-    public int CurrentGameLevel {get{return currentGameLevel;}}
+    public int CurrentGameLevel {set{currentGameLevel = value;} get{return currentGameLevel;}}
     public List<CharactersScriptableObj> Characters {set{characters = value;} get{return characters;}}
+    public List<Building> MeetupLocBuildings {set{meetupLocBuildings = value;} get{return meetupLocBuildings;}}
     public static GameManager Instance { get; private set; }
 
 
@@ -168,10 +172,13 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        currentGameLevel = 1;
         PrepareCharacters();
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         pauseBtn.SetActive(true);
-        AssignNpcToBuilding(0f);
+        AssignNpcToBuilding(0);
+        levelManager.PrepareCurrentLevelMissions(currentGameLevel);
+        TimeManager.Instance.AddClockTime(7f);
         //AudioManager.Instance.PlayMusic("Theme");
     }
 
@@ -183,6 +190,7 @@ public class GameManager : MonoBehaviour
 
         if (gameStateRes.Item1 == null)
         {
+            currentGameLevel = 1;
             playerInfoManager.OpenCharacterCreationOVerlay();
         }
         else
@@ -203,15 +211,7 @@ public class GameManager : MonoBehaviour
 
     public void InteractWithNPC(string characterName)
     {
-        Debug.Log("current player is = " + characterName);
-        foreach(CharactersScriptableObj character in characters)
-        {
-            if (characterName == character.characterName)
-            {
-                interactionSystemManager.Interact(character);
-                break;
-            }
-        }
+        interactionSystemManager.Interact(GetCharacterValue(characterName));
     }
 
 
@@ -241,7 +241,67 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void AssignNpcToBuilding(float dayCount)
+    public CharactersScriptableObj GetCharacterValue(string name)
+    {
+        foreach(CharactersScriptableObj character in characters)
+        {
+            if (name == character.characterName)
+            {
+                return character;
+            }
+        }
+
+        return null;
+    }
+
+
+    public Building GetOpenBuilding(float time)
+    {
+        meetupLocBuildings = ShuffleList(meetupLocBuildings);
+
+        foreach (Building highlightedBuilding in meetupLocBuildings)
+        {
+            if (highlightedBuilding.buildingOpeningTime > highlightedBuilding.buildingClosingTime)
+            {
+                if (time > highlightedBuilding.buildingOpeningTime || time < (highlightedBuilding.buildingClosingTime - 1.5f))
+                {
+                    return highlightedBuilding;
+                }
+
+                return null;
+            }
+            else
+            {
+                if (time > highlightedBuilding.buildingOpeningTime && time < (highlightedBuilding.buildingClosingTime - 1.5f))
+                {
+                    return highlightedBuilding;
+                }
+                    
+                return null;
+            }
+        }
+
+        return null;
+    }
+
+
+    private List<Building> ShuffleList(List<Building> list)
+    {
+        var random = new System.Random();
+        var newShuffledList = new List<Building>();
+        var listcCount = list.Count;
+
+        for (int i = 0; i < listcCount; i++)
+        {
+            var randomElementInList = random.Next(0, list.Count);
+            newShuffledList.Add(list[randomElementInList]);
+            list.Remove(list[randomElementInList]);
+        }
+        return newShuffledList;
+    }
+    
+
+    private void AssignNpcToBuilding(int dayCount)
     {
         foreach (var character in characters)
         {

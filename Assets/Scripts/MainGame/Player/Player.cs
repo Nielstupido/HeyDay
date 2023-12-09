@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
 {
     //Player Basic Data
     private Dictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>();
+    private int playerAge;
     private string playerName;
     private Gender playerGender;
     private CharactersScriptableObj currentCharacter;
@@ -108,6 +109,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        playerAge = 19;
         currentPlayerJob = null;
         courseEnrolled = UniversityCourses.NONE;
         playerCash = 5000f;
@@ -118,13 +120,13 @@ public class Player : MonoBehaviour
         playerStatsDict.Add(PlayerStats.MONEY, PlayerCash);
         currentPlayerPlace = null;
         isPlayerHasBankAcc = false;
-        PlayerStatsObserver.onPlayerStatChanged += StatsChecker;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
     }
 
 
     public void EatDrink(Items foodToConsume)
     {
+        StartCoroutine(DoAnim(ActionAnimations.EAT, 2f));
         TimeManager.Instance.AddClockTime(foodToConsume.eatingTime);
         playerStatsDict[PlayerStats.HAPPINESS] += foodToConsume.happinessBarValue;
         playerStatsDict[PlayerStats.ENERGY] += foodToConsume.energyBarValue;
@@ -160,6 +162,7 @@ public class Player : MonoBehaviour
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
 
         UniversityManager.Instance.UpdateStudyHours(studyDurationValue);
+        LevelManager.onFinishedPlayerAction(MissionType.STUDYHR, studyDurationValue);
     }
 
 
@@ -170,6 +173,8 @@ public class Player : MonoBehaviour
             PromptManager.Instance.ShowPrompt(notEnoughMoneyPrompt);
             return;
         }
+
+        StartCoroutine(DoAnim(ActionAnimations.BUY, 2f));
 
         switch (item.itemType)
         {
@@ -213,7 +218,7 @@ public class Player : MonoBehaviour
 
 
     //for non-consumable
-    public bool Pay(float price, float timeAdded, float happinessAdded, Prompts errorMoneyPrompt, float energyLevelCutValue = 10f)
+    public bool Pay(float price, float timeAdded, float happinessAdded, float hungerLevelCutValue, Prompts errorMoneyPrompt, float energyLevelCutValue = 10f)
     {
         if (price > playerCash)
         {
@@ -225,6 +230,7 @@ public class Player : MonoBehaviour
         playerCash -= price;
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         playerStatsDict[PlayerStats.HAPPINESS] += happinessAdded;
+        playerStatsDict[PlayerStats.HUNGER] -= hungerLevelCutValue;
         playerStatsDict[PlayerStats.MONEY] -= price;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
         return true;
@@ -278,6 +284,12 @@ public class Player : MonoBehaviour
     }
 
 
+    public void IncrementAge()
+    {
+        playerAge++;
+    }
+
+
     private void StatsChecker(PlayerStats statName, Dictionary<PlayerStats, float> playerStatsDict)
     {
         if (playerStatsDict[PlayerStats.ENERGY] <= 10 | playerStatsDict[PlayerStats.HAPPINESS] <= 10 | playerStatsDict[PlayerStats.HUNGER] <= 10)//checks if any of the stats reaches lower limit
@@ -322,5 +334,14 @@ public class Player : MonoBehaviour
             playerStatsDict[PlayerStats.HUNGER] = 100;
             LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HUNGER);
         }
+    }
+
+
+    private IEnumerator DoAnim(ActionAnimations actionAnimation, float animLength)
+    {
+        AnimOverlayManager.Instance.StartAnim(actionAnimation);
+        yield return new WaitForSeconds(animLength);
+        AnimOverlayManager.Instance.StopAnim();
+        yield return null;
     }
 }

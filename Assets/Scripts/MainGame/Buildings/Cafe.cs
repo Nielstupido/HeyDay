@@ -12,6 +12,7 @@ public class Cafe : Building
         this.buildingClosingTime = 22f;
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
+        GameManager.Instance.MeetupLocBuildings.Add(this);
     }
 
 
