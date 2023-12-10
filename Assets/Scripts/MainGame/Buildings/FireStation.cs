@@ -10,6 +10,7 @@ public class FireStation : Building
         this.buildingEnumName = Buildings.FIRESTATION;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
+        this.buildingDescription = "You can visit the Bureau of Fire Protection, where brave firefighters work diligently to protect the city. Inside, you'll find a hub of readiness, with trucks and equipment poised to respond to emergencies and safeguard the community.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

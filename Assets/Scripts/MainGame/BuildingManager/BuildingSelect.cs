@@ -61,8 +61,13 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
         else
         {
             BuildingManager.Instance.BuildingNameText = currentSelectedBuilding.buildingStringName;
+            BuildingManager.Instance.BuildingDescriptionText = currentSelectedBuilding.buildingDescription;
+            BuildingManager.Instance.BuildingOpeningHrs = TimeManager.Instance.TransposeTimeValue((int)currentSelectedBuilding.buildingOpeningTime).ToString() + " " + 
+                                                        TimeManager.Instance.AmOrPm((int)currentSelectedBuilding.buildingOpeningTime).ToString() + " - " +
+                                                        TimeManager.Instance.TransposeTimeValue((int)currentSelectedBuilding.buildingClosingTime).ToString() + " " + 
+                                                        TimeManager.Instance.AmOrPm((int)currentSelectedBuilding.buildingClosingTime).ToString();
             BuildingManager.Instance.CurrentSelectedBuilding = currentSelectedBuilding;
-            RefreshSelectOverlayUI();
+            RefreshSelectOverlayUI(); 
 
             if (!BuildingManager.Instance.BuildingSelectOverlay.activeSelf)
             {

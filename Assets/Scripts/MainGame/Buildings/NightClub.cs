@@ -10,6 +10,7 @@ public class NightClub : Building
         this.buildingEnumName = Buildings.NIGHTCLUB;
         this.buildingOpeningTime = 20f;
         this.buildingClosingTime = 5f;
+        this.buildingDescription = "You can step into the vibrant nightclub of Kapuntukan, pulsating with music and colorful lights. The dance floor is alive with energy as people unwind and socialize, creating a lively atmosphere of celebration and entertainment.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
         GameManager.Instance.MeetupLocBuildings.Add(this);

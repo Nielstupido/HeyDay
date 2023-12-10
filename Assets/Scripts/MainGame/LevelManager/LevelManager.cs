@@ -69,6 +69,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private MissionsHolder missionsHolder;
     [SerializeField] private Transform missionPrefabsHolder;
     [SerializeField] private GameObject missionPrefab;
+    [SerializeField] private GameObject missionOverlay;
+    [SerializeField] private TextMeshProUGUI missionOverlayLevelText;
     private Dictionary<string, List<MissionsScriptableObj>> allMissions = new Dictionary<string, List<MissionsScriptableObj>>();
     private List<MissionsScriptableObj> currentActiveMissions = new List<MissionsScriptableObj>();
     private string tempLevelName;
@@ -131,6 +133,7 @@ public class LevelManager : MonoBehaviour
         currentActiveMissions.Clear();
         tempLevelName = "Level ";
         tempLevelName += gameLevel.ToString();
+        missionOverlayLevelText.text = tempLevelName;
 
         foreach (MissionsScriptableObj mission in allMissions[tempLevelName])
         {
@@ -142,8 +145,6 @@ public class LevelManager : MonoBehaviour
             GameObject newMissionObj = Instantiate(missionPrefab, Vector3.zero, Quaternion.identity, missionPrefabsHolder);
             Missions newMission = newMissionObj.GetComponent<Missions>();
             newMission.LoadMissionDets(mission);
-            newMission.MissionCheckBox = newMissionObj.transform.GetChild(0).GetComponent<Image>();
-            newMission.MissionDetsText = newMissionObj.transform.GetChild(1).GetComponent<TextMeshProUGUI>();
         }
     }
 
@@ -156,6 +157,19 @@ public class LevelManager : MonoBehaviour
         {
             OnLevelFinished();
         }
+    }
+
+    public void CloseMissionOverlay()
+    {
+        missionOverlay.SetActive(false);
+        GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
+    }
+
+
+    public void OpenMissionOverlay()
+    {
+        missionOverlay.SetActive(true);
+        GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
     }
 
 

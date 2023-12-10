@@ -11,6 +11,7 @@ public abstract class Building : MonoBehaviour
     [HideInInspector]public float buildingClosingTime;
     [HideInInspector]public float totalWorkHours;
     [HideInInspector]public bool currentlyHired;
+    [HideInInspector]public string buildingDescription;
     public Sprite buildingBgImage;
 
     public abstract void CheckButtons();

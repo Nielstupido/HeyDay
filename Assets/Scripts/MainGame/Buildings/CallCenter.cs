@@ -10,6 +10,7 @@ public class CallCenter : Building
         this.buildingEnumName = Buildings.CALLCENTER;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
+        this.buildingDescription = "Welcome to the dynamic Call Center Agency, a hub of communication expertise and customer service excellence. The bustling center buzzes with agents dedicated to delivering top-notch service. Cubicles hum with conversations, showcasing a vibrant atmosphere of professional interaction.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

@@ -10,6 +10,7 @@ public class AutoDealer : Building
         this.buildingEnumName = Buildings.AUTODEALER;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 16f;
+        this.buildingDescription = "You have the opportunity to discover the lively Beep Beep Auto Dealer, where stylish vehicles and the aroma of fresh leather permeate the atmosphere. The exhibition area displays the most recent advancements and creativity in the automobile industry. Additionally, it offers a selection of affordable used cars.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

@@ -12,6 +12,7 @@ public class Hospital : Building
         this.buildingClosingTime = 0f;
         this.totalWorkHours = 0f;
         this.currentlyHired = false;
+        this.buildingDescription = "You can visit the bustling hospital, where skilled professionals work tirelessly to heal the sick and injured. Inside, the halls hum with activity, offering care, hope, and comfort to those in need.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

@@ -10,6 +10,7 @@ public class Residential : Building
         this.buildingEnumName = Buildings.RESIDENTIAL;
         this.buildingOpeningTime = 0f;
         this.buildingClosingTime = 0f;
+        this.buildingDescription = "Welcome to the cozy Residential Homes, a tranquil retreat within the city. Tree-lined streets lead to charming houses, each exuding warmth and comfort. Gardens bloom with life, offering a serene living environment.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

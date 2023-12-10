@@ -11,6 +11,8 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject barOverlay;
     [SerializeField] private GameObject resViewHUD;
     [SerializeField] private Text buildingNameText;
+    [SerializeField] private Text buildingDescriptionText;
+    [SerializeField] private Text buildingOpeningHrs;
     [SerializeField] private List<Sprite> buttonImages = new List<Sprite>();
     [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject walkBtn;
@@ -41,6 +43,8 @@ public class BuildingManager : MonoBehaviour
     public GameObject ClosedBtn { get{return closedBtn;}}
     public List<Sprite> ButtonImages { get{return buttonImages;}}
     public string BuildingNameText { set{buildingNameText.text = value;}}
+    public string BuildingDescriptionText { set{buildingDescriptionText.text = value;}}
+    public string BuildingOpeningHrs { set{buildingOpeningHrs.text = value;}}
     public static BuildingManager Instance { get; private set; }
 
 

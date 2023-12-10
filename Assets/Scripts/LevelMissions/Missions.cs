@@ -6,6 +6,11 @@ using TMPro;
 
 public class Missions : MonoBehaviour
 {
+    [SerializeField] private Sprite uncheckedBox;
+    [SerializeField] private Sprite checkedBox;
+    [SerializeField] private Image missionCheckBox;
+    [SerializeField] private TextMeshProUGUI missionDetsText;
+    [SerializeField] private TextMeshProUGUI missionProgressText;
     private string missionID;
     private MissionStatus missionStatus;
     private MissionType missionType;
@@ -18,10 +23,7 @@ public class Missions : MonoBehaviour
     private PlayerStats targetPlayerStats;
     private MissionsScriptableObj missionCopy;
 
-    private Image missionCheckBox;
-    private TextMeshProUGUI missionDetsText;
-    public Image MissionCheckBox {set{missionCheckBox = value;}}
-    public TextMeshProUGUI MissionDetsText {set{missionDetsText = value; missionDetsText.text = missionDets;}}
+
 
 
     public void LoadMissionDets(MissionsScriptableObj mission)
@@ -37,6 +39,13 @@ public class Missions : MonoBehaviour
         this.targetIitemType = mission.targetIitemType;
         this.targetApp = mission.targetApp;
         this.targetPlayerStats = mission.targetPlayerStats;
+        this.missionDetsText.text = this.missionDets;
+        this.missionCheckBox.sprite = uncheckedBox;
+
+        if (this.requiredNumberForMission == 0)
+        {
+            this.missionProgressText.gameObject.SetActive(false);
+        }
 
         LevelManager.onFinishedPlayerAction += OnPlayerActionCompleted;
     }
@@ -81,6 +90,7 @@ public class Missions : MonoBehaviour
         else if (actionMissionType == MissionType.STUDYHR || actionMissionType == MissionType.WORKHR)
         {
             this.currentNumberForMission += actionAddedNumber;
+            this.missionProgressText.text = this.currentNumberForMission.ToString() + "/" + this.requiredNumberForMission.ToString();
 
             if (this.requiredNumberForMission <= this.currentNumberForMission)
             {
@@ -91,6 +101,7 @@ public class Missions : MonoBehaviour
         {
             if (this.requiredNumberForMission <= actionAddedNumber)
             {
+                this.missionProgressText.text = actionAddedNumber.ToString() + "/" + this.requiredNumberForMission.ToString();
                 MissionDone();
             }
         }
@@ -122,5 +133,7 @@ public class Missions : MonoBehaviour
     {
         missionStatus = MissionStatus.COMPLETED;
         LevelManager.Instance.OnMissionFinished(this.missionCopy);
+        missionCheckBox.sprite = checkedBox;
+        missionCheckBox.SetNativeSize();
     }
 }

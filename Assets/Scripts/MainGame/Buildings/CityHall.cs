@@ -10,6 +10,7 @@ public class CityHall : Building
         this.buildingEnumName = Buildings.CITYHALL;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
+        this.buildingDescription = "You can explore the grand HeyDay City Hall, a governance and civic affairs hub. Offices and meeting rooms buzz with discussions on policies, urban development, and community initiatives.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

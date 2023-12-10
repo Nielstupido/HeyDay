@@ -33,6 +33,8 @@ public enum ActionAnimations
 public class AnimOverlayManager : MonoBehaviour
 {
     [SerializeField] private GameObject animationOverlay;
+    [SerializeField] private GameObject screenFadeCanvas;
+    [SerializeField] private CanvasGroup screenFadeOverlay;
     [SerializeField] private Image animationImage;
     [SerializeField] private Animator animator;
     [SerializeField] private List<AnimationScriptableObject> animationObjects = new List<AnimationScriptableObject>();
@@ -68,5 +70,19 @@ public class AnimOverlayManager : MonoBehaviour
     public void StopAnim()
     {
         animationOverlay.SetActive(false);
+    }
+
+
+    public void StartScreenFadeLoadScreen()
+    {
+        screenFadeCanvas.SetActive(true);
+        screenFadeOverlay.alpha = 0f;
+        screenFadeOverlay.LeanAlpha(1f, 0.5f).setOnComplete(FadeOutScreen);
+    }
+
+
+    private void FadeOutScreen()
+    {
+        screenFadeOverlay.LeanAlpha(0f, 0.5f).setOnComplete( () => {screenFadeCanvas.SetActive(false);} ).delay = 1f;
     }
 }

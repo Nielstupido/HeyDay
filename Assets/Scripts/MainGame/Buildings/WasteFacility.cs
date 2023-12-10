@@ -10,6 +10,7 @@ public class WasteFacility : Building
         this.buildingEnumName = Buildings.WASTEFACILITY;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
+        this.buildingDescription = "You can explore the efficient Solid Waste Management Facility, a vital hub in keeping the city clean. Inside, workers diligently sort and process recyclables and waste, maintaining an eco-friendly environment.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

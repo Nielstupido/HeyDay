@@ -31,5 +31,14 @@ public class LvlLeaderboardView : MonoBehaviour
             newLeaderboardItem.GetComponent<LvlLeaderboardObj>().SetupLeaderboardObj((rankCounter), playerName, playerRecord.Value);
             rankCounter++;
         }
+
+        this.gameObject.SetActive(true);
+    }
+
+
+    public void NextLevel()
+    {
+        this.gameObject.SetActive(false);
+        EndLevelManager.Instance.NextLevel();
     }
 }

@@ -100,8 +100,10 @@ public class BudgetSetter : MonoBehaviour
     }
 
 
-    public void SaveBudget()
+    public void Continue()
     {
         BudgetSystem.Instance.SaveBudget(sliders[0].value, sliders[1].value, sliders[2].value, sliders[3].value);
+        this.gameObject.SetActive(false);
+        GameManager.Instance.StartGame(new GameStateData());
     }
 }

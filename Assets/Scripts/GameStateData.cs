@@ -8,11 +8,12 @@ public class GameStateData
 {
     //Player Data
     public string playerName;
-    public float playerCashMoney;
-    public float playerBankSavingsMoney;
+    public float playerCashMoney = 5000f;
+    public float playerBankSavingsMoney = 0f;
     
 
     //Game World Data
-    public float time;
-    public float day;
+    public float time = 7f;
+    public float day = 1f;
+    public int gameLevel = 1;
 }

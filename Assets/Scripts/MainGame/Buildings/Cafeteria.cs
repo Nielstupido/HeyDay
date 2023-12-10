@@ -10,6 +10,7 @@ public class Cafeteria : Building
         this.buildingEnumName = Buildings.CAFETERIA;
         this.buildingOpeningTime = 6f;
         this.buildingClosingTime = 20f;
+        this.buildingDescription = "You can step into Graciana’s cafeteria, filled with the aroma of freshly brewed coffee and various delectable dishes. Inside, tables are filled with patrons chatting and enjoying meals, creating a warm and inviting atmosphere.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
         GameManager.Instance.MeetupLocBuildings.Add(this);

@@ -10,6 +10,7 @@ public class PoliceStation : Building
         this.buildingEnumName = Buildings.POLICESTATION;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
+        this.buildingDescription = "You can visit the Police Station, a center of law enforcement activity. Inside, officers rush about, managing operations and maintaining order within the city.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

@@ -10,6 +10,7 @@ public class Factory: Building
         this.buildingEnumName = Buildings.FACTORY;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 18f;
+        this.buildingDescription = "You can enter the innovative Bene Factory, a manufacturing hub where cutting-edge technology meets efficient production. The factory's exterior reflects a commitment to sustainable and advanced manufacturing.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

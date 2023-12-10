@@ -10,6 +10,7 @@ public class ConvenienceStore : Building
         this.buildingEnumName = Buildings.CONVENIENCESTORE;
         this.buildingOpeningTime = 0f;
         this.buildingClosingTime = 0f;
+        this.buildingDescription = "You can step into the familiar Uncle Ben Convenience Store, a neighborhood hub offering quick essentials and friendly service. The store's warm lighting welcomes patrons day and night.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
         GameManager.Instance.MeetupLocBuildings.Add(this);

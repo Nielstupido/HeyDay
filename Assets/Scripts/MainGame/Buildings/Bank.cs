@@ -11,6 +11,7 @@ public class Bank : Building
         this.buildingEnumName = Buildings.BANK;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 16f;
+        this.buildingDescription = "You can enter the secure Intellicash Bank, a financial institution where modern architecture meets trust and reliability. The bank stands tall, symbolizing a pillar of financial stability in the city.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

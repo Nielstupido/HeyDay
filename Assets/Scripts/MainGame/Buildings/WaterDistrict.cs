@@ -10,6 +10,7 @@ public class WaterDistrict : Building
         this.buildingEnumName = Buildings.WATERDISTRICT;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
+        this.buildingDescription = "You have the opportunity to explore the HeyDay Water District, a haven for the management and preservation of water resources.   With state-of-the-art purification systems and flourishing vegetation, the establishment demonstrates its dedication to sustainable water management.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

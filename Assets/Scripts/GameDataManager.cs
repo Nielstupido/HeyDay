@@ -153,7 +153,7 @@ public class GameDataManager : MonoBehaviour
         }
         catch (Exception e)
         {
-            return (currentGameState, e.ToString());
+            return (null, e.ToString());
         }
 
         return (currentGameState, "");

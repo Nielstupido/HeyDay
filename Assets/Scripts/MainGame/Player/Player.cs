@@ -56,10 +56,12 @@ public class Player : MonoBehaviour
     public float PlayerLvlEmergencyFunds { set{playerLvlEmergencyFunds = value;} get{return playerLvlEmergencyFunds;}}
 
     //Studies
+    private UniversityCourses goalCourse;
     private UniversityCourses courseEnrolled;
     private StudyFields studyFieldEnrolled;
     public UniversityCourses PlayerEnrolledCourse { set{courseEnrolled = value;} get{return courseEnrolled;}}
     public StudyFields PlayerEnrolledStudyField { set{studyFieldEnrolled = value;} get{return studyFieldEnrolled;}}
+    public UniversityCourses GoalCourse { set{goalCourse = value;} get{return goalCourse;}}
     public float PlayerEnrolledCourseDuration { set; get;}
     public float PlayerStudyHours { set; get;}
 

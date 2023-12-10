@@ -10,6 +10,7 @@ public class Cafe : Building
         this.buildingEnumName = Buildings.CAFE;
         this.buildingOpeningTime = 10f;
         this.buildingClosingTime = 22f;
+        this.buildingDescription = "You can step into the dynamic Ddos Cafe, a tech-inspired haven where the aroma of coffee mingles with the hum of devices. Modern decor and high-speed internet create an atmosphere perfect for work or relaxation.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
         GameManager.Instance.MeetupLocBuildings.Add(this);

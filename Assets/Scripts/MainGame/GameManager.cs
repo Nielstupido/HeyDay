@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartGame(); 
+        StartGame(new GameStateData()); 
         //>>>>>>>for debugging<<<<<
         // if (PlayerPrefs.GetInt("GameMode") == 0) 
         // {
@@ -170,9 +170,11 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void StartGame()
+    public void StartGame(GameStateData gameStateData)
     {
-        currentGameLevel = 1;
+        currentGameStateData = gameStateData;
+
+        currentGameLevel = currentGameStateData.gameLevel;
         PrepareCharacters();
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         pauseBtn.SetActive(true);
@@ -190,13 +192,11 @@ public class GameManager : MonoBehaviour
 
         if (gameStateRes.Item1 == null)
         {
-            currentGameLevel = 1;
             playerInfoManager.OpenCharacterCreationOVerlay();
         }
         else
         {
-            currentGameStateData = gameStateRes.Item1;
-            StartGame();
+            StartGame(gameStateRes.Item1);
         }
     }
 
@@ -285,6 +285,12 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void StartLevel()
+    {
+        budgetSetter.PrepareBudgeSetter(100f);
+    }
+
+
     private List<Building> ShuffleList(List<Building> list)
     {
         var random = new System.Random();
@@ -308,11 +314,5 @@ public class GameManager : MonoBehaviour
             randomNum = UnityEngine.Random.Range(0, buildingsArr.Count);
             character.currentBuildiing = buildingsArr[randomNum];
         }
-    }
-
-
-    private void StartLevel()
-    {
-        budgetSetter.PrepareBudgeSetter(100f);
     }
 }

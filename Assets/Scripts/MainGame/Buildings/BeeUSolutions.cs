@@ -10,6 +10,7 @@ public class BeeUSolutions : Building
         this.buildingEnumName = Buildings.BEEUSOLUTIONS;
         this.buildingOpeningTime = 8f;
         this.buildingClosingTime = 17f;
+        this.buildingDescription = "You can visit the cutting-edge Bee U IT Solutions, a tech hub where innovation and creativity thrive. The sleek building exterior reflects a commitment to pushing the boundaries of technology.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }

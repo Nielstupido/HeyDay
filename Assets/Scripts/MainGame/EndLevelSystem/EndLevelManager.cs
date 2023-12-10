@@ -49,6 +49,21 @@ public class EndLevelManager : MonoBehaviour
     }
 
 
+    public void NextLevel()
+    {
+        endLvlOverlay.SetActive(false);
+
+        if (GameManager.Instance.CurrentGameLevel == 41)
+        {
+            //End Game
+        }
+        else
+        {
+            LevelMapManager.Instance.MoveToNewLevel(GameManager.Instance.CurrentGameLevel, false);
+        }
+    }
+
+
     public void OpenLeaderboardView()
     {
         Dictionary<string, int> playerRecords =  GameDataManager.Instance.GetCurrentLevelScores();

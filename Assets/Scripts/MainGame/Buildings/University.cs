@@ -10,6 +10,7 @@ public class University : Building
         this.buildingEnumName = Buildings.UNIVERSITY;
         this.buildingOpeningTime = 7f;
         this.buildingClosingTime = 17f;
+        this.buildingDescription = "Welcome to HeyDay University, where knowledge meets opportunity. Sprawling across manicured lawns and modern architecture, the campus buzzes with scholarly pursuits. Towering lecture halls, bustling libraries, and lively student hangouts define the vibrant academic atmosphere.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
         GameManager.Instance.MeetupLocBuildings.Add(this);

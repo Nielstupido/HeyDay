@@ -10,6 +10,7 @@ public class FoodXpress : Building
         this.buildingEnumName = Buildings.FOODXPRESS;
         this.buildingOpeningTime = 0f;
         this.buildingClosingTime = 0f;
+        this.buildingDescription = "You can savor the hustle and bustle of FoodXpress Fastfood, where enticing aromas and quick service define the fast-paced dining experience. Colorful signage and a lively atmosphere make it a popular spot.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
         GameManager.Instance.MeetupLocBuildings.Add(this);

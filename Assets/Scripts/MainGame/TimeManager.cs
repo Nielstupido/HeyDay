@@ -108,7 +108,11 @@ public class TimeManager : MonoBehaviour
             }
         }
         
-        onTimeAdded(currentTime);
+        if (onTimeAdded != null)
+        {
+            onTimeAdded(currentTime);
+        }
+        
         AmOrPm();
         IncrementDayCount();
     }

@@ -10,6 +10,7 @@ public class Cinema : Building
         this.buildingEnumName = Buildings.CINEMA;
         this.buildingOpeningTime = 13f;
         this.buildingClosingTime = 23f;
+        this.buildingDescription = "You can step into the vibrant cinema, where movie posters and the scent of popcorn fill the air. People around you chatter in anticipation of the films about to unravel on the big screen. It's a lively escape, inviting you to immerse yourself in captivating stories and temporary adventures.";
 
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
         GameManager.Instance.MeetupLocBuildings.Add(this);
