@@ -75,7 +75,7 @@ public class TimeManager : MonoBehaviour
             }
             else if (hours > 24)
             {
-                hours = 0;
+                hours = hours - 24;
                 currentTime = hours + (minutes / 100);
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":" + minutes.ToString();
@@ -93,7 +93,7 @@ public class TimeManager : MonoBehaviour
         {
             if (hours > 24)
             {
-                hours = 0;
+                hours = hours - 24;
                 currentTime = hours + (minutes / 100);
                 transposedValue = TransposeTimeValue((int)currentTime);
                 clockValue.text = transposedValue.ToString() + ":00";

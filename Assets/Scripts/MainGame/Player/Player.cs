@@ -239,7 +239,7 @@ public class Player : MonoBehaviour
 
     public void Walk(float energyLevelCutValue)
     {
-        TimeManager.Instance.AddClockTime(2);
+        TimeManager.Instance.AddClockTime(1f);
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
     }
