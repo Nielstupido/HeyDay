@@ -40,9 +40,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Prompts notEnoughMoneyPrompt;
     private float playerCash;
     private float playerBankSavings;
+    private float playerTotalDebt;
+    private float playerHospitalOutstandingDebt;
     private bool isPlayerHasBankAcc;
     public float PlayerCash { set{playerCash = value;} get{return playerCash;}}
     public float PlayerBankSavings { set{playerBankSavings = value;} get{return playerBankSavings;}}
+    public float PlayerHospitalOutstandingDebt { set{playerHospitalOutstandingDebt = value;} get{return playerHospitalOutstandingDebt;}}
+    public float PlayerTotalDebt { set{playerTotalDebt = value;} get{return playerTotalDebt;}}
     public bool IsPlayerHasBankAcc { set{isPlayerHasBankAcc = value;} get{return isPlayerHasBankAcc;}}
 
     //Budget tracking

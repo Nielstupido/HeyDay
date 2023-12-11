@@ -136,16 +136,17 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartGame(new GameStateData()); 
         //>>>>>>>for debugging<<<<<
-        // if (PlayerPrefs.GetInt("GameMode") == 0) 
-        // {
-        //     playerInfoManager.OpenCharacterCreationOVerlay();
-        // }
-        // else
-        // {
-        //     LoadSavedGame();
-        // }
+        // StartGame(new GameStateData()); 
+
+        if (PlayerPrefs.GetInt("GameMode") == 0) 
+        {
+            playerInfoManager.OpenCharacterCreationOVerlay();
+        }
+        else
+        {
+            LoadSavedGame();
+        }
     }
 
 

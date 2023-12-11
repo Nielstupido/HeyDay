@@ -34,7 +34,9 @@ public class AnimOverlayManager : MonoBehaviour
 {
     [SerializeField] private GameObject animationOverlay;
     [SerializeField] private GameObject screenFadeCanvas;
-    [SerializeField] private CanvasGroup screenFadeOverlay;
+    [SerializeField] private CanvasGroup loadScreenFadeOverlay;
+    [SerializeField] private CanvasGroup whiteScreenFadeOverlay;
+    [SerializeField] private CanvasGroup blackScreenFadeOverlay;
     [SerializeField] private Image animationImage;
     [SerializeField] private Animator animator;
     [SerializeField] private List<AnimationScriptableObject> animationObjects = new List<AnimationScriptableObject>();
@@ -75,14 +77,48 @@ public class AnimOverlayManager : MonoBehaviour
 
     public void StartScreenFadeLoadScreen()
     {
+        loadScreenFadeOverlay.alpha = 0f;
+        blackScreenFadeOverlay.alpha = 0f;
+        whiteScreenFadeOverlay.alpha = 0f;
         screenFadeCanvas.SetActive(true);
-        screenFadeOverlay.alpha = 0f;
-        screenFadeOverlay.LeanAlpha(1f, 0.5f).setOnComplete(FadeOutScreen);
+        loadScreenFadeOverlay.LeanAlpha(1f, 0.5f).setOnComplete(FadeOutScreen);
     }
 
 
     private void FadeOutScreen()
     {
-        screenFadeOverlay.LeanAlpha(0f, 0.5f).setOnComplete( () => {screenFadeCanvas.SetActive(false);} ).delay = 1f;
+        loadScreenFadeOverlay.LeanAlpha(0f, 0.5f).setOnComplete( () => {screenFadeCanvas.SetActive(false);} ).delay = 1f;
+    }
+
+
+    public void StartWhiteScreenFadeLoadScreen()
+    {
+        whiteScreenFadeOverlay.alpha = 0f;
+        blackScreenFadeOverlay.alpha = 0f;
+        loadScreenFadeOverlay.alpha = 0f;
+        screenFadeCanvas.SetActive(true);
+        whiteScreenFadeOverlay.LeanAlpha(1f, 0.5f).setOnComplete(FadeOutWhiteScreen);
+    }
+
+
+    private void FadeOutWhiteScreen()
+    {
+        whiteScreenFadeOverlay.LeanAlpha(0f, 0.5f).setOnComplete( () => {screenFadeCanvas.SetActive(false);} ).delay = 1f;
+    }
+
+
+    public void StartBlackScreenFadeLoadScreen()
+    {
+        blackScreenFadeOverlay.alpha = 0f;
+        whiteScreenFadeOverlay.alpha = 0f;
+        loadScreenFadeOverlay.alpha = 0f;
+        screenFadeCanvas.SetActive(true);
+        blackScreenFadeOverlay.LeanAlpha(1f, 0.5f).setOnComplete(FadeOutBlackScreen);
+    }
+
+
+    private void FadeOutBlackScreen()
+    {
+        blackScreenFadeOverlay.LeanAlpha(0f, 0.5f).setOnComplete( () => {screenFadeCanvas.SetActive(false);} ).delay = 0.2f;
     }
 }

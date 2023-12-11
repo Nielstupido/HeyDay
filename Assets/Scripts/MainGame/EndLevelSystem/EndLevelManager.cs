@@ -55,7 +55,8 @@ public class EndLevelManager : MonoBehaviour
 
         if (GameManager.Instance.CurrentGameLevel == 41)
         {
-            //End Game
+            AnimOverlayManager.Instance.StartWhiteScreenFadeLoadScreen();
+            StartCoroutine(ProceedGoodEnding());
         }
         else
         {
@@ -64,10 +65,10 @@ public class EndLevelManager : MonoBehaviour
     }
 
 
-    public void OpenLeaderboardView()
+    public void OpenLeaderboardView(Sprite playerBadge)
     {
         Dictionary<string, int> playerRecords =  GameDataManager.Instance.GetCurrentLevelScores();
-        lvlLeaderboardView.SetupLeaderboard(playerRecords);
+        lvlLeaderboardView.SetupLeaderboard(playerRecords, playerBadge);
     }
 
 
@@ -80,5 +81,13 @@ public class EndLevelManager : MonoBehaviour
     private void OpenBudetTrackerLevelView()
     {
         budgetTrackerEndLevelView.PrepareEndLvlBudgetView(BudgetSystem.Instance.GetCurrentBudgetList(), BudgetSystem.Instance.GetCurrentExpensesList());
+    }
+
+
+    private IEnumerator ProceedGoodEnding()
+    {
+        yield return new WaitForSeconds(1f);
+        //start good ending
+        yield return null;
     }
 }

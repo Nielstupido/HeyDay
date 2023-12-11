@@ -16,6 +16,7 @@ public class CinemaManager : MonoBehaviour
     private void Start()
     {
         watchMovieBtn.onClick.AddListener(WatchMovie);
+        refNumber.text = refNumber.text = Random.Range(11000, 100000).ToString();
     }
 
 

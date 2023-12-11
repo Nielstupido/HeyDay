@@ -38,13 +38,23 @@ public class Hospital : Building
                 case Buttons.QUIT:
                     JobManager.Instance.QuitWork();
                     break;
+                case Buttons.PAY:
+                    HospitalManager.Instance.OpenBillingOverlay();
+                    break;
             }
     }
 
 
     public override void CheckButtons()
     {
-        this.actionButtons = new List<Buttons>(){Buttons.APPLY};     
+        this.actionButtons = new List<Buttons>();
+
+        if (Player.Instance.PlayerHospitalOutstandingDebt != 0f)
+        {
+            this.actionButtons.Add(Buttons.PAY);
+        }
+
+        this.actionButtons.Add(Buttons.APPLY);
 
         if (this.currentlyHired)
         {

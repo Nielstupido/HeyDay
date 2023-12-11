@@ -32,27 +32,31 @@ public class LifeEventsManager : MonoBehaviour
 
     public void StartLifeEvent(LifeEvents lifeEvent = LifeEvents.RANDOM)
     {
-        float randomChance;
-        float possibilityPercentage;
+        int randomChance;
+        int possibilityPercentage;
         LifeEvent upcomingEvent;
 
         switch (lifeEvent)
         {
             case LifeEvents.ROBBERY:
                 upcomingEvent = new Robbery();
-                possibilityPercentage = 0.1f;
+                possibilityPercentage = 2;
                 if (Player.Instance.PlayerCash > 10000)
                 {
-                    possibilityPercentage = 0.4f;
+                    possibilityPercentage = 3;
                 }
                 break;
             case LifeEvents.ACCIDENT:
+                if (Player.Instance.PlayerHospitalOutstandingDebt != 0f)
+                {
+                    return;
+                }
                 upcomingEvent = new Accident();
-                possibilityPercentage = 0.2f;
+                possibilityPercentage = 2;
                 break;  
             default:
                 randomChance = Random.Range(0, 2);
-                possibilityPercentage = 0.05f;
+                possibilityPercentage = 1;
                 if (randomChance == 0)
                 {
                     upcomingEvent = new Earthquake();
@@ -64,7 +68,7 @@ public class LifeEventsManager : MonoBehaviour
                 break;
         }
 
-        randomChance = Random.Range(0f, 1f);
+        randomChance = Random.Range(1, 11);
 
         if (randomChance > possibilityPercentage) 
         {

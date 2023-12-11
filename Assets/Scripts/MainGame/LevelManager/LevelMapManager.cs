@@ -29,8 +29,6 @@ public class LevelMapManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        MoveCharacterPosition(false, false, 2);
     }
 
 

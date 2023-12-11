@@ -61,5 +61,6 @@ public enum Buttons
     ENTER,
     SHOP,
     SLEEP,
-    EAT
+    EAT,
+    PAY
 }

@@ -49,7 +49,7 @@ public class PlayerTravelManager : MonoBehaviour
     }
 
 
-    private void MovePlayerModel(Building selectedBuilding)
+    public void MovePlayerModel(Building selectedBuilding)
     {
         player3DController.playerNavMesh.isStopped = true;
         playerModel.gameObject.transform.position = selectedBuilding.transform.GetChild(selectedBuilding.transform.childCount - 1).transform.position;

@@ -12,8 +12,10 @@ public class LvlLeaderboardView : MonoBehaviour
     [SerializeField] private GameObject leaderboardItemPrefab;
 
 
-    public void SetupLeaderboard(Dictionary<string, int> playerRecords)
+    public void SetupLeaderboard(Dictionary<string, int> playerRecords, Sprite playerBadge)
     {
+        badgeImage.sprite = playerBadge;
+
         for (int i = 0; i < leaderboardIemsHolder.childCount; i++)
         {
             Object.Destroy(leaderboardIemsHolder.GetChild(i).gameObject);

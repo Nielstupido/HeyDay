@@ -19,13 +19,20 @@ public class PlayerInfoManager : MonoBehaviour
     private List<CharactersScriptableObj> currentCharacters = new List<CharactersScriptableObj>();
 
 
+    private IEnumerator ProceedIntro()
+    {
+        AnimOverlayManager.Instance.StartBlackScreenFadeLoadScreen();
+        yield return new WaitForSeconds(0.6f);
+        characterCreationOverlay.SetActive(false);
+        introCutsceneMannager.StartIntro();
+    }
+
+
     public void StartIntroScene()
     {
         Player.Instance.PlayerName = playerNameTextInput.text;
         playerNameTextDisplay.text = playerNameTextInput.text;
-
-        introCutsceneMannager.StartIntro();
-        characterCreationOverlay.SetActive(false);
+        StartCoroutine(ProceedIntro());
     }
 
 

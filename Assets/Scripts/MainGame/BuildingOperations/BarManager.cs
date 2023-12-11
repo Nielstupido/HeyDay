@@ -16,6 +16,7 @@ public class BarManager : MonoBehaviour
     private void Start()
     {
         partyBtn.onClick.AddListener(Party);
+        refNumber.text = Random.Range(11000, 100000).ToString();
     }
 
 

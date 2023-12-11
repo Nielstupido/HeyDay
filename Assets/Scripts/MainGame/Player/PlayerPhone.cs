@@ -7,19 +7,6 @@ using System.Linq;
 
 public class PlayerPhone : MonoBehaviour
 {
-    private string chosenCourse = "BS Information Technology"; //Temporary variable
-    private float totalSavings = 100; //Temporary variable - Total Bank Savings
-    private float totalEmergencyFunds = 1000; //Temporary variable
-    private float totalCash = 5000; //Temporary variable
-    private float currentIncomePerHour = 20; //Temporary variable
-    private float taxRate = 0.5f; //Temporary variable
-    private float totalDebt = 200; //Temporary variable
-    private float outflowPerMonth; //Temporary variable - Rent + Water & Elec Bill
-    private float rentRate = 1500; //Temporary variable
-    private float waterBillRate = 200; //Temporary variable
-    private float electricityBillRate = 250; //Temporary variable
-    private float groceryPrice = 200; //Temporary variable
-    
     [SerializeField] private GameObject phoneOverlay;
     [SerializeField] private MeetUpSystem meetingUpSystem;
 
@@ -80,8 +67,18 @@ public class PlayerPhone : MonoBehaviour
     public void GoalTracker()
     {
         goalTrackerOverlay.SetActive(true);
-        courseValue.text = chosenCourse;
-        savingsValue.text = "₱" + totalSavings.ToString() + "/100000";
+                
+        try
+        {
+            courseValue.text = GameManager.Instance.EnumStringParser(Player.Instance.PlayerEnrolledCourse);
+        }
+        catch (System.Exception)
+        {
+            
+            courseValue.text = "Currently not enrolled to any course.";
+        }
+
+        savingsValue.text = "₱" + Player.Instance.PlayerBankSavings.ToString() + " / 100000";
         LevelManager.onFinishedPlayerAction(MissionType.USEAPP, interactedApp:APPS.GOALTRACKER);
     }
 
@@ -89,13 +86,31 @@ public class PlayerPhone : MonoBehaviour
     public void FinanceTracker()
     {
         financeTrackerOverlay.SetActive(true);
-        bankBalValue.text = "₱" + totalSavings.ToString();
-        emergencyFundsValue.text = "₱" + totalEmergencyFunds.ToString();
-        cashBalValue.text = "₱" + totalCash.ToString();
-        incomeValue.text = currentIncomePerHour.ToString() + "/hr";
-        taxValue.text = taxRate.ToString() + "%";
-        debtValue.text = "₱" + totalDebt.ToString();
-        monthlyOutflowValue.text = "₱" + (rentRate + waterBillRate + electricityBillRate).ToString();
+        bankBalValue.text = Player.Instance.PlayerBankSavings.ToString();
+        cashBalValue.text = Player.Instance.PlayerCash.ToString();
+
+        try
+        {
+            incomeValue.text = Player.Instance.CurrentPlayerJob.salaryPerHr.ToString() + "/hr";
+        }
+        catch (System.Exception)
+        {
+            
+            incomeValue.text = "0/hr";
+        }
+        
+        try
+        {
+            monthlyOutflowValue.text = (Player.Instance.CurrentPlayerPlace.monthlyRent + Player.Instance.CurrentPlayerPlace.monthlyWaterCharge + 
+                                        Player.Instance.CurrentPlayerPlace.monthlyElecCharge).ToString();
+        }
+        catch (System.Exception)
+        {
+            
+            monthlyOutflowValue.text = "0";
+        }
+
+        debtValue.text = Player.Instance.PlayerTotalDebt.ToString();
         LevelManager.onFinishedPlayerAction(MissionType.USEAPP, interactedApp:APPS.FINANCETRACKER);
     }
 
@@ -103,7 +118,7 @@ public class PlayerPhone : MonoBehaviour
     public void OLShop()
     {
         oLShopOverlay.SetActive(true);
-        groceryPriceValue.text = "₱" + groceryPrice.ToString();
+        // groceryPriceValue.text = "₱" + groceryPrice.ToString();
         LevelManager.onFinishedPlayerAction(MissionType.USEAPP, interactedApp:APPS.OLSHOP);
     }
 

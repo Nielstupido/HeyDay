@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -7,6 +8,7 @@ public class JobProfileView : MonoBehaviour
 {
     [SerializeField] private GameObject jobSystemOverlay;
     [SerializeField] private GameObject resignationOverlay;
+    [SerializeField] private Image playerProfileImage;
     [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private TextMeshProUGUI playerPositionText;
     [SerializeField] private TextMeshProUGUI playerEducationText;
@@ -27,6 +29,7 @@ public class JobProfileView : MonoBehaviour
 
         currentPlayer = Player.Instance;
 
+        playerProfileImage.sprite = Player.Instance.CurrentCharacter.bustIcon;
         playerNameText.text = currentPlayer.PlayerName;
         playerPositionText.text = currentPlayer.CurrentPlayerJob.jobPosName;
         playerEducationText.text = GameManager.Instance.EnumStringParser(currentPlayer.PlayerEnrolledCourse);

@@ -134,6 +134,6 @@ public class Missions : MonoBehaviour
         missionStatus = MissionStatus.COMPLETED;
         LevelManager.Instance.OnMissionFinished(this.missionCopy);
         missionCheckBox.sprite = checkedBox;
-        missionCheckBox.SetNativeSize();
+        missionCheckBox.GetComponent<RectTransform>().sizeDelta = new Vector2(60f, 60f);
     }
 }
