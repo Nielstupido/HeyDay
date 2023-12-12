@@ -39,12 +39,11 @@ public class SampaguitaCondotel : ResBuilding
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {
-        Debug.Log("CLICKED BTN IS " + clickedBtn.ToString());
         if (Player.Instance.CurrentPlayerPlace == this)
             switch (clickedBtn)
             {
                 case Buttons.SLEEP:
-                    Sleep();
+                    this.Sleep();
                     break;
                 case Buttons.EAT:
                     Debug.Log("i'll be eating");

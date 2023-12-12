@@ -76,7 +76,7 @@ public class BuildingManager : MonoBehaviour
 
     public void Walk()
     {
-        Player.Instance.Walk(10f);
+        Player.Instance.Walk(5f, 3f);
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
@@ -88,7 +88,7 @@ public class BuildingManager : MonoBehaviour
 
     public void Ride()
     {
-        Player.Instance.Ride(5f);
+        Player.Instance.Ride(2f, 1f);
         walkBtn.SetActive(false);
         rideBtn.SetActive(false);
         enterBtn.SetActive(true);
@@ -132,7 +132,6 @@ public class BuildingManager : MonoBehaviour
         UniversityManager.Instance.OnExitedUniversity();
         currentSelectedBuilding.actionButtons.Clear();
         buildingInteriorOverlay.SetActive(false);
-        GameUiController.onScreenOverlayChanged(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
     }
 
 

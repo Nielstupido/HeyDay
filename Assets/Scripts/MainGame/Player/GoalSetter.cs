@@ -30,7 +30,7 @@ public class GoalSetter : MonoBehaviour
 
     private void GenerateGoal()
     {
-        educGoalText.text = "	You are " + Player.Instance.PlayerName + ", a 19-year-old girl who decided to pursue a degree in " +
+        narrativeText.text = "	You are " + Player.Instance.PlayerName + ", a 19-year-old " + Player.Instance.PlayerGender.ToString() + " who decided to pursue a degree in " +
                             "HeyDay City with only P5,000 in your pocket. You plan to get a degree, get " +
                             "a part- job, and save enough money to be able to continue living in the city " +
                             "after graduation. Your main goals are:";

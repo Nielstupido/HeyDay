@@ -43,7 +43,7 @@ public class LifeEventsManager : MonoBehaviour
                 possibilityPercentage = 2;
                 if (Player.Instance.PlayerCash > 10000)
                 {
-                    possibilityPercentage = 3;
+                    possibilityPercentage = 4;
                 }
                 break;
             case LifeEvents.ACCIDENT:
@@ -68,7 +68,7 @@ public class LifeEventsManager : MonoBehaviour
                 break;
         }
 
-        randomChance = Random.Range(1, 11);
+        randomChance = Random.Range(1, 31);
 
         if (randomChance > possibilityPercentage) 
         {

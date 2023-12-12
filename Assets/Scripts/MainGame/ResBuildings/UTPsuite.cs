@@ -8,7 +8,7 @@ public class UTPsuite : ResBuilding
     {
         this.buildingEnumName = ResBuildings.UTPSUITE;
         this.buildingNameStr = "UTP Suite";
-        this.monthlyRent = 4500f;
+        this.monthlyRent = 2500f;
         this.monthlyElecCharge = 800f;
         this.monthlyWaterCharge = 2500f;
         this.dailyAdtnlHappiness = 5f; 
@@ -43,7 +43,7 @@ public class UTPsuite : ResBuilding
             switch (clickedBtn)
             {
                 case Buttons.SLEEP:
-                    Sleep();
+                    this.Sleep();
                     break;
                 case Buttons.EAT:
                     Debug.Log("i'll be eating");

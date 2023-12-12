@@ -243,19 +243,21 @@ public class Player : MonoBehaviour
     }
 
 
-    public void Walk(float energyLevelCutValue)
+    public void Walk(float energyLevelCutValue, float hungerLevelCutValue)
     {
         TimeManager.Instance.AddClockTime(1f);
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
+        playerStatsDict[PlayerStats.HUNGER] -= hungerLevelCutValue;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
     }
 
 
-    public void Ride(float energyLevelCutValue)
+    public void Ride(float energyLevelCutValue, float hungerLevelCutValue)
     {
         TimeManager.Instance.AddClockTime(0.5f);
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, playerStatsDict);
+        playerStatsDict[PlayerStats.HUNGER] -= hungerLevelCutValue;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
     }
 
 

@@ -43,7 +43,7 @@ public class RegalSanctuary : ResBuilding
             switch (clickedBtn)
             {
                 case Buttons.SLEEP:
-                    Sleep();
+                    this.Sleep();
                     break;
                 case Buttons.EAT:
                     Debug.Log("i'll be eating");

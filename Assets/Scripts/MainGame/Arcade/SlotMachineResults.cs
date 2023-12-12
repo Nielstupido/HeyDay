@@ -38,7 +38,7 @@ public class SlotMachineResults : MonoBehaviour
 
     public void Play()
     {
-        if (Pay(5f, 100000f, 0.5f))
+        if (Pay(5f, 200f, 0.5f))
         {
             slotMachine1.StartRand();
             slotMachine2.StartRand();

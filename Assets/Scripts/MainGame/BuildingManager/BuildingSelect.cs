@@ -88,7 +88,7 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
         
         if (currentBuilding.buildingOpeningTime > currentBuilding.buildingClosingTime)
         {
-            if (TimeManager.Instance.CurrentTime > currentBuilding.buildingOpeningTime || TimeManager.Instance.CurrentTime < currentBuilding.buildingClosingTime)
+            if (TimeManager.Instance.CurrentTime >= currentBuilding.buildingOpeningTime || TimeManager.Instance.CurrentTime < currentBuilding.buildingClosingTime)
             {
                 return true;
             }
@@ -97,7 +97,7 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            if (TimeManager.Instance.CurrentTime > currentBuilding.buildingOpeningTime && TimeManager.Instance.CurrentTime < currentBuilding.buildingClosingTime)
+            if (TimeManager.Instance.CurrentTime >= currentBuilding.buildingOpeningTime && TimeManager.Instance.CurrentTime < currentBuilding.buildingClosingTime)
             {
                 return true;
             }

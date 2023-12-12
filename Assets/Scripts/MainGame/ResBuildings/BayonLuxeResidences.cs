@@ -28,7 +28,6 @@ public class BayonLuxeResidences : ResBuilding
     public override void Sleep()
     {
         SleepManager.Instance.ShowSleepOverlay(this.adtnlEnergyForSleep);
-        Debug.Log("im sleeping");
     }
 
 
@@ -44,7 +43,7 @@ public class BayonLuxeResidences : ResBuilding
             switch (clickedBtn)
             {
                 case Buttons.SLEEP:
-                    Sleep();
+                    this.Sleep();
                     break;
                 case Buttons.EAT:
                     Debug.Log("i'll be eating");
