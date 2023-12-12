@@ -72,10 +72,10 @@ public class Player : MonoBehaviour
     //Possessions
     private List<Items> playerOwnedVehicles = new List<Items>();
     private List<Items> playerOwnedAppliances = new List<Items>();
-    private List<Items> playerOwnedGroceries = new List<Items>();
+    private int groceryBarValue;
     public List<Items> PlayerOwnedVehicles { get{return playerOwnedVehicles;}}
     public List<Items> PlayerOwnedAppliances { get{return playerOwnedAppliances;}}
-    public List<Items> PlayerOwnedGroceries { get{return playerOwnedGroceries;}}
+    public int GroceryBarValue { set{groceryBarValue = value;} get{return groceryBarValue;}}
 
     //Work
     private JobPositions currentPlayerJob;
@@ -94,6 +94,7 @@ public class Player : MonoBehaviour
     private const float WorkHungerCutValue = 10;
 
     //Misc.
+    [SerializeField] private PlayerPhone playerPhone;
     private ResBuilding currentPlayerPlace;
     public ResBuilding CurrentPlayerPlace { set{currentPlayerPlace = value;} get{return currentPlayerPlace;}}
 
@@ -120,6 +121,7 @@ public class Player : MonoBehaviour
         courseEnrolled = UniversityCourses.NONE;
         playerCash = 5000f;
         playerBankSavings = 0f;
+        groceryBarValue = 0;
         playerStatsDict.Add(PlayerStats.HAPPINESS, 100f);
         playerStatsDict.Add(PlayerStats.HUNGER, 100f);
         playerStatsDict.Add(PlayerStats.ENERGY, 100f);
@@ -139,12 +141,19 @@ public class Player : MonoBehaviour
         playerStatsDict[PlayerStats.HUNGER] += foodToConsume.hungerBarValue;
 
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
-        playerOwnedGroceries.Remove(foodToConsume);
+    }
+
+
+    public void ConsumeGrocery()
+    {
+        playerPhone.ConsumeGrocery();
     }
 
 
     public void Work(bool isGettingSalary, float workHrsDone, float totalWorkHrs)
     {
+        currentWorkHours += workHrsDone;
+        
         if (isGettingSalary)
         {
             playerCash += totalWorkHrs * currentPlayerJob.salaryPerHr;
@@ -195,9 +204,6 @@ public class Player : MonoBehaviour
                 playerStatsDict[PlayerStats.HAPPINESS] += item.happinessBarValue;
                 LevelManager.onFinishedPlayerAction(MissionType.BUY, interactedItemType:ItemType.APPLIANCE);
                 break;
-            case ItemType.CONSUMABLE:
-                playerOwnedGroceries.Add(item);
-                break;
             case ItemType.SERVICE:
                 if (item.itemName == "Spa Service")
                 {
@@ -219,6 +225,7 @@ public class Player : MonoBehaviour
         {
             EatDrink(item);
             LevelManager.onFinishedPlayerAction(MissionType.EAT, interactedBuilding:BuildingManager.Instance.CurrentSelectedBuilding.buildingEnumName);
+            LevelManager.onFinishedPlayerAction(MissionType.BUY, interactedItemType:ItemType.CONSUMABLE);
         }
     }
 

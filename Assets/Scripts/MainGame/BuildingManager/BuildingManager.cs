@@ -217,6 +217,7 @@ public class BuildingManager : MonoBehaviour
 
     public void ExitResidential()
     {
+        ResBuildingManager.Instance.ResBuildingSelectOverlay.SetActive(false);
         GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         camera1.SetActive(true);
         resViewHUD.SetActive(false);

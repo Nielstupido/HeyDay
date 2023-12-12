@@ -16,7 +16,7 @@ public class JobProfileView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerTotalWHtext;
     [SerializeField] private TextMeshProUGUI playerCurrentWHLabel;
     [SerializeField] private TextMeshProUGUI playerCurrentWHtext;
-    [SerializeField] private TextMeshProUGUI playerSalaryPerHr;
+    [SerializeField] private TextMeshProUGUI playerSalaryPerHrText;
     [SerializeField] private TextMeshProUGUI workHrsText;
     private float workHrs;
     private Player currentPlayer;
@@ -37,7 +37,7 @@ public class JobProfileView : MonoBehaviour
         playerTotalWHtext.text = currentPlayer.GetTotalWorkHours().ToString() + "hrs";
         playerCurrentWHLabel.text = "Current Work Hours [" + GameManager.Instance.EnumStringParser(currentPlayer.CurrentPlayerJob.workField) +"]";
         playerCurrentWHtext.text = currentPlayer.CurrentWorkHours.ToString() + "hrs";
-        playerCurrentWHtext.text = "₱" + currentPlayer.CurrentPlayerJob.salaryPerHr.ToString();
+        playerSalaryPerHrText.text = "₱" + currentPlayer.CurrentPlayerJob.salaryPerHr.ToString();
     }
 
 
@@ -68,8 +68,9 @@ public class JobProfileView : MonoBehaviour
 
     public void Resign()
     {
-        resignationOverlay.SetActive(true);
         jobSystemOverlay.SetActive(true);
+        this.gameObject.SetActive(true);
+        resignationOverlay.SetActive(true);
     }
 
 

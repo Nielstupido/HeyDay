@@ -34,16 +34,18 @@ public class PlayerPhone : MonoBehaviour
     [SerializeField] private GameObject oLShopOverlay;
     [SerializeField] private TextMeshProUGUI groceryPriceValue;
     [SerializeField] private Slider groceryBar;
+    private float groceryPrice = 200f;
 
     [SerializeField] private TextMeshProUGUI courseValue;
     [SerializeField] private TextMeshProUGUI savingsValue;
     [SerializeField] private TextMeshProUGUI bankBalValue;
-    [SerializeField] private TextMeshProUGUI emergencyFundsValue;
     [SerializeField] private TextMeshProUGUI cashBalValue;
     [SerializeField] private TextMeshProUGUI incomeValue;
-    [SerializeField] private TextMeshProUGUI taxValue;
-    [SerializeField] private TextMeshProUGUI debtValue;
-    [SerializeField] private TextMeshProUGUI monthlyOutflowValue;
+    [SerializeField] private TextMeshProUGUI debtValue; 
+    [SerializeField] private TextMeshProUGUI monthlyOutflowValue; 
+    [SerializeField] private Prompts noGroceryPrompt; 
+    [SerializeField] private Prompts errorMoneyPrompt; 
+    [SerializeField] private Prompts groceryBarFull; 
 
 
     public void OpenPhone()
@@ -119,17 +121,66 @@ public class PlayerPhone : MonoBehaviour
     {
         oLShopOverlay.SetActive(true);
         // groceryPriceValue.text = "₱" + groceryPrice.ToString();
+        groceryBar.value = Player.Instance.GroceryBarValue;
         LevelManager.onFinishedPlayerAction(MissionType.USEAPP, interactedApp:APPS.OLSHOP);
     }
 
 
     public void BuyGrocery()
     {
-        groceryBar.value += 10;
-        // Player.Instance.Purchase(false, 200f);
+        if (Player.Instance.GroceryBarValue < 10)
+        {
+            if (groceryPrice > Player.Instance.PlayerCash)
+            {
+                PromptManager.Instance.ShowPrompt(errorMoneyPrompt);
+                return;
+            }
+
+            StartCoroutine(DoAnim(ActionAnimations.BUY, 2f));
+
+            TimeManager.Instance.AddClockTime(0.1f);
+            Player.Instance.PlayerCash -= groceryPrice;
+            Player.Instance.PlayerStatsDict[PlayerStats.MONEY] -= groceryPrice;
+            PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
+
+            groceryBar.value++;
+            Player.Instance.GroceryBarValue++;
+
+            return;
+        }
+
+        PromptManager.Instance.ShowPrompt(groceryBarFull);
     }
 
 
+    public void ConsumeGrocery()
+    {
+        if (Player.Instance.GroceryBarValue > 0)
+        {
+            StartCoroutine(DoAnim(ActionAnimations.EAT, 2f));
+            TimeManager.Instance.AddClockTime(0.2f);
+            Player.Instance.PlayerStatsDict[PlayerStats.HAPPINESS] += 15f;
+            Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += 25f;
+            Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] += 20f;
+
+            PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
+
+            Player.Instance.GroceryBarValue++;
+            groceryBar.value++;
+            return;
+        }
+        
+        PromptManager.Instance.ShowPrompt(noGroceryPrompt);
+    }
+
+
+    private IEnumerator DoAnim(ActionAnimations actionAnimation, float animLength)
+    {
+        AnimOverlayManager.Instance.StartAnim(actionAnimation);
+        yield return new WaitForSeconds(animLength);
+        AnimOverlayManager.Instance.StopAnim();
+        yield return null;
+    }
 
     //<<<<<<<< Phonebook >>>>>>>
     public void PhoneBook()

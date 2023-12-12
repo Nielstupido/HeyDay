@@ -70,6 +70,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Transform missionPrefabsHolder;
     [SerializeField] private GameObject missionPrefab;
     [SerializeField] private GameObject missionOverlay;
+    [SerializeField] private GameObject nextLevelBtn;
     [SerializeField] private TextMeshProUGUI missionOverlayLevelText;
     private Dictionary<string, List<MissionsScriptableObj>> allMissions = new Dictionary<string, List<MissionsScriptableObj>>();
     private List<MissionsScriptableObj> currentActiveMissions = new List<MissionsScriptableObj>();
@@ -155,9 +156,10 @@ public class LevelManager : MonoBehaviour
 
         if (currentActiveMissions.Count == 0)
         {
-            OnLevelFinished();
+            nextLevelBtn.SetActive(true);
         }
     }
+
 
     public void CloseMissionOverlay()
     {
@@ -173,8 +175,11 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    private void OnLevelFinished()
+    public void OnLevelFinished()
     {
+        AnimOverlayManager.Instance.StartScreenFadeLoadScreen();
+        CloseMissionOverlay();
+        nextLevelBtn.SetActive(false);
         EndLevelManager.Instance.LevelFinished();
     }
 }

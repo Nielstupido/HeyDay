@@ -33,7 +33,7 @@ public class BayonLuxeResidences : ResBuilding
 
     public override void Eat()
     {
-
+        Player.Instance.ConsumeGrocery();
     }
 
 
@@ -46,7 +46,7 @@ public class BayonLuxeResidences : ResBuilding
                     this.Sleep();
                     break;
                 case Buttons.EAT:
-                    Debug.Log("i'll be eating");
+                    this.Eat();
                     break;
             }
     }

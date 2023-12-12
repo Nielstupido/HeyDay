@@ -294,6 +294,7 @@ public class UniversityManager : MonoBehaviour
         Player.Instance.PlayerEnrolledStudyField = selectedField;
         Player.Instance.PlayerEnrolledCourse = selectedCourse;
         Player.Instance.PlayerEnrolledCourseDuration = selectedCourseDuration;
+        Player.Instance.PlayerStudyHours = 0f;
         UpdateCourseDetsHUD();
         UpdateStudyHours(0);
         BuildingManager.Instance.PrepareButtons(BuildingManager.Instance.CurrentSelectedBuilding);

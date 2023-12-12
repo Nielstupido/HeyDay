@@ -167,9 +167,6 @@ public class ResBuildingManager : MonoBehaviour
             case ItemType.APPLIANCE:
                 playerItemsListManager.ShowItems(itemType, Player.Instance.PlayerOwnedAppliances);
                 break;
-            case ItemType.CONSUMABLE:
-                playerItemsListManager.ShowItems(itemType, Player.Instance.PlayerOwnedGroceries);
-                break;
         }
     }
 }

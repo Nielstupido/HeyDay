@@ -11,7 +11,6 @@ public class PlayerItemsListManager : MonoBehaviour
     [SerializeField] private GameObject itemsObjPrefab;
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private Image overlayBg;
-    [SerializeField] private Sprite kitchenBg;
     [SerializeField] private Sprite livingRoomBg;
     [SerializeField] private Sprite garageBg;
 
@@ -30,24 +29,12 @@ public class PlayerItemsListManager : MonoBehaviour
                 titleText.text = "Appliances Owned";
                 overlayBg.sprite = garageBg;
                 break;
-            case ItemType.CONSUMABLE:
-                titleText.text = "Available Groceries";
-                overlayBg.sprite = garageBg;
-                break;
         }
 
         foreach (Items playerItem in playerItems)
         {
             GameObject newItem = Instantiate(itemsObjPrefab, Vector3.zero, Quaternion.identity, itemsContentHolder);
             newItem.GetComponent<ItemsObjPrefab>().ItemImageSprite = playerItem.itemImage;
-            if (playerItem.itemType == ItemType.CONSUMABLE)
-            {
-                newItem.GetComponent<ItemsObjPrefab>().ItemEatBtn.gameObject.SetActive(true);
-                newItem.GetComponent<ItemsObjPrefab>().ItemEatBtn.onClick.AddListener( () => {
-                    Player.Instance.EatDrink(playerItem); 
-                    newItem.GetComponent<ItemsObjPrefab>().DestroyObj();
-                });
-            }
         }
     }
 

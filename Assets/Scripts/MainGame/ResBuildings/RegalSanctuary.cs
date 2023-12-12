@@ -33,7 +33,7 @@ public class RegalSanctuary : ResBuilding
 
     public override void Eat()
     {
-
+        Player.Instance.ConsumeGrocery();
     }
 
 
@@ -46,7 +46,7 @@ public class RegalSanctuary : ResBuilding
                     this.Sleep();
                     break;
                 case Buttons.EAT:
-                    Debug.Log("i'll be eating");
+                    this.Eat();
                     break;
             }
     }
