@@ -19,8 +19,8 @@ MonoBehaviour:
   itemCondition: 0
   vehicleType: 0
   vehicleColor: 0
-  energyBarValue: 0
-  hungerBarValue: 5
-  happinessBarValue: -10
+  energyBarValue: 5
+  hungerBarValue: 30
+  happinessBarValue: -5
   eatingTime: 0.2
   electricBillValue: 0
