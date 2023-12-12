@@ -20,7 +20,6 @@ public class ResBuildingManager : MonoBehaviour
     [SerializeField] private Transform buttonsHolder;
     [SerializeField] private Button vechiclesBtn;
     [SerializeField] private Button appliancesBtn;
-    [SerializeField] private Button groceriesBtn;
     [SerializeField] private PlayerItemsListManager playerItemsListManager;
     [SerializeField] private Prompts notEnoughMoneyRent;
     private ResBuilding currentSelectedResBuilding;
@@ -55,7 +54,6 @@ public class ResBuildingManager : MonoBehaviour
     {
         vechiclesBtn.onClick.AddListener( () => {ShowItems(ItemType.VEHICLE);} );
         appliancesBtn.onClick.AddListener( () => {ShowItems(ItemType.APPLIANCE);} );
-        groceriesBtn.onClick.AddListener( () => {ShowItems(ItemType.CONSUMABLE);} );
         enterBtn.GetComponent<Button>().onClick.AddListener( () => {EnterRoom(currentSelectedResBuilding);} );
         rentBtn.GetComponent<Button>().onClick.AddListener( () => {Rent(currentSelectedResBuilding);} );
         TimeManager.onDayAdded += ComputeBillings;
@@ -90,9 +88,11 @@ public class ResBuildingManager : MonoBehaviour
         totalBilling = 0;
 
         float temp = stayCount / 30;
+
         if (Mathf.Approximately(temp, Mathf.RoundToInt(temp)))
         {
             totalBilling = Player.Instance.CurrentPlayerPlace.monthlyElecCharge + Player.Instance.CurrentPlayerPlace.monthlyRent + Player.Instance.CurrentPlayerPlace.monthlyWaterCharge;
+            Player.Instance.PlayerLvlBillExpenses += totalBilling;
             if (Player.Instance.PlayerCash > totalBilling)
             {
                 Player.Instance.PlayerCash = Player.Instance.PlayerCash - totalBilling;
@@ -124,8 +124,9 @@ public class ResBuildingManager : MonoBehaviour
 
     public void Rent(ResBuilding selectedBuilding)
     {
-        if (Player.Instance.Pay(selectedBuilding.monthlyRent, 0.5f, 5f, 3f, notEnoughMoneyRent)) 
+        if (Player.Instance.Pay(true, selectedBuilding.monthlyRent, 0.5f, 5f, 3f, notEnoughMoneyRent)) 
         {
+            Player.Instance.PlayerLvlBillExpenses += selectedBuilding.monthlyRent;
             stayCount = 0;
             Player.Instance.CurrentPlayerPlace = selectedBuilding;
             EnterRoom(selectedBuilding);

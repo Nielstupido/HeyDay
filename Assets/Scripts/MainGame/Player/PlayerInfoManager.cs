@@ -32,6 +32,7 @@ public class PlayerInfoManager : MonoBehaviour
     {
         Player.Instance.PlayerName = playerNameTextInput.text;
         playerNameTextDisplay.text = playerNameTextInput.text;
+        GameDataManager.Instance.SavePlayerRecords(playerNameTextInput.text, 0);
         StartCoroutine(ProceedIntro());
     }
 

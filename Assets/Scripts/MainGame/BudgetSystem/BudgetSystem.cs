@@ -21,7 +21,6 @@ public class BudgetSystem : MonoBehaviour
     private float playerLvlSavingsTotal;
     private float playerCurrentFinanceBudgetTotal;
     private float totalCurrentBudget;
-    private Player currentPlayer;
     public static BudgetSystem Instance { get; private set; }
 
 
@@ -50,19 +49,18 @@ public class BudgetSystem : MonoBehaviour
 
     public BadgeAwards AnalyzeBudgetResult()
     {
-        currentPlayer = Player.Instance;
         playerIniPoints = 0f;
 
         //Bills
-        playerIniPoints += GetResPoints(false, (currentPlayer.PlayerLvlBillExpenses / currentBillsBudget));
+        playerIniPoints += GetResPoints(false, (Player.Instance.PlayerLvlBillExpenses / currentBillsBudget));
 
         //Savings & Emergency Fund
-        playerLvlSavingsTotal = currentPlayer.PlayerLvlSavings + currentPlayer.PlayerLvlEmergencyFunds;
+        playerLvlSavingsTotal = Player.Instance.PlayerLvlSavings + Player.Instance.PlayerLvlEmergencyFunds;
         playerCurrentFinanceBudgetTotal = currentSavingsBudget + currentEmergencyBudget;
         playerIniPoints += GetResPoints(true, (playerLvlSavingsTotal / playerCurrentFinanceBudgetTotal));
 
         //Bills
-        playerIniPoints += GetResPoints(false, (currentPlayer.PlayerLvlConsumablesExpenses / currentConsumablesBudget));
+        playerIniPoints += GetResPoints(false, (Player.Instance.PlayerLvlConsumablesExpenses / currentConsumablesBudget));
 
         switch (playerIniPoints)
         {
@@ -81,6 +79,16 @@ public class BudgetSystem : MonoBehaviour
     }
 
 
+    public void ResetBudget()
+    {
+        currentBillsBudget = 0f;
+        currentSavingsBudget = 0f;
+        currentConsumablesBudget = 0f;
+        currentEmergencyBudget = 0f;
+        totalCurrentBudget = 0f;
+    }
+
+
     public float[] GetCurrentBudgetList()
     {
         return new float[] {currentBillsBudget, currentSavingsBudget, currentConsumablesBudget, currentEmergencyBudget, totalCurrentBudget};
@@ -89,8 +97,8 @@ public class BudgetSystem : MonoBehaviour
 
     public float[] GetCurrentExpensesList()
     {
-        return new float[] {currentPlayer.PlayerLvlBillExpenses, currentPlayer.PlayerLvlSavings, currentPlayer.PlayerLvlConsumablesExpenses, 
-                        currentPlayer.PlayerLvlEmergencyFunds, currentPlayer.GetLvlTotalExpenses()};
+        return new float[] {Player.Instance.PlayerLvlBillExpenses, Player.Instance.PlayerLvlSavings, Player.Instance.PlayerLvlConsumablesExpenses, 
+                        Player.Instance.PlayerLvlEmergencyFunds, Player.Instance.GetLvlTotalExpenses()};
     }
 
 

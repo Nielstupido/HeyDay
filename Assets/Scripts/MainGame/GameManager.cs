@@ -137,8 +137,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //>>>>>>>for debugging<<<<<
-        StartGame(new GameStateData()); 
-        return;
+        // StartGame(new GameStateData()); 
+        // return;
 
         if (PlayerPrefs.GetInt("GameMode") == 0) 
         {
@@ -289,6 +289,8 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel()
     {
+        BudgetSystem.Instance.ResetBudget();
+        Player.Instance.ResetLvlExpenses();
         budgetSetter.PrepareBudgeSetter(Player.Instance.PlayerCash);
     }
 

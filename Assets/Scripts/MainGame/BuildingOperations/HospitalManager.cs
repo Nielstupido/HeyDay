@@ -89,7 +89,7 @@ public class HospitalManager : MonoBehaviour
     
     public void PayHospitalFees()
     {
-        if (Player.Instance.Pay(Player.Instance.PlayerHospitalOutstandingDebt, 0.5f, 10f, 5, notEnoughMoneyForBills))
+        if (Player.Instance.Pay(false, Player.Instance.PlayerHospitalOutstandingDebt, 0.5f, 10f, 5, notEnoughMoneyForBills))
         {
             daysUnpaid = 0;
             Player.Instance.PlayerHospitalOutstandingDebt = 0f;

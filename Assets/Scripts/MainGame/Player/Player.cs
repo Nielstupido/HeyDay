@@ -218,6 +218,7 @@ public class Player : MonoBehaviour
         
         TimeManager.Instance.AddClockTime(timeAdded);
         playerCash -= item.itemPrice;
+        playerLvlConsumablesExpenses += item.itemPrice;
         playerStatsDict[PlayerStats.MONEY] -= item.itemPrice;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
 
@@ -231,12 +232,21 @@ public class Player : MonoBehaviour
 
 
     //for non-consumable
-    public bool Pay(float price, float timeAdded, float happinessAdded, float hungerLevelCutValue, Prompts errorMoneyPrompt, float energyLevelCutValue = 10f)
+    public bool Pay(bool isBill, float price, float timeAdded, float happinessAdded, float hungerLevelCutValue, Prompts errorMoneyPrompt, float energyLevelCutValue = 10f)
     {
         if (price > playerCash)
         {
             PromptManager.Instance.ShowPrompt(errorMoneyPrompt);
             return false;
+        }
+
+        if (isBill)
+        {
+            playerLvlBillExpenses += price;
+        }
+        else
+        {
+            playerLvlConsumablesExpenses += price;
         }
 
         TimeManager.Instance.AddClockTime(timeAdded);
@@ -271,6 +281,15 @@ public class Player : MonoBehaviour
     public float GetLvlTotalExpenses()
     {
         return playerLvlBillExpenses + playerLvlSavings + playerLvlConsumablesExpenses + playerLvlEmergencyFunds;
+    }
+
+
+    public void ResetLvlExpenses()
+    {
+        playerLvlBillExpenses = 0f;
+        playerLvlSavings = 0f;
+        playerLvlConsumablesExpenses = 0f;
+        playerLvlEmergencyFunds = 0f;
     }
 
 

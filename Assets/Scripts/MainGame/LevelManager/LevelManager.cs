@@ -164,7 +164,7 @@ public class LevelManager : MonoBehaviour
     public void CloseMissionOverlay()
     {
         missionOverlay.SetActive(false);
-        GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
+        GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
     }
 
 
