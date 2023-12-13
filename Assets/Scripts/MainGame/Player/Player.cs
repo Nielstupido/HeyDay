@@ -362,17 +362,44 @@ public class Player : MonoBehaviour
         if (playerStatsDict[PlayerStats.ENERGY] >= 100)
         {
             playerStatsDict[PlayerStats.ENERGY] = 100;
-            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.ENERGY);
+
+            try
+            {
+                LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.ENERGY);
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
         }
         if (playerStatsDict[PlayerStats.HAPPINESS] >= 100)
         {
             playerStatsDict[PlayerStats.HAPPINESS] = 100;
-            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HAPPINESS);
+
+            try
+            {
+                LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HAPPINESS);
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
         }
         if (playerStatsDict[PlayerStats.HUNGER] >= 100)
         {
             playerStatsDict[PlayerStats.HUNGER] = 100;
-            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HUNGER);
+
+            try
+            {
+                LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HUNGER);
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
         }
     }
 

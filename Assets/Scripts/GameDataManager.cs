@@ -173,5 +173,12 @@ public class GameDataManager : MonoBehaviour
 
         return (currentGameState, "");
     }
+
+
+    public void NewGameState()
+    {
+        GameManager.Instance.CurrentGameStateData = new GameStateData();
+        SaveGameStateData(new GameStateData());
+    }
     //===>> PLAYERS' GAME STATE DATA <<===//
 }

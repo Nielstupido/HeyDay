@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver {set{isGameOver = value;} get{return isGameOver;}}
     public List<CharactersScriptableObj> Characters {set{characters = value;} get{return characters;}}
     public List<Building> MeetupLocBuildings {set{meetupLocBuildings = value;} get{return meetupLocBuildings;}}
+    public GameStateData CurrentGameStateData {set{currentGameStateData = value;} get{return currentGameStateData;}}
     public static GameManager Instance { get; private set; }
 
 
@@ -301,7 +302,6 @@ public class GameManager : MonoBehaviour
         BudgetSystem.Instance.ResetBudget();
         Player.Instance.ResetLvlExpenses();
         budgetSetter.PrepareBudgeSetter(Player.Instance.PlayerCash);
-        UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         levelManager.PrepareCurrentLevelMissions(currentGameLevel);
         isGameOver = false;
     }
