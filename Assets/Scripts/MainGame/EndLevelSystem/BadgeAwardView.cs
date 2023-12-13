@@ -40,6 +40,7 @@ public class BadgeAwardView : MonoBehaviour
 
     public void ShowLeaderboard()
     {
+        this.gameObject.SetActive(false);
         EndLevelManager.Instance.OpenLeaderboardView(playerBadge);
     }
 }

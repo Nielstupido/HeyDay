@@ -22,11 +22,19 @@ public class ResBuildingManager : MonoBehaviour
     [SerializeField] private Button appliancesBtn;
     [SerializeField] private PlayerItemsListManager playerItemsListManager;
     [SerializeField] private Prompts notEnoughMoneyRent;
+    [SerializeField] private Prompts notEnoughMoneyDebt;
+    [SerializeField] private Prompts debtReminder;
+    [SerializeField] private Prompts rentBillPaid;
+    [SerializeField] private Prompts existingDebt;
+    [SerializeField] private GameObject debtReminderOverlay; 
+
     private ResBuilding currentSelectedResBuilding;
     private int stayCount;
-    private float totalBilling;
+    private float unpaidBill;
+    private int daysUnpaid;
     public GameObject ResBuildingSelectOverlay { get{return resBuildingSelectOverlay;}}
     public ResBuilding CurrentSelectedResBuilding { set{currentSelectedResBuilding = value; ShowBtn();} get{return currentSelectedResBuilding;}}
+    public float UnpaidBill { set{unpaidBill = value; } get{return unpaidBill;}}
     public string MonthlyRentText {set{monthlyRentText.text = "Monthly Rent : ₱" + value;}}
     public string MonthlyElecText {set{monthlyElecText.text = "Monthly Electricity Charge : ₱" + value;}}
     public string MonthlyWaterText {set{monthlyWaterText.text = "Monthly Water Charge : ₱" + value;}}
@@ -56,9 +64,16 @@ public class ResBuildingManager : MonoBehaviour
         appliancesBtn.onClick.AddListener( () => {ShowItems(ItemType.APPLIANCE);} );
         enterBtn.GetComponent<Button>().onClick.AddListener( () => {EnterRoom(currentSelectedResBuilding);} );
         rentBtn.GetComponent<Button>().onClick.AddListener( () => {Rent(currentSelectedResBuilding);} );
-        TimeManager.onDayAdded += ComputeBillings;
+        TimeManager.onDayAdded += NewDay;
         stayCount = 0;
-        totalBilling = 0;
+        daysUnpaid = 0;
+        unpaidBill = 0f;
+    }
+
+
+    private void OnDestroy()
+    {
+        TimeManager.onDayAdded -= NewDay;
     }
 
 
@@ -77,6 +92,14 @@ public class ResBuildingManager : MonoBehaviour
     }
 
 
+    private void NewDay(int dayCount)
+    {
+        Player.Instance.PlayerStatsDict[PlayerStats.HAPPINESS] += Player.Instance.CurrentPlayerPlace.dailyAdtnlHappiness;
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HAPPINESS, Player.Instance.PlayerStatsDict);
+        ComputeBillings(dayCount);
+    }
+
+
     private void ComputeBillings(int currentDayCount)
     {
         if (Player.Instance.CurrentPlayerPlace == null)
@@ -85,46 +108,107 @@ public class ResBuildingManager : MonoBehaviour
         }
         
         stayCount++;
-        totalBilling = 0;
+        float totalBilling = 0;
 
         float temp = stayCount / 30;
 
         if (Mathf.Approximately(temp, Mathf.RoundToInt(temp)))
         {
             totalBilling = Player.Instance.CurrentPlayerPlace.monthlyElecCharge + Player.Instance.CurrentPlayerPlace.monthlyRent + Player.Instance.CurrentPlayerPlace.monthlyWaterCharge;
-            Player.Instance.PlayerLvlBillExpenses += totalBilling;
+
             if (Player.Instance.PlayerCash > totalBilling)
             {
+                Player.Instance.PlayerLvlBillExpenses += totalBilling;
                 Player.Instance.PlayerCash = Player.Instance.PlayerCash - totalBilling;
                 Player.Instance.PlayerStatsDict[PlayerStats.MONEY] = Player.Instance.PlayerCash;
                 PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
+                daysUnpaid = 0;
+                unpaidBill = 0f;
+                PromptManager.Instance.ShowPrompt(rentBillPaid);
             }
             else if (Player.Instance.PlayerBankSavings > totalBilling)
             {
+                Player.Instance.PlayerLvlBillExpenses += totalBilling;
                 Player.Instance.PlayerBankSavings = Player.Instance.PlayerBankSavings - totalBilling;
+                daysUnpaid = 0;
+                unpaidBill = 0f;
+                PromptManager.Instance.ShowPrompt(rentBillPaid);
             }
             else
             {
-                //player will be kicked out from the current apartment
+                unpaidBill = totalBilling;
+                debtReminderOverlay.SetActive(true);
             }
         }
+
+        if (unpaidBill != 0f)
+        {
+            if (daysUnpaid >= 5)
+            {
+                GameManager.Instance.IsGameOver = true;
+                LevelManager.Instance.OnLevelFinished();
+                return;
+            }
+
+            if (daysUnpaid > 0)
+            {
+                PromptManager.Instance.ShowPrompt(debtReminder);
+            }                
+
+            daysUnpaid++;
+        }
+
     }
 
 
     private void PrepareButtons(ResBuilding selectedBuilding)
     {
+        for (var i = buttonsHolder.childCount - 1; i >= 0; i--)
+        {
+            Object.Destroy(buttonsHolder.GetChild(i).gameObject);
+        }
+
         foreach(Buttons btn in selectedBuilding.actionButtons)
         {
             GameObject newBtn = Instantiate(btnPrefab, Vector3.zero, Quaternion.identity, buttonsHolder);
             newBtn.GetComponent<Image>().sprite = BuildingManager.Instance.ButtonImages[((int)btn)];
             newBtn.GetComponent<Button>().onClick.AddListener( () => {BuildingManager.Instance.onBuildingBtnClicked(btn);} );
+
+            if (btn == Buttons.PAY)
+            {
+                if (unpaidBill == 0f)
+                {
+                    newBtn.SetActive(false);
+                }
+            }
+        }
+    }
+
+
+    public void PayDebt()
+    {
+        float totalBilling = Player.Instance.CurrentPlayerPlace.monthlyElecCharge + Player.Instance.CurrentPlayerPlace.monthlyRent + Player.Instance.CurrentPlayerPlace.monthlyWaterCharge;
+       
+        if (Player.Instance.Pay(true, totalBilling, 0.2f, 5f, 2f, notEnoughMoneyDebt, 3f)) 
+        {
+            unpaidBill = 0f;
+            daysUnpaid = 0;
+            Player.Instance.PlayerLvlBillExpenses += totalBilling;
+            PromptManager.Instance.ShowPrompt(rentBillPaid);
+            PrepareButtons(Player.Instance.CurrentPlayerPlace);
         }
     }
 
 
     public void Rent(ResBuilding selectedBuilding)
     {
-        if (Player.Instance.Pay(true, selectedBuilding.monthlyRent, 0.5f, 5f, 3f, notEnoughMoneyRent)) 
+        if (unpaidBill != 0f)
+        {
+            PromptManager.Instance.ShowPrompt(existingDebt);
+            return;
+        }
+
+        if (Player.Instance.Pay(true, selectedBuilding.monthlyRent, 0.2f, 5f, 2f, notEnoughMoneyRent, 3f)) 
         {
             Player.Instance.PlayerLvlBillExpenses += selectedBuilding.monthlyRent;
             stayCount = 0;

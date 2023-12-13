@@ -87,7 +87,7 @@ public class CarCatalogueManager : MonoBehaviour
     public void DisplayItem()
     {
         vehicleName.text = vehicleDets[currentItem].itemName;
-        vehiclePrice.text = "₱ " + ConvertToCurrency(vehicleDets[currentItem].itemPrice);
+        vehiclePrice.text = "₱ " + ConvertToCurrency(vehicleDets[currentItem].itemPrice + ((GameManager.Instance.InflationRate / 100) * vehicleDets[currentItem].itemPrice));
         vehicleCondition.text = vehicleDets[currentItem].itemCondition.ToString();
         vehicleColor.text = vehicleDets[currentItem].vehicleColor.ToString();
         vehicleType.text = vehicleDets[currentItem].vehicleType.ToString();

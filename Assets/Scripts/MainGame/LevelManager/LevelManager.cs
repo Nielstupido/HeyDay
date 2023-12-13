@@ -136,6 +136,11 @@ public class LevelManager : MonoBehaviour
         tempLevelName += gameLevel.ToString();
         missionOverlayLevelText.text = tempLevelName;
 
+        for (int i = 0; i < missionPrefabsHolder.childCount; i++)
+        {
+            Object.Destroy(missionPrefabsHolder.GetChild(i).gameObject);
+        }
+
         foreach (MissionsScriptableObj mission in allMissions[tempLevelName])
         {
             currentActiveMissions.Add(mission);

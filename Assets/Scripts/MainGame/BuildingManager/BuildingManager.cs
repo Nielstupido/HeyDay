@@ -96,6 +96,7 @@ public class BuildingManager : MonoBehaviour
         if (Player.Instance.PlayerOwnedVehicles.Count == 0)
         {
             playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.COMMUTE, ActionAnimations.COMMUTE);
+            //commute payment
             LevelManager.onFinishedPlayerAction(MissionType.COMMUTE);
             LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ACCIDENT);
         }

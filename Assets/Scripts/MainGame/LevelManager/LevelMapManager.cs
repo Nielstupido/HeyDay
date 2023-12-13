@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelMapManager : MonoBehaviour
 {
@@ -101,6 +102,7 @@ public class LevelMapManager : MonoBehaviour
     {
         AnimOverlayManager.Instance.StartScreenFadeLoadScreen();
 
+        characterImage.GetComponent<Image>().sprite = Player.Instance.CurrentCharacter.defaultBody;
         isNewMap = false;
         nextLvlBtn.SetActive(false);
         map1.SetActive(false);

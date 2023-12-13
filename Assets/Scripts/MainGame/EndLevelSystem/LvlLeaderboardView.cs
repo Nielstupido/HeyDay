@@ -15,6 +15,7 @@ public class LvlLeaderboardView : MonoBehaviour
     public void SetupLeaderboard(Dictionary<string, int> playerRecords, Sprite playerBadge)
     {
         badgeImage.sprite = playerBadge;
+        currentPlayerScoreText.text = GameDataManager.Instance.PlayerRecords[Player.Instance.PlayerName].ToString();
 
         for (int i = 0; i < leaderboardIemsHolder.childCount; i++)
         {
@@ -35,12 +36,29 @@ public class LvlLeaderboardView : MonoBehaviour
         }
 
         this.gameObject.SetActive(true);
+        GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
     }
 
 
     public void NextLevel()
     {
         this.gameObject.SetActive(false);
+
+        if (GameManager.Instance.IsGameOver)
+        {
+            AnimOverlayManager.Instance.StartWhiteScreenFadeLoadScreen();
+            StartCoroutine(ProceedBadEnding());
+            return;
+        }
+
         EndLevelManager.Instance.NextLevel();
+    }
+
+
+    private IEnumerator ProceedBadEnding()
+    {
+        yield return new WaitForSeconds(1f);
+        GameManager.Instance.GameOver();
+        yield return null;
     }
 }

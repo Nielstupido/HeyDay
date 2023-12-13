@@ -22,7 +22,7 @@ public class HospitalManager : MonoBehaviour
     [SerializeField] private Prompts paidBills; 
 
     private const float BillInterest = 100f;
-    private int daysUnpaid; 
+    private int daysUnpaid = 0; 
     private float hospitalBill; 
     public static HospitalManager Instance { get; private set; }
 
@@ -48,13 +48,13 @@ public class HospitalManager : MonoBehaviour
     }
 
 
-    public void Hospitalized(float dayCount, float bill = 800)
+    public void Hospitalized(int dayCount, float bill = 800)
     {
         hospitalBill = bill * dayCount;
         daysHospitalized.text = dayCount.ToString();
         Player.Instance.PlayerHospitalOutstandingDebt += hospitalBill;
         totalBill.text = Player.Instance.PlayerHospitalOutstandingDebt.ToString();
-        daysUnpaid = 0;
+
         hospitalizedPrompt.SetActive(true);
         
         Player.Instance.PlayerStatsDict[PlayerStats.HAPPINESS] = 100;
@@ -62,6 +62,9 @@ public class HospitalManager : MonoBehaviour
         Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] = 100;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
         PlayerTravelManager.Instance.MovePlayerModel(hospitalObj);
+        BuildingManager.Instance.CurrentSelectedBuilding = hospitalObj;
+        BuildingManager.Instance.EnterBuilding(hospitalObj);
+        TimeManager.Instance.IncrementDayCount(true, dayCount);
     }
 
 
@@ -104,12 +107,15 @@ public class HospitalManager : MonoBehaviour
         {
             Player.Instance.PlayerHospitalOutstandingDebt += BillInterest;
             daysUnpaid++;
+
+            if (daysUnpaid >= 6)
+            {
+                GameManager.Instance.IsGameOver = true;
+                LevelManager.Instance.OnLevelFinished();
+            }
         }
 
-        if (dayCount == 6)
-        {
-            //start bad ending
-        }
+
     }
 
 

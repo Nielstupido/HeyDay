@@ -10,11 +10,11 @@ public class UTPsuite : ResBuilding
         this.buildingNameStr = "UTP Suite";
         this.monthlyRent = 2500f;
         this.monthlyElecCharge = 800f;
-        this.monthlyWaterCharge = 2500f;
-        this.dailyAdtnlHappiness = 5f; 
-        this.adtnlEnergyForSleep = 1f;
+        this.monthlyWaterCharge = 250f;
+        this.dailyAdtnlHappiness = 6f; 
+        this.adtnlEnergyForSleep = 6f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT};
+        this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -27,7 +27,7 @@ public class UTPsuite : ResBuilding
 
     public override void Sleep()
     {
-        SleepManager.Instance.ShowSleepOverlay(this.adtnlEnergyForSleep);
+        SleepManager.Instance.ShowSleepOverlay();
     }
 
 
@@ -47,6 +47,9 @@ public class UTPsuite : ResBuilding
                     break;
                 case Buttons.EAT:
                     this.Eat();
+                    break;
+                case Buttons.PAY:
+                    ResBuildingManager.Instance.PayDebt();
                     break;
             }
     }

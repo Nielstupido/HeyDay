@@ -65,13 +65,13 @@ public class BudgetSystem : MonoBehaviour
         switch (playerIniPoints)
         {
             case 9f:
-                GameDataManager.Instance.PlayerRecords[Player.Instance.PlayerName] += 100;
+                GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 100);
                 return BadgeAwards.GOLD;
             case > 5f:
-                GameDataManager.Instance.PlayerRecords[Player.Instance.PlayerName] += 50;
+                GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 50);
                 return BadgeAwards.SILVER;
             case < 6f:
-                GameDataManager.Instance.PlayerRecords[Player.Instance.PlayerName] += 25;
+                GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 25);
                 return BadgeAwards.BRONZE;
             default:
                 return BadgeAwards.NA;
