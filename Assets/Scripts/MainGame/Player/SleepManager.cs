@@ -8,7 +8,6 @@ public class SleepManager : MonoBehaviour
 {
     [SerializeField] private GameObject sleepingManagerOverlay;
     [SerializeField] private TextMeshProUGUI sleepHrsText;
-    private float adtnlEnergyForSleep;
     private float sleepHrs;
     public static SleepManager Instance { get; private set; }
 
@@ -46,10 +45,9 @@ public class SleepManager : MonoBehaviour
     }
 
 
-    public void ShowSleepOverlay(float adtnlPlayerEnergyForSleep)
+    public void ShowSleepOverlay()
     {
         sleepingManagerOverlay.SetActive(true);
-        adtnlEnergyForSleep = adtnlPlayerEnergyForSleep;
     }
 
 
@@ -64,9 +62,12 @@ public class SleepManager : MonoBehaviour
     {
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.SLEEP);
         TimeManager.Instance.AddClockTime(sleepHrs);
-        Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += (sleepHrs * adtnlEnergyForSleep);
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ENERGY, Player.Instance.PlayerStatsDict);
+        Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += (sleepHrs * Player.Instance.CurrentPlayerPlace.adtnlEnergyForSleep);
+        Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] += (sleepHrs * 2f);
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
         LevelManager.onFinishedPlayerAction(MissionType.SLEEPHR, sleepHrs);
+        sleepHrs = 0f;
+        sleepHrsText.text = sleepHrs.ToString();
 
         yield return new WaitForSeconds(waitingTime);
 

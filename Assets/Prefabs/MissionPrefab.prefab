@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 97c6d50ed14090f418653e7f40876e02, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cb90b0ec5374ba24fb885638c1fd0a71, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -304,8 +304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38690aa1ba13a345878131046a7bdd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uncheckedBox: {fileID: 21300000, guid: 1dcc5e6d55da89144802817134cff2a1, type: 3}
-  checkedBox: {fileID: 21300000, guid: 97c6d50ed14090f418653e7f40876e02, type: 3}
+  uncheckedBox: {fileID: 21300000, guid: cb90b0ec5374ba24fb885638c1fd0a71, type: 3}
+  checkedBox: {fileID: 21300000, guid: 0b0dd794b8187784080949fe8f807e1c, type: 3}
   missionCheckBox: {fileID: 356742636861653458}
   missionDetsText: {fileID: 356742636603176192}
   missionProgressText: {fileID: 356742637812101016}

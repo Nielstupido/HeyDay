@@ -80,7 +80,7 @@ public class MallManager : MonoBehaviour
 
             itemButton.SetItemObj(mallItems[i]);
             itemButton.itemName.text = mallItems[i].itemName;
-            itemButton.itemPrice.text = "₱" + mallItems[i].itemPrice.ToString();
+            itemButton.itemPrice.text = "₱" + (mallItems[i].itemPrice + ((GameManager.Instance.InflationRate / 100) * mallItems[i].itemPrice)).ToString();
             itemButton.itemImageHolder.sprite = mallItems[i].itemImage;
             itemButton.itemHungerBarPerks.text = "+ " + mallItems[i].hungerBarValue.ToString() + " Hunger";
             itemButton.itemHappinessPerks.text = "+ " + mallItems[i].happinessBarValue.ToString() + " Happiness";

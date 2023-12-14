@@ -6,12 +6,14 @@ using UnityEngine.UI;
 
 public class LeaderboardTemplate : MonoBehaviour
 {
+    public Text playerRank;
     public Text playerNameText;
     public Text playerScoreText;
-    public Image rankImage;
 
-    public void SetPlayerInfo(string playerName, int playerScore)
+
+    public void SetPlayerInfo(string playerName, int rank, int playerScore)
     {
+        playerRank.text = rank.ToString();
         playerNameText.text = playerName;
         playerScoreText.text = playerScore.ToString();
     }

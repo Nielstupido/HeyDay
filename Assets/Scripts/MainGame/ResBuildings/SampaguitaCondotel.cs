@@ -11,10 +11,10 @@ public class SampaguitaCondotel : ResBuilding
         this.monthlyRent = 10500f;
         this.monthlyElecCharge = 1500f;
         this.monthlyWaterCharge = 500f;
-        this.dailyAdtnlHappiness = 17f; 
-        this.adtnlEnergyForSleep = 2f;
+        this.dailyAdtnlHappiness = 15f; 
+        this.adtnlEnergyForSleep = 15f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT};
+        this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -27,7 +27,7 @@ public class SampaguitaCondotel : ResBuilding
 
     public override void Sleep()
     {
-        SleepManager.Instance.ShowSleepOverlay(this.adtnlEnergyForSleep);
+        SleepManager.Instance.ShowSleepOverlay();
     }
 
 
@@ -47,6 +47,9 @@ public class SampaguitaCondotel : ResBuilding
                     break;
                 case Buttons.EAT:
                     this.Eat();
+                    break;
+                case Buttons.PAY:
+                    ResBuildingManager.Instance.PayDebt();
                     break;
             }
     }

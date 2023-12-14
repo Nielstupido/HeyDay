@@ -12,9 +12,9 @@ public class HeyDayTriangleResidences : ResBuilding
         this.monthlyElecCharge = 1100f;
         this.monthlyWaterCharge = 300f;
         this.dailyAdtnlHappiness = 10f; 
-        this.adtnlEnergyForSleep = 1.5f;
+        this.adtnlEnergyForSleep = 10f;
 
-        this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT};
+        this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -27,7 +27,7 @@ public class HeyDayTriangleResidences : ResBuilding
 
     public override void Sleep()
     {
-        SleepManager.Instance.ShowSleepOverlay(this.adtnlEnergyForSleep);
+        SleepManager.Instance.ShowSleepOverlay();
     }
 
 
@@ -47,6 +47,9 @@ public class HeyDayTriangleResidences : ResBuilding
                     break;
                 case Buttons.EAT:
                     this.Eat();
+                    break;
+                case Buttons.PAY:
+                    ResBuildingManager.Instance.PayDebt();
                     break;
             }
     }

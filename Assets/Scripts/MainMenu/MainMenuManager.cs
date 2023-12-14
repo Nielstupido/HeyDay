@@ -22,12 +22,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject gameModePanel;
     [SerializeField] private GameObject leaderboardEntryPrefab;
     [SerializeField] private GameObject leaderboardEntryParent;
-    [SerializeField] private Sprite rank1;
-    [SerializeField] private Sprite rank2;
-    [SerializeField] private Sprite rank3;
-    [SerializeField] private Sprite rank4;
-    [SerializeField] private Sprite rank5;
-    [SerializeField] private Sprite[] rankSpriteImages;
+    [SerializeField] private Prompts errorLoadingPlayerRecord;
 
     public static MainMenuManager Instance { get; private set; }
 
@@ -47,8 +42,13 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
+        if (!GameDataManager.Instance.LoadPlayerRecords().Item1)
+        {
+            errorLoadingPlayerRecord.promptContent = GameDataManager.Instance.LoadPlayerRecords().Item2;
+            PromptManager.Instance.ShowPrompt(errorLoadingPlayerRecord);
+        }
+        
         AnimateMainMenu();
-        rankSpriteImages = new Sprite[] {rank1, rank2, rank3, rank4, rank5};
     }
 
 
@@ -110,17 +110,20 @@ public class MainMenuManager : MonoBehaviour
     }
 
 
-    public void DisplayPlayers()
+    private void DisplayPlayers()
     {
         int index = 0;
-        foreach (var savedPlayer in GameDataManager.Instance.PlayerRecords.OrderByDescending(x => x.Value))
+
+        for (int i = 0; i < leaderboardEntryParent.transform.childCount; i++)
+        {
+            Object.Destroy(leaderboardEntryParent.transform.GetChild(i).gameObject);
+        }
+
+        foreach (var savedPlayer in GameDataManager.Instance.GetCurrentLevelScores())
         {
             GameObject newEntry = Instantiate(leaderboardEntryPrefab, leaderboardEntryParent.transform);
             LeaderboardTemplate leaderboardEntry = newEntry.GetComponent<LeaderboardTemplate>();
-
-            leaderboardEntry.playerNameText.text = savedPlayer.Key;
-            leaderboardEntry.playerScoreText.text = savedPlayer.Value.ToString();
-            leaderboardEntry.rankImage.sprite = rankSpriteImages[index];
+            leaderboardEntry.SetPlayerInfo(savedPlayer.Key, ++index, savedPlayer.Value);
             index++;
         }
     }

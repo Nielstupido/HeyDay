@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2630474803561672466}
   - component: {fileID: 2630474803561672476}
   - component: {fileID: 2630474803561672467}
+  - component: {fileID: 1521426873315294557}
   - component: {fileID: 1753900327789470087}
   m_Layer: 5
   m_Name: ContactItem
@@ -36,10 +37,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 765.4152, y: 136.28}
+  m_SizeDelta: {x: 765.4153, y: 136.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2630474803561672476
 CanvasRenderer:
@@ -79,6 +80,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1521426873315294557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2630474803561672465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f39bb022684644c901d28b9fa4604f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contactBtn: {fileID: 1753900327789470087}
+  contactNameText: {fileID: 2630474804447394468}
+  pendingMeetupPrompt: {fileID: 11400000, guid: 48b5bff5553bda4458a0c02b27acde6c, type: 2}
 --- !u!114 &1753900327789470087
 MonoBehaviour:
   m_ObjectHideFlags: 0

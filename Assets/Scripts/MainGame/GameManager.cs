@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerInfoManager playerInfoManager;
     [SerializeField] private InteractionSystemManager interactionSystemManager;
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private EndGameManager endGameManager;
     [SerializeField] private List<CharactersScriptableObj> characters = new List<CharactersScriptableObj>();
 
     private List<string> characterNamesMale = new List<string>(){
@@ -102,11 +103,18 @@ public class GameManager : MonoBehaviour
     private GameStateData currentGameStateData;
     private int currentGameLevel;
     private int randomNum;
+    private bool isGameOver;
+    private int inflationDuration;
+    private float inflationRate = 0f;
+    public float InflationRate { get{return inflationRate;} set{inflationRate = value;}}
+    public int InflationDuration { get{return inflationDuration;} set{inflationDuration = value;}}
     private List<Building> meetupLocBuildings = new List<Building>();
     private List<Buildings> buildingsArr = new List<Buildings>();
     public int CurrentGameLevel {set{currentGameLevel = value;} get{return currentGameLevel;}}
+    public bool IsGameOver {set{isGameOver = value;} get{return isGameOver;}}
     public List<CharactersScriptableObj> Characters {set{characters = value;} get{return characters;}}
     public List<Building> MeetupLocBuildings {set{meetupLocBuildings = value;} get{return meetupLocBuildings;}}
+    public GameStateData CurrentGameStateData {set{currentGameStateData = value;} get{return currentGameStateData;}}
     public static GameManager Instance { get; private set; }
 
 
@@ -124,6 +132,7 @@ public class GameManager : MonoBehaviour
         GameUiController.onScreenOverlayChanged += UpdateBottomOverlay;
         TimeManager.onDayAdded += AssignNpcToBuilding;
         buildingsArr = Enum.GetValues(typeof(Buildings)).Cast<Buildings>().ToList();
+        isGameOver = false;
     }
 
 
@@ -137,8 +146,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //>>>>>>>for debugging<<<<<
-        StartGame(new GameStateData()); 
-        return;
+        // StartGame(new GameStateData()); 
+        // return;
 
         if (PlayerPrefs.GetInt("GameMode") == 0) 
         {
@@ -177,6 +186,7 @@ public class GameManager : MonoBehaviour
         currentGameStateData = gameStateData;
 
         currentGameLevel = currentGameStateData.gameLevel;
+        isGameOver = false;
         PrepareCharacters();
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         pauseBtn.SetActive(true);
@@ -289,7 +299,23 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel()
     {
+        BudgetSystem.Instance.ResetBudget();
+        Player.Instance.ResetLvlExpenses();
         budgetSetter.PrepareBudgeSetter(Player.Instance.PlayerCash);
+        levelManager.PrepareCurrentLevelMissions(currentGameLevel);
+        isGameOver = false;
+    }
+
+
+    public void GameOver()
+    {
+        endGameManager.StartOutro(false, Player.Instance.PlayerGender);
+    }
+
+
+    public void GameFinished()
+    {
+        endGameManager.StartOutro(true, Player.Instance.PlayerGender);
     }
 
 

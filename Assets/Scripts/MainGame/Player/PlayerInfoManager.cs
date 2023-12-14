@@ -16,6 +16,7 @@ public class PlayerInfoManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerNameTextDisplay;
     [SerializeField] private IntroCutsceneMannager introCutsceneMannager;
     [SerializeField] private Image playerBustIcon;
+    [SerializeField] private Prompts usernameUnavailable;
     private List<CharactersScriptableObj> currentCharacters = new List<CharactersScriptableObj>();
 
 
@@ -30,8 +31,15 @@ public class PlayerInfoManager : MonoBehaviour
 
     public void StartIntroScene()
     {
-        Player.Instance.PlayerName = playerNameTextInput.text;
-        playerNameTextDisplay.text = playerNameTextInput.text;
+        if (!GameDataManager.Instance.IsPlayerNameAvailable((playerNameTextInput.text).TrimEnd()))
+        {
+            PromptManager.Instance.ShowPrompt(usernameUnavailable);
+            return;
+        }
+
+        Player.Instance.PlayerName = playerNameTextInput.text.TrimEnd();
+        playerNameTextDisplay.text = playerNameTextInput.text.TrimEnd();
+        GameDataManager.Instance.SavePlayerRecords(playerNameTextInput.text, 0);
         StartCoroutine(ProceedIntro());
     }
 

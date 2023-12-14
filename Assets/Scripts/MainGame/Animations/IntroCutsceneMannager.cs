@@ -38,11 +38,11 @@ public class IntroCutsceneMannager : MonoBehaviour
             }
         }
 
-        goalSetter.SetGoal();
         yield return new WaitForSeconds(2.5f);
         AnimOverlayManager.Instance.StartBlackScreenFadeLoadScreen();
         yield return new WaitForSeconds(0.5f);
         IntroOverlay.SetActive(false);
+        goalSetter.SetGoal();
         yield return null;
     }
 

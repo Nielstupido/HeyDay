@@ -27,6 +27,28 @@ public class LifeEventsManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        TimeManager.onDayAdded += UpdateInflation;
+    }
+
+
+    private void OnDestroy()
+    {
+        TimeManager.onDayAdded -= UpdateInflation;
+    }
+
+
+    private void UpdateInflation(int dayCount)
+    {
+        if (GameManager.Instance.InflationRate != 0f)
+        {
+            GameManager.Instance.InflationDuration--;
+
+            if (GameManager.Instance.InflationDuration == 0)
+            {
+                GameManager.Instance.InflationRate = 0f;
+            }
+        }
     }
 
 
@@ -63,12 +85,13 @@ public class LifeEventsManager : MonoBehaviour
                 }
                 else
                 {
+                    GameManager.Instance.InflationDuration = Random.Range(3, 11);
                     upcomingEvent = new Inflation();
                 }
                 break;
         }
 
-        randomChance = Random.Range(1, 31);
+        randomChance = Random.Range(1, 101);
 
         if (randomChance > possibilityPercentage) 
         {

@@ -6,11 +6,9 @@ public class SequenceAnimator : MonoBehaviour
 {
     public float WaitBetween = 0.20f;
     public float WaitEnd = 1.5f;
-
-
     List<Animator> _animators;
-
     public static SequenceAnimator Instance { get; private set; }
+
 
     private void Awake() 
     { 
@@ -24,12 +22,14 @@ public class SequenceAnimator : MonoBehaviour
         }
     }
 
+
     void Start()
     {
         _animators = new List<Animator>(GetComponentsInChildren<Animator>());
 
         StartCoroutine(DoAnimation());
     }
+
 
     public void EnableAnimation()
     {
@@ -38,10 +38,12 @@ public class SequenceAnimator : MonoBehaviour
         StartCoroutine(DoAnimation());
     }
 
+
     void OnDisable()
     {
         StopAllCoroutines();
     }
+
 
     public IEnumerator DoAnimation()
     {

@@ -168,8 +168,16 @@ public class TimeManager : MonoBehaviour
     }
 
 
-    public void IncrementDayCount()
+    public void IncrementDayCount(bool isAddingDays = false, int daysToAdd = 0)
     {
+        if (isAddingDays)
+        {
+            currentDayCount += daysToAdd;
+            UpdateDayUI(currentDayCount);
+            onDayAdded(currentDayCount);
+            return;
+        }
+
         if (toggleCounter == 1)
         {
             currentDayCount++;

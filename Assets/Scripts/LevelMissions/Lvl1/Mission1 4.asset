@@ -15,7 +15,10 @@ MonoBehaviour:
   id: 1.4
   missionStatus: 0
   missionType: 12
-  missionDets: "Enroll for a Bachelor\u2019s Degree"
-  currentNumberForGoal: 0
-  requiredNumberForGoal: 0
+  missionDets: "Enroll to your goal Bachelor\u2019s Degree"
+  currentNumberForMission: 0
+  requiredNumberForMission: 0
   targetBuilding: 0
+  targetIitemType: 0
+  targetApp: 0
+  targetPlayerStats: 0

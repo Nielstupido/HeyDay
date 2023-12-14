@@ -87,7 +87,7 @@ public class EndLevelManager : MonoBehaviour
     private IEnumerator ProceedGoodEnding()
     {
         yield return new WaitForSeconds(1f);
-        //start good ending
+        GameManager.Instance.GameFinished();
         yield return null;
     }
 }

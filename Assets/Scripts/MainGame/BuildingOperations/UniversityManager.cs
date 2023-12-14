@@ -287,7 +287,11 @@ public class UniversityManager : MonoBehaviour
 
     public void ContinueEnroll()
     {
-        LevelManager.onFinishedPlayerAction(MissionType.ENROLL);
+        if (selectedCourse == Player.Instance.GoalCourse)
+        {
+            LevelManager.onFinishedPlayerAction(MissionType.ENROLL);
+        }
+        
         enrollPrompt.SetActive(false);
         courseSelectionOverlay.SetActive(false);
         fieldSelectionOverlay.SetActive(false);

@@ -136,6 +136,11 @@ public class LevelManager : MonoBehaviour
         tempLevelName += gameLevel.ToString();
         missionOverlayLevelText.text = tempLevelName;
 
+        for (int i = 0; i < missionPrefabsHolder.childCount; i++)
+        {
+            Object.Destroy(missionPrefabsHolder.GetChild(i).gameObject);
+        }
+
         foreach (MissionsScriptableObj mission in allMissions[tempLevelName])
         {
             currentActiveMissions.Add(mission);
@@ -164,7 +169,7 @@ public class LevelManager : MonoBehaviour
     public void CloseMissionOverlay()
     {
         missionOverlay.SetActive(false);
-        GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
+        GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
     }
 
 

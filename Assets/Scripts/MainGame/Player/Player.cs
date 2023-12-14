@@ -97,7 +97,6 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerPhone playerPhone;
     private ResBuilding currentPlayerPlace;
     public ResBuilding CurrentPlayerPlace { set{currentPlayerPlace = value;} get{return currentPlayerPlace;}}
-
     public static Player Instance { get; private set; }
 
 
@@ -128,7 +127,14 @@ public class Player : MonoBehaviour
         playerStatsDict.Add(PlayerStats.MONEY, PlayerCash);
         currentPlayerPlace = null;
         isPlayerHasBankAcc = false;
+        PlayerStatsObserver.onPlayerStatChanged += StatsChecker;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
+    }
+
+
+    private void OnDestroy()
+    {
+        PlayerStatsObserver.onPlayerStatChanged -= StatsChecker;
     }
 
 
@@ -217,8 +223,9 @@ public class Player : MonoBehaviour
         }
         
         TimeManager.Instance.AddClockTime(timeAdded);
-        playerCash -= item.itemPrice;
-        playerStatsDict[PlayerStats.MONEY] -= item.itemPrice;
+        playerCash -= (item.itemPrice + ((GameManager.Instance.InflationRate / 100) * item.itemPrice));
+        playerLvlConsumablesExpenses += (item.itemPrice + ((GameManager.Instance.InflationRate / 100) * item.itemPrice));
+        playerStatsDict[PlayerStats.MONEY] -= (item.itemPrice + ((GameManager.Instance.InflationRate / 100) * item.itemPrice));
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
 
         if (toConsume)
@@ -231,12 +238,21 @@ public class Player : MonoBehaviour
 
 
     //for non-consumable
-    public bool Pay(float price, float timeAdded, float happinessAdded, float hungerLevelCutValue, Prompts errorMoneyPrompt, float energyLevelCutValue = 10f)
+    public bool Pay(bool isBill, float price, float timeAdded, float happinessAdded, float hungerLevelCutValue, Prompts errorMoneyPrompt, float energyLevelCutValue = 10f)
     {
         if (price > playerCash)
         {
             PromptManager.Instance.ShowPrompt(errorMoneyPrompt);
             return false;
+        }
+
+        if (isBill)
+        {
+            playerLvlBillExpenses += price;
+        }
+        else
+        {
+            playerLvlConsumablesExpenses += price;
         }
 
         TimeManager.Instance.AddClockTime(timeAdded);
@@ -274,6 +290,15 @@ public class Player : MonoBehaviour
     }
 
 
+    public void ResetLvlExpenses()
+    {
+        playerLvlBillExpenses = 0f;
+        playerLvlSavings = 0f;
+        playerLvlConsumablesExpenses = 0f;
+        playerLvlEmergencyFunds = 0f;
+    }
+
+
     public float GetTotalWorkHours()
     {
         float totalWorkHours = 0;
@@ -307,29 +332,29 @@ public class Player : MonoBehaviour
 
     private void StatsChecker(PlayerStats statName, Dictionary<PlayerStats, float> playerStatsDict)
     {
-        if (playerStatsDict[PlayerStats.ENERGY] <= 10 | playerStatsDict[PlayerStats.HAPPINESS] <= 10 | playerStatsDict[PlayerStats.HUNGER] <= 10)//checks if any of the stats reaches lower limit
+        if (playerStatsDict[PlayerStats.ENERGY] <= 10 || playerStatsDict[PlayerStats.HAPPINESS] <= 10 || playerStatsDict[PlayerStats.HUNGER] <= 10)//checks if any of the stats reaches lower limit
         {
             float sumOfStats = playerStatsDict[PlayerStats.ENERGY] + playerStatsDict[PlayerStats.HAPPINESS] + playerStatsDict[PlayerStats.HUNGER];
 
             if ((sumOfStats * 100) / 300 <= 10)
             {
-                HospitalManager.Instance.Hospitalized(5f);
+                HospitalManager.Instance.Hospitalized(5);
             }
             else if ((sumOfStats*100) / 300 <= 30)
             {
-                HospitalManager.Instance.Hospitalized(4f);
+                HospitalManager.Instance.Hospitalized(4);
             }
             else if ((sumOfStats*100) / 300 <= 50)
             {
-                HospitalManager.Instance.Hospitalized(3f);
+                HospitalManager.Instance.Hospitalized(3);
             }
             else if ((sumOfStats*100) / 300 <= 70)
             {
-                HospitalManager.Instance.Hospitalized(2f);
+                HospitalManager.Instance.Hospitalized(2);
             }
             else
             {
-                HospitalManager.Instance.Hospitalized(1f);
+                HospitalManager.Instance.Hospitalized(1);
             }
         }
 
@@ -337,17 +362,44 @@ public class Player : MonoBehaviour
         if (playerStatsDict[PlayerStats.ENERGY] >= 100)
         {
             playerStatsDict[PlayerStats.ENERGY] = 100;
-            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.ENERGY);
+
+            try
+            {
+                LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.ENERGY);
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
         }
         if (playerStatsDict[PlayerStats.HAPPINESS] >= 100)
         {
             playerStatsDict[PlayerStats.HAPPINESS] = 100;
-            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HAPPINESS);
+
+            try
+            {
+                LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HAPPINESS);
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
         }
         if (playerStatsDict[PlayerStats.HUNGER] >= 100)
         {
             playerStatsDict[PlayerStats.HUNGER] = 100;
-            LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HUNGER);
+
+            try
+            {
+                LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HUNGER);
+            }
+            catch (System.Exception)
+            {
+                
+                throw;
+            }
         }
     }
 

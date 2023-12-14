@@ -78,7 +78,7 @@ public class SwitchMenuItem : MonoBehaviour
    private void DisplayItem()
    {
       foodName.text = foodList[currentItem].itemName;
-      priceValue.text = "₱" + foodList[currentItem].itemPrice.ToString();
+      priceValue.text = "₱" + (foodList[currentItem].itemPrice + ((GameManager.Instance.InflationRate / 100) * foodList[currentItem].itemPrice)).ToString();
       targetImage.sprite = foodList[currentItem].itemImage;
    }
 

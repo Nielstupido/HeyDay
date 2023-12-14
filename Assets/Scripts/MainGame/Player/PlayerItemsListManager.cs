@@ -18,7 +18,9 @@ public class PlayerItemsListManager : MonoBehaviour
 
     public void ShowItems(ItemType itemType, List<Items> playerItems)
     {
+        HideItems();
         itemsHolderOverlay.SetActive(true);
+
         switch (itemType)
         {
             case ItemType.VEHICLE:
@@ -27,7 +29,7 @@ public class PlayerItemsListManager : MonoBehaviour
                 break;
             case ItemType.APPLIANCE:
                 titleText.text = "Appliances Owned";
-                overlayBg.sprite = garageBg;
+                overlayBg.sprite = livingRoomBg;
                 break;
         }
 

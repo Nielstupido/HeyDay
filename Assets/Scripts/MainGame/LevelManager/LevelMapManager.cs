@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelMapManager : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class LevelMapManager : MonoBehaviour
     [SerializeField] private GameObject map2;
     [SerializeField] private GameObject map3;
     [SerializeField] private GameObject map4;
+    [SerializeField] private GameObject endLvlOverlay;
+    [SerializeField] private GameObject leaderboard;
+    [SerializeField] private GameObject badgeAward;
+    [SerializeField] private GameObject budgetTracker;
     [SerializeField] private List<Transform> mapPlaceholders1 = new List<Transform>();
     [SerializeField] private List<Transform> mapPlaceholders2 = new List<Transform>();
     [SerializeField] private List<Transform> mapPlaceholders3 = new List<Transform>();
@@ -97,6 +102,7 @@ public class LevelMapManager : MonoBehaviour
     {
         AnimOverlayManager.Instance.StartScreenFadeLoadScreen();
 
+        characterImage.GetComponent<Image>().sprite = Player.Instance.CurrentCharacter.defaultBody;
         isNewMap = false;
         nextLvlBtn.SetActive(false);
         map1.SetActive(false);
@@ -109,7 +115,14 @@ public class LevelMapManager : MonoBehaviour
 
     public void StartNextLevel()
     {
+        AnimOverlayManager.Instance.StartWhiteScreenFadeLoadScreen();
         levelMapCanvas.SetActive(false);
+        endLvlOverlay.SetActive(false);
+        leaderboard.SetActive(false);
+        badgeAward.SetActive(false);
+        budgetTracker.SetActive(false);
+        Player.Instance.ResetLvlExpenses();
+        GameManager.Instance.StartLevel();
     }
 
 

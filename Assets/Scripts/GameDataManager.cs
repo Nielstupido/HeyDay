@@ -4,6 +4,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
 using System;
+using System.Linq;
 
 public class GameDataManager : MonoBehaviour
 {
@@ -29,11 +30,25 @@ public class GameDataManager : MonoBehaviour
 
 
     //===>> PLAYER RECORDS (NAME, SCORE) <<===//
+    public bool IsPlayerNameAvailable(string name)
+    {
+        foreach (var item in playerRecords)
+        {
+            if (item.Key == name)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
     public ValueTuple<bool, string> LoadPlayerRecords()
     {
         try
         {
-            string filePath = Application.dataPath + "/DoNotDelete/PlayerScores.json";
+            string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerScores.json";
             if (!File.Exists(filePath))
             {
                 File.WriteAllText(filePath, "{}");
@@ -60,7 +75,7 @@ public class GameDataManager : MonoBehaviour
                 playerRecords.Add(playerName, 0);
             }
             playerRecords[playerName] += score;
-            string filePath = Application.dataPath + "/DoNotDelete/PlayerScores.json";
+            string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerScores.json";
             string jsonString = JsonConvert.SerializeObject(playerRecords);
             File.WriteAllText(filePath, jsonString);
         }
@@ -77,7 +92,7 @@ public class GameDataManager : MonoBehaviour
     {
         Dictionary<string, int> currentLevelScores = new Dictionary<string, int>();
 
-        foreach (var item in playerRecords)
+        foreach (var item in playerRecords.OrderByDescending(item => item.Value))
         {
             try
             {
@@ -100,7 +115,7 @@ public class GameDataManager : MonoBehaviour
     {
         try
         {
-            string filePath = Application.dataPath + "/DoNotDelete/PlayerGameStateData.json";
+            string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerGameStateData.json";
             if (!File.Exists(filePath))
             {
                 File.WriteAllText(filePath, "{}");
@@ -131,7 +146,7 @@ public class GameDataManager : MonoBehaviour
                 allPlayersGameStateData.Add(currentPlayerGameStateData);
             }
 
-            string filePath = Application.dataPath + "/DoNotDelete/PlayerGameStateData.json";
+            string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerGameStateData.json";
             string jsonString = JsonConvert.SerializeObject(allPlayersGameStateData);
             File.WriteAllText(filePath, jsonString);
         }
@@ -157,6 +172,13 @@ public class GameDataManager : MonoBehaviour
         }
 
         return (currentGameState, "");
+    }
+
+
+    public void NewGameState()
+    {
+        GameManager.Instance.CurrentGameStateData = new GameStateData();
+        SaveGameStateData(new GameStateData());
     }
     //===>> PLAYERS' GAME STATE DATA <<===//
 }

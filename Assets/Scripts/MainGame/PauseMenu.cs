@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,19 +17,57 @@ public class PauseMenu : MonoBehaviour
     private bool isOnMusic = true;
     private bool isOnSFX = true;
 
+
+    private IEnumerator DirectingHome()
+    {
+        AnimOverlayManager.Instance.StartScreenFadeLoadScreen();
+        yield return new WaitForSeconds(1.8f);
+        SceneManager.LoadScene("MainMenu");
+        yield return null;
+    }   
+
+
     public void PauseGame()
     {
+        GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
         Time.timeScale = 0;
         pauseMenuOverlay.SetActive(true);
         AudioManager.Instance.PlaySFX("Select");
     }
 
+
     public void Resume()
     {
+        GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         AudioManager.Instance.PlaySFX("Select");
         Time.timeScale = 1;
         pauseMenuOverlay.SetActive(false);
     }
+
+
+    public void Home()
+    {
+        SaveGame();
+        StartCoroutine(DirectingHome());
+    }
+
+
+    public void Restart()
+    {
+        pauseMenuOverlay.SetActive(false);
+        GameDataManager.Instance.PlayerRecords[Player.Instance.PlayerName] = 0;
+        GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
+        GameDataManager.Instance.NewGameState();
+        GameManager.Instance.StartLevel();
+    }
+
+
+    public void SaveGame()
+    {
+        GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
+        GameDataManager.Instance.SaveGameStateData(GameManager.Instance.CurrentGameStateData);
+    }
+
 
     public void ToggleMusic()
     {
@@ -46,6 +85,7 @@ public class PauseMenu : MonoBehaviour
 
         isOnMusic = !isOnMusic;
     }
+
 
     public void ToggleSFX()
     {

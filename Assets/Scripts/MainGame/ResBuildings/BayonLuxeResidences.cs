@@ -11,10 +11,10 @@ public class BayonLuxeResidences : ResBuilding
         this.monthlyRent = 10000f;
         this.monthlyElecCharge = 1500f;
         this.monthlyWaterCharge = 500f;
-        this.dailyAdtnlHappiness = 15f; 
-        this.adtnlEnergyForSleep = 2f;
+        this.dailyAdtnlHappiness = 12f; 
+        this.adtnlEnergyForSleep = 12f;
   
-        this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT};
+        this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 
@@ -27,7 +27,7 @@ public class BayonLuxeResidences : ResBuilding
 
     public override void Sleep()
     {
-        SleepManager.Instance.ShowSleepOverlay(this.adtnlEnergyForSleep);
+        SleepManager.Instance.ShowSleepOverlay();
     }
 
 
@@ -47,6 +47,9 @@ public class BayonLuxeResidences : ResBuilding
                     break;
                 case Buttons.EAT:
                     this.Eat();
+                    break;
+                case Buttons.PAY:
+                    ResBuildingManager.Instance.PayDebt();
                     break;
             }
     }

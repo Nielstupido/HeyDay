@@ -22,6 +22,8 @@ public class BankSystemManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI balanceText;
     [SerializeField] private TMP_InputField depositAmountField;
     [SerializeField] private TMP_InputField withdrawAmountField;
+    [SerializeField] private Prompts withdrawError;
+    [SerializeField] private Prompts depositError;
     public static BankSystemManager Instance { get; private set; }
 
 
@@ -108,12 +110,22 @@ public class BankSystemManager : MonoBehaviour
 
     public void WithdrawMoney()
     {
+        if (float.Parse(withdrawAmountField.text) > Player.Instance.PlayerBankSavings)
+        {
+            PromptManager.Instance.ShowPrompt(withdrawError);
+            return;
+        }
         StartCoroutine(ProcessTransaction(1));
     }
 
 
     public void DepositMoney()
     {
+        if (float.Parse(depositAmountField.text) > Player.Instance.PlayerCash)
+        {
+            PromptManager.Instance.ShowPrompt(depositError);
+            return;
+        }
         StartCoroutine(ProcessTransaction(2));
     }
 
@@ -128,14 +140,8 @@ public class BankSystemManager : MonoBehaviour
     {
         if (transacType == 1)
         {
-            if (float.Parse(withdrawAmountField.text) > Player.Instance.PlayerBankSavings)
-            {
-                //error
-            }
-
-            Debug.Log("cash = " + Player.Instance.PlayerCash.ToString());
-            Debug.Log("bank = " + Player.Instance.PlayerBankSavings.ToString());
             withdrawProcessOverlay.SetActive(true);
+            withdrawProcessingOverlay.SetActive(true);
             yield return new WaitForSeconds(2f);
             withdrawProcessingOverlay.SetActive(false);
             withdrawProcessedOverlay.SetActive(true);
@@ -143,23 +149,16 @@ public class BankSystemManager : MonoBehaviour
 
             Player.Instance.PlayerCash += float.Parse(withdrawAmountField.text);
             Player.Instance.PlayerBankSavings -= float.Parse(withdrawAmountField.text);
+            Player.Instance.PlayerLvlEmergencyFunds -= float.Parse(withdrawAmountField.text);
+            Player.Instance.PlayerLvlSavings -= float.Parse(withdrawAmountField.text);
 
             withdrawOverlay.SetActive(false);
-            withdrawProcessedOverlay.SetActive(false);
+            withdrawProcessOverlay.SetActive(true);
             withdrawProcessingOverlay.SetActive(true);
             withdrawProcessedOverlay.SetActive(false);
-            Debug.Log("cash = " + Player.Instance.PlayerCash.ToString());
-            Debug.Log("bank = " + Player.Instance.PlayerBankSavings.ToString());
         }
         else if (transacType == 2)
         {
-            if (float.Parse(depositAmountField.text) > Player.Instance.PlayerCash)
-            {
-                //error
-            }
-
-            Debug.Log("cash = " + Player.Instance.PlayerCash.ToString());
-            Debug.Log("bank = " + Player.Instance.PlayerBankSavings.ToString());
             depositProcessOverlay.SetActive(true);
             depositProcessingOverlay.SetActive(true);
             yield return new WaitForSeconds(2f);
@@ -169,13 +168,13 @@ public class BankSystemManager : MonoBehaviour
 
             Player.Instance.PlayerCash -= float.Parse(depositAmountField.text);
             Player.Instance.PlayerBankSavings += float.Parse(depositAmountField.text);
+            Player.Instance.PlayerLvlEmergencyFunds += float.Parse(depositAmountField.text);
+            Player.Instance.PlayerLvlSavings += float.Parse(depositAmountField.text);
 
             depositOverlay.SetActive(false);
             depositProcessOverlay.SetActive(true);
             depositProcessingOverlay.SetActive(true);
             depositProcessedOverlay.SetActive(false);
-            Debug.Log("cash = " + Player.Instance.PlayerCash.ToString());
-            Debug.Log("bank = " + Player.Instance.PlayerBankSavings.ToString());
             LevelManager.onFinishedPlayerAction(MissionType.DEPOSITSAVINGSACC);
         }
 
