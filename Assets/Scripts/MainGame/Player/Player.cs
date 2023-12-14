@@ -137,6 +137,14 @@ public class Player : MonoBehaviour
         PlayerStatsObserver.onPlayerStatChanged -= StatsChecker;
     }
 
+    private void OnEnable()
+    {
+        PlayerStatsObserver.onPlayerStatChanged += StatsChecker;
+    }
+    private void OnDisable()
+    {
+        PlayerStatsObserver.onPlayerStatChanged -= StatsChecker;
+    }
 
     public void EatDrink(Items foodToConsume)
     {

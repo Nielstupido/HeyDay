@@ -39,6 +39,19 @@ public class MeetUpSystem : MonoBehaviour
         TimeManager.onDayAdded -= CheckMeetupStatus;   
     }
 
+    private void OnEnable()
+    {
+        TimeManager.onTimeAdded += CheckMeetupStatus;
+        TimeManager.onDayAdded += CheckMeetupStatus;
+    }
+
+
+    private void OnDisable()
+    {
+        TimeManager.onTimeAdded -= CheckMeetupStatus;
+        TimeManager.onDayAdded -= CheckMeetupStatus;   
+    }
+
 
     public void ResetMeetupDets()
     {

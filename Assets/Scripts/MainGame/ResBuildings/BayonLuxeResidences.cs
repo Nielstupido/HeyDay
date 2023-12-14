@@ -24,6 +24,15 @@ public class BayonLuxeResidences : ResBuilding
         BuildingManager.Instance.onBuildingBtnClicked -= CheckBtnClicked;
     } 
 
+    private void OnEnable()
+    {
+        BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
+    }
+    private void OnDisable()
+    {
+        BuildingManager.Instance.onBuildingBtnClicked -= CheckBtnClicked;
+    }
+
 
     public override void Sleep()
     {

@@ -76,6 +76,15 @@ public class ResBuildingManager : MonoBehaviour
         TimeManager.onDayAdded -= NewDay;
     }
 
+    private void OnEnable()
+    {
+        TimeManager.onDayAdded += NewDay;
+    }
+    private void OnDisable()
+    {
+        TimeManager.onDayAdded -= NewDay;
+    }
+
 
     private void ShowBtn()
     {
