@@ -85,6 +85,7 @@ public class BuildingManager : MonoBehaviour
         playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.WALK, ActionAnimations.WALK);
         LevelManager.onFinishedPlayerAction(MissionType.WALK);
         LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ROBBERY);
+        AudioManager.Instance.PlayMusic("Walk");
     }
 
 
@@ -100,11 +101,13 @@ public class BuildingManager : MonoBehaviour
             playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.COMMUTE, ActionAnimations.COMMUTE);
             LevelManager.onFinishedPlayerAction(MissionType.COMMUTE);
             LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ACCIDENT);
+            AudioManager.Instance.PlayMusic("Commute");
         }
         else
         {
             Player.Instance.Pay(false, 0f, 0.05f, 0f, 0.5f, notEnoughMoneyFare, 2f);
             playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.DRIVE, ActionAnimations.DRIVE);
+            AudioManager.Instance.PlayMusic("Drive");
         }
 
         walkBtn.SetActive(false);

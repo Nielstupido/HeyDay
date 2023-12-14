@@ -19,7 +19,7 @@ public class EndGameManager : MonoBehaviour
     private bool isGoodEnding;
 
 
-    private IEnumerator StartCutscene(bool isGoodEnding, List<Sprite> sceneImages)
+    private IEnumerator StartCutscene(List<Sprite> sceneImages)
     {
         foreach(Sprite image in sceneImages)
         {
@@ -54,6 +54,14 @@ public class EndGameManager : MonoBehaviour
 
     public void StartOutro()
     {
+        StartCoroutine(ContinueOutro());
+    }
+
+
+    private IEnumerator ContinueOutro()
+    {
+        AnimOverlayManager.Instance.StartScreenFadeLoadScreen();
+        yield return new WaitForSeconds(0.5f);
         if (isGoodEnding)
         {
             if (Player.Instance.PlayerGender == Gender.MALE)
@@ -61,14 +69,14 @@ public class EndGameManager : MonoBehaviour
                 sceneImageObj.sprite = goodSceneImagesBoy[0];
                 outroOverlay.SetActive(true);
                 botBar.LeanSize(new Vector2(0f, 90f), 2f).delay = 0.5f;
-                topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene(true, goodSceneImagesBoy));} ).delay = 0.5f;
+                topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene(goodSceneImagesBoy));} ).delay = 0.5f;
             }
             else
             {
                 sceneImageObj.sprite = goodSceneImagesGirl[0];
                 outroOverlay.SetActive(true);
                 botBar.LeanSize(new Vector2(0f, 90f), 2f).delay = 0.5f;
-                topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene(true, goodSceneImagesGirl));} ).delay = 0.5f;
+                topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene(goodSceneImagesGirl));} ).delay = 0.5f;
             }
         }
         else
@@ -78,16 +86,17 @@ public class EndGameManager : MonoBehaviour
                 sceneImageObj.sprite = badSceneImagesBoy[0];
                 outroOverlay.SetActive(true);
                 botBar.LeanSize(new Vector2(0f, 90f), 2f).delay = 0.5f;
-                topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene(false, badSceneImagesBoy));} ).delay = 0.5f;
+                topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene(badSceneImagesBoy));} ).delay = 0.5f;
             }
             else
             {
                 sceneImageObj.sprite = badSceneImagesGirl[0];
                 outroOverlay.SetActive(true);
                 botBar.LeanSize(new Vector2(0f, 90f), 2f).delay = 0.5f;
-                topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene(false, badSceneImagesGirl));} ).delay = 0.5f;
+                topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene(badSceneImagesGirl));} ).delay = 0.5f;
             }
         }
+        yield return null;
     }
 
 

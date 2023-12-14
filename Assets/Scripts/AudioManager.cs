@@ -7,8 +7,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    public Sound[] musicSounds, sfxSounds;
-    public AudioSource musicSource, sfxSource;
+    [SerializeField] private Sound[] musicSounds, sfxSounds, musicEffectSounds;
+    [SerializeField] private AudioSource musicSource, sfxSource, soundEffectsSource;
 
 
     private void Awake()
@@ -22,12 +22,6 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-
-    private void Start()
-    {
-        PlayMusic("Theme2");
     }
 
 
@@ -56,6 +50,31 @@ public class AudioManager : MonoBehaviour
     }
 
 
+    public void PlayMusicEffect(string name)
+    {
+        Sound s = Array.Find(musicSounds, x => x.name == name);
+
+        if (s == null)
+        {
+            Debug.Log("Sound not Found");
+        }
+        else
+        {
+            soundEffectsSource.clip = s.clip;
+            soundEffectsSource.Play();
+        }
+    }
+
+
+    public void StopMusicEffect()
+    {
+        if (soundEffectsSource.clip)
+        {
+            soundEffectsSource.Stop();
+        }
+    }
+
+
     public void PlaySFX(string name)
     {
        Sound s = Array.Find(sfxSounds, x => x.name == name);
@@ -74,6 +93,7 @@ public class AudioManager : MonoBehaviour
     public void ToggleMusic()
     {
         musicSource.mute = !musicSource.mute;
+        soundEffectsSource.mute = !soundEffectsSource.mute;
     }
 
     public void ToggleSFX()
@@ -85,6 +105,7 @@ public class AudioManager : MonoBehaviour
     public void MusicVolume(float volume)
     {
         musicSource.volume = volume; 
+        soundEffectsSource.volume = volume;
     }
 
     public void SFXVolume(float volume)

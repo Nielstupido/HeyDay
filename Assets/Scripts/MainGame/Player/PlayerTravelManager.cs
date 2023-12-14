@@ -64,6 +64,7 @@ public class PlayerTravelManager : MonoBehaviour
         MovePlayerModel(selectedBuilding);
         yield return new WaitForSeconds(travelingTime);
         AnimOverlayManager.Instance.StopAnim();
+        AudioManager.Instance.StopMusicEffect();
         yield return null;
     }
 }
