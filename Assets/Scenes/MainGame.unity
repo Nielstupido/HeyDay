@@ -2416,6 +2416,7 @@ MonoBehaviour:
   missionPrefabsHolder: {fileID: 413398855}
   missionPrefab: {fileID: 356742637122987874, guid: 80891771fc48fcb489b994e174f7580d, type: 3}
   missionOverlay: {fileID: 1773205518}
+  missionPopUp: {fileID: 714422047}
   nextLevelBtn: {fileID: 621143077}
   missionOverlayLevelText: {fileID: 1143903487}
 --- !u!114 &89637883
@@ -3832,7 +3833,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1012855972}
+      - m_Target: {fileID: 433560208}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: Home
         m_Mode: 1
@@ -5945,6 +5946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuOverlay: {fileID: 1651387344}
+  menuPopUp: {fileID: 464854760}
   foodName: {fileID: 743785006}
   priceValue: {fileID: 1898194362}
   targetImage: {fileID: 1630969196}
@@ -8645,7 +8647,7 @@ RectTransform:
   m_GameObject: {fileID: 397748303}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1403682823}
@@ -9068,8 +9070,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00012207031}
-  m_SizeDelta: {x: 0, y: -557.1064}
+  m_AnchoredPosition: {x: 0, y: 60122.867}
+  m_SizeDelta: {x: 0, y: -557.10645}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &413398856
 MonoBehaviour:
@@ -9435,6 +9437,7 @@ GameObject:
   - component: {fileID: 433560205}
   - component: {fileID: 433560206}
   - component: {fileID: 433560207}
+  - component: {fileID: 433560208}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -9517,9 +9520,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterCreationOverlay: {fileID: 8987504603226619078}
   selectGenderOverlay: {fileID: 8987504604307815459}
+  boyButton: {fileID: 8987504602779659125}
+  girlButton: {fileID: 8987504604835621107}
   selectCharacterOverlay: {fileID: 698364486}
   charactersHolder: {fileID: 3268918}
+  charObj1: {fileID: 503688894}
+  charObj2: {fileID: 1806204914}
+  charObj3: {fileID: 1574944144}
   setNameOverlay: {fileID: 8987504603898149016}
+  setNamePopUp: {fileID: 8987504603608688496}
   playerNameTextInput: {fileID: 8987504603984673095}
   playerNameTextDisplay: {fileID: 1064102319}
   introCutsceneMannager: {fileID: 1605115983}
@@ -9587,6 +9596,26 @@ MonoBehaviour:
   goalSetterOverlay: {fileID: 1765046790}
   educGoalText: {fileID: 142044632}
   narrativeText: {fileID: 4515895016912219581}
+--- !u!114 &433560208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433560198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f8c8b5fde214542a6445923327b13e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicOff: {fileID: 21300000, guid: 5f8dfaefad2094d47a407f0fd9f56bf7, type: 3}
+  sfxOff: {fileID: 21300000, guid: ff56105b979476a4d8add275e5084e1f, type: 3}
+  musicOn: {fileID: 21300000, guid: 35d87404e46464f439792ca063a24b8d, type: 3}
+  sfxOn: {fileID: 21300000, guid: f458e10c7f137e149b47df57d723d186, type: 3}
+  musicBtn: {fileID: 525240217}
+  sfxBtn: {fileID: 1736579903}
+  pauseMenuOverlay: {fileID: 1012855970}
+  pauseMenuPopUp: {fileID: 714928393}
 --- !u!1 &434310656
 GameObject:
   m_ObjectHideFlags: 0
@@ -10021,7 +10050,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 460432575}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 433560208}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &460432575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10060,6 +10101,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460432572}
   m_CullTransparentMesh: 1
+--- !u!1 &464854760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4968602365360910438, guid: a23a93a5ff94d0c41a1462a96e1941c3, type: 3}
+  m_PrefabInstance: {fileID: 4968602365429749672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &465339077
 GameObject:
   m_ObjectHideFlags: 0
@@ -10798,7 +10844,7 @@ RectTransform:
   m_GameObject: {fileID: 503688894}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2039939935}
@@ -11452,7 +11498,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1012855972}
+      - m_Target: {fileID: 433560208}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: ToggleMusic
         m_Mode: 1
@@ -15110,7 +15156,7 @@ RectTransform:
   m_GameObject: {fileID: 714422047}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1035089645}
@@ -15220,7 +15266,7 @@ RectTransform:
   m_GameObject: {fileID: 714928393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1090899191}
@@ -19138,7 +19184,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.00002098}
-  m_SizeDelta: {x: 96.4828, y: 1054.8511}
+  m_SizeDelta: {x: 96.4828, y: 1068.1831}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &876183052
 MonoBehaviour:
@@ -20359,7 +20405,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 917074672}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 433560208}
+        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
+        m_MethodName: SaveGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &917074672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22700,7 +22758,6 @@ GameObject:
   - component: {fileID: 1012855971}
   - component: {fileID: 1012855974}
   - component: {fileID: 1012855973}
-  - component: {fileID: 1012855972}
   m_Layer: 5
   m_Name: PauseMenuOverlay
   m_TagString: Untagged
@@ -22729,25 +22786,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1012855972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012855970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5f8c8b5fde214542a6445923327b13e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicOff: {fileID: 21300000, guid: 5f8dfaefad2094d47a407f0fd9f56bf7, type: 3}
-  sfxOff: {fileID: 21300000, guid: ff56105b979476a4d8add275e5084e1f, type: 3}
-  musicOn: {fileID: 21300000, guid: 35d87404e46464f439792ca063a24b8d, type: 3}
-  sfxOn: {fileID: 21300000, guid: f458e10c7f137e149b47df57d723d186, type: 3}
-  musicBtn: {fileID: 525240217}
-  sfxBtn: {fileID: 1736579903}
-  pauseMenuOverlay: {fileID: 1012855970}
 --- !u!114 &1012855973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25125,7 +25163,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1012855972}
+      - m_Target: {fileID: 433560208}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
@@ -28902,9 +28940,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1012855972}
+      - m_Target: {fileID: 433560208}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: PauseGame
+        m_MethodName: ShowPauseMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -35595,7 +35633,7 @@ RectTransform:
   m_GameObject: {fileID: 1574944144}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2062277570}
@@ -36047,6 +36085,7 @@ GameObject:
   - component: {fileID: 1605115984}
   - component: {fileID: 1605115983}
   - component: {fileID: 1605115985}
+  - component: {fileID: 1605115986}
   m_Layer: 0
   m_Name: AnimationManager
   m_TagString: Untagged
@@ -36220,6 +36259,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2a9e6524415b8ba4a9b237a42335a376, type: 3}
   - {fileID: 21300000, guid: bd396b57ebfb8184e89fe026e9106bb3, type: 3}
   - {fileID: 21300000, guid: 25d42df962a141047893482e8ea9d994, type: 3}
+--- !u!114 &1605115986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605115979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8542eee0753b1145b13674a0dc9da34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goalAssignmentOverlay: {fileID: 4515895016065632674}
+  phoneObj: {fileID: 397748303}
+  menuOverlay: {fileID: 0}
 --- !u!1 &1608146036
 GameObject:
   m_ObjectHideFlags: 0
@@ -38696,10 +38750,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 698364486}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 433560203}
+        m_TargetAssemblyTypeName: PlayerInfoManager, Assembly-CSharp
+        m_MethodName: SelectCharBack
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -38708,10 +38762,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8987504604307815459}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 433560203}
+        m_TargetAssemblyTypeName: PlayerInfoManager, Assembly-CSharp
+        m_MethodName: OpenCharacterCreationOVerlay
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -39360,7 +39414,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1012855972}
+      - m_Target: {fileID: 433560208}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: ToggleSFX
         m_Mode: 1
@@ -41005,7 +41059,7 @@ RectTransform:
   m_GameObject: {fileID: 1806204914}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1506598875}
@@ -51675,6 +51729,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 303715229}
+    - target: {fileID: 7755154620145799734, guid: 6cb01b96461c37846a6f71ae9a1a9a3c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -100.1001
+      objectReference: {fileID: 0}
     - target: {fileID: 7755154620213244049, guid: 6cb01b96461c37846a6f71ae9a1a9a3c, type: 3}
       propertyPath: m_Name
       value: CarCatalogueOverlay
@@ -73299,7 +73357,7 @@ RectTransform:
   m_GameObject: {fileID: 4515895016065632674}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4515895016912219580}
@@ -75385,6 +75443,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1138957115}
     m_Modifications:
+    - target: {fileID: 4968602364161239643, guid: a23a93a5ff94d0c41a1462a96e1941c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968602364161239643, guid: a23a93a5ff94d0c41a1462a96e1941c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 303715228}
+    - target: {fileID: 4968602364161239643, guid: a23a93a5ff94d0c41a1462a96e1941c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideConsumablesMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968602364161239643, guid: a23a93a5ff94d0c41a1462a96e1941c3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SwitchMenuItem, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4968602364932340856, guid: a23a93a5ff94d0c41a1462a96e1941c3, type: 3}
       propertyPath: m_Name
       value: MenuOverlay
@@ -75481,6 +75555,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 303715228}
+    - target: {fileID: 4968602365360910438, guid: a23a93a5ff94d0c41a1462a96e1941c3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4968602366100569722, guid: a23a93a5ff94d0c41a1462a96e1941c3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -94649,7 +94727,7 @@ RectTransform:
   m_GameObject: {fileID: 8987504602779659125}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1173286550}
@@ -95285,7 +95363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8987504604454188964
 RectTransform:
   m_ObjectHideFlags: 0
@@ -95690,7 +95768,7 @@ RectTransform:
   m_GameObject: {fileID: 8987504604835621107}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1706366156}

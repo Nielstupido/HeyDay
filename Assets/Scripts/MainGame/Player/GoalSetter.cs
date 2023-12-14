@@ -17,6 +17,7 @@ public class GoalSetter : MonoBehaviour
     public void SetGoal()
     {
         goalSetterOverlay.SetActive(true);
+        OverlayAnimations.Instance.ShowGoalSetter();
         GenerateGoal();
     }
 

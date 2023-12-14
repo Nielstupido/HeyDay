@@ -7,6 +7,7 @@ using TMPro;
 public class SwitchMenuItem : MonoBehaviour
 {
    [SerializeField] private GameObject menuOverlay;
+   [SerializeField] private GameObject menuPopUp;
    [SerializeField] private TextMeshProUGUI foodName;
    [SerializeField] private TextMeshProUGUI priceValue;
    [SerializeField] private Image targetImage;
@@ -21,9 +22,16 @@ public class SwitchMenuItem : MonoBehaviour
    public void ShowConsumablesMenu()
    {
       menuOverlay.SetActive(true);
+      OverlayAnimations.Instance.AnimOpenOverlay(menuPopUp);
       
       AssignMenu();
       DisplayItem();
+   }
+
+   public void HideConsumablesMenu()
+   {
+      OverlayAnimations.Instance.AnimCloseOverlay(menuPopUp, menuOverlay);
+      menuOverlay.SetActive(false);
    }  
 
 
