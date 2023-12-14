@@ -51,6 +51,7 @@ public class PlayerPhone : MonoBehaviour
     public void OpenPhone()
     {
         phoneOverlay.SetActive(true);
+        OverlayAnimations.Instance.ShowPhone();
         GameUiController.onScreenOverlayChanged(UIactions.SHOW_SMALL_BOTTOM_OVERLAY);
         playerMsgText.text = "";
         npcResponseText.text = "";
@@ -61,7 +62,7 @@ public class PlayerPhone : MonoBehaviour
 
     public void ClosePhone()
     {
-        phoneOverlay.SetActive(false);
+        OverlayAnimations.Instance.HidePhone(phoneOverlay);
         GameUiController.onScreenOverlayChanged(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
     }
 

@@ -9,9 +9,15 @@ public class PlayerInfoManager : MonoBehaviour
 {
     [SerializeField] private GameObject characterCreationOverlay;
     [SerializeField] private GameObject selectGenderOverlay;
+    [SerializeField] private GameObject boyButton;
+    [SerializeField] private GameObject girlButton;
     [SerializeField] private GameObject selectCharacterOverlay;
     [SerializeField] private Transform charactersHolder;
+    [SerializeField] private GameObject charObj1;
+    [SerializeField] private GameObject charObj2;
+    [SerializeField] private GameObject charObj3;
     [SerializeField] private GameObject setNameOverlay;
+    [SerializeField] private GameObject setNamePopUp;
     [SerializeField] private TextMeshProUGUI playerNameTextInput;
     [SerializeField] private TextMeshProUGUI playerNameTextDisplay;
     [SerializeField] private IntroCutsceneMannager introCutsceneMannager;
@@ -31,15 +37,15 @@ public class PlayerInfoManager : MonoBehaviour
 
     public void StartIntroScene()
     {
-        if (!GameDataManager.Instance.IsPlayerNameAvailable((playerNameTextInput.text).TrimEnd()))
-        {
-            PromptManager.Instance.ShowPrompt(usernameUnavailable);
-            return;
-        }
+        // if (!GameDataManager.Instance.IsPlayerNameAvailable((playerNameTextInput.text).TrimEnd()))
+        // {
+        //     PromptManager.Instance.ShowPrompt(usernameUnavailable);
+        //     return;
+        // }
 
         Player.Instance.PlayerName = playerNameTextInput.text.TrimEnd();
         playerNameTextDisplay.text = playerNameTextInput.text.TrimEnd();
-        GameDataManager.Instance.SavePlayerRecords(playerNameTextInput.text, 0);
+        // GameDataManager.Instance.SavePlayerRecords(playerNameTextInput.text, 0);
         StartCoroutine(ProceedIntro());
     }
 
@@ -48,8 +54,10 @@ public class PlayerInfoManager : MonoBehaviour
     {
         characterCreationOverlay.SetActive(true);
         selectGenderOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimShowObj(boyButton);
+        OverlayAnimations.Instance.AnimShowObj(girlButton);
         selectCharacterOverlay.SetActive(false);
-        setNameOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(setNamePopUp, setNameOverlay);
     }
 
 
@@ -63,14 +71,28 @@ public class PlayerInfoManager : MonoBehaviour
         {
             Player.Instance.PlayerGender = Gender.FEMALE;
         }
+        
+        OverlayAnimations.Instance.AnimHideObj(boyButton, selectGenderOverlay);
+        OverlayAnimations.Instance.AnimHideObj(girlButton, selectGenderOverlay);
         selectGenderOverlay.SetActive(false);
-        selectCharacterOverlay.SetActive(true);
         ShowCharacters();
+    }
+
+    public void SelectCharBack()
+    {
+        OverlayAnimations.Instance.AnimHideObj(charObj1, selectCharacterOverlay);
+        OverlayAnimations.Instance.AnimHideObj(charObj2, selectCharacterOverlay);
+        OverlayAnimations.Instance.AnimHideObj(charObj3, selectCharacterOverlay);
     }
 
 
     private void ShowCharacters()
     {
+        selectCharacterOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimShowObj(charObj1);
+        OverlayAnimations.Instance.AnimShowObj(charObj2);
+        OverlayAnimations.Instance.AnimShowObj(charObj3);
+
         if (Player.Instance.PlayerGender == Gender.MALE)
         {
             currentCharacters = GameManager.Instance.Characters.GetRange(0, 3);
@@ -93,6 +115,7 @@ public class PlayerInfoManager : MonoBehaviour
         GameManager.Instance.Characters.Remove(Player.Instance.CurrentCharacter);
         selectCharacterOverlay.SetActive(false);
         setNameOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(setNamePopUp);
         playerBustIcon.sprite = currentCharacters.Find((characterItem) => characterItem.characterID == characterID).bustIcon;
         playerBustIcon.SetNativeSize();
     }

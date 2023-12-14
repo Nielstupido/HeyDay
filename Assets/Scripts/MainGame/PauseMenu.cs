@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor.Search;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button musicBtn;
     [SerializeField] private Button sfxBtn;
     [SerializeField] private GameObject pauseMenuOverlay;
+    [SerializeField] private GameObject pauseMenuPopUp;
 
     private bool isOnMusic = true;
     private bool isOnSFX = true;
@@ -24,14 +26,20 @@ public class PauseMenu : MonoBehaviour
         yield return new WaitForSeconds(1.8f);
         SceneManager.LoadScene("MainMenu");
         yield return null;
-    }   
+    }
+
+    public void ShowPauseMenu()
+    {
+        pauseMenuOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(pauseMenuPopUp);
+        PauseGame();
+    }
 
 
     public void PauseGame()
     {
         GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
-        Time.timeScale = 0;
-        pauseMenuOverlay.SetActive(true);
+        //Time.timeScale = 0;
         AudioManager.Instance.PlaySFX("Select");
     }
 

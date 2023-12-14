@@ -11,6 +11,7 @@ public class BudgetSetter : MonoBehaviour
     [SerializeField] private List<Slider> recommSliders = new List<Slider>();
     [SerializeField] private List<TextMeshProUGUI> amountTexts = new List<TextMeshProUGUI>();
     [SerializeField] private TextMeshProUGUI playerCurrentMoneyText;
+    [SerializeField] private GameObject budgetSetterPopUp;
     private const float BillsRecommPercentage = 0.5f;
     private const float SavingsRecommPercentage = 0.1f;
     private const float ConsumablesRecommPercentage = 0.3f;
@@ -22,6 +23,7 @@ public class BudgetSetter : MonoBehaviour
     public void PrepareBudgeSetter(float currentPlayerMoney)
     {
         this.gameObject.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(budgetSetterPopUp);
 
         playerCurrentMoneyText.text = currentPlayerMoney.ToString();
         moneyValue = currentPlayerMoney;
@@ -103,7 +105,8 @@ public class BudgetSetter : MonoBehaviour
     public void Continue()
     {
         BudgetSystem.Instance.SaveBudget(sliders[0].value, sliders[1].value, sliders[2].value, sliders[3].value);
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(budgetSetterPopUp, this.gameObject);
 
         if (GameManager.Instance.CurrentGameLevel == 1)
         {
