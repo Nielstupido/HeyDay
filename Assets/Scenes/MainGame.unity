@@ -10544,7 +10544,7 @@ GameObject:
   - component: {fileID: 491469560}
   - component: {fileID: 491469561}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: WorldLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
