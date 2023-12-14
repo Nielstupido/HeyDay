@@ -32,6 +32,14 @@ public class PlayerStatsUiManager : MonoBehaviour
         PlayerStatsObserver.onPlayerStatChanged -= UpdateStatsText;
     }
 
+    private void OnEnable()
+    {
+        PlayerStatsObserver.onPlayerStatChanged += UpdateStatsText;
+    }
+    private void OnDisable()
+    {
+        PlayerStatsObserver.onPlayerStatChanged -= UpdateStatsText;    
+    }
 
     private void UpdateStatsText(PlayerStats statName, Dictionary<PlayerStats, float> playerStatsDict)
     {

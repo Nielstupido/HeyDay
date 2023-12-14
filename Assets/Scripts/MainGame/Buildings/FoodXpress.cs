@@ -22,6 +22,14 @@ public class FoodXpress : Building
         BuildingManager.Instance.onBuildingBtnClicked -= CheckBtnClicked;
     }
 
+        private void OnEnable()
+    {
+        BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
+    }
+    private void OnDisable()
+    {
+        BuildingManager.Instance.onBuildingBtnClicked -= CheckBtnClicked;
+    }
 
     public override void CheckBtnClicked(Buttons clickedBtn)
     {

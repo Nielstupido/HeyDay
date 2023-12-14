@@ -41,8 +41,17 @@ public class HospitalManager : MonoBehaviour
         TimeManager.onDayAdded += AddInterest;
     }
 
-
     private void OnDestroy()
+    {
+        TimeManager.onDayAdded -= AddInterest;
+    }
+
+    private void OnEnable()
+    {
+        TimeManager.onDayAdded += AddInterest;
+    }
+    
+    private void OnDisable()
     {
         TimeManager.onDayAdded -= AddInterest;
     }

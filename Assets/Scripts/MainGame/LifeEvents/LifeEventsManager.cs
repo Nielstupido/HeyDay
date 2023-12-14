@@ -37,6 +37,15 @@ public class LifeEventsManager : MonoBehaviour
         TimeManager.onDayAdded -= UpdateInflation;
     }
 
+    private void OnEnable()
+    {
+        TimeManager.onDayAdded += UpdateInflation;
+    }
+    private void OnDisable()
+    {
+        TimeManager.onDayAdded -= UpdateInflation;
+    }
+
 
     private void UpdateInflation(int dayCount)
     {

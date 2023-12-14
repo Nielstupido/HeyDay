@@ -19,7 +19,18 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
     {
         PlayerActionObservers.onPlayerTraveled -= RefreshSelectOverlayUI;
     }
+
     
+        private void OnEnable()
+    {
+        PlayerActionObservers.onPlayerTraveled += RefreshSelectOverlayUI;
+    }
+
+
+    private void OnDisable()
+    {
+        PlayerActionObservers.onPlayerTraveled -= RefreshSelectOverlayUI;
+    }
 
     public void RefreshSelectOverlayUI(ModeOfTravels modeOfTravel = ModeOfTravels.NA)
     {
