@@ -129,11 +129,12 @@ public class LevelManager : MonoBehaviour
 
 
     //prepares all assigned missions for the current level
-    public void PrepareCurrentLevelMissions(int gameLevel)
+    public void PrepareCurrentLevelMissions()
     {
+
         currentActiveMissions.Clear();
         tempLevelName = "Level ";
-        tempLevelName += gameLevel.ToString();
+        tempLevelName += GameManager.Instance.CurrentGameLevel.ToString();
         missionOverlayLevelText.text = tempLevelName;
 
         for (int i = 0; i < missionPrefabsHolder.childCount; i++)

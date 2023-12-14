@@ -31,7 +31,9 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private SwitchMenuItem switchMenuItem;
     [SerializeField] private MallManager mallManager;
     [SerializeField] private BoxCollider resAreaCollider;
+    [SerializeField] private Prompts notEnoughMoneyFare;
     [SerializeField] private List<BoxCollider> resBuildingColliders = new List<BoxCollider>();
+
     private Building currentSelectedBuilding;
     public delegate void OnBuildingBtnClicked(Buttons clickedBtn);
     public OnBuildingBtnClicked onBuildingBtnClicked;
@@ -88,22 +90,26 @@ public class BuildingManager : MonoBehaviour
 
     public void Ride()
     {
-        Player.Instance.Ride(2f, 1f);
-        walkBtn.SetActive(false);
-        rideBtn.SetActive(false);
-        enterBtn.SetActive(true);
-
         if (Player.Instance.PlayerOwnedVehicles.Count == 0)
         {
+            if (!Player.Instance.Pay(false, 30f, 0.1f, 0f, 1f, notEnoughMoneyFare, 5f))
+            {
+                return;
+            }
+
             playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.COMMUTE, ActionAnimations.COMMUTE);
-            //commute payment
             LevelManager.onFinishedPlayerAction(MissionType.COMMUTE);
             LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ACCIDENT);
         }
         else
         {
+            Player.Instance.Pay(false, 0f, 0.05f, 0f, 0.5f, notEnoughMoneyFare, 2f);
             playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.DRIVE, ActionAnimations.DRIVE);
         }
+
+        walkBtn.SetActive(false);
+        rideBtn.SetActive(false);
+        enterBtn.SetActive(true);
     }
 
 

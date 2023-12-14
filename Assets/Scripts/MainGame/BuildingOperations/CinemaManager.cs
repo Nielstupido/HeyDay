@@ -22,7 +22,7 @@ public class CinemaManager : MonoBehaviour
 
     private void WatchMovie()
     {
-        if (Player.Instance.Pay(false, ticketPrice, 2f, 15f, 10f, notEnoughMoney))
+        if (Player.Instance.Pay(false, ticketPrice, 2f, 80f, 10f, notEnoughMoney))
         {
             LevelManager.onFinishedPlayerAction(MissionType.WATCHMOVIE);
             StartCoroutine(WatchingMovie(2f));

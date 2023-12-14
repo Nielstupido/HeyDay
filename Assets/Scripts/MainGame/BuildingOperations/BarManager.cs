@@ -22,7 +22,7 @@ public class BarManager : MonoBehaviour
 
     private void Party()
     {
-        if (Player.Instance.Pay(false, barEntrance, 2f, 30f, 15f, notEnoughMoney, 15f))
+        if (Player.Instance.Pay(false, barEntrance, 2f, 80f, 15f, notEnoughMoney, 15f))
         {
             LevelManager.onFinishedPlayerAction(MissionType.PARTY);
             StartCoroutine(StartParty(2f));

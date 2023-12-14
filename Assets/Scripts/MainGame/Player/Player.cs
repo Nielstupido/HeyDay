@@ -275,13 +275,12 @@ public class Player : MonoBehaviour
     }
 
 
-    public void Ride(float energyLevelCutValue, float hungerLevelCutValue)
-    {
-        TimeManager.Instance.AddClockTime(0.5f);
-        playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
-        playerStatsDict[PlayerStats.HUNGER] -= hungerLevelCutValue;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
-    }
+    // public void Ride(float energyLevelCutValue, float hungerLevelCutValue)
+    // {
+    //     playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
+    //     playerStatsDict[PlayerStats.HUNGER] -= hungerLevelCutValue;
+    //     PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
+    // }
 
 
     public float GetLvlTotalExpenses()
@@ -367,10 +366,9 @@ public class Player : MonoBehaviour
             {
                 LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.ENERGY);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                
-                throw;
+                Debug.Log((e));
             }
         }
         if (playerStatsDict[PlayerStats.HAPPINESS] >= 100)
@@ -381,10 +379,9 @@ public class Player : MonoBehaviour
             {
                 LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HAPPINESS);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                
-                throw;
+                Debug.Log((e));
             }
         }
         if (playerStatsDict[PlayerStats.HUNGER] >= 100)
@@ -395,10 +392,9 @@ public class Player : MonoBehaviour
             {
                 LevelManager.onFinishedPlayerAction(MissionType.MAXSTATS, interactedPlayerStats:PlayerStats.HUNGER);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                
-                throw;
+                Debug.Log((e));
             }
         }
     }

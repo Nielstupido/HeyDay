@@ -110,9 +110,7 @@ public class ResBuildingManager : MonoBehaviour
         stayCount++;
         float totalBilling = 0;
 
-        float temp = stayCount / 30;
-
-        if (Mathf.Approximately(temp, Mathf.RoundToInt(temp)))
+        if (stayCount % 3 == 0)
         {
             totalBilling = Player.Instance.CurrentPlayerPlace.monthlyElecCharge + Player.Instance.CurrentPlayerPlace.monthlyRent + Player.Instance.CurrentPlayerPlace.monthlyWaterCharge;
 

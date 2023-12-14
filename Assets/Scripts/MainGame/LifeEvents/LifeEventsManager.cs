@@ -74,7 +74,7 @@ public class LifeEventsManager : MonoBehaviour
                     return;
                 }
                 upcomingEvent = new Accident();
-                possibilityPercentage = 2;
+                possibilityPercentage = 50;
                 break;  
             default:
                 randomChance = Random.Range(0, 2);

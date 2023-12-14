@@ -51,11 +51,12 @@ public class GameDataManager : MonoBehaviour
             string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerScores.json";
             if (!File.Exists(filePath))
             {
-                File.WriteAllText(filePath, "{}");
+                string playerRecord = JsonUtility.ToJson(new Dictionary<string, int>());
+                File.WriteAllText(filePath, playerRecord);
             }
             
             string jsonString = File.ReadAllText(filePath);
-            playerRecords = JsonConvert.DeserializeObject<Dictionary<string, int>>(jsonString);
+            playerRecords = JsonUtility.FromJson<Dictionary<string, int>>(jsonString);
         }
         catch (Exception e)
         {
@@ -76,7 +77,7 @@ public class GameDataManager : MonoBehaviour
             }
             playerRecords[playerName] += score;
             string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerScores.json";
-            string jsonString = JsonConvert.SerializeObject(playerRecords);
+            string jsonString = JsonUtility.ToJson(playerRecords);
             File.WriteAllText(filePath, jsonString);
         }
         catch (Exception e)
@@ -118,11 +119,12 @@ public class GameDataManager : MonoBehaviour
             string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerGameStateData.json";
             if (!File.Exists(filePath))
             {
-                File.WriteAllText(filePath, "{}");
+                string playerGameStateData = JsonUtility.ToJson(new GameStateData());
+                File.WriteAllText(filePath, playerGameStateData);
             }
-            
+
             string jsonString = File.ReadAllText(filePath);
-            allPlayersGameStateData = JsonConvert.DeserializeObject<List<GameStateData>>(jsonString);
+            allPlayersGameStateData = JsonUtility.FromJson<List<GameStateData>>(jsonString);
         }
         catch (Exception e)
         {
@@ -147,7 +149,7 @@ public class GameDataManager : MonoBehaviour
             }
 
             string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerGameStateData.json";
-            string jsonString = JsonConvert.SerializeObject(allPlayersGameStateData);
+            string jsonString = JsonUtility.ToJson(allPlayersGameStateData);
             File.WriteAllText(filePath, jsonString);
         }
         catch (Exception e)
