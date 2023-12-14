@@ -47,7 +47,7 @@ public class AutoDealer : Building
     {
         this.actionButtons = new List<Buttons>(){Buttons.SHOP, Buttons.APPLY};
 
-        if (this.currentlyHired)
+        if (this.currentlyHired && this.buildingEnumName == Player.Instance.CurrentPlayerJob.establishment)
         {
             this.actionButtons.Add(Buttons.WORK);
             this.actionButtons.Add(Buttons.QUIT);   

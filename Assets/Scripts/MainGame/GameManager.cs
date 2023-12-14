@@ -139,7 +139,21 @@ public class GameManager : MonoBehaviour
         GameUiController.onScreenOverlayChanged -= UpdateBottomOverlay;
         TimeManager.onDayAdded -= AssignNpcToBuilding;
     }
-    
+
+
+    private void OnEnable()
+    {
+        GameUiController.onScreenOverlayChanged += UpdateBottomOverlay;
+        TimeManager.onDayAdded += AssignNpcToBuilding;
+    }
+
+
+    private void OnDisable()
+    {
+        GameUiController.onScreenOverlayChanged -= UpdateBottomOverlay;
+        TimeManager.onDayAdded -= AssignNpcToBuilding;
+    }
+
 
     private void Start()
     {

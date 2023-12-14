@@ -46,6 +46,18 @@ public class Missions : MonoBehaviour
         {
             this.missionProgressText.gameObject.SetActive(false);
         }
+        else
+        {
+            this.missionProgressText.text = this.currentNumberForMission.ToString() + "/" + this.requiredNumberForMission.ToString();
+        }
+
+        LevelManager.onFinishedPlayerAction += OnPlayerActionCompleted;
+    }
+
+
+    private void OnDestroy()
+    {
+        LevelManager.onFinishedPlayerAction -= OnPlayerActionCompleted;
     }
 
 
@@ -135,9 +147,16 @@ public class Missions : MonoBehaviour
 
     private void MissionDone()
     {
-        this.missionStatus = MissionStatus.COMPLETED;
-        LevelManager.Instance.OnMissionFinished(this.missionCopy);
-        this.missionCheckBox.sprite = checkedBox;
-        this.missionCheckBox.GetComponent<RectTransform>().sizeDelta = new Vector2(60f, 60f);
+        if (this.missionCheckBox != null)
+        {
+            this.missionStatus = MissionStatus.COMPLETED;
+            LevelManager.Instance.OnMissionFinished(this.missionCopy);
+
+            if (checkedBox != null)
+            {
+                this.missionCheckBox.sprite = checkedBox;
+                this.missionCheckBox.GetComponent<RectTransform>().sizeDelta = new Vector2(60f, 60f);
+            }
+        }
     }
 }

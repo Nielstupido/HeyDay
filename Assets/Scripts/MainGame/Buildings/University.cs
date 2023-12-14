@@ -62,7 +62,7 @@ public class University : Building
             this.actionButtons.Add(Buttons.STUDY);
         }
 
-        if (this.currentlyHired)
+        if (this.currentlyHired && this.buildingEnumName == Player.Instance.CurrentPlayerJob.establishment)
         {
             this.actionButtons.Add(Buttons.WORK);
             this.actionButtons.Add(Buttons.QUIT);  

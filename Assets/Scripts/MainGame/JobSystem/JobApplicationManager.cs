@@ -97,7 +97,7 @@ public class JobApplicationManager : MonoBehaviour
             GameObject newJobPositionObj = Instantiate(jobPositionPrefab, Vector3.zero, Quaternion.identity, availableJobPositionsHolder);
             JobPositionObj newJobPosition = newJobPositionObj.GetComponent<JobPositionObj>();
 
-            if (jobPosition == Player.Instance.CurrentPlayerJob)
+            if (jobPosition == Player.Instance.CurrentPlayerJob && currentBuilding.buildingEnumName == Player.Instance.CurrentPlayerJob.establishment)
             {
                 newJobPosition.PrepareJobDets(jobPosition, "Current Job");
                 newJobPositionObj.GetComponent<Button>().enabled = false;

@@ -56,7 +56,7 @@ public class Bank : Building
             this.actionButtons.Remove(Buttons.OPENSAVINGSACCOUNT);   
         }
 
-        if (this.currentlyHired)
+        if (this.currentlyHired && this.buildingEnumName == Player.Instance.CurrentPlayerJob.establishment)
         {
             this.actionButtons.Add(Buttons.WORK);
             this.actionButtons.Add(Buttons.QUIT);   

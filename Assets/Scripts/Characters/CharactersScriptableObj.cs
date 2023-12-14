@@ -117,6 +117,12 @@ public class CharactersScriptableObj : ScriptableObject
                             };
 
 
+    private void Awake()
+    {
+        TimeManager.onDayAdded += (x) => { gotCalledToday = false; };
+    }
+
+
     private void OnEnable()
     {
         TimeManager.onDayAdded += (x) => { gotCalledToday = false; };

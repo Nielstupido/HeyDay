@@ -102,7 +102,6 @@ public class LevelMapManager : MonoBehaviour
     {
         AnimOverlayManager.Instance.StartScreenFadeLoadScreen();
 
-        characterImage.GetComponent<Image>().sprite = Player.Instance.CurrentCharacter.defaultBody;
         isNewMap = false;
         nextLvlBtn.SetActive(false);
         map1.SetActive(false);
@@ -134,6 +133,7 @@ public class LevelMapManager : MonoBehaviour
 
     private IEnumerator LerpCharacter(int lvlNum)
     {
+        characterImage.gameObject.GetComponent<Image>().sprite = Player.Instance.CurrentCharacter.defaultBody;
         yield return new WaitForSeconds(1f);
         float timeCounter = 0;
         float speed = 20f;
