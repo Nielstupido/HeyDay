@@ -108,10 +108,9 @@ public class HospitalManager : MonoBehaviour
             Player.Instance.PlayerHospitalOutstandingDebt += BillInterest;
             daysUnpaid++;
 
-            if (daysUnpaid >= 6)
+            if (daysUnpaid >= 3)
             {
-                GameManager.Instance.IsGameOver = true;
-                LevelManager.Instance.OnLevelFinished();
+                GameManager.Instance.GameOver();
             }
         }
 

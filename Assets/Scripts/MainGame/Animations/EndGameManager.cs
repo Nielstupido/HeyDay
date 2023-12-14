@@ -16,6 +16,7 @@ public class EndGameManager : MonoBehaviour
     [SerializeField] private List<Sprite> goodSceneImagesBoy = new List<Sprite>();
     [SerializeField] private List<Sprite> badSceneImagesGirl = new List<Sprite>();
     [SerializeField] private List<Sprite> badSceneImagesBoy = new List<Sprite>();
+    private bool isGoodEnding;
 
 
     private IEnumerator StartCutscene(bool isGoodEnding, List<Sprite> sceneImages)
@@ -28,10 +29,17 @@ public class EndGameManager : MonoBehaviour
             sceneImageObj.sprite = image;
         }
 
-        yield return new WaitForSeconds(2.5f);
-        AnimOverlayManager.Instance.StartBlackScreenFadeLoadScreen();
-        yield return new WaitForSeconds(0.5f);
-        outroOverlay.SetActive(false);
+        yield return new WaitForSeconds(4f);
+        AnimOverlayManager.Instance.StartScreenFadeLoadScreen();
+        yield return new WaitForSeconds(0.7f);
+        ReturnHome();
+        yield return null;
+    }
+
+
+    public void ShowOutro(bool isGameFinished)
+    {
+        isGoodEnding = isGameFinished;
         
         if (isGoodEnding)
         {
@@ -41,16 +49,14 @@ public class EndGameManager : MonoBehaviour
         {
             badEndOverlay.SetActive(true); 
         }
-
-        yield return null;
     }
 
 
-    public void StartOutro(bool isGoodEnding, Gender playerGender)
+    public void StartOutro()
     {
         if (isGoodEnding)
         {
-            if (playerGender == Gender.MALE)
+            if (Player.Instance.PlayerGender == Gender.MALE)
             {
                 sceneImageObj.sprite = goodSceneImagesBoy[0];
                 outroOverlay.SetActive(true);
@@ -67,7 +73,7 @@ public class EndGameManager : MonoBehaviour
         }
         else
         {
-            if (playerGender == Gender.MALE)
+            if (Player.Instance.PlayerGender == Gender.MALE)
             {
                 sceneImageObj.sprite = badSceneImagesBoy[0];
                 outroOverlay.SetActive(true);
@@ -87,8 +93,6 @@ public class EndGameManager : MonoBehaviour
 
     public void ReturnHome()
     {
-        badEndOverlay.SetActive(false);
-        goodEndOverlay.SetActive(false);
         SceneManager.LoadScene("MainMenu");
     }
 }

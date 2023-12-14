@@ -103,7 +103,6 @@ public class GameManager : MonoBehaviour
     private GameStateData currentGameStateData;
     private int currentGameLevel;
     private int randomNum;
-    private bool isGameOver;
     private int inflationDuration;
     private float inflationRate = 0f;
     public float InflationRate { get{return inflationRate;} set{inflationRate = value;}}
@@ -111,7 +110,6 @@ public class GameManager : MonoBehaviour
     private List<Building> meetupLocBuildings = new List<Building>();
     private List<Buildings> buildingsArr = new List<Buildings>();
     public int CurrentGameLevel {set{currentGameLevel = value;} get{return currentGameLevel;}}
-    public bool IsGameOver {set{isGameOver = value;} get{return isGameOver;}}
     public List<CharactersScriptableObj> Characters {set{characters = value;} get{return characters;}}
     public List<Building> MeetupLocBuildings {set{meetupLocBuildings = value;} get{return meetupLocBuildings;}}
     public GameStateData CurrentGameStateData {set{currentGameStateData = value;} get{return currentGameStateData;}}
@@ -132,7 +130,6 @@ public class GameManager : MonoBehaviour
         GameUiController.onScreenOverlayChanged += UpdateBottomOverlay;
         TimeManager.onDayAdded += AssignNpcToBuilding;
         buildingsArr = Enum.GetValues(typeof(Buildings)).Cast<Buildings>().ToList();
-        isGameOver = false;
         currentGameLevel = 1;
     }
 
@@ -142,7 +139,7 @@ public class GameManager : MonoBehaviour
         GameUiController.onScreenOverlayChanged -= UpdateBottomOverlay;
         TimeManager.onDayAdded -= AssignNpcToBuilding;
     }
-
+    
 
     private void Start()
     {
@@ -184,7 +181,6 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        isGameOver = false;
         PrepareCharacters();
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         pauseBtn.SetActive(true);
@@ -192,6 +188,25 @@ public class GameManager : MonoBehaviour
         levelManager.PrepareCurrentLevelMissions();
         TimeManager.Instance.AddClockTime(7f);
         //AudioManager.Instance.PlayMusic("Theme");
+    }
+
+
+    public void StartNextLevel()
+    {
+        UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
+        pauseBtn.SetActive(true);
+        AssignNpcToBuilding(0);
+        levelManager.PrepareCurrentLevelMissions();
+        TimeManager.Instance.AddClockTime(7f);
+    }
+
+
+    public void StartLevel()
+    {
+        BudgetSystem.Instance.ResetBudget();
+        Player.Instance.ResetLvlExpenses();
+        budgetSetter.PrepareBudgeSetter(Player.Instance.PlayerCash);
+        levelManager.PrepareCurrentLevelMissions();
     }
 
 
@@ -296,25 +311,16 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void StartLevel()
-    {
-        BudgetSystem.Instance.ResetBudget();
-        Player.Instance.ResetLvlExpenses();
-        budgetSetter.PrepareBudgeSetter(Player.Instance.PlayerCash);
-        levelManager.PrepareCurrentLevelMissions();
-        isGameOver = false;
-    }
-
-
     public void GameOver()
     {
-        endGameManager.StartOutro(false, Player.Instance.PlayerGender);
+        AnimOverlayManager.Instance.StopAnim();
+        endGameManager.ShowOutro(false);
     }
 
 
     public void GameFinished()
     {
-        endGameManager.StartOutro(true, Player.Instance.PlayerGender);
+        endGameManager.ShowOutro(true);
     }
 
 

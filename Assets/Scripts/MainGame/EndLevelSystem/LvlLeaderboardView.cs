@@ -43,22 +43,6 @@ public class LvlLeaderboardView : MonoBehaviour
     public void NextLevel()
     {
         this.gameObject.SetActive(false);
-
-        if (GameManager.Instance.IsGameOver)
-        {
-            AnimOverlayManager.Instance.StartWhiteScreenFadeLoadScreen();
-            StartCoroutine(ProceedBadEnding());
-            return;
-        }
-
         EndLevelManager.Instance.NextLevel();
-    }
-
-
-    private IEnumerator ProceedBadEnding()
-    {
-        yield return new WaitForSeconds(1f);
-        GameManager.Instance.GameOver();
-        yield return null;
     }
 }

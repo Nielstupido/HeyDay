@@ -143,8 +143,7 @@ public class ResBuildingManager : MonoBehaviour
         {
             if (daysUnpaid >= 5)
             {
-                GameManager.Instance.IsGameOver = true;
-                LevelManager.Instance.OnLevelFinished();
+                GameManager.Instance.GameOver();
                 return;
             }
 

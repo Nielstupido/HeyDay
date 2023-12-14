@@ -289,7 +289,14 @@ public class UniversityManager : MonoBehaviour
     {
         if (selectedCourse == Player.Instance.GoalCourse)
         {
-            LevelManager.onFinishedPlayerAction(MissionType.ENROLL);
+            try
+            {
+                LevelManager.onFinishedPlayerAction(MissionType.ENROLL);
+            }
+            catch (System.Exception e)
+            {
+                Debugger.Instance.ShowError(e.ToString());
+            }
         }
         
         enrollPrompt.SetActive(false);

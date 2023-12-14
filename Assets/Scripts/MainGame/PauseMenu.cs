@@ -65,7 +65,7 @@ public class PauseMenu : MonoBehaviour
     public void SaveGame()
     {
         GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
-        GameDataManager.Instance.SaveGameStateData(GameManager.Instance.CurrentGameStateData);
+        Debugger.Instance.ShowError(GameDataManager.Instance.SaveGameStateData(GameManager.Instance.CurrentGameStateData).Item2);
     }
 
 

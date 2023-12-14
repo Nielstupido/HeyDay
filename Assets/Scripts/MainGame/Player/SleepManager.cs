@@ -63,10 +63,10 @@ public class SleepManager : MonoBehaviour
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.SLEEP);
         TimeManager.Instance.AddClockTime(sleepHrs);
         Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += (sleepHrs * Player.Instance.CurrentPlayerPlace.adtnlEnergyForSleep);
-        Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] += (sleepHrs * 2f);
+        Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] -= (sleepHrs * 2f);
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
         LevelManager.onFinishedPlayerAction(MissionType.SLEEPHR, sleepHrs);
-        sleepHrs = 0f;
+        sleepHrs = 1f;
         sleepHrsText.text = sleepHrs.ToString();
 
         yield return new WaitForSeconds(waitingTime);

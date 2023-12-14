@@ -117,17 +117,16 @@ public class CharactersScriptableObj : ScriptableObject
                             };
 
 
-    private void Awake()
+    private void OnEnable()
     {
         TimeManager.onDayAdded += (x) => { gotCalledToday = false; };
     }
 
-    private void OnDestroy()
+
+    private void OnDisable()
     {
         TimeManager.onDayAdded -= (x) => { gotCalledToday = false; };
     }
-
-
 
 
     //<<<<<<<<<<<<<<<<<<<< PUBLIC METHODS >>>>>>>>>>>>>>>>>>>>>>//

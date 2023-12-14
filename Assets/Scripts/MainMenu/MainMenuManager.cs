@@ -69,7 +69,7 @@ public class MainMenuManager : MonoBehaviour
     }
 
 
-    public void StartGame()
+    public void ShowGameOverlay()
     {
         gameModePanel.SetActive(true);
     }
@@ -134,6 +134,12 @@ public class MainMenuManager : MonoBehaviour
         dictionaryOverlay.SetActive(false);
     }
     
+
+    public void CloseGameOverlay()
+    {
+        gameModePanel.SetActive(false);
+    }
+
 
     public void ExitSettings()
     {

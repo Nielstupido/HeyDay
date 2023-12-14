@@ -49,9 +49,11 @@ public class IntroCutsceneMannager : MonoBehaviour
 
     public void StartIntro()
     {
-        sceneImageObj.sprite = firstScene;
-        IntroOverlay.SetActive(true);
-        botBar.LeanSize(new Vector2(0f, 90f), 2f).delay = 0.5f;
-        topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene());} ).delay = 0.5f;
+        // sceneImageObj.sprite = firstScene;
+        // IntroOverlay.SetActive(true);
+        // botBar.LeanSize(new Vector2(0f, 90f), 2f).delay = 0.5f;
+        // topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene());} ).delay = 0.5f;
+
+        goalSetter.SetGoal(); //testing purposes
     }
 }
