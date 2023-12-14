@@ -16,4 +16,12 @@ public class GameStateData
     public float time = 7f;
     public float day = 1f;
     public int gameLevel = 1;
+
+
+    //Meetup system
+    public Building meetupBuilding;
+    public float meetupTime;
+    public int meetupDay;
+    public CharactersScriptableObj meetupCharacter;
+    public bool pendingMeetup = false;
 }
