@@ -13,6 +13,8 @@ public abstract class Building : MonoBehaviour
     [HideInInspector]public bool currentlyHired;
     [HideInInspector]public string buildingDescription;
     public Sprite buildingBgImage;
+    public AudioClip bbuildingBgSound;
+
 
     public abstract void CheckButtons();
     public abstract void CheckBtnClicked(Buttons clickedBtn);

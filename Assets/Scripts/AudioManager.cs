@@ -66,6 +66,20 @@ public class AudioManager : MonoBehaviour
     }
 
 
+    public void PlayMusicEffect(AudioClip audioClip)
+    {
+        if (audioClip == null)
+        {
+            Debug.Log("Sound not Found");
+        }
+        else
+        {
+            soundEffectsSource.clip = audioClip;
+            soundEffectsSource.Play();
+        }
+    }
+
+
     public void StopMusicEffect()
     {
         if (soundEffectsSource.clip)

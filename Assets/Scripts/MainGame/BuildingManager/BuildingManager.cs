@@ -131,12 +131,18 @@ public class BuildingManager : MonoBehaviour
             PrepareNpc();
         }
 
+        if (selectedBuilding.bbuildingBgSound)
+        {
+            AudioManager.Instance.PlayMusicEffect(selectedBuilding.bbuildingBgSound);
+        }
+        
         LevelManager.onFinishedPlayerAction(MissionType.VISIT, interactedBuilding:selectedBuilding.buildingEnumName);
     }
 
 
     public void ExitBuilding()
     {
+        AudioManager.Instance.StopMusicEffect();
         RemoveBuildingActionBtns();
         RemoveNpc();
         UniversityManager.Instance.OnExitedUniversity();
