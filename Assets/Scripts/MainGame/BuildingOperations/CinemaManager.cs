@@ -22,6 +22,7 @@ public class CinemaManager : MonoBehaviour
 
     private void WatchMovie()
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (Player.Instance.Pay(false, ticketPrice, 2f, 80f, 10f, notEnoughMoney))
         {
             LevelManager.onFinishedPlayerAction(MissionType.WATCHMOVIE);
@@ -33,6 +34,7 @@ public class CinemaManager : MonoBehaviour
     private IEnumerator WatchingMovie(float waitingTime)
     {
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.WATCHMOVIE);
+        AudioManager.Instance.PlaySFX("WatchMovie");
         yield return new WaitForSeconds(waitingTime);
         cinemaOverlay.SetActive(false);
         AnimOverlayManager.Instance.StopAnim();

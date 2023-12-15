@@ -169,14 +169,15 @@ public class LevelManager : MonoBehaviour
 
     public void CloseMissionOverlay()
     {
+        AudioManager.Instance.PlaySFX("Select");
         OverlayAnimations.Instance.AnimCloseOverlay(missionPopUp, missionOverlay);
-        GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
     }
 
 
     public void OpenMissionOverlay()
     {
         missionOverlay.SetActive(true);
+        AudioManager.Instance.PlaySFX("Select");
         OverlayAnimations.Instance.AnimOpenOverlay(missionPopUp);
         GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
     }

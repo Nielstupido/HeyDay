@@ -148,7 +148,8 @@ public class Player : MonoBehaviour
 
     public void EatDrink(Items foodToConsume)
     {
-        StartCoroutine(DoAnim(ActionAnimations.EAT, 2f));
+        StartCoroutine(DoAnim(ActionAnimations.EAT, 5f));
+        AudioManager.Instance.PlaySFX("Eat");
         TimeManager.Instance.AddClockTime(foodToConsume.eatingTime);
         playerStatsDict[PlayerStats.HAPPINESS] += foodToConsume.happinessBarValue;
         playerStatsDict[PlayerStats.ENERGY] += foodToConsume.energyBarValue;

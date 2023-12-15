@@ -7,17 +7,20 @@ public class HospitalManager : MonoBehaviour
 {
     //hospitalized prompt
     [SerializeField] private GameObject hospitalizedPrompt;
+    [SerializeField] private GameObject hospitalizedPopUp;
     [SerializeField] private TextMeshProUGUI daysHospitalized;
     [SerializeField] private TextMeshProUGUI totalBill; 
 
     //hospital bill overlay
     [SerializeField] private GameObject payBillsOverlay;
+    [SerializeField] private GameObject payBillsPopUp;
     [SerializeField] private TextMeshProUGUI playerName; 
     [SerializeField] private TextMeshProUGUI refNum; 
     [SerializeField] private TextMeshProUGUI totalOutstandingBill; 
 
     [SerializeField] private Hospital hospitalObj; 
-    [SerializeField] private GameObject debtReminderOverlay; 
+    [SerializeField] private GameObject debtReminderOverlay;
+    [SerializeField] private GameObject debtReminderPopUp;  
     [SerializeField] private Prompts notEnoughMoneyForBills; 
     [SerializeField] private Prompts paidBills; 
 
@@ -59,12 +62,14 @@ public class HospitalManager : MonoBehaviour
 
     public void Hospitalized(int dayCount, float bill = 800)
     {
+        AudioManager.Instance.PlaySFX("Ambulance");
         hospitalBill = bill * dayCount;
         daysHospitalized.text = dayCount.ToString();
         Player.Instance.PlayerHospitalOutstandingDebt += hospitalBill;
         totalBill.text = Player.Instance.PlayerHospitalOutstandingDebt.ToString();
 
         hospitalizedPrompt.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(hospitalizedPopUp);
         
         Player.Instance.PlayerStatsDict[PlayerStats.HAPPINESS] = 100;
         Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] = 100;
@@ -79,7 +84,9 @@ public class HospitalManager : MonoBehaviour
 
     public void CloseHospitalizedOverlay()
     {
+        AudioManager.Instance.PlaySFX("Select");
         hospitalizedPrompt.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(hospitalizedPopUp, hospitalizedPrompt);
         StartCoroutine(ShowReminder());
     }
 
@@ -87,6 +94,7 @@ public class HospitalManager : MonoBehaviour
     public void OpenBillingOverlay()
     {
         payBillsOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(payBillsPopUp);
         playerName.text = Player.Instance.PlayerName;
         refNum.text = Random.Range(11000, 100000).ToString();
         totalOutstandingBill.text = Player.Instance.PlayerHospitalOutstandingDebt.ToString();
@@ -95,12 +103,15 @@ public class HospitalManager : MonoBehaviour
 
     public void CloseBillingOverlay()
     {
+        AudioManager.Instance.PlaySFX("Select");
         payBillsOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(payBillsPopUp, payBillsOverlay);
     }
     
     
     public void PayHospitalFees()
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (Player.Instance.Pay(false, Player.Instance.PlayerHospitalOutstandingDebt, 0.5f, 10f, 5, notEnoughMoneyForBills))
         {
             daysUnpaid = 0;
@@ -130,6 +141,7 @@ public class HospitalManager : MonoBehaviour
     private IEnumerator PayBills()
     {
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.BUY);
+        AudioManager.Instance.PlaySFX("Pay");
         yield return new WaitForSeconds(2f);
         AnimOverlayManager.Instance.StopAnim();
         payBillsOverlay.SetActive(false);

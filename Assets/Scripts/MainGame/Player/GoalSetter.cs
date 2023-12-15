@@ -24,6 +24,7 @@ public class GoalSetter : MonoBehaviour
 
     public void StartGame()
     {
+        AudioManager.Instance.PlaySFX("Select");
         goalSetterOverlay.SetActive(false);
         GameManager.Instance.StartLevel();
     }

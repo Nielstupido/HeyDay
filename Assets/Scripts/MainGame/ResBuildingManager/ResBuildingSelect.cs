@@ -16,7 +16,7 @@ public class ResBuildingSelect : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
+        AudioManager.Instance.PlaySFX("Select");
         if (ResBuildingManager.Instance.ResBuildingSelectOverlay.activeSelf && ResBuildingManager.Instance.CurrentSelectedResBuilding == eventData.selectedObject.GetComponent<ResBuilding>())
         {
             AnimationManager.ScaleObj(ResBuildingManager.Instance.ResBuildingSelectOverlay, scaleDown, 0.4f, true, LeanTweenType.easeInOutBack);

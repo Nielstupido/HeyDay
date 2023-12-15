@@ -22,10 +22,11 @@ public class BarManager : MonoBehaviour
 
     private void Party()
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (Player.Instance.Pay(false, barEntrance, 2f, 80f, 15f, notEnoughMoney, 15f))
         {
             LevelManager.onFinishedPlayerAction(MissionType.PARTY);
-            StartCoroutine(StartParty(2f));
+            StartCoroutine(StartParty(13f));
         }
     }
 
@@ -33,6 +34,7 @@ public class BarManager : MonoBehaviour
     private IEnumerator StartParty(float waitingTime)
     {
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.PARTY);
+        AudioManager.Instance.PlaySFX("Party");
         yield return new WaitForSeconds(waitingTime);
         barOverlay.SetActive(false);
         AnimOverlayManager.Instance.StopAnim();

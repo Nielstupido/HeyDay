@@ -62,6 +62,7 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        AudioManager.Instance.PlaySFX("Select");
         Building currentSelectedBuilding = eventData.selectedObject.GetComponentInParent<Building>();
 
         if (BuildingManager.Instance.BuildingSelectOverlay.activeSelf && BuildingManager.Instance.CurrentSelectedBuilding == currentSelectedBuilding)
