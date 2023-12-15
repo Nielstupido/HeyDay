@@ -10,34 +10,53 @@ public class Player3dController : MonoBehaviour
     [SerializeField] private Animator animator;
     private float clickTimeThres = 0.3f;
     private float firstClickTime = 0f;
+    private Vector3 targetPos = Vector3.zero;
+    public static Player3dController Instance { get; private set; }
+
+
+    private void Awake() 
+    { 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
 
     private void Start()
     {
-        playerNavMesh = gameObject.GetComponent<NavMeshAgent>();
-        animator.StopPlayback();
+        animator.enabled = false;
     }
 
 
     private void Update()
     {
-        if (Input.anyKeyDown)
-        // if(Input.touchCount > 0) //for mobile
+        if (targetPos != Vector3.zero)
         {
-            if (Time.time - firstClickTime < clickTimeThres)
+            playerNavMesh.isStopped = false;
+            playerNavMesh.SetDestination(targetPos);
+        }
+
+        if (!playerNavMesh.pathPending && targetPos != Vector3.zero)
+        {
+            if (playerNavMesh.remainingDistance < 1f)
             {
-                Ray movePos = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if(Physics.Raycast(movePos, out var targetInfo))
-                {
-                    playerNavMesh.SetDestination(targetInfo.point);
-                    animator.Play("Walking");
-                }
-                firstClickTime = 0;
-            }
-            else
-            {
-                firstClickTime = Time.time;
+                targetPos = Vector3.zero;
+                playerNavMesh.isStopped = true;
+                animator.enabled = false;
             }
         }
+    }
+
+
+    public void WalkToPoint(Vector3 pos)
+    {
+        targetPos = pos;
+        animator.enabled = true;
+        animator.Play("Walking");
     }
 }
