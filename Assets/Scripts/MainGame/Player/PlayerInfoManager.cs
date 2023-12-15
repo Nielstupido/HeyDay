@@ -34,18 +34,19 @@ public class PlayerInfoManager : MonoBehaviour
         introCutsceneMannager.StartIntro();
     }
 
-
     public void StartIntroScene()
     {
-        // if (!GameDataManager.Instance.IsPlayerNameAvailable((playerNameTextInput.text).TrimEnd()))
-        // {
-        //     PromptManager.Instance.ShowPrompt(usernameUnavailable);
-        //     return;
-        // }
+        string playerName = playerNameTextInput.text.TrimEnd();
+        Player.Instance.PlayerName = playerName;
+        playerNameTextDisplay.text = playerName;
 
-        Player.Instance.PlayerName = playerNameTextInput.text.TrimEnd();
-        playerNameTextDisplay.text = playerNameTextInput.text.TrimEnd();
-        // GameDataManager.Instance.SavePlayerRecords(playerNameTextInput.text, 0);
+        if (!GameDataManager.Instance.IsPlayerNameAvailable(playerName))
+        {
+            PromptManager.Instance.ShowPrompt(usernameUnavailable);
+            return;
+        }
+
+        GameDataManager.Instance.SavePlayerRecords(playerName, 0);
         StartCoroutine(ProceedIntro());
     }
 
