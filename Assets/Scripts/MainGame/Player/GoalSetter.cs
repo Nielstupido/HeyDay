@@ -12,6 +12,20 @@ public class GoalSetter : MonoBehaviour
     [SerializeField] private TextMeshProUGUI narrativeText;
     private List<UniversityCourses> courseList = new List<UniversityCourses>();
     private int randomNum;
+    public static GoalSetter Instance { get; private set; }
+
+
+    private void Awake() 
+    { 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
 
     public void SetGoal()

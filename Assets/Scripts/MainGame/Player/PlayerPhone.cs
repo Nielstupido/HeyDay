@@ -70,15 +70,12 @@ public class PlayerPhone : MonoBehaviour
     public void GoalTracker()
     {
         goalTrackerOverlay.SetActive(true);
-                
-        try
+        courseValue.text = GameManager.Instance.EnumStringParser(Player.Instance.GoalCourse);
+        courseValue.alpha = 1f;
+
+        if (Player.Instance.PlayerEnrolledCourse != Player.Instance.GoalCourse)
         {
-            courseValue.text = GameManager.Instance.EnumStringParser(Player.Instance.PlayerEnrolledCourse);
-        }
-        catch (System.Exception)
-        {
-            
-            courseValue.text = "Currently not enrolled to any course.";
+            courseValue.alpha = 0.2f;
         }
 
         savingsValue.text = "₱" + Player.Instance.PlayerBankSavings.ToString() + " / 100000";
@@ -143,6 +140,7 @@ public class PlayerPhone : MonoBehaviour
             Player.Instance.PlayerCash -= groceryPrice;
             Player.Instance.PlayerStatsDict[PlayerStats.MONEY] -= groceryPrice;
             PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
+            LevelManager.onFinishedPlayerAction(MissionType.BUY);
 
             groceryBar.value++;
             Player.Instance.GroceryBarValue++;
@@ -160,9 +158,9 @@ public class PlayerPhone : MonoBehaviour
         {
             StartCoroutine(DoAnim(ActionAnimations.EAT, 2f));
             TimeManager.Instance.AddClockTime(0.2f);
-            Player.Instance.PlayerStatsDict[PlayerStats.HAPPINESS] += 15f;
-            Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += 25f;
-            Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] += 20f;
+            Player.Instance.PlayerStatsDict[PlayerStats.HAPPINESS] += 5f;
+            Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += 10f;
+            Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] += 15f;
 
             PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
 

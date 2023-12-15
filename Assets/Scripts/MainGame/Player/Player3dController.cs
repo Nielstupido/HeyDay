@@ -6,7 +6,8 @@ using UnityEngine.AI;
 
 public class Player3dController : MonoBehaviour
 {
-    public NavMeshAgent playerNavMesh;
+    [SerializeField] private NavMeshAgent playerNavMesh;
+    [SerializeField] private Animator animator;
     private float clickTimeThres = 0.3f;
     private float firstClickTime = 0f;
 
@@ -14,6 +15,7 @@ public class Player3dController : MonoBehaviour
     private void Start()
     {
         playerNavMesh = gameObject.GetComponent<NavMeshAgent>();
+        animator.StopPlayback();
     }
 
 
@@ -28,6 +30,7 @@ public class Player3dController : MonoBehaviour
                 if(Physics.Raycast(movePos, out var targetInfo))
                 {
                     playerNavMesh.SetDestination(targetInfo.point);
+                    animator.Play("Walking");
                 }
                 firstClickTime = 0;
             }

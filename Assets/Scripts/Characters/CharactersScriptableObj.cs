@@ -425,17 +425,17 @@ public class CharactersScriptableObj : ScriptableObject
 
     private bool CheckRelStatus()
     {
-        if (currentSocialEnergyLvl < 0)
+        if (currentSocialEnergyLvl <= 0)
         {
             currentSocialEnergyLvl = 0;
         }
 
-        if (relStatBarValue < 0)
+        if (relStatBarValue <= 0)
         {
             relStatBarValue = 0;
         }
 
-        if (relStatBarValue > 100)
+        if (relStatBarValue >= 100)
         {
             relStatBarValue = 100;
         }
@@ -448,17 +448,26 @@ public class CharactersScriptableObj : ScriptableObject
                     relStatus = RelStatus.ENEMIES;
                     break;
                 case <= 60:
-                    LevelManager.onFinishedPlayerAction(MissionType.UPRELATIONSHIP);
-                    LevelManager.onFinishedPlayerAction(MissionType.MAKEFRIEND);
+                    if (relStatus == RelStatus.ENEMIES)
+                    {
+                        LevelManager.onFinishedPlayerAction(MissionType.UPRELATIONSHIP);
+                        LevelManager.onFinishedPlayerAction(MissionType.MAKEFRIEND);
+                    }
                     relStatus = RelStatus.FRIENDS;
                     break;
                 case <= 80:
-                    LevelManager.onFinishedPlayerAction(MissionType.UPRELATIONSHIP);
-                    LevelManager.onFinishedPlayerAction(MissionType.MAKECLOSEFRIEND);
+                    if (relStatus == RelStatus.FRIENDS)
+                    {
+                        LevelManager.onFinishedPlayerAction(MissionType.UPRELATIONSHIP);
+                        LevelManager.onFinishedPlayerAction(MissionType.MAKECLOSEFRIEND);
+                    }
                     relStatus = RelStatus.GOOD_FRIENDS;
                     break;
                 case <= 100:
-                    LevelManager.onFinishedPlayerAction(MissionType.UPRELATIONSHIP);
+                    if (relStatus == RelStatus.GOOD_FRIENDS)
+                    {
+                        LevelManager.onFinishedPlayerAction(MissionType.UPRELATIONSHIP);
+                    }
                     relStatus = RelStatus.BEST_BUDDIES;
                     break;
             }
@@ -468,10 +477,11 @@ public class CharactersScriptableObj : ScriptableObject
             switch (relStatBarValue)
             {
                 case <= 30:
-                    relStatus = RelStatus.ENEMIES;
+                    relStatus = RelStatus.STRANGERS;
                     break;
                 case <= 60:
                     LevelManager.onFinishedPlayerAction(MissionType.UPRELATIONSHIP);
+                    LevelManager.onFinishedPlayerAction(MissionType.MAKEFRIEND);
                     relStatus = RelStatus.FRIENDS;
                     beenFriends = true;
                     break;

@@ -76,10 +76,13 @@ public class ResBuildingManager : MonoBehaviour
         TimeManager.onDayAdded -= NewDay;
     }
 
+
     private void OnEnable()
     {
         TimeManager.onDayAdded += NewDay;
     }
+
+
     private void OnDisable()
     {
         TimeManager.onDayAdded -= NewDay;
@@ -103,8 +106,12 @@ public class ResBuildingManager : MonoBehaviour
 
     private void NewDay(int dayCount)
     {
-        Player.Instance.PlayerStatsDict[PlayerStats.HAPPINESS] += Player.Instance.CurrentPlayerPlace.dailyAdtnlHappiness;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HAPPINESS, Player.Instance.PlayerStatsDict);
+        if (Player.Instance.CurrentPlayerPlace != null)
+        {
+            Player.Instance.PlayerStatsDict[PlayerStats.HAPPINESS] += Player.Instance.CurrentPlayerPlace.dailyAdtnlHappiness;
+            PlayerStatsObserver.onPlayerStatChanged(PlayerStats.HAPPINESS, Player.Instance.PlayerStatsDict);
+        }
+        
         ComputeBillings(dayCount);
     }
 

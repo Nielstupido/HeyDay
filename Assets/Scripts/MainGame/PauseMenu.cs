@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor.Search;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -27,6 +26,7 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
         yield return null;
     }
+
 
     public void ShowPauseMenu()
     {
@@ -66,14 +66,14 @@ public class PauseMenu : MonoBehaviour
         GameDataManager.Instance.PlayerRecords[Player.Instance.PlayerName] = 0;
         GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
         GameDataManager.Instance.NewGameState();
-        GameManager.Instance.StartLevel();
+        GoalSetter.Instance.SetGoal();
     }
 
 
     public void SaveGame()
     {
         GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
-        Debugger.Instance.ShowError(GameDataManager.Instance.SaveGameStateData(GameManager.Instance.CurrentGameStateData).Item2);
+        GameDataManager.Instance.SaveGameStateData(GameManager.Instance.CurrentGameStateData);
     }
 
 

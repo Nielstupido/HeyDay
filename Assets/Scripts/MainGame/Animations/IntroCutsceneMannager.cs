@@ -10,7 +10,6 @@ public class IntroCutsceneMannager : MonoBehaviour
     [SerializeField] private RectTransform topBar;
     [SerializeField] private RectTransform botBar;
     [SerializeField] private Sprite firstScene;
-    [SerializeField] private GoalSetter goalSetter;
     [SerializeField] private List<Sprite> sceneImagesGirl = new List<Sprite>();
     [SerializeField] private List<Sprite> sceneImagesBoy = new List<Sprite>();
 
@@ -42,7 +41,7 @@ public class IntroCutsceneMannager : MonoBehaviour
         AnimOverlayManager.Instance.StartBlackScreenFadeLoadScreen();
         yield return new WaitForSeconds(0.5f);
         IntroOverlay.SetActive(false);
-        goalSetter.SetGoal();
+        GoalSetter.Instance.SetGoal();
         yield return null;
     }
 
@@ -54,6 +53,6 @@ public class IntroCutsceneMannager : MonoBehaviour
         // botBar.LeanSize(new Vector2(0f, 90f), 2f).delay = 0.5f;
         // topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene());} ).delay = 0.5f;
 
-        goalSetter.SetGoal(); //testing purposes
+        GoalSetter.Instance.SetGoal(); //testing purposes
     }
 }

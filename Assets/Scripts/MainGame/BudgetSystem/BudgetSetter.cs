@@ -86,26 +86,29 @@ public class BudgetSetter : MonoBehaviour
 
     private float GetAmountLeft(int index)
     {
-        switch (index)
+        float amountLeft = moneyValue;
+
+        for (int i = 0; i < sliders.Count; i++)
         {
-            case 0:
-                return (moneyValue - (sliders[1].value + sliders[2].value + sliders[3].value));
-            case 1:
-                return (moneyValue - (sliders[0].value + sliders[2].value + sliders[3].value));
-            case 2:
-                return (moneyValue - (sliders[0].value + sliders[1].value + sliders[3].value));
-            case 3:
-                return (moneyValue - (sliders[0].value + sliders[1].value + sliders[2].value));
-            default:
-                return 0;
+            if (i != index)
+            {
+                amountLeft -= sliders[i].value;
+            }
         }
+
+        return amountLeft;
     }
 
 
     public void Continue()
     {
+        if (sliders[0].value + sliders[1].value + sliders[2].value + sliders[3].value < (moneyValue * 0.9))
+        {
+            return;
+        }
+
         BudgetSystem.Instance.SaveBudget(sliders[0].value, sliders[1].value, sliders[2].value, sliders[3].value);
-        //this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
         OverlayAnimations.Instance.AnimCloseOverlay(budgetSetterPopUp, this.gameObject);
 
         if (GameManager.Instance.CurrentGameLevel == 1)
@@ -114,7 +117,7 @@ public class BudgetSetter : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.StartGame(); //continue next level
+            GameManager.Instance.StartNextLevel(); //continue next level
         }
     }
 }

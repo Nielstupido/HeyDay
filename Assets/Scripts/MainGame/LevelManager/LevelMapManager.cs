@@ -7,7 +7,7 @@ public class LevelMapManager : MonoBehaviour
 {
     [SerializeField] private GameObject levelMapCanvas;
     [SerializeField] private GameObject nextLvlBtn;
-    [SerializeField] private Transform characterImage;
+    [SerializeField] private Image characterImage;
     [SerializeField] private GameObject map1;
     [SerializeField] private GameObject map2;
     [SerializeField] private GameObject map3;
@@ -21,6 +21,7 @@ public class LevelMapManager : MonoBehaviour
     [SerializeField] private List<Transform> mapPlaceholders3 = new List<Transform>();
     [SerializeField] private List<Transform> mapPlaceholders4 = new List<Transform>();
     private bool isNewMap;
+    private Vector3 targetPos;
     public static LevelMapManager Instance { get; private set; }
 
 
@@ -37,12 +38,56 @@ public class LevelMapManager : MonoBehaviour
     }
 
 
+    private int GetIndexValue(int num, bool startNewMap)
+    {
+        if (!startNewMap)
+        {
+            switch (num)
+            {
+                case 11: 
+                    return 11;
+                case 21: 
+                    return 11;
+                case 31: 
+                    return 11;
+            }
+        }
+        
+        switch (num)
+        {
+            case 11: case 21: case 31:
+                return 1;
+            case 12: case 22: case 32:
+                return 2;
+            case 13: case 23: case 33:
+                return 3;
+            case 14: case 24: case 34:
+                return 4;
+            case 15: case 25: case 35:
+                return 5;
+            case 16: case 26: case 36:
+                return 6;
+            case 17: case 27: case 37:
+                return 7;
+            case 18: case 28: case 38:
+                return 8;
+            case 19: case 29: case 39:
+                return 9;
+            case 20: case 30: case 40:
+                return 10;
+            default: return (num);
+        }
+    }
+
+
     public void MoveCharacterPosition(bool isSceneSetup, bool startNewMap, int lvlNum)
     {
         if (lvlNum < 11)
         {
+            characterImage.transform.SetParent(map1.transform);
             map1.SetActive(true);
-            characterImage.SetParent(mapPlaceholders1[lvlNum - 1]);
+            targetPos = mapPlaceholders1[GetIndexValue(lvlNum, startNewMap) - 1].localPosition;
+            // characterImage.transform.SetParent(mapPlaceholders1[GetIndexValue(lvlNum, startNewMap) - 1]);
         }
         else if (lvlNum < 21)
         {
@@ -50,13 +95,21 @@ public class LevelMapManager : MonoBehaviour
             {
                 isNewMap = true;
                 map1.SetActive(true);
+                targetPos = mapPlaceholders1[GetIndexValue(lvlNum, startNewMap) - 1].localPosition;
+                // characterImage.transform.SetParent(mapPlaceholders1[GetIndexValue(lvlNum, startNewMap) - 1]);
             }
             else
             {
+                if (lvlNum == 11)
+                {
+                    characterImage.gameObject.transform.localPosition = new Vector3(-800f, -950f, 0f);
+                }
+
+                characterImage.transform.SetParent(map2.transform);
                 map2.SetActive(true);
+                targetPos = mapPlaceholders2[GetIndexValue(lvlNum, startNewMap) - 1].localPosition;
+                // characterImage.transform.SetParent(mapPlaceholders2[GetIndexValue(lvlNum, startNewMap) - 1]);
             }
-            
-            characterImage.SetParent(mapPlaceholders2[lvlNum - 1]);
         }
         else if (lvlNum < 31)
         {
@@ -64,13 +117,21 @@ public class LevelMapManager : MonoBehaviour
             {
                 isNewMap = true;
                 map2.SetActive(true);
+                targetPos = mapPlaceholders2[GetIndexValue(lvlNum, startNewMap) - 1].localPosition;
+                // characterImage.transform.SetParent(mapPlaceholders2[GetIndexValue(lvlNum, startNewMap) - 1]);
             }
             else
             {
+                if (lvlNum == 21)
+                {
+                    characterImage.gameObject.transform.localPosition = new Vector3(-800f, -950f, 0f);
+                }
+
+                characterImage.transform.SetParent(map3.transform);
                 map3.SetActive(true);
+                targetPos = mapPlaceholders3[GetIndexValue(lvlNum, startNewMap) - 1].localPosition;
+                // characterImage.transform.SetParent(mapPlaceholders3[GetIndexValue(lvlNum, startNewMap) - 1]);
             }
-            
-            characterImage.SetParent(mapPlaceholders3[lvlNum - 1]);
         }
         else
         {
@@ -78,18 +139,29 @@ public class LevelMapManager : MonoBehaviour
             {
                 isNewMap = true;
                 map3.SetActive(true);
+                targetPos = mapPlaceholders3[GetIndexValue(lvlNum, startNewMap) - 1].localPosition;
+                // characterImage.transform.SetParent(mapPlaceholders3[GetIndexValue(lvlNum, startNewMap) - 1]);
             }
             else
             {
-                map4.SetActive(true);
-            }
+                if (lvlNum == 31)
+                {
+                    characterImage.gameObject.transform.localPosition = new Vector3(-800f, -950f, 0f);
+                }
 
-            characterImage.SetParent(mapPlaceholders4[lvlNum - 1]);
+                characterImage.transform.SetParent(map4.transform);
+                map4.SetActive(true);
+                targetPos = mapPlaceholders4[GetIndexValue(lvlNum, startNewMap) - 1].localPosition;
+                // characterImage.transform.SetParent(mapPlaceholders4[GetIndexValue(lvlNum, startNewMap) - 1]);
+            }
         }
+        
+        characterImage.GetComponent<Image>().sprite = Player.Instance.CurrentCharacter.defaultCharacter;
+        characterImage.gameObject.GetComponent<RectTransform>().localScale = new Vector3(0.3f, 0.3f, 0.3f);
 
         if (isSceneSetup)
         {
-            characterImage.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            characterImage.gameObject.transform.localPosition = targetPos;
             return;
         }
 
@@ -101,7 +173,6 @@ public class LevelMapManager : MonoBehaviour
     public void MoveToNewLevel(int nextLvl, bool startNewMap)
     {
         AnimOverlayManager.Instance.StartScreenFadeLoadScreen();
-
         isNewMap = false;
         nextLvlBtn.SetActive(false);
         map1.SetActive(false);
@@ -115,6 +186,13 @@ public class LevelMapManager : MonoBehaviour
     public void StartNextLevel()
     {
         AnimOverlayManager.Instance.StartWhiteScreenFadeLoadScreen();
+        StartCoroutine(ProceedToNextLevel());
+    }
+
+
+    private IEnumerator ProceedToNextLevel()
+    {
+        yield return new WaitForSeconds(0.6f);
         levelMapCanvas.SetActive(false);
         endLvlOverlay.SetActive(false);
         leaderboard.SetActive(false);
@@ -133,24 +211,24 @@ public class LevelMapManager : MonoBehaviour
 
     private IEnumerator LerpCharacter(int lvlNum)
     {
-        characterImage.gameObject.GetComponent<Image>().sprite = Player.Instance.CurrentCharacter.defaultBody;
-        yield return new WaitForSeconds(1f);
+        characterImage.gameObject.GetComponent<RectTransform>().localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        yield return new WaitForSeconds(2.5f);
         float timeCounter = 0;
         float speed = 20f;
 
         while (timeCounter < speed)
         {
-            if (Vector3.Distance(characterImage.GetComponent<RectTransform>().localPosition, Vector3.zero) < 2f)
+            if (Vector3.Distance(characterImage.gameObject.transform.localPosition, targetPos) < 2f)
             {
                 break;
             }
 
-            characterImage.GetComponent<RectTransform>().localPosition = Vector3.Lerp(characterImage.GetComponent<RectTransform>().localPosition, Vector3.zero, timeCounter / speed);
+            characterImage.gameObject.transform.localPosition = Vector3.Lerp(characterImage.gameObject.transform.localPosition, targetPos, timeCounter / speed);
             timeCounter += Time.deltaTime;
             yield return null;
         }
 
-        characterImage.GetComponent<RectTransform>().localPosition = Vector3.zero;
+        characterImage.gameObject.transform.localPosition = targetPos;
 
         if (isNewMap)
         {

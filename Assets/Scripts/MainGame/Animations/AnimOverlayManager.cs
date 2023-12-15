@@ -87,7 +87,7 @@ public class AnimOverlayManager : MonoBehaviour
 
     private void FadeOutScreen()
     {
-        loadScreenFadeOverlay.LeanAlpha(0f, 0.5f).setOnComplete( () => {screenFadeCanvas.SetActive(false);} ).delay = 1f;
+        loadScreenFadeOverlay.LeanAlpha(0f, 0.5f).setOnComplete( () => {screenFadeCanvas.SetActive(false);} ).delay = 2f;
     }
 
 

@@ -170,7 +170,7 @@ public class LevelManager : MonoBehaviour
     public void CloseMissionOverlay()
     {
         OverlayAnimations.Instance.AnimCloseOverlay(missionPopUp, missionOverlay);
-        GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
+        GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
     }
 
 

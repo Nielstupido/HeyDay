@@ -31,12 +31,10 @@ public class GameDataManager : MonoBehaviour
     //===>> PLAYER RECORDS (NAME, SCORE) <<===//
     public bool IsPlayerNameAvailable(string name)
     {
-
         foreach (var item in playerRecords)
         {
             if (item.Key == name)
             {
-                Debug.Log("MATCH");
                 return false;
             }
         }

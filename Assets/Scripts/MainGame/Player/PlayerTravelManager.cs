@@ -51,7 +51,7 @@ public class PlayerTravelManager : MonoBehaviour
 
     public void MovePlayerModel(Building selectedBuilding)
     {
-        player3DController.playerNavMesh.isStopped = true;
+        // player3DController.playerNavMesh.isStopped = true;
         playerModel.gameObject.transform.position = selectedBuilding.transform.GetChild(selectedBuilding.transform.childCount - 1).transform.position;
         currentVisitedBuilding = selectedBuilding;
         PlayerActionObservers.onPlayerTraveled(currentModeOfTravel);

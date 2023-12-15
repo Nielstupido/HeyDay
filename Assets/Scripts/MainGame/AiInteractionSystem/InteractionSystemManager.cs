@@ -80,7 +80,7 @@ public class InteractionSystemManager : MonoBehaviour
 
         if (npcGreetings != null)
         {
-            StartCoroutine(GreetPlayer());
+            StartCoroutine(GreetPlayer(npcGreetings));
         }
 
         if (interactingCharacter.currentDebt == 0f)
@@ -340,10 +340,10 @@ public class InteractionSystemManager : MonoBehaviour
     }
 
 
-    private IEnumerator GreetPlayer()
+    private IEnumerator GreetPlayer(string greetings)
     {
         speechBubbleImage.SetActive(true);
-        ToggleSpeechBubble(false, npcGreetings);
+        ToggleSpeechBubble(false, greetings);
         yield return new WaitForSeconds(1.5f);
         ToggleSpeechBubble(true, "");
         yield return null;
