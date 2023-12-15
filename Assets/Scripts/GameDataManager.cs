@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Newtonsoft.Json;
 using System.IO;
 using System;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Linq;
+
 
 public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance {private set; get;}
-    private Dictionary<string, int> playerRecords = new Dictionary<string, int>();
+    public Dictionary<string, int> playerRecords = new Dictionary<string, int>();
     private List<GameStateData> allPlayersGameStateData;
     public Dictionary<string, int> PlayerRecords { set{playerRecords = value;} get{return playerRecords;}}
-
 
     private void Awake()
     {
@@ -32,10 +31,12 @@ public class GameDataManager : MonoBehaviour
     //===>> PLAYER RECORDS (NAME, SCORE) <<===//
     public bool IsPlayerNameAvailable(string name)
     {
+
         foreach (var item in playerRecords)
         {
             if (item.Key == name)
             {
+                Debug.Log("MATCH");
                 return false;
             }
         }
@@ -43,41 +44,67 @@ public class GameDataManager : MonoBehaviour
         return true;
     }
 
-
     public ValueTuple<bool, string> LoadPlayerRecords()
     {
         try
         {
-            string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerScores.json";
+            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+            string filePath = directoryPath + "PlayerScores.json";
+
+            // Check if the directory exists, create it if not
+            if (!Directory.Exists(directoryPath))
+            {
+                Debug.Log("TEST 1: Directory mo wala");
+                Directory.CreateDirectory(directoryPath);
+            }
+
             if (!File.Exists(filePath))
             {
-                string playerRecord = JsonUtility.ToJson(new Dictionary<string, int>());
+                // If the file doesn't exist, create it
+                string playerRecord = JsonConvert.SerializeObject(new Dictionary<string, int>());
                 File.WriteAllText(filePath, playerRecord);
             }
-            
+
             string jsonString = File.ReadAllText(filePath);
-            playerRecords = JsonUtility.FromJson<Dictionary<string, int>>(jsonString);
+
+            // Deserialize into playerRecords using Json.NET
+            playerRecords = JsonConvert.DeserializeObject<Dictionary<string, int>>(jsonString);
+
+            // Debug.Log each entry
+            // foreach (var entry in playerRecords)
+            // {
+            //     Debug.Log($"Player: {entry.Key}, Score: {entry.Value}");
+            // }
         }
         catch (Exception e)
         {
+            Debug.LogError($"{e}");
             return (false, e.ToString());
         }
 
         return (true, "");
     }
 
-
     public ValueTuple<bool, string> SavePlayerRecords(string playerName, int score)
     {
         try
         {
-            if (!playerRecords.ContainsKey(playerName))
+            if (playerRecords.ContainsKey(playerName))
             {
-                playerRecords.Add(playerName, 0);
+                playerRecords[playerName] += score;
             }
-            playerRecords[playerName] += score;
-            string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerScores.json";
-            string jsonString = JsonUtility.ToJson(playerRecords);
+            else
+            {
+                playerRecords.Add(playerName, score);
+            }
+    
+            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+            string filePath = directoryPath + "PlayerScores.json";
+
+            // Serialize playerRecords using Json.NET
+            string jsonString = JsonConvert.SerializeObject(playerRecords);
+
+            // Write the serialized data to the file
             File.WriteAllText(filePath, jsonString);
         }
         catch (Exception e)
