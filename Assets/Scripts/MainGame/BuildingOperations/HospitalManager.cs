@@ -79,7 +79,7 @@ public class HospitalManager : MonoBehaviour
     }
 
 
-    public void Hospitalized(int dayCount, float bill = 800)
+    public void Hospitalized(int dayCount, float bill = 300)
     {
         AudioManager.Instance.PlaySFX("Ambulance");
         hospitalBill = bill * dayCount;

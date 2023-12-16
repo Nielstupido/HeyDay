@@ -149,17 +149,32 @@ public class LevelManager : MonoBehaviour
     {
         currentActiveMissions.Clear();
         tempLevelName = "Level ";
-        tempLevelName += GameManager.Instance.CurrentGameLevel.ToString();
-        missionOverlayLevelText.text = tempLevelName;
 
-        for (int i = 0; i < missionPrefabsHolder.childCount; i++)
+        if (GameManager.Instance.CurrentGameLevel == 0)
         {
-            Object.Destroy(missionPrefabsHolder.GetChild(i).gameObject);
+            tempLevelName += "1";
         }
+        else
+        {
+            tempLevelName += GameManager.Instance.CurrentGameLevel.ToString();
+        }
+
+        missionOverlayLevelText.text = tempLevelName;
 
         foreach (MissionsScriptableObj mission in allMissions[tempLevelName])
         {
             currentActiveMissions.Add(mission);
+        }
+
+        InstantiateCurrentLvlMissions();
+    }
+    
+
+    public void InstantiateCurrentLvlMissions()
+    {
+        for (int i = 0; i < missionPrefabsHolder.childCount; i++)
+        {
+            Object.Destroy(missionPrefabsHolder.GetChild(i).gameObject);
         }
 
         foreach(MissionsScriptableObj mission in currentActiveMissions)

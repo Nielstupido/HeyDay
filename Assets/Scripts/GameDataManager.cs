@@ -10,7 +10,7 @@ public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance {private set; get;}
     public Dictionary<string, int> playerRecords = new Dictionary<string, int>();
-    private List<GameStateData> allPlayersGameStateData = new List<GameStateData>();
+    private Dictionary<string, GameStateData> allPlayersGameStateData = new Dictionary<string, GameStateData>();
     public Dictionary<string, int> PlayerRecords { set{playerRecords = value;} get{return playerRecords;}}
 
 
@@ -162,14 +162,14 @@ public class GameDataManager : MonoBehaviour
             if (!File.Exists(filePath))
             {
                 // If the file doesn't exist, create it
-                string playerGameStateData = JsonUtility.ToJson(new List<GameStateData>());
+                string playerGameStateData = JsonConvert.SerializeObject(new Dictionary<string, GameStateData>());
                 File.WriteAllText(filePath, playerGameStateData);
             }
 
             string jsonString = File.ReadAllText(filePath);
 
             // Deserialize into playerRecords using Json.NET
-            allPlayersGameStateData = JsonUtility.FromJson<List<GameStateData>>(jsonString);
+            allPlayersGameStateData = JsonConvert.DeserializeObject<Dictionary<string, GameStateData>>(jsonString);
         }
         catch (Exception e)
         {
@@ -180,17 +180,17 @@ public class GameDataManager : MonoBehaviour
     }
 
 
-    public ValueTuple<bool, string> SaveGameStateData(GameStateData currentPlayerGameStateData)
+    public ValueTuple<bool, string> SaveGameStateData(string playerName, GameStateData currentPlayerGameStateData)
     {
         try
         {
-            if (allPlayersGameStateData.Contains(currentPlayerGameStateData))
+            if (allPlayersGameStateData.ContainsKey(playerName))
             {
-                allPlayersGameStateData[allPlayersGameStateData.IndexOf(currentPlayerGameStateData)] = currentPlayerGameStateData;
+                allPlayersGameStateData[playerName] = currentPlayerGameStateData;
             }
             else
             {
-                allPlayersGameStateData.Add(currentPlayerGameStateData);
+                allPlayersGameStateData.Add(playerName, currentPlayerGameStateData);
             }
 
             string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
@@ -215,7 +215,7 @@ public class GameDataManager : MonoBehaviour
         GameStateData currentGameState = null;
         try
         {
-            currentGameState = allPlayersGameStateData.Find( (gameState) => gameState.playerName == playerName);
+            currentGameState = allPlayersGameStateData[playerName];
         }
         catch (Exception e)
         {
@@ -226,16 +226,30 @@ public class GameDataManager : MonoBehaviour
     }
 
 
-    public List<GameStateData> GetAllGameStateData()
+    public Dictionary<string, GameStateData> GetAllGameStateData()
     {
-        return allPlayersGameStateData;
+        Dictionary<string, GameStateData> currentPlayersGameStateData = new Dictionary<string, GameStateData>();
+
+        foreach (var item in allPlayersGameStateData)
+        {
+            try
+            {
+                currentPlayersGameStateData.Add(item.Key, item.Value);
+            }
+            catch (Exception)
+            {
+                continue;
+            }
+        }
+
+        return currentPlayersGameStateData;
     }   
 
 
-    public void NewGameState()
+    public void NewGameState(string playerName)
     {
         GameManager.Instance.CurrentGameStateData = new GameStateData();
-        SaveGameStateData(new GameStateData());
+        SaveGameStateData(playerName, new GameStateData());
     }
     //===>> PLAYERS' GAME STATE DATA <<===//
 }

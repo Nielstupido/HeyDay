@@ -52,7 +52,7 @@ public class GoalSetter : MonoBehaviour
                             "after graduation. Your main goals are:";
         
         courseList = Enum.GetValues(typeof(UniversityCourses)).Cast<UniversityCourses>().ToList();
-        randomNum = UnityEngine.Random.Range(1, courseList.Count);
+        randomNum = UnityEngine.Random.Range(2, courseList.Count);
         Player.Instance.GoalCourse = courseList[randomNum];
         educGoalText.text = GameManager.Instance.EnumStringParser(courseList[randomNum]);
     }

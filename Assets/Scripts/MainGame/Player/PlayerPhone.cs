@@ -277,7 +277,8 @@ public class PlayerPhone : MonoBehaviour
         foreach(string characterName in Player.Instance.ContactList)
         {
             GameObject newNpc = Instantiate(contactItemPrefab, Vector3.zero, Quaternion.identity, contactListHolder);
-            newNpc.GetComponent<ContactItem>().SetupContactItem(characterName, this);
+            ContactItem contactItem = newNpc.GetComponent<ContactItem>();
+            contactItem.SetupContactItem(characterName, this);
         }
     } 
 

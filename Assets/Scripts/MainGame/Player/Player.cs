@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
     //Finance
     [SerializeField] private Prompts notEnoughMoneyPrompt;
-    private float playerCash;
+    private float playerCash = -1f;
     private float playerBankSavings;
     private float playerTotalDebt;
     private float playerHospitalOutstandingDebt;
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
     public float PlayerLvlEmergencyFunds { set{playerLvlEmergencyFunds = value;} get{return playerLvlEmergencyFunds;}}
 
     //Studies
-    private UniversityCourses goalCourse;
+    private UniversityCourses goalCourse = UniversityCourses.NONE;
     private UniversityCourses courseEnrolled;
     private StudyFields studyFieldEnrolled;
     private float playerStudyHours;
@@ -177,6 +177,10 @@ public class Player : MonoBehaviour
 
     private void LoadGameData()
     {
+        if (this.goalCourse == UniversityCourses.NONE)
+        {
+            this.goalCourse = GameManager.Instance.CurrentGameStateData.goalCourse;
+        }
         this.playerName = GameManager.Instance.CurrentGameStateData.playerName;
         this.playerAge = GameManager.Instance.CurrentGameStateData.playerAge;
         this.playerGender = GameManager.Instance.CurrentGameStateData.playerGender;
@@ -192,7 +196,6 @@ public class Player : MonoBehaviour
         this.playerLvlSavings = GameManager.Instance.CurrentGameStateData.playerLvlSavings;
         this.playerLvlConsumablesExpenses = GameManager.Instance.CurrentGameStateData.playerLvlConsumablesExpenses;
         this.playerLvlEmergencyFunds = GameManager.Instance.CurrentGameStateData.playerLvlEmergencyFunds;
-        this.goalCourse = GameManager.Instance.CurrentGameStateData.goalCourse;
         this.courseEnrolled = GameManager.Instance.CurrentGameStateData.courseEnrolled;
         this.studyFieldEnrolled = GameManager.Instance.CurrentGameStateData.studyFieldEnrolled;
         this.playerEnrolledCourseDuration = GameManager.Instance.CurrentGameStateData.playerEnrolledCourseDuration;

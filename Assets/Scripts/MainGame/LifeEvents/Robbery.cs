@@ -12,7 +12,7 @@ public class Robbery : LifeEvent
 
         this.message = "Emergency Update! You have been robbed! Assess the damage, " +
                         "strategize for recovery, and reclaim what's rightfully yours. " +
-                        "To avoid in-game robberies, consider these tips. Avoid carrying " +
+                        "To avoid robberies, consider these tips. Avoid carrying " +
                         "large amount of money. Be cautious during nighttime walks.";
         LifeEventsPrompt.Instance.DisplayPrompt(message);
     }

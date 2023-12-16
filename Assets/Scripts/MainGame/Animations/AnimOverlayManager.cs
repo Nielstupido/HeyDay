@@ -40,6 +40,7 @@ public class AnimOverlayManager : MonoBehaviour
     [SerializeField] private Image animationImage;
     [SerializeField] private Animator animator;
     [SerializeField] private List<AnimationScriptableObject> animationObjects = new List<AnimationScriptableObject>();
+    private float localDelayTime;
     public static AnimOverlayManager Instance {private set; get;}
 
 
@@ -77,6 +78,7 @@ public class AnimOverlayManager : MonoBehaviour
 
     public void StartScreenFadeLoadScreen()
     {
+        localDelayTime = 2f;
         loadScreenFadeOverlay.alpha = 0f;
         blackScreenFadeOverlay.alpha = 0f;
         whiteScreenFadeOverlay.alpha = 0f;
@@ -85,9 +87,18 @@ public class AnimOverlayManager : MonoBehaviour
     }
 
 
+    public void StartScreenFadeLoadScreen(float delayTime)
+    {
+        localDelayTime = delayTime;
+        loadScreenFadeOverlay.alpha = 0f;
+        screenFadeCanvas.SetActive(true);
+        loadScreenFadeOverlay.LeanAlpha(1f, 0.5f).setOnComplete(FadeOutScreen);
+    }
+
+
     private void FadeOutScreen()
     {
-        loadScreenFadeOverlay.LeanAlpha(0f, 0.5f).setOnComplete( () => {screenFadeCanvas.SetActive(false);} ).delay = 2f;
+        loadScreenFadeOverlay.LeanAlpha(0f, 0.5f).setOnComplete( () => {screenFadeCanvas.SetActive(false);} ).delay = localDelayTime;
     }
 
 

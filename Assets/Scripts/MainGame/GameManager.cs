@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
                                                             };
 
     private GameStateData currentGameStateData;
-    private int currentGameLevel;
+    private int currentGameLevel = 0;
     private int randomNum;
     private int inflationDuration;
     private float inflationRate = 0f;
@@ -217,7 +217,8 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.GetInt("FirstLoad") == 0) 
         {
             PlayerPrefs.SetInt("FirstLoad", 1);
-            levelManager.currentActiveMissions = GameManager.Instance.CurrentGameStateData.currentActiveMissions;
+            levelManager.currentActiveMissions = this.currentGameStateData.currentActiveMissions;
+            levelManager.InstantiateCurrentLvlMissions();
         }
         else
         {
@@ -277,6 +278,7 @@ public class GameManager : MonoBehaviour
 
         if (gameStateRes.Item1 == null)
         {
+            PlayerPrefs.SetInt("GameStart", 0);
             playerInfoManager.OpenCharacterCreationOVerlay();
         }
         else

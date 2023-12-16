@@ -367,7 +367,7 @@ public class UniversityManager : MonoBehaviour
         Player.Instance.Study(studyDuration);
         studyPromptOverlay.SetActive(false);
         OverlayAnimations.Instance.AnimCloseOverlay(studyPromptOverlay, studyPromptOverlay);
-        studyDurationText.text = "0";
+        studyDurationText.text = "1";
         StartCoroutine(EndStudyAnimation(3));
     }
 

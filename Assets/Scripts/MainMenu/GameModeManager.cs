@@ -28,13 +28,14 @@ public class GameModeManager : MonoBehaviour
     private void StartGame()
     {
         MenuObjManager.onGameStart();
-        SceneManager.LoadScene("MainGame");
         AudioManager.Instance.StopMusic();
+        SceneManager.LoadScene("MainGame");
     }
 
 
     public void NewGame()
     {
+        AnimOverlayManager.Instance.StartScreenFadeLoadScreen(5f);
         PlayerPrefs.SetInt("GameMode", 0); // 0 = new game
         StartGame();
     }
@@ -42,6 +43,7 @@ public class GameModeManager : MonoBehaviour
 
     public void LoadGame(string name)
     {
+        AnimOverlayManager.Instance.StartScreenFadeLoadScreen(5f);
         PlayerPrefs.SetInt("GameMode", 1); // 1 = load game
         PlayerPrefs.SetString("PlayerName", name);
         StartGame();
@@ -65,7 +67,7 @@ public class GameModeManager : MonoBehaviour
 
     private void DisplaySavedGames()
     {
-        if (GameDataManager.Instance.GetAllGameStateData().Count == 0)
+        if (GameDataManager.Instance.GetAllGameStateData().Keys.Count == 0)
         {
             noSavedGamesSign.SetActive(true);
             return;
@@ -81,7 +83,7 @@ public class GameModeManager : MonoBehaviour
         {
             GameObject newEntry = Instantiate(savedGamePrefab, savedGamesHolder);
             SavedGameObj leaderboardEntry = newEntry.GetComponent<SavedGameObj>();
-            leaderboardEntry.SetupSavedGames(savedGame.playerName);
+            leaderboardEntry.SetupSavedGames(savedGame.Key);
         }
     }
 }

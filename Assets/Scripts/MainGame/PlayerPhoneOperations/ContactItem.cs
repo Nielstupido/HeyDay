@@ -10,15 +10,13 @@ public class ContactItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI contactNameText;
     [SerializeField] private Prompts pendingMeetupPrompt;
     private PlayerPhone playerPhone;
-    private string npcContactName;
 
 
     public void SetupContactItem(string contactName, PlayerPhone playerPhoneRef)
     {
         this.contactNameText.text = contactName;
-        this.npcContactName = contactName;
         this.playerPhone = playerPhoneRef;
-        this.contactBtn.onClick.AddListener( () => {CallContact(contactName);});
+        this.contactBtn.onClick.AddListener( () => {this.CallContact(contactName);});
     }
 
 

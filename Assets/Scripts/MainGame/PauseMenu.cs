@@ -69,7 +69,12 @@ public class PauseMenu : MonoBehaviour
         pauseMenuOverlay.SetActive(false);
         GameDataManager.Instance.PlayerRecords[Player.Instance.PlayerName] = 0;
         GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
-        GameDataManager.Instance.NewGameState();
+        GameDataManager.Instance.NewGameState(Player.Instance.PlayerName);
+        
+        PlayerPrefs.SetInt("FirstLoad", 1);
+        PlayerPrefs.SetInt("GameStart", 0);
+        var gameStateRes = GameDataManager.Instance.GetCurrentGameState(Player.Instance.PlayerName);
+        GameManager.Instance.StartGame(gameStateRes.Item1);
         GoalSetter.Instance.SetGoal();
     }
 
@@ -90,7 +95,7 @@ public class PauseMenu : MonoBehaviour
         gameSavingOverlay.SetActive(false);
         yield return new WaitForSeconds(1f);
         gameSavedOverlay.SetActive(false);
-        GameDataManager.Instance.SaveGameStateData(GameManager.Instance.CurrentGameStateData);
+        GameDataManager.Instance.SaveGameStateData(Player.Instance.PlayerName, GameManager.Instance.CurrentGameStateData);
         yield return null;
     }
 

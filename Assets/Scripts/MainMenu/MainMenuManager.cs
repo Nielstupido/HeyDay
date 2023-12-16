@@ -49,7 +49,6 @@ public class MainMenuManager : MonoBehaviour
         }
         
         AnimateMainMenu();
-        var res = GameDataManager.Instance.LoadAllGameStateData();
     }
 
 
@@ -72,6 +71,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void ShowGameOverlay()
     {
+        GameDataManager.Instance.LoadAllGameStateData();
         gameModePanel.SetActive(true);
     }
 

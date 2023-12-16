@@ -22,6 +22,12 @@ public class BudgetSetter : MonoBehaviour
 
     public void PrepareBudgeSetter(float currentPlayerMoney)
     {
+        if (currentPlayerMoney == -1f)
+        {
+            Player.Instance.PlayerCash = 5000f;
+            currentPlayerMoney = 5000f;
+        }
+
         this.gameObject.SetActive(true);
         OverlayAnimations.Instance.AnimOpenOverlay(budgetSetterPopUp);
 
