@@ -7,6 +7,7 @@ using TMPro;
 public class SleepManager : MonoBehaviour
 {
     [SerializeField] private GameObject sleepingManagerOverlay;
+    [SerializeField] private GameObject sleepPopUp;
     [SerializeField] private TextMeshProUGUI sleepHrsText;
     private float sleepHrs;
     public static SleepManager Instance { get; private set; }
@@ -47,12 +48,21 @@ public class SleepManager : MonoBehaviour
 
     public void ShowSleepOverlay()
     {
+        AudioManager.Instance.PlaySFX("Select");
         sleepingManagerOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(sleepPopUp);
+    }
+
+    public void AbortSleep()
+    {
+        sleepingManagerOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(sleepPopUp, sleepingManagerOverlay);
     }
 
 
     public void TakeSleep()
     {
+        AudioManager.Instance.PlaySFX("Select");
         sleepHrs = float.Parse(sleepHrsText.text);
         StartCoroutine(DoSleep(sleepHrs));
     }
@@ -61,6 +71,7 @@ public class SleepManager : MonoBehaviour
     private IEnumerator DoSleep(float waitingTime)
     {
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.SLEEP);
+        AudioManager.Instance.PlaySFX("Sleep");
         TimeManager.Instance.AddClockTime(sleepHrs);
         Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += (sleepHrs * Player.Instance.CurrentPlayerPlace.adtnlEnergyForSleep);
         Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] -= (sleepHrs * 2f);
@@ -72,6 +83,7 @@ public class SleepManager : MonoBehaviour
         yield return new WaitForSeconds(waitingTime);
 
         sleepingManagerOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(sleepPopUp, sleepingManagerOverlay);
         AnimOverlayManager.Instance.StopAnim();
         LifeEventsManager.Instance.StartLifeEvent(); //random (earthquake, inflation)
 

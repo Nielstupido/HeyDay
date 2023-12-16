@@ -102,6 +102,8 @@ public class BudgetSetter : MonoBehaviour
 
     public void Continue()
     {
+        AudioManager.Instance.PlaySFX("Select");
+
         if (sliders[0].value + sliders[1].value + sliders[2].value + sliders[3].value < (moneyValue * 0.9))
         {
             return;

@@ -36,6 +36,7 @@ public class PlayerInfoManager : MonoBehaviour
 
     public void StartIntroScene()
     {
+        AudioManager.Instance.PlaySFX("Select");
         string playerName = playerNameTextInput.text.TrimEnd();
         Player.Instance.PlayerName = playerName;
         playerNameTextDisplay.text = playerName;
@@ -64,6 +65,7 @@ public class PlayerInfoManager : MonoBehaviour
 
     public void SetGender(bool isBoy)
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (isBoy)
         {
             Player.Instance.PlayerGender = Gender.MALE;
@@ -81,6 +83,7 @@ public class PlayerInfoManager : MonoBehaviour
 
     public void SelectCharBack()
     {
+        AudioManager.Instance.PlaySFX("Select");
         OverlayAnimations.Instance.AnimHideObj(charObj1, selectCharacterOverlay);
         OverlayAnimations.Instance.AnimHideObj(charObj2, selectCharacterOverlay);
         OverlayAnimations.Instance.AnimHideObj(charObj3, selectCharacterOverlay);
@@ -112,6 +115,7 @@ public class PlayerInfoManager : MonoBehaviour
 
     public void OnCharacterSelected(int characterID)
     {
+        AudioManager.Instance.PlaySFX("Select");
         Player.Instance.CurrentCharacter = currentCharacters.Find((characterItem) => characterItem.characterID == characterID);
         GameManager.Instance.Characters.Remove(Player.Instance.CurrentCharacter);
         selectCharacterOverlay.SetActive(false);

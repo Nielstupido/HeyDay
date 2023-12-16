@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class PlayerPhone : MonoBehaviour
 {
@@ -47,9 +48,14 @@ public class PlayerPhone : MonoBehaviour
     [SerializeField] private Prompts errorMoneyPrompt; 
     [SerializeField] private Prompts groceryBarFull; 
 
+    public void PhoneExitBtn()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+    }
 
     public void OpenPhone()
     {
+        AudioManager.Instance.PlaySFX("Select");
         phoneOverlay.SetActive(true);
         OverlayAnimations.Instance.ShowPhone();
         GameUiController.onScreenOverlayChanged(UIactions.SHOW_SMALL_BOTTOM_OVERLAY);
@@ -62,6 +68,7 @@ public class PlayerPhone : MonoBehaviour
 
     public void ClosePhone()
     {
+        AudioManager.Instance.PlaySFX("Select");
         OverlayAnimations.Instance.HidePhone(phoneOverlay);
         GameUiController.onScreenOverlayChanged(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
     }
@@ -69,6 +76,7 @@ public class PlayerPhone : MonoBehaviour
 
     public void GoalTracker()
     {
+        AudioManager.Instance.PlaySFX("Select");
         goalTrackerOverlay.SetActive(true);
         courseValue.text = GameManager.Instance.EnumStringParser(Player.Instance.GoalCourse);
         courseValue.alpha = 1f;
@@ -85,6 +93,7 @@ public class PlayerPhone : MonoBehaviour
 
     public void FinanceTracker()
     {
+        AudioManager.Instance.PlaySFX("Select");
         financeTrackerOverlay.SetActive(true);
         bankBalValue.text = Player.Instance.PlayerBankSavings.ToString();
         cashBalValue.text = Player.Instance.PlayerCash.ToString();
@@ -117,6 +126,7 @@ public class PlayerPhone : MonoBehaviour
 
     public void OLShop()
     {
+        AudioManager.Instance.PlaySFX("Select");
         oLShopOverlay.SetActive(true);
         // groceryPriceValue.text = "₱" + groceryPrice.ToString();
         groceryBar.value = Player.Instance.GroceryBarValue;
@@ -126,6 +136,7 @@ public class PlayerPhone : MonoBehaviour
 
     public void BuyGrocery()
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (Player.Instance.GroceryBarValue < 10)
         {
             if (groceryPrice > Player.Instance.PlayerCash)
@@ -154,6 +165,7 @@ public class PlayerPhone : MonoBehaviour
 
     public void ConsumeGrocery()
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (Player.Instance.GroceryBarValue > 0)
         {
             StartCoroutine(DoAnim(ActionAnimations.EAT, 2f));
@@ -184,6 +196,7 @@ public class PlayerPhone : MonoBehaviour
     //<<<<<<<< Phonebook >>>>>>>
     public void PhoneBook()
     {
+        AudioManager.Instance.PlaySFX("Select");
         noContactsText.SetActive(false);
         phoneBookOverlay.SetActive(true); 
         LevelManager.onFinishedPlayerAction(MissionType.USEAPP, interactedApp:APPS.PHONEBOOK);
@@ -193,6 +206,7 @@ public class PlayerPhone : MonoBehaviour
 
     public void DialContact(string characterName)
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (GameManager.Instance.Characters[GameManager.Instance.Characters.FindIndex( (character) => character.name == currrentSelectedContact )].gotCalledToday)
         {
             PromptManager.Instance.ShowPrompt(contactBusyPrompt);

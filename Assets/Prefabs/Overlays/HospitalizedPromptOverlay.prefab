@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 1066361603140653492}
   - component: {fileID: 1066361603140653493}
   m_Layer: 5
-  m_Name: Prompt
+  m_Name: HospitalPrompt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
