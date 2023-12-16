@@ -202,6 +202,12 @@ public class GameDataManager : MonoBehaviour
     }
 
 
+    public List<GameStateData> GetAllGameStateData()
+    {
+        return allPlayersGameStateData;
+    }   
+
+
     public void NewGameState()
     {
         GameManager.Instance.CurrentGameStateData = new GameStateData();

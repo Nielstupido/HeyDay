@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
     private int randomNum;
     private int inflationDuration;
     private float inflationRate = 0f;
+    private UIactions currentUIaction;
     public float InflationRate { get{return inflationRate;} set{inflationRate = value;}}
     public int InflationDuration { get{return inflationDuration;} set{inflationDuration = value;}}
     private List<Building> meetupLocBuildings = new List<Building>();
@@ -257,6 +258,8 @@ public class GameManager : MonoBehaviour
 
     public void UpdateBottomOverlay(UIactions uIaction)
     {
+        currentUIaction = uIaction;
+
         if (uIaction == UIactions.SHOW_SMALL_BOTTOM_OVERLAY)
         {
             smallBottomOverlay.SetActive(true);
@@ -272,6 +275,12 @@ public class GameManager : MonoBehaviour
             smallBottomOverlay.SetActive(false);
             defaultBottomOverlay.SetActive(false);
         }
+    }
+
+
+    public UIactions GetCurrentUIaction()
+    {
+        return currentUIaction;
     }
 
 

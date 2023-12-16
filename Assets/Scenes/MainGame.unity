@@ -15716,7 +15716,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 60122.867}
+  m_AnchoredPosition: {x: 0, y: 60486.395}
   m_SizeDelta: {x: 0, y: -557.10645}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &413398856
@@ -30954,6 +30954,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &869436952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 276507646487816917, guid: 86ee5920c0902e14e965d5201f68a826, type: 3}
+  m_PrefabInstance: {fileID: 415302402502070061}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &870106403
 GameObject:
   m_ObjectHideFlags: 0
@@ -31061,11 +31066,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &869436952 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 276507646487816917, guid: 86ee5920c0902e14e965d5201f68a826, type: 3}
-  m_PrefabInstance: {fileID: 415302402502070061}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &874681294
 GameObject:
   m_ObjectHideFlags: 0
@@ -43457,6 +43457,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1207001457 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 276507646637510891, guid: 86ee5920c0902e14e965d5201f68a826, type: 3}
+  m_PrefabInstance: {fileID: 415302402502070061}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1208346474
 GameObject:
   m_ObjectHideFlags: 0
@@ -43564,11 +43569,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &1207001457 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 276507646637510891, guid: 86ee5920c0902e14e965d5201f68a826, type: 3}
-  m_PrefabInstance: {fileID: 415302402502070061}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1209574597
 GameObject:
   m_ObjectHideFlags: 0
@@ -55171,7 +55171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goalAssignmentOverlay: {fileID: 4515895016065632674}
   phoneObj: {fileID: 397748303}
-  menuOverlay: {fileID: 0}
+  movieTicket: {fileID: 0}
+  barTicket: {fileID: 0}
 --- !u!1 &1607902306
 GameObject:
   m_ObjectHideFlags: 0
@@ -55279,8 +55280,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
-  movieTicket: {fileID: 1063558048}
-  barTicket: {fileID: 1817648041}
 --- !u!1 &1608146036
 GameObject:
   m_ObjectHideFlags: 0

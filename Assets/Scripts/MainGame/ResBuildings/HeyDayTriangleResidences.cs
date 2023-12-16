@@ -8,11 +8,11 @@ public class HeyDayTriangleResidences : ResBuilding
     {
         this.buildingEnumName = ResBuildings.HEYDAYTRIANGLERESIDENCES;
         this.buildingNameStr = "HeyDay Triangle Residences";
-        this.monthlyRent = 7000f;
-        this.monthlyElecCharge = 1100f;
-        this.monthlyWaterCharge = 300f;
-        this.dailyAdtnlHappiness = 10f; 
-        this.adtnlEnergyForSleep = 10f;
+        this.monthlyRent = 3500f;
+        this.monthlyElecCharge = 700f;
+        this.monthlyWaterCharge = 350f;
+        this.dailyAdtnlHappiness = 20f; 
+        this.adtnlEnergyForSleep = 15f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;

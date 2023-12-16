@@ -8,11 +8,11 @@ public class SampaguitaCondotel : ResBuilding
     {
         this.buildingEnumName = ResBuildings.SAMPAGUITACONDOTEL;
         this.buildingNameStr = "Sampaguita Condotel";
-        this.monthlyRent = 10500f;
-        this.monthlyElecCharge = 1500f;
-        this.monthlyWaterCharge = 500f;
-        this.dailyAdtnlHappiness = 15f; 
-        this.adtnlEnergyForSleep = 15f;
+        this.monthlyRent = 5000f;
+        this.monthlyElecCharge = 800f;
+        this.monthlyWaterCharge = 450f;
+        this.dailyAdtnlHappiness = 25f; 
+        this.adtnlEnergyForSleep = 25f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;

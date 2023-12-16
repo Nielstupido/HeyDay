@@ -28,7 +28,7 @@ public class OverlayAnimations : MonoBehaviour
 
     public void AnimOpenOverlay(GameObject obj)
     {
-        LeanTween.scale(obj, new Vector3(1f,1f,1f),1f).setDelay(0.5f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(obj, new Vector3(1f,1f,1f),0.5f).setDelay(0.5f).setEase(LeanTweenType.easeOutElastic);
     }
 
     public void AnimCloseOverlay(GameObject obj, GameObject panel)
@@ -72,14 +72,14 @@ public class OverlayAnimations : MonoBehaviour
 
     public void ShowMovieTicket()
     {
-        LeanTween.scale(movieTicket, new Vector3(1f,1f,1f),1f)
+        LeanTween.scale(movieTicket, new Vector3(1f,1f,1f),0.5f)
         .setDelay(0.5f)
         .setEase(LeanTweenType.easeOutElastic);
     }
 
     public void ShowBarTicket()
     {
-        LeanTween.scale(barTicket, new Vector3(1f,1f,1f),1f)
+        LeanTween.scale(barTicket, new Vector3(1f,1f,1f),0.5f)
         .setDelay(0.5f)
         .setEase(LeanTweenType.easeOutElastic);
     }

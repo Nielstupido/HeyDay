@@ -8,11 +8,11 @@ public class BayonLuxeResidences : ResBuilding
     {
         this.buildingEnumName = ResBuildings.BAYONLUXERESIDENCES;
         this.buildingNameStr = "Bayon Luxe Residences";
-        this.monthlyRent = 10000f;
-        this.monthlyElecCharge = 1500f;
-        this.monthlyWaterCharge = 500f;
-        this.dailyAdtnlHappiness = 12f; 
-        this.adtnlEnergyForSleep = 12f;
+        this.monthlyRent = 4000f;
+        this.monthlyElecCharge = 800f;
+        this.monthlyWaterCharge = 400f;
+        this.dailyAdtnlHappiness = 23f; 
+        this.adtnlEnergyForSleep = 20f;
   
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;

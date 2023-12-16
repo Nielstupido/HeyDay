@@ -10,24 +10,28 @@ public class ContactItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI contactNameText;
     [SerializeField] private Prompts pendingMeetupPrompt;
     private PlayerPhone playerPhone;
+    private string npcContactName;
 
 
     public void SetupContactItem(string contactName, PlayerPhone playerPhoneRef)
     {
-        contactNameText.text = contactName;
-        contactBtn.onClick.AddListener( () => {CallContact(contactName);} );
-        playerPhone = playerPhoneRef;
+        this.contactNameText.text = contactName;
+        this.npcContactName = contactName;
+        this.playerPhone = playerPhoneRef;
+        this.contactBtn.onClick.AddListener( () => {CallContact(contactName);});
     }
 
 
-    public void CallContact(string contactName)
+    public void CallContact(string name)
     {
+        Debugger.Instance.ShowError(name);
+
         if (MeetUpSystem.Instance.CheckForPendingMeetup())
         {
             PromptManager.Instance.ShowPrompt(pendingMeetupPrompt);
             return;
         }
 
-        playerPhone.DialContact(contactName);
+        this.playerPhone.DialContact(name);
     }
 }

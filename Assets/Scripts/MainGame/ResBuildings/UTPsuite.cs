@@ -8,11 +8,11 @@ public class UTPsuite : ResBuilding
     {
         this.buildingEnumName = ResBuildings.UTPSUITE;
         this.buildingNameStr = "UTP Suite";
-        this.monthlyRent = 2500f;
-        this.monthlyElecCharge = 800f;
-        this.monthlyWaterCharge = 250f;
-        this.dailyAdtnlHappiness = 6f; 
-        this.adtnlEnergyForSleep = 6f;
+        this.monthlyRent = 1800f;
+        this.monthlyElecCharge = 450f;
+        this.monthlyWaterCharge = 150f;
+        this.dailyAdtnlHappiness = 12f; 
+        this.adtnlEnergyForSleep = 8f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;

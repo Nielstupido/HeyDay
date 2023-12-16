@@ -78,6 +78,7 @@ public class LevelManager : MonoBehaviour
     private string tempLevelName;
     private string[] tempSplitIdHolder;
     private int levelCounter;
+    private UIactions lastUIactions;
     public static LevelManager Instance { get; private set; }
 
 
@@ -171,7 +172,7 @@ public class LevelManager : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("Select");
         OverlayAnimations.Instance.AnimCloseOverlay(missionPopUp, missionOverlay);
-        GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
+        GameManager.Instance.UpdateBottomOverlay(lastUIactions);
     }
 
 
@@ -180,6 +181,7 @@ public class LevelManager : MonoBehaviour
         missionOverlay.SetActive(true);
         AudioManager.Instance.PlaySFX("Select");
         OverlayAnimations.Instance.AnimOpenOverlay(missionPopUp);
+        lastUIactions = GameManager.Instance.GetCurrentUIaction();
         GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
     }
 
@@ -189,6 +191,7 @@ public class LevelManager : MonoBehaviour
         AnimOverlayManager.Instance.StartScreenFadeLoadScreen();
         CloseMissionOverlay();
         nextLevelBtn.SetActive(false);
+        GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
         EndLevelManager.Instance.LevelFinished();
     }
 }

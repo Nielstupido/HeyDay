@@ -8,11 +8,11 @@ public class RegalSanctuary : ResBuilding
     {
         this.buildingEnumName = ResBuildings.REGALSANCTUARY;
         this.buildingNameStr = "Regal Sanctuary";
-        this.monthlyRent = 6000f;
-        this.monthlyElecCharge = 1000f;
-        this.monthlyWaterCharge = 250f;
-        this.dailyAdtnlHappiness = 8f; 
-        this.adtnlEnergyForSleep = 8f;
+        this.monthlyRent = 2500f;
+        this.monthlyElecCharge = 600f;
+        this.monthlyWaterCharge = 200f;
+        this.dailyAdtnlHappiness = 15f; 
+        this.adtnlEnergyForSleep = 10f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;

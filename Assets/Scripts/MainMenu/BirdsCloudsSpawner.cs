@@ -22,6 +22,14 @@ public class BirdsCloudsSpawner : MonoBehaviour
     }
 
 
+    private void OnDestroy()
+    {
+        MenuObjManager.onObjDestroyed -= SubtractTotalSpawned;
+        MenuObjManager.onGameStart -= StopSpawning;
+        MenuObjManager.onBtnSet -= StartSpawning;
+    }
+
+
     private void StartSpawning()
     {
         StartCoroutine("Spawn");
@@ -62,12 +70,5 @@ public class BirdsCloudsSpawner : MonoBehaviour
             }
             Debug.Log(gameObject.name + " total spawned " + totalSpawnedObj);
         }
-    }
-
-
-    private void OnDestroy()
-    {
-        MenuObjManager.onObjDestroyed -= SubtractTotalSpawned;
-        MenuObjManager.onGameStart -= StopSpawning;
     }
 }

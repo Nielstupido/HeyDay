@@ -49,6 +49,7 @@ public class MainMenuManager : MonoBehaviour
         }
         
         AnimateMainMenu();
+        var res = GameDataManager.Instance.LoadAllGameStateData();
     }
 
 
@@ -112,13 +113,12 @@ public class MainMenuManager : MonoBehaviour
 
     private void DisplayPlayers()
     {
-        int index = 0;
-
         for (int i = 0; i < leaderboardEntryParent.transform.childCount; i++)
         {
             Object.Destroy(leaderboardEntryParent.transform.GetChild(i).gameObject);
         }
 
+        int index = 0;
         foreach (var savedPlayer in GameDataManager.Instance.GetCurrentLevelScores())
         {
             GameObject newEntry = Instantiate(leaderboardEntryPrefab, leaderboardEntryParent.transform);
@@ -133,7 +133,7 @@ public class MainMenuManager : MonoBehaviour
     {
         dictionaryOverlay.SetActive(false);
     }
-    
+
 
     public void CloseGameOverlay()
     {
