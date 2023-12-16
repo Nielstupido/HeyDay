@@ -196,9 +196,13 @@ public class LevelMapManager : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         levelMapCanvas.SetActive(false);
         endLvlOverlay.SetActive(false);
+        OverlayAnimations.Instance.CloseOverlayAnim(endLvlOverlay);
         leaderboard.SetActive(false);
+        OverlayAnimations.Instance.CloseOverlayAnim(leaderboard);
         badgeAward.SetActive(false);
+        OverlayAnimations.Instance.CloseOverlayAnim(badgeAward);
         budgetTracker.SetActive(false);
+        OverlayAnimations.Instance.CloseOverlayAnim(budgetTracker);
         Player.Instance.ResetLvlExpenses();
         GameManager.Instance.StartLevel();
     }

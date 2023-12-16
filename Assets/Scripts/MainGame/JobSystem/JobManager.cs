@@ -47,6 +47,13 @@ public class JobManager : MonoBehaviour
     {
         jobProfileView.SetupJobProfileView();
     }
+    
+    public void HideJobProfileView()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        this.gameObject.SetActive(false);
+        OverlayAnimations.Instance.CloseOverlayAnim(jobProfileView.gameObject);
+    }
 
 
     public void Apply(Building currentBuilding)

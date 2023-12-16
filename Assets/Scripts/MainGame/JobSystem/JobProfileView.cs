@@ -26,6 +26,7 @@ public class JobProfileView : MonoBehaviour
     {
         jobSystemOverlay.SetActive(true);
         this.gameObject.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(this.gameObject);
 
         currentPlayer = Player.Instance;
 
@@ -39,7 +40,6 @@ public class JobProfileView : MonoBehaviour
         playerCurrentWHtext.text = currentPlayer.CurrentWorkHours.ToString() + "hrs";
         playerSalaryPerHrText.text = "₱" + currentPlayer.CurrentPlayerJob.salaryPerHr.ToString();
     }
-
 
     public void StartWorkShift()
     {
@@ -68,15 +68,24 @@ public class JobProfileView : MonoBehaviour
 
     public void Resign()
     {
+        AudioManager.Instance.PlaySFX("Select");
         jobSystemOverlay.SetActive(true);
-        this.gameObject.SetActive(true);
         resignationOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(resignationOverlay);
+    }
+
+    public void CancelResignation()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        OverlayAnimations.Instance.CloseOverlayAnim(resignationOverlay);
     }
 
 
     public void ConfirmResign()
     {
+        AudioManager.Instance.PlaySFX("Select");
         StartCoroutine(ResigningAnim(2f));
+        OverlayAnimations.Instance.CloseOverlayAnim(resignationOverlay);
     }
 
 
@@ -99,6 +108,7 @@ public class JobProfileView : MonoBehaviour
 
     public void IncrementWorkHrs()
     {
+        AudioManager.Instance.PlaySFX("Select");
         workHrs = float.Parse(workHrsText.text);
         if (workHrs < 10f)
         {
@@ -109,6 +119,7 @@ public class JobProfileView : MonoBehaviour
     
     public void DecrementWorkHrs()
     {
+        AudioManager.Instance.PlaySFX("Select");
         workHrs = float.Parse(workHrsText.text);
         if (workHrs > 1f)
         {

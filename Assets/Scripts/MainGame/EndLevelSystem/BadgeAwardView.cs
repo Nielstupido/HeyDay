@@ -14,6 +14,7 @@ public class BadgeAwardView : MonoBehaviour
 
     public void PrepareBadgeAwardView(BadgeAwards badgeAward)
     {
+        AudioManager.Instance.PlaySFX("Twinkle");
         switch (badgeAward)
         {
             case BadgeAwards.BRONZE:
@@ -35,12 +36,15 @@ public class BadgeAwardView : MonoBehaviour
 
         badgeImage.SetNativeSize();
         this.gameObject.SetActive(true);
+        OverlayAnimations.Instance.AnimShowObj(this.gameObject);
     }
 
 
     public void ShowLeaderboard()
     {
+        AudioManager.Instance.PlaySFX("Select");
         this.gameObject.SetActive(false);
         EndLevelManager.Instance.OpenLeaderboardView(playerBadge);
+        OverlayAnimations.Instance.CloseOverlayAnim(this.gameObject);
     }
 }

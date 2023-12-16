@@ -7,6 +7,7 @@ public class MallManager : MonoBehaviour
 {
     [SerializeField] private GameObject mallOverlay;
     [SerializeField] private GameObject arcadeOverlay;
+    [SerializeField] private GameObject slotMachine;
     [SerializeField] private GameObject shopOptionsOverlay;
     [SerializeField] private GameObject shopBrowserOverlay;
     [SerializeField] private GameObject shopBrowserPanel;
@@ -84,6 +85,14 @@ public class MallManager : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("Select");
         arcadeOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(slotMachine);
+    }
+
+    public void ExitArcade()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        arcadeOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(slotMachine, arcadeOverlay);
     }
 
 

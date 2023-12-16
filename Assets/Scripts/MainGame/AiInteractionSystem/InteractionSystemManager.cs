@@ -38,9 +38,11 @@ public enum CharacterStance
 public class InteractionSystemManager : MonoBehaviour
 {
     [SerializeField] private GameObject interactionOverlay;
+    [SerializeField] private GameObject interactionPopUp;
     [SerializeField] private GameObject touchBlockerOverlay;
     [SerializeField] private GameObject speechBubbleImage;
     [SerializeField] private GameObject borrowAmountOverlay;
+    [SerializeField] private GameObject borrowMoneyPopUp;
     [SerializeField] private Button getContactNumBtn;
     [SerializeField] private Button payDebtBtn;
     [SerializeField] private Button borrowMoneyBtn;
@@ -75,6 +77,7 @@ public class InteractionSystemManager : MonoBehaviour
         }
 
         interactionOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(interactionPopUp);
         interactingCharacter = character;
         npcGreetings = interactingCharacter.Interact();
 
@@ -111,6 +114,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void EndInteraction()
     {
+        AudioManager.Instance.PlaySFX("Select");
         StartCoroutine(DoEndInteraction());
         GameManager.Instance.SaveNpcData(interactingCharacter);
     }
@@ -118,6 +122,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void Chat()
     {
+        AudioManager.Instance.PlaySFX("Select");
         npcResponse = interactingCharacter.Chat();
         if (npcResponse.Item1)
         {
@@ -133,6 +138,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void Hug()
     {
+        AudioManager.Instance.PlaySFX("Select");
         npcResponse = interactingCharacter.Hug();
         if (npcResponse.Item1)
         {
@@ -157,6 +163,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void SayBye()
     {
+        AudioManager.Instance.PlaySFX("Select");
         ToggleSpeechBubble(false, interactingCharacter.SayBye());
         EndInteraction();
     }
@@ -164,6 +171,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void PayDebt()
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (Player.Instance.PlayerCash < interactingCharacter.currentDebt)
         {
             PromptManager.Instance.ShowPrompt(notEnoughMoney);
@@ -181,6 +189,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void AskForContactNum()
     {
+        AudioManager.Instance.PlaySFX("Select");
         npcResponse = interactingCharacter.GetNumber();
 
         if (npcResponse.Item1)
@@ -206,6 +215,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void YellAt()
     {
+        AudioManager.Instance.PlaySFX("Select");
         npcEmoResponse = interactingCharacter.YellAt();
 
         UpdateCharacterEmo(npcEmoResponse.Item1, npcEmoResponse.Item2);
@@ -216,6 +226,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void TellJoke()
     {
+        AudioManager.Instance.PlaySFX("Select");
         npcEmoResponse = interactingCharacter.TellJoke();
 
         if (npcEmoResponse.Item1 == CharacterEmotions.HAPPY)
@@ -231,11 +242,13 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void BorrowMoney()
     {
+        AudioManager.Instance.PlaySFX("Select");
         npcResponse = interactingCharacter.TryBorrowMoney();
 
         if (npcResponse.Item1)
         {
             borrowAmountOverlay.SetActive(true);
+            OverlayAnimations.Instance.AnimOpenOverlay(borrowMoneyPopUp);
         }
         else
         {
@@ -255,7 +268,9 @@ public class InteractionSystemManager : MonoBehaviour
 
     public void ProceedBorrowMoney(float amount)
     {
+        AudioManager.Instance.PlaySFX("Select");
         borrowAmountOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(borrowMoneyPopUp, borrowAmountOverlay);
         interactingCharacter.currentDebt = amount;
         Player.Instance.PlayerCash += amount;
         Player.Instance.PlayerStatsDict[PlayerStats.MONEY] = Player.Instance.PlayerCash;
@@ -357,6 +372,8 @@ public class InteractionSystemManager : MonoBehaviour
         interactingCharacter = null;
         ToggleSpeechBubble(true, "");
         interactionOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(interactionPopUp, interactionOverlay);
+
         yield return null;
     }
 

@@ -14,6 +14,7 @@ public class LvlLeaderboardView : MonoBehaviour
 
     public void SetupLeaderboard(Dictionary<string, int> playerRecords, Sprite playerBadge)
     {
+        AudioManager.Instance.PlaySFX("Twinkle");
         badgeImage.sprite = playerBadge;
         currentPlayerScoreText.text = GameDataManager.Instance.PlayerRecords[Player.Instance.PlayerName].ToString();
 
@@ -36,13 +37,16 @@ public class LvlLeaderboardView : MonoBehaviour
         }
 
         this.gameObject.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(this.gameObject);
         GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
     }
 
 
     public void NextLevel()
     {
+        AudioManager.Instance.PlaySFX("Select");
         this.gameObject.SetActive(false);
         EndLevelManager.Instance.NextLevel();
+        OverlayAnimations.Instance.CloseOverlayAnim(this.gameObject);
     }
 }

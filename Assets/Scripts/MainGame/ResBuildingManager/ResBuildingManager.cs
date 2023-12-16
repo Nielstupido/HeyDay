@@ -26,7 +26,8 @@ public class ResBuildingManager : MonoBehaviour
     [SerializeField] private Prompts debtReminder;
     [SerializeField] private Prompts rentBillPaid;
     [SerializeField] private Prompts existingDebt;
-    [SerializeField] private GameObject debtReminderOverlay; 
+    [SerializeField] private GameObject debtReminderOverlay;
+    [SerializeField] private GameObject debtReminderPopUp;
 
     private ResBuilding currentSelectedResBuilding;
     private int stayCount;
@@ -152,6 +153,7 @@ public class ResBuildingManager : MonoBehaviour
             {
                 unpaidBill = totalBilling;
                 debtReminderOverlay.SetActive(true);
+                OverlayAnimations.Instance.AnimOpenOverlay(debtReminderPopUp);
             }
         }
 
@@ -172,7 +174,6 @@ public class ResBuildingManager : MonoBehaviour
         }
 
     }
-
 
     private void PrepareButtons(ResBuilding selectedBuilding)
     {
@@ -200,6 +201,7 @@ public class ResBuildingManager : MonoBehaviour
 
     public void PayDebt()
     {
+        AudioManager.Instance.PlaySFX("Select");
         float totalBilling = Player.Instance.CurrentPlayerPlace.monthlyElecCharge + Player.Instance.CurrentPlayerPlace.monthlyRent + Player.Instance.CurrentPlayerPlace.monthlyWaterCharge;
        
         if (Player.Instance.Pay(true, totalBilling, 0.2f, 5f, 2f, notEnoughMoneyDebt, 3f)) 
@@ -215,6 +217,7 @@ public class ResBuildingManager : MonoBehaviour
 
     public void Rent(ResBuilding selectedBuilding)
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (unpaidBill != 0f)
         {
             PromptManager.Instance.ShowPrompt(existingDebt);
