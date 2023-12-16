@@ -38,9 +38,11 @@ public class JobApplicationManager : MonoBehaviour
     [SerializeField] private GameObject jobPosListOverlay;
     [SerializeField] private Transform availableJobPositionsHolder;
     [SerializeField] private GameObject jobDetailedViewOverlay;
+    [SerializeField] private GameObject jobDetailedPopUp;
     [SerializeField] private GameObject jobPositionPrefab;
     [SerializeField] private Prompts notQualifiedPrompt;
     [SerializeField] private GameObject qualifiedMsgOverlay;
+    [SerializeField] private GameObject qualifiedPopUp;
     [SerializeField] private TextMeshProUGUI congratulatoryMsg;
     [SerializeField] private List<JobPositions> hospitalJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> cityHallJobPositions = new List<JobPositions>();
@@ -84,6 +86,8 @@ public class JobApplicationManager : MonoBehaviour
         LevelManager.onFinishedPlayerAction(MissionType.BROWSEJOB, interactedBuilding: currentBuilding.buildingEnumName);
         jobSystemOverlay.SetActive(true);
         jobPosListOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(jobPosListOverlay);
+
 
         for (var i = 0; i < availableJobPositionsHolder.childCount; i++)
         {
@@ -120,8 +124,10 @@ public class JobApplicationManager : MonoBehaviour
 
     public void ShowSelectedJobPosition(JobPositions selectedJobPosition)
     {
+        AudioManager.Instance.PlaySFX("Select");
         jobDetailedViewOverlay.GetComponent<JobDetailedViewObj>().PrepareDetailedJobDets(selectedJobPosition);
         jobDetailedViewOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(jobDetailedPopUp);
     }
 
 
@@ -131,14 +137,16 @@ public class JobApplicationManager : MonoBehaviour
         StartCoroutine(JobAppProcessingAnim(2f, newJobData));
     }
 
-
     private void JobApplicationProcessDone(JobPositions newJobData)
     {
         if (IsPlayerQualified(newJobData))
         {
             qualifiedMsgOverlay.SetActive(true);
+            OverlayAnimations.Instance.AnimOpenOverlay(qualifiedPopUp);
             jobDetailedViewOverlay.SetActive(false);
+            OverlayAnimations.Instance.AnimCloseOverlay(jobDetailedPopUp, jobDetailedViewOverlay);
             jobPosListOverlay.SetActive(false);
+            // OverlayAnimations.Instance.CloseOverlayAnim(jobPosListOverlay);
 
             congratulatoryMsg.text = ("Congratulations on applying for the " + newJobData.jobPosName + " position at " + 
                                         BuildingManager.Instance.CurrentSelectedBuilding.buildingStringName + "! Wishing you the best of luck in this exciting opportunity.");
@@ -278,5 +286,26 @@ public class JobApplicationManager : MonoBehaviour
             default:
                 return new List<JobPositions>();
         }
+    }
+
+    public void HideJobDetailedOverlay()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        jobDetailedViewOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(jobDetailedPopUp, jobDetailedViewOverlay);
+    }
+
+    public void HideJobPostionsOverlay()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        jobPosListOverlay.SetActive(false);
+        OverlayAnimations.Instance.CloseOverlayAnim(jobPosListOverlay);
+    }
+
+    public void HideQualifiedJob()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        qualifiedMsgOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(qualifiedPopUp, qualifiedMsgOverlay);
     }
 }

@@ -81,8 +81,10 @@ public class UniversityManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI totalStudyHours;
 
     [SerializeField] private GameObject fieldSelectionOverlay;
+    [SerializeField] private GameObject fieldSelectionPopUp;
     [SerializeField] private TextMeshProUGUI fieldNameText; 
     [SerializeField] private GameObject courseSelectionOverlay;
+    [SerializeField] private GameObject coursesPopUp;
     [SerializeField] private GameObject courseButtonPrefab;
     [SerializeField] private GameObject courseButtonParent;
 
@@ -90,9 +92,18 @@ public class UniversityManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI studyDurationText;
 
     [SerializeField] private GameObject enrollPrompt;
+    [SerializeField] private GameObject enrollPopUp;
     [SerializeField] private TextMeshProUGUI courseNamePrompt;
 
     [SerializeField] private University university;
+    [SerializeField] private GameObject archiBtn;
+    [SerializeField] private GameObject bsmBtn;
+    [SerializeField] private GameObject educBtn;
+    [SerializeField] private GameObject engrBtn;
+    [SerializeField] private GameObject medBtn;
+    [SerializeField] private GameObject socSciBtn;
+    [SerializeField] private GameObject sciTechBtn;
+
 
     private StudyFields selectedField; 
     private UniversityCourses selectedCourse;
@@ -119,6 +130,7 @@ public class UniversityManager : MonoBehaviour
 
     public void ArchitectureAndDesign()
     {
+        AudioManager.Instance.PlaySFX("Select");
         selectedField = StudyFields.Architecture_and_Design;
         fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
@@ -132,6 +144,7 @@ public class UniversityManager : MonoBehaviour
 
     public void BusinessAndManagement()
     {
+        AudioManager.Instance.PlaySFX("Select");
         selectedField = StudyFields.Business_and_Management;
         fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
@@ -149,6 +162,7 @@ public class UniversityManager : MonoBehaviour
 
     public void Education()
     {
+        AudioManager.Instance.PlaySFX("Select");
         selectedField = StudyFields.Education;
         fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
@@ -165,6 +179,7 @@ public class UniversityManager : MonoBehaviour
 
     public void Engineering()
     {
+        AudioManager.Instance.PlaySFX("Select");
         selectedField = StudyFields.Engineering_and_Technology;
         fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
@@ -183,6 +198,7 @@ public class UniversityManager : MonoBehaviour
 
     public void HealthSciences()
     {
+        AudioManager.Instance.PlaySFX("Select");
         selectedField = StudyFields.Health_Sciences;
         fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
@@ -198,6 +214,7 @@ public class UniversityManager : MonoBehaviour
 
     public void SocialSciences()
     {
+        AudioManager.Instance.PlaySFX("Select");
         selectedField = StudyFields.Social_Sciences;
         fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
@@ -215,6 +232,7 @@ public class UniversityManager : MonoBehaviour
 
     public void ScienceAndTech()
     {
+        AudioManager.Instance.PlaySFX("Select");
         selectedField = StudyFields.Science_and_Technology;
         fieldNameText.text = GameManager.Instance.EnumStringParser(selectedField);
 
@@ -229,6 +247,7 @@ public class UniversityManager : MonoBehaviour
 
     public void OnEnteredUniversity()
     {
+        AudioManager.Instance.PlaySFX("Select");
         universitySystemOverlay.SetActive(true);
         UpdateCourseDetsHUD();
     }
@@ -236,25 +255,37 @@ public class UniversityManager : MonoBehaviour
 
     public void OnExitedUniversity()
     {
+        AudioManager.Instance.PlaySFX("Select");
         universitySystemOverlay.SetActive(false);
+    }
+
+    public void HideFieldSelection()
+    {
+        fieldSelectionOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(fieldSelectionPopUp, fieldSelectionOverlay);
     }
 
 
     public void ShowEnrollOverlay()
     {
+        AudioManager.Instance.PlaySFX("Select");
         fieldSelectionOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(fieldSelectionPopUp);
     }
 
 
     public void ShowStudyOverlay()
     {
+        AudioManager.Instance.PlaySFX("Select");
         studyPromptOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(studyPromptOverlay);
     }
 
     
     private void DisplayCourses()
     {
         courseSelectionOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(coursesPopUp);
 
         foreach (Transform child in courseButtonParent.transform)
         {
@@ -274,6 +305,12 @@ public class UniversityManager : MonoBehaviour
         }
     }
 
+    public void HideCourseSelection()
+    {
+        courseSelectionOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(coursesPopUp, courseSelectionOverlay);
+    }
+
 
     public void EnrollPrompt(int index)
     {
@@ -282,11 +319,13 @@ public class UniversityManager : MonoBehaviour
 
         courseNamePrompt.text = GameManager.Instance.EnumStringParser(selectedCourse);
         enrollPrompt.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(enrollPopUp);
     }
 
 
     public void ContinueEnroll()
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (selectedCourse == Player.Instance.GoalCourse)
         {
             try
@@ -300,7 +339,9 @@ public class UniversityManager : MonoBehaviour
         }
         
         enrollPrompt.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(enrollPopUp, enrollPrompt);
         courseSelectionOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(coursesPopUp, courseSelectionOverlay);
         fieldSelectionOverlay.SetActive(false);
         Player.Instance.PlayerEnrolledStudyField = selectedField;
         Player.Instance.PlayerEnrolledCourse = selectedCourse;
@@ -314,14 +355,18 @@ public class UniversityManager : MonoBehaviour
 
     public void CancelEnroll()
     {
+        AudioManager.Instance.PlaySFX("Select");
         enrollPrompt.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(enrollPopUp, enrollPrompt);
     }
 
 
     public void ContinueStudy()
     {
+        AudioManager.Instance.PlaySFX("Select");
         Player.Instance.Study(studyDuration);
         studyPromptOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(studyPromptOverlay, studyPromptOverlay);
         studyDurationText.text = "0";
         StartCoroutine(EndStudyAnimation(3));
     }
@@ -329,7 +374,9 @@ public class UniversityManager : MonoBehaviour
 
     public void CancelStudy()
     {
+        AudioManager.Instance.PlaySFX("Select");
         studyPromptOverlay.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(studyPromptOverlay, studyPromptOverlay);
     }
 
 
@@ -349,6 +396,7 @@ public class UniversityManager : MonoBehaviour
 
     public void IncrementStudyHrs()
     {
+        AudioManager.Instance.PlaySFX("Select");
         studyDuration = int.Parse(studyDurationText.text);
         if (studyDuration < ((university.buildingClosingTime - TimeManager.Instance.CurrentTime)))
         {
@@ -359,6 +407,7 @@ public class UniversityManager : MonoBehaviour
     
     public void DecrementStudyHrs()
     {
+        AudioManager.Instance.PlaySFX("Select");
         studyDuration = int.Parse(studyDurationText.text);
         if (studyDuration > 0f)
         {
@@ -366,9 +415,9 @@ public class UniversityManager : MonoBehaviour
         }
     }
 
-
     private IEnumerator EndStudyAnimation(float seconds)
     {
+        AudioManager.Instance.PlaySFX("Study");
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.STUDY);
         yield return new WaitForSeconds(seconds);
         AnimOverlayManager.Instance.StopAnim();

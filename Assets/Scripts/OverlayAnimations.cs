@@ -8,7 +8,9 @@ public class OverlayAnimations : MonoBehaviour
     goalAssignmentOverlay,
     phoneObj,
     movieTicket,
-    barTicket;
+    barTicket,
+    debtReminderOverlay,
+    debtReminderPopUp;
 
 
     public static OverlayAnimations Instance { get; private set; }
@@ -82,6 +84,21 @@ public class OverlayAnimations : MonoBehaviour
         LeanTween.scale(barTicket, new Vector3(1f,1f,1f),0.5f)
         .setDelay(0.5f)
         .setEase(LeanTweenType.easeOutElastic);
+    }
+
+    public void HideDebtReminder()
+    {
+        debtReminderOverlay.SetActive(false);
+        LeanTween.scale(debtReminderPopUp, new Vector3(0f,0f,0f),0.5f)
+        .setEase(LeanTweenType.easeInElastic)
+        .setOnComplete(() => debtReminderOverlay.SetActive(false));
+    }
+
+    public void CloseOverlayAnim(GameObject obj)
+    {
+        debtReminderOverlay.SetActive(false);
+        LeanTween.scale(debtReminderPopUp, new Vector3(0f,0f,0f),0.5f)
+        .setEase(LeanTweenType.easeInElastic);
     }
 
 }

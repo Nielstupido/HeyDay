@@ -7,6 +7,7 @@ using TMPro;
 public class PlayerItemsListManager : MonoBehaviour
 {
     [SerializeField] private GameObject itemsHolderOverlay;
+    [SerializeField] private GameObject itemsHolderPopUp;
     [SerializeField] private Transform itemsContentHolder;
     [SerializeField] private GameObject itemsObjPrefab;
     [SerializeField] private TextMeshProUGUI titleText;
@@ -18,8 +19,10 @@ public class PlayerItemsListManager : MonoBehaviour
 
     public void ShowItems(ItemType itemType, List<Items> playerItems)
     {
+        AudioManager.Instance.PlaySFX("Select");
         HideItems();
         itemsHolderOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(itemsHolderPopUp);
 
         switch (itemType)
         {
@@ -40,6 +43,11 @@ public class PlayerItemsListManager : MonoBehaviour
         }
     }
 
+    public void HidePlayerItems()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        OverlayAnimations.Instance.AnimCloseOverlay(itemsHolderPopUp, itemsHolderOverlay);
+    }
 
     public void HideItems()
     {

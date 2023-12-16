@@ -16,6 +16,7 @@ public enum BadgeAwards
 public class EndLevelManager : MonoBehaviour
 {
     [SerializeField] private GameObject endLvlOverlay;
+    [SerializeField] private GameObject budgetTrackerPopUp;
     [SerializeField] private LvlLeaderboardView lvlLeaderboardView;
     [SerializeField] private BudgetTrackerEndLevelView budgetTrackerEndLevelView;
     [SerializeField] private BadgeAwardView badgeAwardView;
@@ -39,6 +40,8 @@ public class EndLevelManager : MonoBehaviour
     {
         GameManager.Instance.CurrentGameLevel++;
         endLvlOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(endLvlOverlay);
+        OverlayAnimations.Instance.AnimOpenOverlay(budgetTrackerPopUp);
         OpenBudetTrackerLevelView();
         //save game data
 
@@ -52,6 +55,7 @@ public class EndLevelManager : MonoBehaviour
     public void NextLevel()
     {
         endLvlOverlay.SetActive(false);
+        OverlayAnimations.Instance.CloseOverlayAnim(endLvlOverlay);
 
         if (GameManager.Instance.CurrentGameLevel == 41)
         {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class BudgetTrackerEndLevelView : MonoBehaviour
 {
@@ -38,7 +39,9 @@ public class BudgetTrackerEndLevelView : MonoBehaviour
 
     public void Continue()
     {
+        AudioManager.Instance.PlaySFX("Select");
         this.gameObject.SetActive(false);
+        OverlayAnimations.Instance.CloseOverlayAnim(this.gameObject);
         EndLevelManager.Instance.OpenBadgeAwardView();
     }
 }

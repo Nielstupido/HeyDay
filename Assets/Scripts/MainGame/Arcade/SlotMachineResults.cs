@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class SlotMachineResults : MonoBehaviour
 {
     [SerializeField] private GameObject winPrompt;
+    [SerializeField] private GameObject winPopUp;
     [SerializeField] private Text winAmount;
     [SerializeField] private GameObject losePrompt;
+    [SerializeField] private GameObject losePopUp;
     [SerializeField] private Prompts notEnoughMoneyPrompt;
     [SerializeField] private SlotMachine slotMachine1;
     [SerializeField] private SlotMachine slotMachine2;
@@ -38,6 +40,7 @@ public class SlotMachineResults : MonoBehaviour
 
     public void Play()
     {
+        AudioManager.Instance.PlaySFX("Select");
         if (Pay(5f, 200f, 0.5f))
         {
             slotMachine1.StartRand();
@@ -91,12 +94,15 @@ public class SlotMachineResults : MonoBehaviour
         if (matchCount == 0)
         {
             losePrompt.SetActive(true);
+            OverlayAnimations.Instance.AnimOpenOverlay(losePopUp);
         }
         else
         {
             Player.Instance.PlayerStatsDict[PlayerStats.MONEY] = Player.Instance.PlayerCash;
             PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
             winPrompt.SetActive(true);
+            OverlayAnimations.Instance.AnimOpenOverlay(winPopUp);
+            matchCount = 0;
         }
     }
 
@@ -106,6 +112,8 @@ public class SlotMachineResults : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         
         winPrompt.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(winPopUp, winPrompt);
         losePrompt.SetActive(false);
+        OverlayAnimations.Instance.AnimCloseOverlay(losePopUp, losePrompt);
     }
 }
