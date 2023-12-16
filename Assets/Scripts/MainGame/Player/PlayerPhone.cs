@@ -35,7 +35,7 @@ public class PlayerPhone : MonoBehaviour
     [SerializeField] private GameObject oLShopOverlay;
     [SerializeField] private TextMeshProUGUI groceryPriceValue;
     [SerializeField] private Slider groceryBar;
-    private float groceryPrice = 200f;
+    private float groceryPrice = 50f;
 
     [SerializeField] private TextMeshProUGUI courseValue;
     [SerializeField] private TextMeshProUGUI savingsValue;
@@ -48,10 +48,12 @@ public class PlayerPhone : MonoBehaviour
     [SerializeField] private Prompts errorMoneyPrompt; 
     [SerializeField] private Prompts groceryBarFull; 
 
+
     public void PhoneExitBtn()
     {
         AudioManager.Instance.PlaySFX("Select");
     }
+
 
     public void OpenPhone()
     {
@@ -147,7 +149,7 @@ public class PlayerPhone : MonoBehaviour
 
             StartCoroutine(DoAnim(ActionAnimations.BUY, 2f));
 
-            TimeManager.Instance.AddClockTime(0.1f);
+            TimeManager.Instance.AddClockTime(false, 0.1f);
             Player.Instance.PlayerCash -= groceryPrice;
             Player.Instance.PlayerStatsDict[PlayerStats.MONEY] -= groceryPrice;
             PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
@@ -169,7 +171,7 @@ public class PlayerPhone : MonoBehaviour
         if (Player.Instance.GroceryBarValue > 0)
         {
             StartCoroutine(DoAnim(ActionAnimations.EAT, 2f));
-            TimeManager.Instance.AddClockTime(0.2f);
+            TimeManager.Instance.AddClockTime(false, 0.2f);
             Player.Instance.PlayerStatsDict[PlayerStats.HAPPINESS] += 5f;
             Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += 10f;
             Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] += 15f;

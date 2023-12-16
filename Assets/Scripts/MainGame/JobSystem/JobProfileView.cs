@@ -44,7 +44,7 @@ public class JobProfileView : MonoBehaviour
     public void StartWorkShift()
     {
         workHrs = float.Parse(workHrsText.text);
-        TimeManager.Instance.AddClockTime(workHrs);
+        TimeManager.Instance.AddClockTime(false, workHrs);
         StartCoroutine(WorkingAnim(workHrs));
     }
 

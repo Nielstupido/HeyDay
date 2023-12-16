@@ -9,109 +9,95 @@ using TMPro;
 public class GameStateData
 {
     //Player Data
-    public string playerName;
+    public string playerName = null;
+    public int playerAge = 19;
     public Gender playerGender;
-    public float playerCashMoney = 5000f;
-    public float playerBankSavingsMoney = 0f;
     public CharactersScriptableObj currentCharacter;
-    public List<string> contactList = new List<string>();
-    // public Dictionary<PlayerStats, float> PlayerStatsDict {set{playerStatsDict = value;} get{return playerStatsDict;}}
+    public List<string> contactList = new List<string>();    
+    public Dictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>() 
+                                                            {
+                                                                {PlayerStats.HAPPINESS, 100f},
+                                                                {PlayerStats.HUNGER, 100f},
+                                                                {PlayerStats.ENERGY, 100f},
+                                                                {PlayerStats.MONEY, 5000f},
+                                                            };
 
-    //Player Data Finance
-    public float playerCash;
-    public float playerBankSavings;
-    public float playerTotalDebt;
-    public float playerHospitalOutstandingDebt;
-    public bool isPlayerHasBankAcc;
-    public float playerLvlBillExpenses;
-    public float playerLvlSavings;
-    public float playerLvlConsumablesExpenses;
-    public float playerLvlEmergencyFunds;
-    
-    //Player Data University
-    public UniversityCourses goalCourse;
-    public UniversityCourses courseEnrolled;
-    public StudyFields studyFieldEnrolled;
-    
-    //Player Data Owned Things
+    public float playerCash = 5000f;
+    public float playerBankSavings = 0f;
+    public float playerTotalDebt = 0f;
+    public float playerHospitalOutstandingDebt = 0f;
+    public bool isPlayerHasBankAcc = false;
+
+    public float playerLvlBillExpenses = 0f;
+    public float playerLvlSavings = 0f;
+    public float playerLvlConsumablesExpenses = 0f;
+    public float playerLvlEmergencyFunds = 0f;
+
+    public UniversityCourses goalCourse = UniversityCourses.NONE;
+    public UniversityCourses courseEnrolled = UniversityCourses.NONE;
+    public StudyFields studyFieldEnrolled = StudyFields.NONE;
+    public float playerStudyHours = 0f;
+    public float playerEnrolledCourseDuration = 0f;
+
     public List<Items> playerOwnedVehicles = new List<Items>();
     public List<Items> playerOwnedAppliances = new List<Items>();
-    public int groceryBarValue;
+    public int groceryBarValue = 0;
 
-    //Game World Data
-    public float time = 7f;
-    public float day = 1f;
-    public int gameLevel = 1;
+    public JobPositions currentPlayerJob = null;
+    public Dictionary<JobFields,float> playerWorkFieldHistory = new Dictionary<JobFields, float>();
+    public float currentWorkHours = 0f;
+    public ResBuilding currentPlayerPlace = null;
+
+  
+
+    //Time Manager
+    public float currentTime = 7f; //time will start at 7AM
+    public int currentDayCount = 1;
+
+
+
+    //GameManager
+    public List<CharactersScriptableObj> characters = new List<CharactersScriptableObj>();
+    public int currentGameLevel = 1;
+    public int inflationDuration = 0;
+    public float inflationRate = 0f;
+
+
+
+    //ResBuilding
+    public int stayCount = 0;
+    public float unpaidBill = 0f;
+    public int daysUnpaidRent = 0;
+
+
+
+    //PlayerTravelManager
+    public Building currentVisitedBuilding = null;
+
+
+
+    //LevelManager
+    public List<MissionsScriptableObj> currentActiveMissions = new List<MissionsScriptableObj>();
+
+
+
+    //HospitalManger
+    public int daysUnpaid = 0; 
+
+
+
+    //BudgetSystem
+    public float currentBillsBudget = 0f;
+    public float currentSavingsBudget = 0f;
+    public float currentConsumablesBudget = 0f;
+    public float currentEmergencyBudget = 0f;
+
 
 
     //Meetup system
-    public Building meetupBuilding;
-    public float meetupTime;
-    public int meetupDay;
-    public CharactersScriptableObj meetupCharacter;
+    public Building meetupBuilding = null;
+    public float meetupTime = 0f;
+    public int meetupDay = 0;
+    public CharactersScriptableObj meetupCharacter = null;
     public bool pendingMeetup = false;
-
-    //Budget values
-    public float currentBillsBudget;
-    public float currentSavingsBudget;
-    public float currentConsumablesBudget;
-    public float currentEmergencyBudget;
-
-    //LeaderBoards
-    public Text playerRank;
-    public Text playerNameText;
-    public Text playerScoreText;
-
-    //LevelManager Data
-    public MissionsHolder missionsHolder;
-    public Transform missionPrefabsHolder;
-    public GameObject missionPrefab;
-    public GameObject missionOverlay;
-    public GameObject nextLevelBtn;
-    public TextMeshProUGUI missionOverlayLevelText;
-
-    //Contact
-    public PlayerPhone playerPhone;
-    
-    //ResBuilding
-    public int stayCount;
-    public float unpaidBill;
-    public int daysUnpaid;
-    
-    //GAme Items
-    public string itemName;
-    public ItemType itemType;
-    public Sprite itemImage;
-    public float itemPrice;
-    public ItemCondition itemCondition;
-    public VehicleType vehicleType;
-    public VehicleColor vehicleColor;
-    public float energyBarValue;
-    public float hungerBarValue;
-    public float happinessBarValue;
-    public float eatingTime;
-    public float electricBillValue;
-
-    //Job Positions
-    public string jobPosName;
-    public string jobPosReqs;
-    public Buildings establishment;
-    public JobFields workField;
-    public StudyFields reqStudyField;
-    public List<UniversityCourses> reqCourse;
-    public JobFields reqWorkField;
-    public float reqWorkHrs;
-    public float salaryPerHr;
-
-    //Missions
-    public string id;
-    public MissionStatus missionStatus;
-    public MissionType missionType;
-    public string missionDets;
-    public float currentNumberForMission;
-    public float requiredNumberForMission;
-    public Buildings targetBuilding;
-    public ItemType targetIitemType;
-    public APPS targetApp;
-    public PlayerStats targetPlayerStats;
 }

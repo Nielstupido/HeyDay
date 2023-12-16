@@ -31,7 +31,7 @@ public class ResBuildingManager : MonoBehaviour
     private ResBuilding currentSelectedResBuilding;
     private int stayCount;
     private float unpaidBill;
-    private int daysUnpaid;
+    private int daysUnpaidRent;
     public GameObject ResBuildingSelectOverlay { get{return resBuildingSelectOverlay;}}
     public ResBuilding CurrentSelectedResBuilding { set{currentSelectedResBuilding = value; ShowBtn();} get{return currentSelectedResBuilding;}}
     public float UnpaidBill { set{unpaidBill = value; } get{return unpaidBill;}}
@@ -55,6 +55,33 @@ public class ResBuildingManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        GameManager.onGameStarted += LoadGameData;
+        GameManager.onSaveGameStateData += SaveGameData;
+    }
+
+
+    private void OnDestroy()
+    {
+        TimeManager.onDayAdded -= NewDay;
+        GameManager.onGameStarted -= LoadGameData;
+        GameManager.onSaveGameStateData -= SaveGameData;
+    }
+
+
+    private void LoadGameData()
+    {
+        this.stayCount = GameManager.Instance.CurrentGameStateData.stayCount;
+        this.unpaidBill = GameManager.Instance.CurrentGameStateData.unpaidBill;
+        this.daysUnpaidRent = GameManager.Instance.CurrentGameStateData.daysUnpaidRent;
+    }
+
+
+    private void SaveGameData()
+    {
+        GameManager.Instance.CurrentGameStateData.stayCount = this.stayCount;
+        GameManager.Instance.CurrentGameStateData.unpaidBill = this.unpaidBill;
+        GameManager.Instance.CurrentGameStateData.daysUnpaidRent = this.daysUnpaidRent;
     }
 
 
@@ -66,14 +93,8 @@ public class ResBuildingManager : MonoBehaviour
         rentBtn.GetComponent<Button>().onClick.AddListener( () => {Rent(currentSelectedResBuilding);} );
         TimeManager.onDayAdded += NewDay;
         stayCount = 0;
-        daysUnpaid = 0;
+        daysUnpaidRent = 0;
         unpaidBill = 0f;
-    }
-
-
-    private void OnDestroy()
-    {
-        TimeManager.onDayAdded -= NewDay;
     }
 
 
@@ -136,7 +157,7 @@ public class ResBuildingManager : MonoBehaviour
                 Player.Instance.PlayerCash = Player.Instance.PlayerCash - totalBilling;
                 Player.Instance.PlayerStatsDict[PlayerStats.MONEY] = Player.Instance.PlayerCash;
                 PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
-                daysUnpaid = 0;
+                daysUnpaidRent = 0;
                 unpaidBill = 0f;
                 PromptManager.Instance.ShowPrompt(rentBillPaid);
             }
@@ -144,7 +165,7 @@ public class ResBuildingManager : MonoBehaviour
             {
                 Player.Instance.PlayerLvlBillExpenses += totalBilling;
                 Player.Instance.PlayerBankSavings = Player.Instance.PlayerBankSavings - totalBilling;
-                daysUnpaid = 0;
+                daysUnpaidRent = 0;
                 unpaidBill = 0f;
                 PromptManager.Instance.ShowPrompt(rentBillPaid);
             }
@@ -157,18 +178,18 @@ public class ResBuildingManager : MonoBehaviour
 
         if (unpaidBill != 0f)
         {
-            if (daysUnpaid >= 5)
+            if (daysUnpaidRent >= 5)
             {
                 GameManager.Instance.GameOver();
                 return;
             }
 
-            if (daysUnpaid > 0)
+            if (daysUnpaidRent > 0)
             {
                 PromptManager.Instance.ShowPrompt(debtReminder);
             }                
 
-            daysUnpaid++;
+            daysUnpaidRent++;
         }
 
     }
@@ -205,7 +226,7 @@ public class ResBuildingManager : MonoBehaviour
         if (Player.Instance.Pay(true, totalBilling, 0.2f, 5f, 2f, notEnoughMoneyDebt, 3f)) 
         {
             unpaidBill = 0f;
-            daysUnpaid = 0;
+            daysUnpaidRent = 0;
             Player.Instance.PlayerLvlBillExpenses += totalBilling;
             PromptManager.Instance.ShowPrompt(rentBillPaid);
             PrepareButtons(Player.Instance.CurrentPlayerPlace);

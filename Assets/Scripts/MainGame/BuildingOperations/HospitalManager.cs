@@ -24,7 +24,7 @@ public class HospitalManager : MonoBehaviour
     [SerializeField] private Prompts notEnoughMoneyForBills; 
     [SerializeField] private Prompts paidBills; 
 
-    private const float BillInterest = 100f;
+    private const float BillInterest = 30f;
     private int daysUnpaid = 0; 
     private float hospitalBill; 
     public static HospitalManager Instance { get; private set; }
@@ -42,21 +42,40 @@ public class HospitalManager : MonoBehaviour
         }
 
         TimeManager.onDayAdded += AddInterest;
+        GameManager.onGameStarted += LoadGameData;
+        GameManager.onSaveGameStateData += SaveGameData;
     }
+
 
     private void OnDestroy()
     {
+        GameManager.onGameStarted -= LoadGameData;
+        GameManager.onSaveGameStateData -= SaveGameData;
         TimeManager.onDayAdded -= AddInterest;
     }
+
 
     private void OnEnable()
     {
         TimeManager.onDayAdded += AddInterest;
     }
     
+
     private void OnDisable()
     {
         TimeManager.onDayAdded -= AddInterest;
+    }
+
+
+    private void LoadGameData()
+    {
+        this.daysUnpaid = GameManager.Instance.CurrentGameStateData.daysUnpaid;
+    }
+
+
+    private void SaveGameData()
+    {
+        GameManager.Instance.CurrentGameStateData.daysUnpaid = this.daysUnpaid;
     }
 
 

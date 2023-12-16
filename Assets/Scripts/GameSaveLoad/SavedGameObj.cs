@@ -19,6 +19,6 @@ public class SavedGameObj : MonoBehaviour
 
     public void LoadSavedGame(string name)
     {
-        Debug.Log("load saved game of " + name);
+        GameModeManager.Instance.LoadGame(name);
     }
 }

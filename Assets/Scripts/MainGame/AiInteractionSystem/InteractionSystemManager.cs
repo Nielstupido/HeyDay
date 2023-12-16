@@ -326,7 +326,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     private void OnDoneChatting()
     {
-        TimeManager.Instance.AddClockTime(0.1f);
+        TimeManager.Instance.AddClockTime(false, 0.1f);
     }
     
 

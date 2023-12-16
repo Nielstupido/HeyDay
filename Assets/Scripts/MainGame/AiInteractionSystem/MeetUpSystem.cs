@@ -23,6 +23,29 @@ public class MeetUpSystem : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    
+        GameManager.onGameStarted += LoadGameData;
+        GameManager.onGameStarted += SaveGameData;
+    }
+
+
+    private void LoadGameData()
+    {
+        this.meetupBuilding = GameManager.Instance.CurrentGameStateData.meetupBuilding;
+        this.meetupTime = GameManager.Instance.CurrentGameStateData.meetupTime;
+        this.meetupDay = GameManager.Instance.CurrentGameStateData.meetupDay;
+        this.meetupCharacter = GameManager.Instance.CurrentGameStateData.meetupCharacter;
+        this.pendingMeetup = GameManager.Instance.CurrentGameStateData.pendingMeetup;
+    }
+
+
+    private void SaveGameData()
+    {
+        GameManager.Instance.CurrentGameStateData.meetupBuilding = this.meetupBuilding;
+        GameManager.Instance.CurrentGameStateData.meetupTime = this.meetupTime;
+        GameManager.Instance.CurrentGameStateData.meetupDay = this.meetupDay;
+        GameManager.Instance.CurrentGameStateData.meetupCharacter = this.meetupCharacter;
+        GameManager.Instance.CurrentGameStateData.pendingMeetup = this.pendingMeetup;
     }
 
 
@@ -35,6 +58,8 @@ public class MeetUpSystem : MonoBehaviour
 
     private void OnDestroy()
     {
+        GameManager.onGameStarted -= LoadGameData;
+        GameManager.onSaveGameStateData -= SaveGameData;
         TimeManager.onTimeAdded -= CheckMeetupStatus;
         TimeManager.onDayAdded -= CheckMeetupStatus;   
     }

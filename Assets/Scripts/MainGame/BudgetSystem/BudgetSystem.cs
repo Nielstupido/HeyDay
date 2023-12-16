@@ -7,10 +7,10 @@ public class BudgetSystem : MonoBehaviour
     [SerializeField] private BudgetTrackerEndLevelView budgetTrackerEndLevelView;
 
     //Budget values
-    private float currentBillsBudget;
-    private float currentSavingsBudget;
-    private float currentConsumablesBudget;
-    private float currentEmergencyBudget;
+    private float currentBillsBudget = 0f;
+    private float currentSavingsBudget = 0f;
+    private float currentConsumablesBudget = 0f;
+    private float currentEmergencyBudget = 0f;
     public float CurrentBillsBudget {set{currentBillsBudget = value;} get{return currentBillsBudget;}}
     public float CurrentSavingsBudget {set{currentSavingsBudget = value;} get{return currentSavingsBudget;}}
     public float CurrentConsumablesBudget {set{currentConsumablesBudget = value;} get{return currentConsumablesBudget;}}
@@ -34,6 +34,37 @@ public class BudgetSystem : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        
+        GameManager.onGameStarted += LoadGameData;
+        GameManager.onSaveGameStateData += SaveGameData;
+    }
+
+
+    private void OnDestroy()
+    {
+        GameManager.onGameStarted -= LoadGameData;
+        GameManager.onSaveGameStateData -= SaveGameData;
+    }
+
+
+    private void LoadGameData()
+    {
+        if (this.currentBillsBudget == 0f && this.currentSavingsBudget == 0f && this.currentConsumablesBudget == 0f && this.currentEmergencyBudget == 0f)
+        {
+            this.currentBillsBudget = GameManager.Instance.CurrentGameStateData.currentBillsBudget;
+            this.currentSavingsBudget = GameManager.Instance.CurrentGameStateData.currentSavingsBudget;
+            this.currentConsumablesBudget = GameManager.Instance.CurrentGameStateData.currentConsumablesBudget;
+            this.currentEmergencyBudget = GameManager.Instance.CurrentGameStateData.currentEmergencyBudget;
+        }
+    }
+
+
+    private void SaveGameData()
+    {
+        GameManager.Instance.CurrentGameStateData.currentBillsBudget = this.currentBillsBudget;
+        GameManager.Instance.CurrentGameStateData.currentSavingsBudget = this.currentSavingsBudget;
+        GameManager.Instance.CurrentGameStateData.currentConsumablesBudget = this.currentConsumablesBudget;
+        GameManager.Instance.CurrentGameStateData.currentEmergencyBudget = this.currentEmergencyBudget;
     }
 
 

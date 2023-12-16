@@ -74,10 +74,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject nextLevelBtn;
     [SerializeField] private TextMeshProUGUI missionOverlayLevelText;
     private Dictionary<string, List<MissionsScriptableObj>> allMissions = new Dictionary<string, List<MissionsScriptableObj>>();
-    private List<MissionsScriptableObj> currentActiveMissions = new List<MissionsScriptableObj>();
+    public List<MissionsScriptableObj> currentActiveMissions = new List<MissionsScriptableObj>();
     private string tempLevelName;
     private string[] tempSplitIdHolder;
-    private int levelCounter;
+    private int missionLevelCounter;
     private UIactions lastUIactions;
     public static LevelManager Instance { get; private set; }
 
@@ -92,6 +92,14 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        GameManager.onSaveGameStateData += SaveGameData;
+    }
+
+
+    private void OnDestroy()
+    {
+        GameManager.onSaveGameStateData -= SaveGameData;
     }
 
 
@@ -101,22 +109,28 @@ public class LevelManager : MonoBehaviour
     }
 
 
+    private void SaveGameData()
+    {
+        GameManager.Instance.CurrentGameStateData.currentActiveMissions = this.currentActiveMissions;
+    }
+
+
     //loads all missions to a dictionary for easy access during gameplay
     private void LoadAllMissions()
     {
-        levelCounter = 1;
+        missionLevelCounter = 1;
 
         foreach (MissionsScriptableObj mission in missionsHolder.missions)
         {
             tempLevelName = "Level ";
             tempSplitIdHolder = mission.id.Split(".");
 
-            if (tempSplitIdHolder[0] != levelCounter.ToString())
+            if (tempSplitIdHolder[0] != missionLevelCounter.ToString())
             {
-                levelCounter++;
+                missionLevelCounter++;
             }
 
-            tempLevelName += levelCounter.ToString();
+            tempLevelName += missionLevelCounter.ToString();
 
             if (allMissions.ContainsKey(tempLevelName))
             {

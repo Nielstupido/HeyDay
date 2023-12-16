@@ -72,9 +72,15 @@ public class LifeEventsManager : MonoBehaviour
             case LifeEvents.ROBBERY:
                 upcomingEvent = new Robbery();
                 possibilityPercentage = 2;
+
+                if (TimeManager.Instance.CurrentTime > 22f || TimeManager.Instance.CurrentTime < 4f)
+                {
+                    possibilityPercentage += 2;
+                }
+
                 if (Player.Instance.PlayerCash > 10000)
                 {
-                    possibilityPercentage = 4;
+                    possibilityPercentage += 2;
                 }
                 break;
             case LifeEvents.ACCIDENT:
@@ -83,7 +89,7 @@ public class LifeEventsManager : MonoBehaviour
                     return;
                 }
                 upcomingEvent = new Accident();
-                possibilityPercentage = 50;
+                possibilityPercentage = 2;
                 break;  
             default:
                 randomChance = Random.Range(0, 2);

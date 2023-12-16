@@ -39,6 +39,28 @@ public class PlayerTravelManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        GameManager.onGameStarted += LoadGameData;
+        GameManager.onSaveGameStateData += SaveGameData;
+    }
+
+
+    private void OnDestroy()
+    {
+        GameManager.onGameStarted -= LoadGameData;
+        GameManager.onSaveGameStateData -= SaveGameData;
+    }
+
+
+    private void LoadGameData()
+    {
+        this.currentVisitedBuilding = GameManager.Instance.CurrentGameStateData.currentVisitedBuilding;
+    }
+
+
+    private void SaveGameData()
+    {
+        GameManager.Instance.CurrentGameStateData.currentVisitedBuilding = this.currentVisitedBuilding;
     }
 
 

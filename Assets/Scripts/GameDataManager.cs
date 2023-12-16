@@ -10,8 +10,9 @@ public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager Instance {private set; get;}
     public Dictionary<string, int> playerRecords = new Dictionary<string, int>();
-    private List<GameStateData> allPlayersGameStateData;
+    private List<GameStateData> allPlayersGameStateData = new List<GameStateData>();
     public Dictionary<string, int> PlayerRecords { set{playerRecords = value;} get{return playerRecords;}}
+
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class GameDataManager : MonoBehaviour
 
         return true;
     }
+
 
     public ValueTuple<bool, string> LoadPlayerRecords()
     {
@@ -82,6 +84,7 @@ public class GameDataManager : MonoBehaviour
 
         return (true, "");
     }
+
 
     public ValueTuple<bool, string> SavePlayerRecords(string playerName, int score)
     {
@@ -136,19 +139,36 @@ public class GameDataManager : MonoBehaviour
 
 
 
+
+
+
+
+
     //===>> PLAYERS' GAME STATE DATA <<===//
     public ValueTuple<bool, string> LoadAllGameStateData()
     {
         try
         {
-            string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerGameStateData.json";
+            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+            string filePath = directoryPath + "PlayerGameStateData.json";
+
+            // Check if the directory exists, create it if not
+            if (!Directory.Exists(directoryPath))
+            {
+                Debug.Log("TEST 1: Directory mo wala");
+                Directory.CreateDirectory(directoryPath);
+            }
+
             if (!File.Exists(filePath))
             {
-                string playerGameStateData = JsonUtility.ToJson(new GameStateData());
+                // If the file doesn't exist, create it
+                string playerGameStateData = JsonUtility.ToJson(new List<GameStateData>());
                 File.WriteAllText(filePath, playerGameStateData);
             }
 
             string jsonString = File.ReadAllText(filePath);
+
+            // Deserialize into playerRecords using Json.NET
             allPlayersGameStateData = JsonUtility.FromJson<List<GameStateData>>(jsonString);
         }
         catch (Exception e)
@@ -173,8 +193,12 @@ public class GameDataManager : MonoBehaviour
                 allPlayersGameStateData.Add(currentPlayerGameStateData);
             }
 
-            string filePath = Application.persistentDataPath + "/DoNotDelete/PlayerGameStateData.json";
-            string jsonString = JsonUtility.ToJson(allPlayersGameStateData);
+            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+            string filePath = directoryPath + "PlayerGameStateData.json";
+
+            // Serialize playerRecords using Json.NET
+            string jsonString = JsonConvert.SerializeObject(allPlayersGameStateData);
+
             File.WriteAllText(filePath, jsonString);
         }
         catch (Exception e)

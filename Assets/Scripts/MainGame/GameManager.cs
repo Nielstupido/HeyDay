@@ -114,6 +114,10 @@ public class GameManager : MonoBehaviour
     public List<CharactersScriptableObj> Characters {set{characters = value;} get{return characters;}}
     public List<Building> MeetupLocBuildings {set{meetupLocBuildings = value;} get{return meetupLocBuildings;}}
     public GameStateData CurrentGameStateData {set{currentGameStateData = value;} get{return currentGameStateData;}}
+    public delegate void OnGameStarted();
+    public static OnGameStarted onGameStarted;
+    public delegate void OnSaveGameStateData();
+    public static OnSaveGameStateData onSaveGameStateData;
     public static GameManager Instance { get; private set; }
 
 
@@ -131,7 +135,7 @@ public class GameManager : MonoBehaviour
         GameUiController.onScreenOverlayChanged += UpdateBottomOverlay;
         TimeManager.onDayAdded += AssignNpcToBuilding;
         buildingsArr = Enum.GetValues(typeof(Buildings)).Cast<Buildings>().ToList();
-        currentGameLevel = 1;
+        onSaveGameStateData += SaveGameData;
     }
 
 
@@ -139,6 +143,7 @@ public class GameManager : MonoBehaviour
     {
         GameUiController.onScreenOverlayChanged -= UpdateBottomOverlay;
         TimeManager.onDayAdded -= AssignNpcToBuilding;
+        onSaveGameStateData -= SaveGameData;
     }
 
 
@@ -158,12 +163,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //>>>>>>>for debugging<<<<<
-        // StartGame(new GameStateData()); 
-        // return;
-
         if (PlayerPrefs.GetInt("GameMode") == 0) 
         {
+            PlayerPrefs.SetInt("GameStart", 0);
             playerInfoManager.OpenCharacterCreationOVerlay();
         }
         else
@@ -175,34 +177,78 @@ public class GameManager : MonoBehaviour
 
     private void PrepareCharacters()
     {
-        foreach (var character in characters)
+        if (currentGameStateData.characters.Count != 0)
         {
-            if (character.characterGender == Gender.MALE)
+            characters = currentGameStateData.characters;
+        }
+        else
+        {
+            foreach (var character in characters)
             {
-                randomNum = UnityEngine.Random.Range(0, characterNamesMale.Count);
-                character.PrepareCharacter(characterNamesMale[randomNum], 15, RelStatus.STRANGERS);
-                characterNamesMale.RemoveAt(randomNum);
-            }
-            else
-            {
-                randomNum = UnityEngine.Random.Range(0, characterNamesFemale.Count);
-                character.PrepareCharacter(characterNamesFemale[randomNum], 15, RelStatus.STRANGERS);
-                characterNamesFemale.RemoveAt(randomNum);
-            }
+                if (character.characterGender == Gender.MALE)
+                {
+                    randomNum = UnityEngine.Random.Range(0, characterNamesMale.Count);
+                    character.PrepareCharacter(characterNamesMale[randomNum], 15, RelStatus.STRANGERS);
+                    characterNamesMale.RemoveAt(randomNum);
+                }
+                else
+                {
+                    randomNum = UnityEngine.Random.Range(0, characterNamesFemale.Count);
+                    character.PrepareCharacter(characterNamesFemale[randomNum], 15, RelStatus.STRANGERS);
+                    characterNamesFemale.RemoveAt(randomNum);
+                }
 
+            }
         }
     }
 
 
-    public void StartGame()
+    public void StartGame(GameStateData gameStateData)
     {
+        this.currentGameStateData = gameStateData;
+
+        if (PlayerPrefs.GetInt("GameStart") == 0)
+        {
+            this.currentGameStateData.playerName = Player.Instance.PlayerName;
+            this.currentGameStateData.currentCharacter = Player.Instance.CurrentCharacter;
+            this.currentGameStateData.playerGender = Player.Instance.PlayerGender;
+        }
+
+        if (PlayerPrefs.GetInt("FirstLoad") == 0) 
+        {
+            PlayerPrefs.SetInt("FirstLoad", 1);
+            levelManager.currentActiveMissions = GameManager.Instance.CurrentGameStateData.currentActiveMissions;
+        }
+        else
+        {
+            levelManager.PrepareCurrentLevelMissions();
+        }
+
+        PlayerPrefs.SetInt("GameStart", 1);
         PrepareCharacters();
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         pauseBtn.SetActive(true);
         AssignNpcToBuilding(0);
-        levelManager.PrepareCurrentLevelMissions();
-        TimeManager.Instance.AddClockTime(7f);
+        TimeManager.Instance.AddClockTime(true, 7f);
         //AudioManager.Instance.PlayMusic("Theme");
+        onGameStarted();
+        LoadGameData();
+    }
+
+
+    private void LoadGameData()
+    {
+        this.currentGameLevel = currentGameStateData.currentGameLevel;
+        this.inflationDuration = currentGameStateData.inflationDuration;
+        this.inflationRate = currentGameStateData.inflationRate;
+    }
+
+
+    private void SaveGameData()
+    {
+        currentGameStateData.currentGameLevel = this.currentGameLevel;
+        currentGameStateData.inflationDuration = this.inflationDuration;
+        currentGameStateData.inflationRate = this.inflationRate;
     }
 
 
@@ -212,7 +258,6 @@ public class GameManager : MonoBehaviour
         pauseBtn.SetActive(true);
         AssignNpcToBuilding(0);
         levelManager.PrepareCurrentLevelMissions();
-        TimeManager.Instance.AddClockTime(7f);
     }
 
 
@@ -236,8 +281,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // StartGame(gameStateRes.Item1);
-            StartGame();
+            PlayerPrefs.SetInt("FirstLoad", 0);
+            StartGame(gameStateRes.Item1);
         }
     }
 

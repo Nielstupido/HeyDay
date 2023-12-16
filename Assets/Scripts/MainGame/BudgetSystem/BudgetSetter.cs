@@ -113,9 +113,9 @@ public class BudgetSetter : MonoBehaviour
         this.gameObject.SetActive(false);
         OverlayAnimations.Instance.AnimCloseOverlay(budgetSetterPopUp, this.gameObject);
 
-        if (GameManager.Instance.CurrentGameLevel == 1)
+        if (PlayerPrefs.GetInt("GameStart") == 0)
         {
-            GameManager.Instance.StartGame(); 
+            GameManager.Instance.StartGame(new GameStateData()); 
         }
         else
         {

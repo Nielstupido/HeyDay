@@ -32,12 +32,45 @@ public class TimeManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        GameManager.onGameStarted += LoadGameData;
+        GameManager.onSaveGameStateData += SaveGameData;
     }
 
 
-    public void AddClockTime(float addedClockValue)
+    private void OnDestroy()
+    {
+        GameManager.onGameStarted -= LoadGameData;
+        GameManager.onSaveGameStateData -= SaveGameData;
+    }
+
+
+    private void SaveGameData()
+    {
+        GameManager.Instance.CurrentGameStateData.currentTime = this.currentTime;
+        GameManager.Instance.CurrentGameStateData.currentDayCount = this.currentDayCount;
+    }
+
+
+    private void LoadGameData()
+    {
+        this.currentTime = GameManager.Instance.CurrentGameStateData.currentTime;
+        this.currentDayCount = GameManager.Instance.CurrentGameStateData.currentDayCount;
+
+        AddClockTime(true, this.currentTime);
+        UpdateDayUI(this.currentDayCount);
+    }
+
+
+    public void AddClockTime(bool isSetTime, float addedClockValue)
     {
         currentTime += addedClockValue;
+
+        if (isSetTime)
+        {
+            currentTime = addedClockValue;
+        }
+
         int minutes = 0;
         int hours = 0;
         int transposedValue;

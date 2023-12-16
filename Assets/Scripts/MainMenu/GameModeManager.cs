@@ -9,6 +9,20 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private GameObject savedGamesOverlay;
     [SerializeField] private GameObject savedGamePrefab;
     [SerializeField] private Transform savedGamesHolder;
+    public static GameModeManager Instance { get; private set; }
+
+
+    private void Awake() 
+    { 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
 
     private void StartGame()
@@ -22,6 +36,14 @@ public class GameModeManager : MonoBehaviour
     public void NewGame()
     {
         PlayerPrefs.SetInt("GameMode", 0); // 0 = new game
+        StartGame();
+    }
+
+
+    public void LoadGame(string name)
+    {
+        PlayerPrefs.SetInt("GameMode", 1); // 1 = load game
+        PlayerPrefs.SetString("PlayerName", name);
         StartGame();
     }
 

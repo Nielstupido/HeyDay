@@ -14,6 +14,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Button sfxBtn;
     [SerializeField] private GameObject pauseMenuOverlay;
     [SerializeField] private GameObject pauseMenuPopUp;
+    [SerializeField] private GameObject gameSavingOverlay;
+    [SerializeField] private GameObject gameSavedOverlay;
 
     private bool isOnMusic = true;
     private bool isOnSFX = true;
@@ -75,8 +77,21 @@ public class PauseMenu : MonoBehaviour
     public void SaveGame()
     {
         AudioManager.Instance.PlaySFX("Select");
-        GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
+        GameManager.onSaveGameStateData();
+        StartCoroutine(ProceedGameSave());
+    }
+
+
+    private IEnumerator ProceedGameSave()
+    {
+        gameSavingOverlay.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        gameSavedOverlay.SetActive(true);
+        gameSavingOverlay.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        gameSavedOverlay.SetActive(false);
         GameDataManager.Instance.SaveGameStateData(GameManager.Instance.CurrentGameStateData);
+        yield return null;
     }
 
 

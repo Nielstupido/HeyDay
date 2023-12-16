@@ -63,11 +63,13 @@ public class Player : MonoBehaviour
     private UniversityCourses goalCourse;
     private UniversityCourses courseEnrolled;
     private StudyFields studyFieldEnrolled;
+    private float playerStudyHours;
+    private float playerEnrolledCourseDuration;
     public UniversityCourses PlayerEnrolledCourse { set{courseEnrolled = value;} get{return courseEnrolled;}}
     public StudyFields PlayerEnrolledStudyField { set{studyFieldEnrolled = value;} get{return studyFieldEnrolled;}}
     public UniversityCourses GoalCourse { set{goalCourse = value;} get{return goalCourse;}}
-    public float PlayerEnrolledCourseDuration { set; get;}
-    public float PlayerStudyHours { set; get;}
+    public float PlayerEnrolledCourseDuration { set{playerEnrolledCourseDuration = value;} get{return playerEnrolledCourseDuration;}}
+    public float PlayerStudyHours { set{playerStudyHours = value;} get{return playerStudyHours;}}
 
     //Possessions
     private List<Items> playerOwnedVehicles = new List<Items>();
@@ -110,47 +112,107 @@ public class Player : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        GameManager.onGameStarted += LoadGameData;
+        GameManager.onSaveGameStateData += SaveGameData;
     }
 
 
     private void Start()
     {
-        playerAge = 19;
-        currentPlayerJob = null;
-        courseEnrolled = UniversityCourses.NONE;
-        playerCash = 5000f;
-        playerBankSavings = 0f;
-        groceryBarValue = 0;
-        playerStatsDict.Add(PlayerStats.HAPPINESS, 100f);
-        playerStatsDict.Add(PlayerStats.HUNGER, 100f);
-        playerStatsDict.Add(PlayerStats.ENERGY, 100f);
-        playerStatsDict.Add(PlayerStats.MONEY, PlayerCash);
-        currentPlayerPlace = null;
-        isPlayerHasBankAcc = false;
         PlayerStatsObserver.onPlayerStatChanged += StatsChecker;
-        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
     }
 
 
     private void OnDestroy()
     {
         PlayerStatsObserver.onPlayerStatChanged -= StatsChecker;
+        GameManager.onGameStarted -= LoadGameData;
+        GameManager.onSaveGameStateData -= SaveGameData;
     }
+
 
     private void OnEnable()
     {
         PlayerStatsObserver.onPlayerStatChanged += StatsChecker;
     }
+
+
     private void OnDisable()
     {
         PlayerStatsObserver.onPlayerStatChanged -= StatsChecker;
     }
 
+
+    private void SaveGameData()
+    {
+        GameManager.Instance.CurrentGameStateData.playerName = this.playerName;
+        GameManager.Instance.CurrentGameStateData.playerAge = this.playerAge;
+        GameManager.Instance.CurrentGameStateData.playerGender = this.playerGender;
+        GameManager.Instance.CurrentGameStateData.currentCharacter = this.currentCharacter;
+        GameManager.Instance.CurrentGameStateData.contactList = this.contactList;
+        GameManager.Instance.CurrentGameStateData.playerStatsDict = this.playerStatsDict;
+        GameManager.Instance.CurrentGameStateData.playerCash = this.playerCash;
+        GameManager.Instance.CurrentGameStateData.playerBankSavings = this.playerBankSavings;
+        GameManager.Instance.CurrentGameStateData.playerTotalDebt = this.playerTotalDebt;
+        GameManager.Instance.CurrentGameStateData.playerHospitalOutstandingDebt = this.playerHospitalOutstandingDebt;
+        GameManager.Instance.CurrentGameStateData.isPlayerHasBankAcc = this.isPlayerHasBankAcc;
+        GameManager.Instance.CurrentGameStateData.playerLvlBillExpenses = this.playerLvlBillExpenses;
+        GameManager.Instance.CurrentGameStateData.playerLvlSavings = this.playerLvlSavings;
+        GameManager.Instance.CurrentGameStateData.playerLvlConsumablesExpenses = this.playerLvlConsumablesExpenses;
+        GameManager.Instance.CurrentGameStateData.playerLvlEmergencyFunds = this.playerLvlEmergencyFunds;
+        GameManager.Instance.CurrentGameStateData.goalCourse = this.goalCourse;
+        GameManager.Instance.CurrentGameStateData.courseEnrolled = this.courseEnrolled;
+        GameManager.Instance.CurrentGameStateData.studyFieldEnrolled = this.studyFieldEnrolled;
+        GameManager.Instance.CurrentGameStateData.playerEnrolledCourseDuration = this.playerEnrolledCourseDuration;
+        GameManager.Instance.CurrentGameStateData.playerOwnedVehicles = this.playerOwnedVehicles;
+        GameManager.Instance.CurrentGameStateData.playerOwnedAppliances = this.playerOwnedAppliances;
+        GameManager.Instance.CurrentGameStateData.groceryBarValue = this.groceryBarValue;
+        GameManager.Instance.CurrentGameStateData.currentPlayerJob = this.currentPlayerJob;
+        GameManager.Instance.CurrentGameStateData.playerWorkFieldHistory = this.playerWorkFieldHistory;
+        GameManager.Instance.CurrentGameStateData.currentWorkHours = this.currentWorkHours;
+        GameManager.Instance.CurrentGameStateData.currentPlayerPlace = this.currentPlayerPlace;
+    }
+
+
+    private void LoadGameData()
+    {
+        this.playerName = GameManager.Instance.CurrentGameStateData.playerName;
+        this.playerAge = GameManager.Instance.CurrentGameStateData.playerAge;
+        this.playerGender = GameManager.Instance.CurrentGameStateData.playerGender;
+        this.currentCharacter = GameManager.Instance.CurrentGameStateData.currentCharacter;
+        this.contactList = GameManager.Instance.CurrentGameStateData.contactList;
+        this.playerStatsDict = GameManager.Instance.CurrentGameStateData.playerStatsDict;
+        this.playerCash = GameManager.Instance.CurrentGameStateData.playerCash;
+        this.playerBankSavings = GameManager.Instance.CurrentGameStateData.playerBankSavings;
+        this.playerTotalDebt = GameManager.Instance.CurrentGameStateData.playerTotalDebt;
+        this.playerHospitalOutstandingDebt = GameManager.Instance.CurrentGameStateData.playerHospitalOutstandingDebt;
+        this.isPlayerHasBankAcc = GameManager.Instance.CurrentGameStateData.isPlayerHasBankAcc;
+        this.playerLvlBillExpenses = GameManager.Instance.CurrentGameStateData.playerLvlBillExpenses;
+        this.playerLvlSavings = GameManager.Instance.CurrentGameStateData.playerLvlSavings;
+        this.playerLvlConsumablesExpenses = GameManager.Instance.CurrentGameStateData.playerLvlConsumablesExpenses;
+        this.playerLvlEmergencyFunds = GameManager.Instance.CurrentGameStateData.playerLvlEmergencyFunds;
+        this.goalCourse = GameManager.Instance.CurrentGameStateData.goalCourse;
+        this.courseEnrolled = GameManager.Instance.CurrentGameStateData.courseEnrolled;
+        this.studyFieldEnrolled = GameManager.Instance.CurrentGameStateData.studyFieldEnrolled;
+        this.playerEnrolledCourseDuration = GameManager.Instance.CurrentGameStateData.playerEnrolledCourseDuration;
+        this.playerOwnedVehicles = GameManager.Instance.CurrentGameStateData.playerOwnedVehicles;
+        this.playerOwnedAppliances = GameManager.Instance.CurrentGameStateData.playerOwnedAppliances;
+        this.groceryBarValue = GameManager.Instance.CurrentGameStateData.groceryBarValue;
+        this.currentPlayerJob = GameManager.Instance.CurrentGameStateData.currentPlayerJob;
+        this.playerWorkFieldHistory = GameManager.Instance.CurrentGameStateData.playerWorkFieldHistory;
+        this.currentWorkHours = GameManager.Instance.CurrentGameStateData.currentWorkHours;
+        this.currentPlayerPlace = GameManager.Instance.CurrentGameStateData.currentPlayerPlace;
+
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
+    }
+
+
     public void EatDrink(Items foodToConsume)
     {
         StartCoroutine(DoAnim(ActionAnimations.EAT, 5f));
         AudioManager.Instance.PlaySFX("Eat");
-        TimeManager.Instance.AddClockTime(foodToConsume.eatingTime);
+        TimeManager.Instance.AddClockTime(false, foodToConsume.eatingTime);
         playerStatsDict[PlayerStats.HAPPINESS] += foodToConsume.happinessBarValue;
         playerStatsDict[PlayerStats.ENERGY] += foodToConsume.energyBarValue;
         playerStatsDict[PlayerStats.HUNGER] += foodToConsume.hungerBarValue;
@@ -185,7 +247,7 @@ public class Player : MonoBehaviour
 
     public void Study(int studyDurationValue)
     {
-        TimeManager.Instance.AddClockTime(studyDurationValue);
+        TimeManager.Instance.AddClockTime(false, studyDurationValue);
         playerStatsDict[PlayerStats.ENERGY] -= studyDurationValue * StudyEnergyCutValue;
         playerStatsDict[PlayerStats.HAPPINESS] -= studyDurationValue * StudyHappinessCutValue;
         playerStatsDict[PlayerStats.HUNGER] -= studyDurationValue * StudyHungerCutValue;
@@ -231,7 +293,7 @@ public class Player : MonoBehaviour
                 break;
         }
         
-        TimeManager.Instance.AddClockTime(timeAdded);
+        TimeManager.Instance.AddClockTime(false, timeAdded);
         playerCash -= (item.itemPrice + ((GameManager.Instance.InflationRate / 100) * item.itemPrice));
         playerLvlConsumablesExpenses += (item.itemPrice + ((GameManager.Instance.InflationRate / 100) * item.itemPrice));
         playerStatsDict[PlayerStats.MONEY] -= (item.itemPrice + ((GameManager.Instance.InflationRate / 100) * item.itemPrice));
@@ -264,7 +326,7 @@ public class Player : MonoBehaviour
             playerLvlConsumablesExpenses += price;
         }
 
-        TimeManager.Instance.AddClockTime(timeAdded);
+        TimeManager.Instance.AddClockTime(false, timeAdded);
         playerCash -= price;
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         playerStatsDict[PlayerStats.HAPPINESS] += happinessAdded;
@@ -277,7 +339,7 @@ public class Player : MonoBehaviour
 
     public void Walk(float energyLevelCutValue, float hungerLevelCutValue)
     {
-        TimeManager.Instance.AddClockTime(1f);
+        TimeManager.Instance.AddClockTime(false, 1f);
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         playerStatsDict[PlayerStats.HUNGER] -= hungerLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);

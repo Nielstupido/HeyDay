@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    [SerializeField] private Dictionary<string, GameObject> buildings = new Dictionary<string, GameObject>();
     [SerializeField] private GameObject buildingSelectOverlay;
     [SerializeField] private GameObject cinemaOverlay;
     [SerializeField] private GameObject barOverlay;

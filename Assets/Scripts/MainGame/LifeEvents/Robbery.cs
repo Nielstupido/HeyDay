@@ -10,11 +10,10 @@ public class Robbery : LifeEvent
         Player.Instance.PlayerStatsDict[PlayerStats.MONEY] = 0;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, Player.Instance.PlayerStatsDict);
 
-        this.message = "Alert! The city has been rocked by a powerful earthquake, " +
-                        "causing significant damage to your apartment and belongings. " +
-                        "Brace for the aftermath and strategically navigate the upheaval " +
-                        "as you assess the impact on your possessions. The road to recovery " +
-                        "awaits, but first, be prepared to deal with the consequences of this seismic event";
+        this.message = "Emergency Update! You have been robbed! Assess the damage, " +
+                        "strategize for recovery, and reclaim what's rightfully yours. " +
+                        "To avoid in-game robberies, consider these tips. Avoid carrying " +
+                        "large amount of money. Be cautious during nighttime walks.";
         LifeEventsPrompt.Instance.DisplayPrompt(message);
     }
 }

@@ -72,7 +72,7 @@ public class SleepManager : MonoBehaviour
     {
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.SLEEP);
         AudioManager.Instance.PlaySFX("Sleep");
-        TimeManager.Instance.AddClockTime(sleepHrs);
+        TimeManager.Instance.AddClockTime(false, sleepHrs);
         Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] += (sleepHrs * Player.Instance.CurrentPlayerPlace.adtnlEnergyForSleep);
         Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] -= (sleepHrs * 2f);
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
