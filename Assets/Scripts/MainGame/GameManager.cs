@@ -230,9 +230,8 @@ public class GameManager : MonoBehaviour
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         pauseBtn.SetActive(true);
         AssignNpcToBuilding(0);
-<<<<<<< Updated upstream
         TimeManager.Instance.AddClockTime(true, 7f);
-        //AudioManager.Instance.PlayMusic("Theme");
+        AudioManager.Instance.PlayMusic("Theme2");
         onGameStarted();
         LoadGameData();
     }
@@ -251,11 +250,7 @@ public class GameManager : MonoBehaviour
         currentGameStateData.currentGameLevel = this.currentGameLevel;
         currentGameStateData.inflationDuration = this.inflationDuration;
         currentGameStateData.inflationRate = this.inflationRate;
-=======
         levelManager.PrepareCurrentLevelMissions();
-        TimeManager.Instance.AddClockTime(7f);
-        AudioManager.Instance.PlayMusic("Theme2");
->>>>>>> Stashed changes
     }
 
 

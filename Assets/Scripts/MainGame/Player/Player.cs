@@ -330,13 +330,9 @@ public class Player : MonoBehaviour
             playerLvlConsumablesExpenses += price;
         }
 
-<<<<<<< Updated upstream
-        TimeManager.Instance.AddClockTime(false, timeAdded);
-=======
         AudioManager.Instance.PlaySFX("Pay");
+        TimeManager.Instance.AddClockTime(false, timeAdded);
 
-        TimeManager.Instance.AddClockTime(timeAdded);
->>>>>>> Stashed changes
         playerCash -= price;
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         playerStatsDict[PlayerStats.HAPPINESS] += happinessAdded;
