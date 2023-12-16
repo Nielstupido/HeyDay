@@ -34,6 +34,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private List<BoxCollider> resBuildingColliders = new List<BoxCollider>();
 
     private Building currentSelectedBuilding;
+    private BuildingSelect buildingSelectCopy;
     public delegate void OnBuildingBtnClicked(Buttons clickedBtn);
     public OnBuildingBtnClicked onBuildingBtnClicked;
     public Building CurrentSelectedBuilding { set{currentSelectedBuilding = value;} get{return currentSelectedBuilding;}}
@@ -46,6 +47,7 @@ public class BuildingManager : MonoBehaviour
     public string BuildingNameText { set{buildingNameText.text = value;}}
     public string BuildingDescriptionText { set{buildingDescriptionText.text = value;}}
     public string BuildingOpeningHrs { set{buildingOpeningHrs.text = value;}}
+    public BuildingSelect BuildingSelectCopy { set{buildingSelectCopy = value;}}
     public static BuildingManager Instance { get; private set; }
 
 
@@ -59,6 +61,14 @@ public class BuildingManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        
+        TimeManager.onTimeAdded += CheckBuildinClosingTime;
+    }
+
+
+    private void OnDestroy()
+    {
+        TimeManager.onTimeAdded -= CheckBuildinClosingTime;
     }
 
 
@@ -71,6 +81,19 @@ public class BuildingManager : MonoBehaviour
         foreach (BoxCollider boxCollider in resBuildingColliders)
         {
             boxCollider.enabled = false;
+        }
+    }
+
+
+    private void CheckBuildinClosingTime(float currentTime)
+    {
+        if (currentSelectedBuilding != null)
+        {
+            if ((currentTime > currentSelectedBuilding.buildingClosingTime || currentTime < CurrentSelectedBuilding.buildingOpeningTime) && buildingInteriorOverlay.activeSelf 
+                    && currentSelectedBuilding.buildingOpeningTime != 0f && currentSelectedBuilding.buildingClosingTime != 0f)
+            {
+                ExitBuilding();
+            }
         }
     }
 
@@ -152,6 +175,7 @@ public class BuildingManager : MonoBehaviour
         UniversityManager.Instance.OnExitedUniversity();
         currentSelectedBuilding.actionButtons.Clear();
         buildingInteriorOverlay.SetActive(false);
+        buildingSelectCopy.RefreshSelectOverlayUI();
     }
 
 

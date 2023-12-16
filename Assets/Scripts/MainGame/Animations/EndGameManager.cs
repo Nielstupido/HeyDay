@@ -21,12 +21,12 @@ public class EndGameManager : MonoBehaviour
 
     private IEnumerator StartCutscene(List<Sprite> sceneImages)
     {
-        foreach(Sprite image in sceneImages)
+        for(int i = 1; i < sceneImages.Count; i++)
         {
             yield return new WaitForSeconds(2.5f);
             AnimOverlayManager.Instance.StartBlackScreenFadeLoadScreen();
             yield return new WaitForSeconds(0.5f);
-            sceneImageObj.sprite = image;
+            sceneImageObj.sprite = sceneImages[i];
         }
 
         yield return new WaitForSeconds(4f);
@@ -103,5 +103,7 @@ public class EndGameManager : MonoBehaviour
     public void ReturnHome()
     {
         SceneManager.LoadScene("MainMenu");
+        GameDataManager.Instance.AllPlayersGameStateData.Remove(Player.Instance.PlayerName);
+        GameDataManager.Instance.SaveGameStateData();
     }
 }

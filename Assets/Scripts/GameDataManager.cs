@@ -12,6 +12,7 @@ public class GameDataManager : MonoBehaviour
     public Dictionary<string, int> playerRecords = new Dictionary<string, int>();
     private Dictionary<string, GameStateData> allPlayersGameStateData = new Dictionary<string, GameStateData>();
     public Dictionary<string, int> PlayerRecords { set{playerRecords = value;} get{return playerRecords;}}
+    public Dictionary<string, GameStateData> AllPlayersGameStateData { set{allPlayersGameStateData = value;} get{return allPlayersGameStateData;}}
 
 
     private void Awake()
@@ -193,6 +194,27 @@ public class GameDataManager : MonoBehaviour
                 allPlayersGameStateData.Add(playerName, currentPlayerGameStateData);
             }
 
+            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+            string filePath = directoryPath + "PlayerGameStateData.json";
+
+            // Serialize playerRecords using Json.NET
+            string jsonString = JsonConvert.SerializeObject(allPlayersGameStateData);
+
+            File.WriteAllText(filePath, jsonString);
+        }
+        catch (Exception e)
+        {
+            return (false, e.ToString());
+        }
+
+        return (true, "");
+    }
+
+
+    public ValueTuple<bool, string> SaveGameStateData()
+    {
+        try
+        {
             string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
             string filePath = directoryPath + "PlayerGameStateData.json";
 

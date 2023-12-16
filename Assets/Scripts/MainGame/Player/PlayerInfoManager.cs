@@ -38,8 +38,6 @@ public class PlayerInfoManager : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("Select");
         string playerName = playerNameTextInput.text.TrimEnd();
-        Player.Instance.PlayerName = playerName;
-        playerNameTextDisplay.text = playerName;
 
         if (!GameDataManager.Instance.IsPlayerNameAvailable(playerName))
         {
@@ -47,6 +45,8 @@ public class PlayerInfoManager : MonoBehaviour
             return;
         }
 
+        Player.Instance.PlayerName = playerName;
+        playerNameTextDisplay.text = playerName;
         GameDataManager.Instance.SavePlayerRecords(playerName, 0);
         StartCoroutine(ProceedIntro());
     }

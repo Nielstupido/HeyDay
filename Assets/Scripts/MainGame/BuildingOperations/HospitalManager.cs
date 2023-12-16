@@ -79,7 +79,7 @@ public class HospitalManager : MonoBehaviour
     }
 
 
-    public void Hospitalized(int dayCount, float bill = 300)
+    public void Hospitalized(int dayCount, float bill = 250)
     {
         AudioManager.Instance.PlaySFX("Ambulance");
         hospitalBill = bill * dayCount;
@@ -147,7 +147,7 @@ public class HospitalManager : MonoBehaviour
             Player.Instance.PlayerHospitalOutstandingDebt += BillInterest;
             daysUnpaid++;
 
-            if (daysUnpaid >= 3)
+            if (daysUnpaid >= 6)
             {
                 GameManager.Instance.GameOver();
             }

@@ -30,6 +30,7 @@ public class GoalSetter : MonoBehaviour
 
     public void SetGoal()
     {
+        GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
         goalSetterOverlay.SetActive(true);
         OverlayAnimations.Instance.ShowGoalSetter();
         GenerateGoal();

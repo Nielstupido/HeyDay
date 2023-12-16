@@ -28348,11 +28348,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionOverlay: {fileID: 398848358}
-  interactionPopUp: {fileID: 1925757295}
+  interactionPopUp: {fileID: 945683866}
   touchBlockerOverlay: {fileID: 502730872}
   speechBubbleImage: {fileID: 594667190}
   borrowAmountOverlay: {fileID: 408476042}
-  borrowMoneyPopUp: {fileID: 1925757295}
+  borrowMoneyPopUp: {fileID: 945683865}
   getContactNumBtn: {fileID: 757268220}
   payDebtBtn: {fileID: 1437531564}
   borrowMoneyBtn: {fileID: 738206656}
@@ -34460,6 +34460,16 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &945683865 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1334179962231395923, guid: 067923034288b6949a6a7364936ba52f, type: 3}
+  m_PrefabInstance: {fileID: 1334179961560568263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &945683866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1334179962389656942, guid: 067923034288b6949a6a7364936ba52f, type: 3}
+  m_PrefabInstance: {fileID: 1334179961560568263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &958781325
 GameObject:
   m_ObjectHideFlags: 0
@@ -37126,19 +37136,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1025055509}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 223557263}
-        m_TargetAssemblyTypeName: BuildingManager, Assembly-CSharp
-        m_MethodName: EnterBuilding
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1025055509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44317,11 +44315,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &1220552529 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1334179962389656942, guid: 067923034288b6949a6a7364936ba52f, type: 3}
-  m_PrefabInstance: {fileID: 1334179961560568263}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1221528530
 GameObject:
   m_ObjectHideFlags: 0
@@ -55320,8 +55313,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 53194d0bc881e3044adf3feff4b23047, type: 3}
   - {fileID: 21300000, guid: 5c0f1800eb193eb40a6ba247ebaa5fd1, type: 3}
   badSceneImagesGirl:
-  - {fileID: 21300000, guid: 9a3d61845b844bc499cd71e4f81ff841, type: 3}
   - {fileID: 21300000, guid: 375519a4574bb094bb806ba675ff2da8, type: 3}
+  - {fileID: 21300000, guid: cf3d8a9db199fd54094b7ad71ad55a7d, type: 3}
   - {fileID: 21300000, guid: 250a602e952b3dc45a89398c83ee50ed, type: 3}
   - {fileID: 21300000, guid: ca5726354f03da7498dc9180646b01e3, type: 3}
   - {fileID: 21300000, guid: bd396b57ebfb8184e89fe026e9106bb3, type: 3}
@@ -66052,11 +66045,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a805a51c9487314bb7bb8ee0d6b8b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1925757295 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1334179962389656942, guid: 067923034288b6949a6a7364936ba52f, type: 3}
-  m_PrefabInstance: {fileID: 1334179961560568263}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1926216225
 GameObject:
   m_ObjectHideFlags: 0
@@ -104874,6 +104862,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3212851011290851451, guid: 41bbeac9abfaf03478887d4c42ca6a32, type: 3}
+      propertyPath: cameraMovement
+      value: 
+      objectReference: {fileID: 963194229}
     - target: {fileID: 3212851011290851451, guid: 41bbeac9abfaf03478887d4c42ca6a32, type: 3}
       propertyPath: sliders.Array.size
       value: 4

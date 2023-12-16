@@ -234,6 +234,7 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlayMusic("Theme2");
         onGameStarted();
         LoadGameData();
+        AnimOverlayManager.Instance.StartScreenFadeLoadScreen();
     }
 
 

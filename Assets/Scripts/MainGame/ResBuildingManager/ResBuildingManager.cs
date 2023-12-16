@@ -148,7 +148,7 @@ public class ResBuildingManager : MonoBehaviour
         stayCount++;
         float totalBilling = 0;
 
-        if (stayCount % 3 == 0)
+        if (stayCount % 15 == 0)
         {
             totalBilling = Player.Instance.CurrentPlayerPlace.monthlyElecCharge + Player.Instance.CurrentPlayerPlace.monthlyRent + Player.Instance.CurrentPlayerPlace.monthlyWaterCharge;
 

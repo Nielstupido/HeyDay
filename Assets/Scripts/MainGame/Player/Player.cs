@@ -345,7 +345,7 @@ public class Player : MonoBehaviour
 
     public void Walk(float energyLevelCutValue, float hungerLevelCutValue)
     {
-        TimeManager.Instance.AddClockTime(false, 1f);
+        TimeManager.Instance.AddClockTime(false, 0.2f);
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         playerStatsDict[PlayerStats.HUNGER] -= hungerLevelCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
