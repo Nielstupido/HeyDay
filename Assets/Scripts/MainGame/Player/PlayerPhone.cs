@@ -148,6 +148,7 @@ public class PlayerPhone : MonoBehaviour
             }
 
             StartCoroutine(DoAnim(ActionAnimations.BUY, 2f));
+            AudioManager.Instance.PlaySFX("Pay");
 
             TimeManager.Instance.AddClockTime(false, 0.1f);
             Player.Instance.PlayerCash -= groceryPrice;

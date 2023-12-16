@@ -60,8 +60,8 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            soundEffectsSource.clip = s.clip;
-            soundEffectsSource.Play();
+            musicSource.clip = s.clip;
+            musicSource.Play();
         }
     }
 
@@ -125,5 +125,13 @@ public class AudioManager : MonoBehaviour
     public void SFXVolume(float volume)
     {
         sfxSource.volume = volume; 
+    }
+
+    public void StopSFX()
+    {
+        if (sfxSource.clip)
+        {
+            sfxSource.Stop();
+        }
     }
 }

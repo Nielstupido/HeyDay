@@ -72,6 +72,7 @@ public class AnimOverlayManager : MonoBehaviour
     public void StopAnim()
     {
         animationOverlay.SetActive(false);
+        AudioManager.Instance.StopSFX();
     }
 
 

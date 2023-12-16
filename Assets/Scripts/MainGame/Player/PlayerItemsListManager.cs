@@ -19,7 +19,6 @@ public class PlayerItemsListManager : MonoBehaviour
 
     public void ShowItems(ItemType itemType, List<Items> playerItems)
     {
-        AudioManager.Instance.PlaySFX("Select");
         HideItems();
         itemsHolderOverlay.SetActive(true);
         OverlayAnimations.Instance.AnimOpenOverlay(itemsHolderPopUp);

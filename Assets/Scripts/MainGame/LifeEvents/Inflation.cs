@@ -14,5 +14,6 @@ public class Inflation : LifeEvent
                         " Navigate wisely through this challenging period, making strategic " +
                         "decisions to weather the storm of rising costs and economic instability.";
         LifeEventsPrompt.Instance.DisplayPrompt(message);
+        AudioManager.Instance.PlaySFX("News");
     }
 }

@@ -35,6 +35,7 @@ public class GameModeManager : MonoBehaviour
 
     public void NewGame()
     {
+        AudioManager.Instance.PlaySFX("Select");
         PlayerPrefs.SetInt("GameMode", 0); // 0 = new game
         StartGame();
     }
@@ -56,6 +57,7 @@ public class GameModeManager : MonoBehaviour
 
     public void ShowSavedGames()
     {
+        AudioManager.Instance.PlaySFX("Select");
         // PlayerPrefs.SetInt("GameMode", 1); // 1 = load game
 
         savedGamesOverlay.SetActive(true);

@@ -40,12 +40,12 @@ public class SlotMachineResults : MonoBehaviour
 
     public void Play()
     {
-        AudioManager.Instance.PlaySFX("Select");
         if (Pay(5f, 200f, 0.5f))
         {
             slotMachine1.StartRand();
             slotMachine2.StartRand();
             slotMachine3.StartRand();
+            AudioManager.Instance.PlaySFX("Pay");
         }
     }
 
@@ -69,12 +69,14 @@ public class SlotMachineResults : MonoBehaviour
 
             if (matchCount == 1)
             {
-                winAmount.text = "1,000";
-                Player.Instance.PlayerCash += 1000;
+                AudioManager.Instance.PlaySFX("Payout");
+                winAmount.text = "100";
+                Player.Instance.PlayerCash += 100;
                 StartCoroutine(ShowPrompt(1.5f));
             }
             else if (matchCount == 3)
             {
+                AudioManager.Instance.PlaySFX("Payout");
                 winAmount.text = "100,000";
                 Player.Instance.PlayerCash += 100000;
                 StartCoroutine(ShowPrompt(1.5f));
@@ -84,7 +86,7 @@ public class SlotMachineResults : MonoBehaviour
                 StartCoroutine(ShowPrompt(1.5f));
             }
         }
-        StartCoroutine(ClosePrompt(2.5f));
+        StartCoroutine(ClosePrompt(4f));
     }
 
 
@@ -111,6 +113,7 @@ public class SlotMachineResults : MonoBehaviour
     {
         yield return new WaitForSeconds(seconds);
         
+        AudioManager.Instance.StopSFX();
         winPrompt.SetActive(false);
         OverlayAnimations.Instance.AnimCloseOverlay(winPopUp, winPrompt);
         losePrompt.SetActive(false);

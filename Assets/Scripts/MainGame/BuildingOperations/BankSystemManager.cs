@@ -136,25 +136,25 @@ public class BankSystemManager : MonoBehaviour
 
     public void WithdrawMoney()
     {
-        AudioManager.Instance.PlaySFX("Select");
         if (float.Parse(withdrawAmountField.text) > Player.Instance.PlayerBankSavings)
         {
             PromptManager.Instance.ShowPrompt(withdrawError);
             return;
         }
         StartCoroutine(ProcessTransaction(1));
+        AudioManager.Instance.PlaySFX("CashCounter");
     }
 
 
     public void DepositMoney()
     {
-        AudioManager.Instance.PlaySFX("Select");
         if (float.Parse(depositAmountField.text) > Player.Instance.PlayerCash)
         {
             PromptManager.Instance.ShowPrompt(depositError);
             return;
         }
         StartCoroutine(ProcessTransaction(2));
+        AudioManager.Instance.PlaySFX("CashCounter");
     }
 
 
@@ -181,7 +181,7 @@ public class BankSystemManager : MonoBehaviour
             Player.Instance.PlayerLvlSavings -= float.Parse(withdrawAmountField.text);
 
             withdrawOverlay.SetActive(false);
-            withdrawProcessOverlay.SetActive(true);
+            withdrawProcessOverlay.SetActive(false);
             withdrawProcessingOverlay.SetActive(true);
             withdrawProcessedOverlay.SetActive(false);
         }
@@ -200,7 +200,7 @@ public class BankSystemManager : MonoBehaviour
             Player.Instance.PlayerLvlSavings += float.Parse(depositAmountField.text);
 
             depositOverlay.SetActive(false);
-            depositProcessOverlay.SetActive(true);
+            depositProcessOverlay.SetActive(false);
             depositProcessingOverlay.SetActive(true);
             depositProcessedOverlay.SetActive(false);
             LevelManager.onFinishedPlayerAction(MissionType.DEPOSITSAVINGSACC);

@@ -133,6 +133,7 @@ public class JobApplicationManager : MonoBehaviour
 
     public void ApplyJob(JobPositions newJobData)
     {
+        AudioManager.Instance.PlaySFX("Select");
         LevelManager.onFinishedPlayerAction(MissionType.APPLYJOB);
         StartCoroutine(JobAppProcessingAnim(2f, newJobData));
     }

@@ -62,7 +62,7 @@ public class SleepManager : MonoBehaviour
 
     public void TakeSleep()
     {
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Yawn");
         sleepHrs = float.Parse(sleepHrsText.text);
         StartCoroutine(DoSleep(sleepHrs));
     }

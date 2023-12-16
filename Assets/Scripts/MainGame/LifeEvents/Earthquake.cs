@@ -13,5 +13,6 @@ public class Earthquake : LifeEvent
                         "as you assess the impact on your possessions. The road to recovery " +
                         "awaits, but first, be prepared to deal with the consequences of this seismic event";
         LifeEventsPrompt.Instance.DisplayPrompt(message);
+        AudioManager.Instance.PlaySFX("Earthquake");
     }
 }

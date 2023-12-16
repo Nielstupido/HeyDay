@@ -97,7 +97,7 @@ public class SwitchMenuItem : MonoBehaviour
 
    public void BuyItem()
    {
-      AudioManager.Instance.PlaySFX("Select");
+      AudioManager.Instance.PlaySFX("Pay");
       Player.Instance.Purchase(true, foodList[currentItem], 0.3f);
    }
 }
