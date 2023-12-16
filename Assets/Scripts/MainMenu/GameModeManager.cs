@@ -35,7 +35,7 @@ public class GameModeManager : MonoBehaviour
 
     public void NewGame()
     {
-        AnimOverlayManager.Instance.StartScreenFadeLoadScreen(5f);
+        AudioManager.Instance.PlaySFX("Select");
         PlayerPrefs.SetInt("GameMode", 0); // 0 = new game
         StartGame();
     }
@@ -43,7 +43,6 @@ public class GameModeManager : MonoBehaviour
 
     public void LoadGame(string name)
     {
-        AnimOverlayManager.Instance.StartScreenFadeLoadScreen(5f);
         PlayerPrefs.SetInt("GameMode", 1); // 1 = load game
         PlayerPrefs.SetString("PlayerName", name);
         StartGame();
@@ -58,6 +57,7 @@ public class GameModeManager : MonoBehaviour
 
     public void ShowSavedGames()
     {
+        AudioManager.Instance.PlaySFX("Select");
         // PlayerPrefs.SetInt("GameMode", 1); // 1 = load game
 
         savedGamesOverlay.SetActive(true);

@@ -160,7 +160,6 @@ public class HospitalManager : MonoBehaviour
     private IEnumerator PayBills()
     {
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.BUY);
-        AudioManager.Instance.PlaySFX("Pay");
         yield return new WaitForSeconds(2f);
         AnimOverlayManager.Instance.StopAnim();
         payBillsOverlay.SetActive(false);
@@ -174,6 +173,7 @@ public class HospitalManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         debtReminderOverlay.SetActive(true);
+        OverlayAnimations.Instance.AnimOpenOverlay(debtReminderPopUp);
         yield return null;
     }
 }

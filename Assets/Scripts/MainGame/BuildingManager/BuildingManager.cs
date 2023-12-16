@@ -120,6 +120,7 @@ public class BuildingManager : MonoBehaviour
     public void EnterBuilding(Building selectedBuilding)
     {
         AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.StopMusic();
         GameUiController.onScreenOverlayChanged(UIactions.SHOW_SMALL_BOTTOM_OVERLAY);
 
         if (selectedBuilding.buildingEnumName == Buildings.RESIDENTIAL)
@@ -145,7 +146,7 @@ public class BuildingManager : MonoBehaviour
     public void ExitBuilding()
     {
         AudioManager.Instance.StopMusicEffect();
-        AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlayMusic("Theme2");
         RemoveBuildingActionBtns();
         RemoveNpc();
         UniversityManager.Instance.OnExitedUniversity();
@@ -221,6 +222,8 @@ public class BuildingManager : MonoBehaviour
     public void EnterResidentialArea()
     {
         AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic("Residential");
         GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_SMALL_BOTTOM_OVERLAY);
         buildingSelectOverlay.SetActive(false);
         resViewHUD.SetActive(true);
@@ -238,6 +241,8 @@ public class BuildingManager : MonoBehaviour
     public void ExitResidential()
     {
         AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic("Theme2");
         ResBuildingManager.Instance.ResBuildingSelectOverlay.SetActive(false);
         GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         camera1.SetActive(true);

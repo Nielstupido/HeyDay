@@ -25,7 +25,15 @@ public class LifeEventsPrompt : MonoBehaviour
 
     public void DisplayPrompt(string message)
     {
+        AudioManager.Instance.StopMusic();
         messagePrompt.text = message;
         messagePromptOverlay.SetActive(true);
+    }
+
+    public void Continue()
+    {
+        AudioManager.Instance.PlaySFX("Select");
+        messagePromptOverlay.SetActive(false);
+        AudioManager.Instance.StopSFX();
     }
 }

@@ -16,5 +16,6 @@ public class Accident : LifeEvent
                 "the challenges ahead, including covering the incurred hospital bills. Navigate " +
                 "wisely through this unexpected twist in your journey.";
         LifeEventsPrompt.Instance.DisplayPrompt(message);
+        AudioManager.Instance.PlaySFX("Ambulance");
     }
 }

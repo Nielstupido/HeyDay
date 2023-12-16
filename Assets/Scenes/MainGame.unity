@@ -11177,10 +11177,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winPrompt: {fileID: 1780387020}
-  winPopUp: {fileID: 1780387020}
+  winPopUp: {fileID: 1638792710}
   winAmount: {fileID: 1201294573}
   losePrompt: {fileID: 395101891}
-  losePopUp: {fileID: 395101891}
+  losePopUp: {fileID: 1655672952}
   notEnoughMoneyPrompt: {fileID: 11400000, guid: 1e93f7d4c4135774c852731db27d0852, type: 2}
   slotMachine1: {fileID: 1848661554}
   slotMachine2: {fileID: 793301523}
@@ -13857,7 +13857,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -28348,11 +28348,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionOverlay: {fileID: 398848358}
-  interactionPopUp: {fileID: 1220552529}
+  interactionPopUp: {fileID: 1925757295}
   touchBlockerOverlay: {fileID: 502730872}
   speechBubbleImage: {fileID: 594667190}
   borrowAmountOverlay: {fileID: 408476042}
-  borrowMoneyPopUp: {fileID: 0}
+  borrowMoneyPopUp: {fileID: 1925757295}
   getContactNumBtn: {fileID: 757268220}
   payDebtBtn: {fileID: 1437531564}
   borrowMoneyBtn: {fileID: 738206656}
@@ -34137,10 +34137,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 579957964}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 724163949}
+        m_TargetAssemblyTypeName: LifeEventsPrompt, Assembly-CSharp
+        m_MethodName: Continue
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -36619,72 +36619,58 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a445d96ea2ec04644a6de332032eea7e, type: 3}
   - name: Theme2
     clip: {fileID: 8300000, guid: 2d3c721ec6f8e1049b59f9801388c84a, type: 3}
+  - name: Theme3
+    clip: {fileID: 8300000, guid: 2d3c721ec6f8e1049b59f9801388c84a, type: 3}
+  - name: Residential
+    clip: {fileID: 8300000, guid: d9c4d6bb95412b74b99392a918098377, type: 3}
   sfxSounds:
   - name: News
-    clip: {fileID: 8300000, guid: 8f14ab4f01ab9cd4381c4eeb2c832fef, type: 3}
+    clip: {fileID: 8300000, guid: 861df0af39653c04d9b4f882cc4e6061, type: 3}
   - name: Barber
-    clip: {fileID: 8300000, guid: c663422e801d2c147858af64bd96e0e6, type: 3}
+    clip: {fileID: 8300000, guid: 68eaf30d31715b145a8276029ecadaaa, type: 3}
   - name: Ambulance
-    clip: {fileID: 8300000, guid: 02fd0c7f3d1de85489f5e3fcf089588e, type: 3}
+    clip: {fileID: 8300000, guid: a279b7dd2dbcb2445b88fa0a914cdfdf, type: 3}
   - name: Commute
-    clip: {fileID: 8300000, guid: b4a56e2fc97bf754c897a40d1808e107, type: 3}
+    clip: {fileID: 8300000, guid: 3d9efc4fa8798804087679ff230bab99, type: 3}
   - name: Dental
-    clip: {fileID: 8300000, guid: 9c1d1fff273734e4ba73b9a93efa3614, type: 3}
+    clip: {fileID: 8300000, guid: dfd733baa6ab6e542ade7dbc47a58d06, type: 3}
   - name: Drive
-    clip: {fileID: 8300000, guid: 995940d2c08fcd84ba5ad6cd2df89111, type: 3}
+    clip: {fileID: 8300000, guid: 50d07e03d2d384545acaf8872d90f034, type: 3}
   - name: Sleep
-    clip: {fileID: 8300000, guid: f0ce5062dd616ea48823597e2cd35a17, type: 3}
+    clip: {fileID: 8300000, guid: 6754f8a9daca03948a634b783bec2fb1, type: 3}
   - name: Walk
-    clip: {fileID: 8300000, guid: 87f10efa47c01284a9b7469ea0afc391, type: 3}
+    clip: {fileID: 8300000, guid: bce6614381911094da93a411f3e0f70a, type: 3}
   - name: Earthquake
-    clip: {fileID: 8300000, guid: e8e083dd34fceac4eb98554c02bf29f8, type: 3}
+    clip: {fileID: 8300000, guid: 2195c2cba1b4eed4ca43acd803f7c475, type: 3}
   - name: Salon
-    clip: {fileID: 8300000, guid: 2459e326bb313ea4081d19a7f1ca0757, type: 3}
+    clip: {fileID: 8300000, guid: d763705e11784754ab1531ecc223b0de, type: 3}
   - name: WatchMovie
-    clip: {fileID: 8300000, guid: 62db1ca3c087f0940a765e96d8a7e0a9, type: 3}
-  - name: Ambulance
-    clip: {fileID: 8300000, guid: 2df9e1c6b8ca19648a8007dffd75e26c, type: 3}
+    clip: {fileID: 8300000, guid: fcac201b949d8a74f98a642f1f97db60, type: 3}
   - name: OfficeNoise
-    clip: {fileID: 8300000, guid: 1ae2139bc7a081945bb359b79d00f0aa, type: 3}
+    clip: {fileID: 8300000, guid: c1f2165b445713042943ea25ffba3f8f, type: 3}
   - name: Eat
-    clip: {fileID: 8300000, guid: 4eec7b35c2c3d2341ae1f42532cf4889, type: 3}
+    clip: {fileID: 8300000, guid: 6fe44d32311a7d3418b68755af7257e1, type: 3}
   - name: Party
-    clip: {fileID: 8300000, guid: 541dff28b5a5af741aaf54fd79c4855f, type: 3}
+    clip: {fileID: 8300000, guid: a2664b84b59965344b95826146ac3b3e, type: 3}
   - name: Select
     clip: {fileID: 8300000, guid: df2a504863a41bf48a9498498b6375cf, type: 3}
   - name: Pay
-    clip: {fileID: 8300000, guid: 77f4c6970b7fcb94f8486777ede063e3, type: 3}
+    clip: {fileID: 8300000, guid: ef8637a63d32c2a4ea1d0d88b613e0a3, type: 3}
+  - name: Salary
+    clip: {fileID: 8300000, guid: 6fe90e4db1bfea148b5d6b188f80b81a, type: 3}
+  - name: Yawn
+    clip: {fileID: 8300000, guid: a21bd50c072371d48966755d22af5bac, type: 3}
+  - name: Study
+    clip: {fileID: 8300000, guid: 32a925abfd001ca48b510c08496ec906, type: 3}
+  - name: Police
+    clip: {fileID: 8300000, guid: 6aef6470170e3514bb903cfce767310a, type: 3}
+  - name: CashCounter
+    clip: {fileID: 8300000, guid: c60cc624b5366424c8c2d3c9bfd237f9, type: 3}
+  - name: Payout
+    clip: {fileID: 8300000, guid: 3c62dcf4583df0849827f52973071bd5, type: 3}
   musicEffectSounds:
-  - name: News
-    clip: {fileID: 8300000, guid: 8f14ab4f01ab9cd4381c4eeb2c832fef, type: 3}
-  - name: Barber
-    clip: {fileID: 8300000, guid: c663422e801d2c147858af64bd96e0e6, type: 3}
-  - name: Ambulance
-    clip: {fileID: 8300000, guid: 02fd0c7f3d1de85489f5e3fcf089588e, type: 3}
-  - name: Commute
-    clip: {fileID: 8300000, guid: 20ddc3d4d7df1ed418c9ccb0f7eaef27, type: 3}
-  - name: Dental
-    clip: {fileID: 8300000, guid: 9c1d1fff273734e4ba73b9a93efa3614, type: 3}
-  - name: Drive
-    clip: {fileID: 8300000, guid: 995940d2c08fcd84ba5ad6cd2df89111, type: 3}
-  - name: Sleep
-    clip: {fileID: 8300000, guid: f0ce5062dd616ea48823597e2cd35a17, type: 3}
-  - name: Walk
-    clip: {fileID: 8300000, guid: 87f10efa47c01284a9b7469ea0afc391, type: 3}
-  - name: Earthquake
-    clip: {fileID: 8300000, guid: e8e083dd34fceac4eb98554c02bf29f8, type: 3}
-  - name: Salon
-    clip: {fileID: 8300000, guid: 2459e326bb313ea4081d19a7f1ca0757, type: 3}
-  - name: WatchMovie
-    clip: {fileID: 8300000, guid: 62db1ca3c087f0940a765e96d8a7e0a9, type: 3}
-  - name: Ambulance
-    clip: {fileID: 8300000, guid: 2df9e1c6b8ca19648a8007dffd75e26c, type: 3}
-  - name: OfficeNoise
-    clip: {fileID: 8300000, guid: 1ae2139bc7a081945bb359b79d00f0aa, type: 3}
-  - name: Eat
-    clip: {fileID: 8300000, guid: 4eec7b35c2c3d2341ae1f42532cf4889, type: 3}
-  - name: Party
-    clip: {fileID: 8300000, guid: 541dff28b5a5af741aaf54fd79c4855f, type: 3}
+  - name: Casino
+    clip: {fileID: 8300000, guid: 08d8a5a476381cb4d8180f03ae3900b3, type: 3}
   musicSource: {fileID: 184015387}
   sfxSource: {fileID: 1329454672}
   soundEffectsSource: {fileID: 374670830}
@@ -56342,7 +56328,7 @@ GameObject:
   - component: {fileID: 1638792713}
   - component: {fileID: 1638792712}
   m_Layer: 5
-  m_Name: WinOverlay
+  m_Name: WinPopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61475,7 +61461,7 @@ GameObject:
   - component: {fileID: 1780387023}
   - component: {fileID: 1780387022}
   m_Layer: 5
-  m_Name: WinPopUp
+  m_Name: WinOverlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66066,6 +66052,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a805a51c9487314bb7bb8ee0d6b8b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1925757295 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1334179962389656942, guid: 067923034288b6949a6a7364936ba52f, type: 3}
+  m_PrefabInstance: {fileID: 1334179961560568263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1926216225
 GameObject:
   m_ObjectHideFlags: 0
@@ -74832,6 +74823,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 276507646029854050, guid: 86ee5920c0902e14e965d5201f68a826, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 276507646772786711, guid: 86ee5920c0902e14e965d5201f68a826, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -74844,6 +74839,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 303715230}
+    - target: {fileID: 6728491576315118558, guid: 86ee5920c0902e14e965d5201f68a826, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6728491576577268399, guid: 86ee5920c0902e14e965d5201f68a826, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -74945,6 +74944,10 @@ PrefabInstance:
       value: BankingSystemOverlay
       objectReference: {fileID: 0}
     - target: {fileID: 6728491577176220029, guid: 86ee5920c0902e14e965d5201f68a826, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728491577580322060, guid: 86ee5920c0902e14e965d5201f68a826, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -78639,7 +78642,7 @@ MonoBehaviour:
   currentlyHired: 0
   buildingDescription: 
   buildingBgImage: {fileID: 21300000, guid: b3b2d71c1654cb04eb06bb07f50383b2, type: 3}
-  bbuildingBgSound: {fileID: 8300000, guid: 03727fa4e3cd68941b38adb5db52788e, type: 3}
+  bbuildingBgSound: {fileID: 8300000, guid: c4edd9106b2c29d40addde700459f100, type: 3}
 --- !u!1 &919132148644934306
 GameObject:
   m_ObjectHideFlags: 0
@@ -78736,7 +78739,7 @@ MonoBehaviour:
   currentlyHired: 0
   buildingDescription: 
   buildingBgImage: {fileID: 21300000, guid: 53c925aa9d5b71948bd7c1548396ae4a, type: 3}
-  bbuildingBgSound: {fileID: 8300000, guid: 966c7a532d7275d49ba9f231de240830, type: 3}
+  bbuildingBgSound: {fileID: 8300000, guid: 53d813e3af1b43148af5090ba347669e, type: 3}
 --- !u!1 &919132148672196732
 GameObject:
   m_ObjectHideFlags: 0
@@ -78833,7 +78836,7 @@ MonoBehaviour:
   currentlyHired: 0
   buildingDescription: 
   buildingBgImage: {fileID: 21300000, guid: 2899c9747d09eec4ba9e63add8bf40de, type: 3}
-  bbuildingBgSound: {fileID: 8300000, guid: 4600bdb35c7ce8f44ac6f0c7d9d73cf2, type: 3}
+  bbuildingBgSound: {fileID: 8300000, guid: e3bf361970b40a44ead3ce6a0c54829c, type: 3}
 --- !u!1 &919132148765386969
 GameObject:
   m_ObjectHideFlags: 0
@@ -79003,7 +79006,7 @@ MonoBehaviour:
   currentlyHired: 0
   buildingDescription: 
   buildingBgImage: {fileID: 21300000, guid: a875390a91381dc418e5017395e369a6, type: 3}
-  bbuildingBgSound: {fileID: 8300000, guid: 2dafd9453087a724892e84e935d36e51, type: 3}
+  bbuildingBgSound: {fileID: 8300000, guid: ee7b23fdc88bc314a8cbf9dd0c7f1e1d, type: 3}
 --- !u!1 &919132148960232143
 GameObject:
   m_ObjectHideFlags: 0
@@ -80534,7 +80537,7 @@ MonoBehaviour:
   currentlyHired: 0
   buildingDescription: 
   buildingBgImage: {fileID: 21300000, guid: 600fea217b6891c4298c61eb58b4e5d7, type: 3}
-  bbuildingBgSound: {fileID: 8300000, guid: 7d2980b9583c4c24792378d2f07422ac, type: 3}
+  bbuildingBgSound: {fileID: 8300000, guid: a1cc9c4ba8e6c634199c510ce3a8ba64, type: 3}
 --- !u!114 &1117413019794750903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82936,7 +82939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1489125647285760724, guid: fcd18517f0f145b48aeeb9380e9414f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1489125647285760724, guid: fcd18517f0f145b48aeeb9380e9414f7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -94408,7 +94411,7 @@ MonoBehaviour:
   currentlyHired: 0
   buildingDescription: 
   buildingBgImage: {fileID: 21300000, guid: f61a4d77bde881d4fbb41b95e8705fc4, type: 3}
-  bbuildingBgSound: {fileID: 8300000, guid: bb0e7e8cfc6f4464d962b98468067703, type: 3}
+  bbuildingBgSound: {fileID: 8300000, guid: 59b037f9f0ccd74418158957493474e7, type: 3}
 --- !u!1 &3469311692838570114
 GameObject:
   m_ObjectHideFlags: 0
@@ -103360,7 +103363,7 @@ MonoBehaviour:
   currentlyHired: 0
   buildingDescription: 
   buildingBgImage: {fileID: 21300000, guid: de4ab161a5f906949b0ba716b331e8a1, type: 3}
-  bbuildingBgSound: {fileID: 8300000, guid: 7d2980b9583c4c24792378d2f07422ac, type: 3}
+  bbuildingBgSound: {fileID: 8300000, guid: a1cc9c4ba8e6c634199c510ce3a8ba64, type: 3}
 --- !u!114 &5390446138128199272
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -270,6 +270,7 @@ public class Player : MonoBehaviour
         }
 
         StartCoroutine(DoAnim(ActionAnimations.BUY, 2f));
+        AudioManager.Instance.PlaySFX("Pay");
 
         switch (item.itemType)
         {
@@ -329,7 +330,13 @@ public class Player : MonoBehaviour
             playerLvlConsumablesExpenses += price;
         }
 
+<<<<<<< Updated upstream
         TimeManager.Instance.AddClockTime(false, timeAdded);
+=======
+        AudioManager.Instance.PlaySFX("Pay");
+
+        TimeManager.Instance.AddClockTime(timeAdded);
+>>>>>>> Stashed changes
         playerCash -= price;
         playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
         playerStatsDict[PlayerStats.HAPPINESS] += happinessAdded;

@@ -49,6 +49,8 @@ public class MainMenuManager : MonoBehaviour
         }
         
         AnimateMainMenu();
+        var res = GameDataManager.Instance.LoadAllGameStateData();
+        AudioManager.Instance.PlayMusic("Theme");
     }
 
 
@@ -73,6 +75,7 @@ public class MainMenuManager : MonoBehaviour
     {
         GameDataManager.Instance.LoadAllGameStateData();
         gameModePanel.SetActive(true);
+        AudioManager.Instance.PlaySFX("Select");
     }
 
 
@@ -132,24 +135,27 @@ public class MainMenuManager : MonoBehaviour
     public void ExitGameDictionary()
     {
         dictionaryOverlay.SetActive(false);
+        AudioManager.Instance.PlaySFX("Select");
     }
 
 
     public void CloseGameOverlay()
     {
         gameModePanel.SetActive(false);
+        AudioManager.Instance.PlaySFX("Select");
     }
 
 
     public void ExitSettings()
     {
         settingsPanel.SetActive(false);
-        //AudioManager.Instance.PlaySFX("Select");
+        AudioManager.Instance.PlaySFX("Select");
     }
 
 
     public void ExitGame()
     {
+        AudioManager.Instance.PlaySFX("Select");
         Application.Quit();
     }
 }

@@ -15,5 +15,6 @@ public class Robbery : LifeEvent
                         "To avoid robberies, consider these tips. Avoid carrying " +
                         "large amount of money. Be cautious during nighttime walks.";
         LifeEventsPrompt.Instance.DisplayPrompt(message);
+        AudioManager.Instance.PlaySFX("Police");
     }
 }
