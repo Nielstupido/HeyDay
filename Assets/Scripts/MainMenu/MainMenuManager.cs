@@ -127,7 +127,6 @@ public class MainMenuManager : MonoBehaviour
             GameObject newEntry = Instantiate(leaderboardEntryPrefab, leaderboardEntryParent.transform);
             LeaderboardTemplate leaderboardEntry = newEntry.GetComponent<LeaderboardTemplate>();
             leaderboardEntry.SetPlayerInfo(savedPlayer.Key, ++index, savedPlayer.Value);
-            index++;
         }
     }
 
