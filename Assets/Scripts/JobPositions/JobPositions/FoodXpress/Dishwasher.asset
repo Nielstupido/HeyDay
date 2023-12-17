@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7bbd351fbdf149acb81d2b7c75426, type: 3}
   m_Name: Dishwasher
   m_EditorClassIdentifier: 
-  jobPosName: Janitor
+  jobPosName: Dishwasher
   jobPosReqs: none
   establishment: 9
   workField: 0

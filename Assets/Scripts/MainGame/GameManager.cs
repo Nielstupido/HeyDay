@@ -275,7 +275,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadSavedGame()
     {
-        var res = GameDataManager.Instance.LoadAllGameStateData();
+        // var res = GameDataManager.Instance.LoadAllGameStateData();
         var gameStateRes = GameDataManager.Instance.GetCurrentGameState(PlayerPrefs.GetString("PlayerName"));
 
         if (gameStateRes.Item1 == null)

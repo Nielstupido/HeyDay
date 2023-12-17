@@ -58426,7 +58426,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Attention! Don't forget to settle your bills within the next 5 days to
+  m_text: Attention! Don't forget to settle your bills within the next 15 days to
     avoid serious consequences. Keep in mind that interest is accumulating daily.
     Stay on top of your finances for a smooth journey!
   m_isRightToLeft: 0

@@ -33,6 +33,7 @@ public class OverlayAnimations : MonoBehaviour
         LeanTween.scale(obj, new Vector3(1f,1f,1f),0.5f).setDelay(0.5f).setEase(LeanTweenType.easeOutElastic);
     }
 
+
     public void AnimCloseOverlay(GameObject obj, GameObject panel)
     {
         LeanTween.scale(obj, new Vector3(0f,0f,0f),0.5f)
@@ -40,10 +41,12 @@ public class OverlayAnimations : MonoBehaviour
         .setOnComplete(() => panel.SetActive(false));
     }
 
+
     public void AnimShowObj(GameObject obj)
     {
         LeanTween.scale(obj, new Vector3(1f,1f,1f),0.5f).setEase(LeanTweenType.easeOutBounce);
     }
+
 
     public void AnimHideObj(GameObject obj, GameObject panel)
     {
@@ -52,6 +55,7 @@ public class OverlayAnimations : MonoBehaviour
         .setOnComplete(() => panel.SetActive(false));
     }
 
+
     public void ShowGoalSetter()
     {
         LeanTween.scale(goalAssignmentOverlay, new Vector3(1f,1f,1f),2f)
@@ -59,11 +63,13 @@ public class OverlayAnimations : MonoBehaviour
         .setEase(LeanTweenType.easeInOutBack);
     }
 
+
     public void ShowPhone()
     {
         LeanTween.scale(phoneObj, new Vector3(1f,1f,1f),0.2f)
         .setEase(LeanTweenType.easeInBounce);
     }
+
 
     public void HidePhone(GameObject panel)
     {
@@ -72,12 +78,14 @@ public class OverlayAnimations : MonoBehaviour
         .setOnComplete(() => panel.SetActive(false));
     }
 
+
     public void ShowMovieTicket()
     {
         LeanTween.scale(movieTicket, new Vector3(1f,1f,1f),0.5f)
         .setDelay(0.5f)
         .setEase(LeanTweenType.easeOutElastic);
     }
+
 
     public void ShowBarTicket()
     {
@@ -86,6 +94,7 @@ public class OverlayAnimations : MonoBehaviour
         .setEase(LeanTweenType.easeOutElastic);
     }
 
+
     public void HideDebtReminder()
     {
         debtReminderOverlay.SetActive(false);
@@ -93,6 +102,7 @@ public class OverlayAnimations : MonoBehaviour
         .setEase(LeanTweenType.easeInElastic)
         .setOnComplete(() => debtReminderOverlay.SetActive(false));
     }
+
 
     public void CloseOverlayAnim(GameObject obj)
     {

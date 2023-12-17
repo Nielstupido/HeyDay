@@ -171,6 +171,7 @@ public class GameDataManager : MonoBehaviour
 
             // Deserialize into playerRecords using Json.NET
             allPlayersGameStateData = JsonConvert.DeserializeObject<Dictionary<string, GameStateData>>(jsonString);
+            Debug.Log("Data saved");
         }
         catch (Exception e)
         {
@@ -222,6 +223,7 @@ public class GameDataManager : MonoBehaviour
             string jsonString = JsonConvert.SerializeObject(allPlayersGameStateData);
 
             File.WriteAllText(filePath, jsonString);
+            Debug.Log("Game saved");
         }
         catch (Exception e)
         {

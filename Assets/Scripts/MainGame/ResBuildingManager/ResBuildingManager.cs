@@ -270,6 +270,7 @@ public class ResBuildingManager : MonoBehaviour
 
     public void LeaveRoom()
     {
+        currentSelectedResBuilding = null;
         AudioManager.Instance.PlaySFX("Select");
         roomBgOverlay.SetActive(false);
         miniBtnsHolder.SetActive(false);

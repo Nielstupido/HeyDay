@@ -25,6 +25,7 @@ public class HospitalManager : MonoBehaviour
     [SerializeField] private Prompts paidBills; 
 
     private const float BillInterest = 30f;
+    private bool addInterest = false;
     private int daysUnpaid = 0; 
     private float hospitalBill; 
     public static HospitalManager Instance { get; private set; }
@@ -97,6 +98,7 @@ public class HospitalManager : MonoBehaviour
         PlayerTravelManager.Instance.MovePlayerModel(hospitalObj);
         BuildingManager.Instance.CurrentSelectedBuilding = hospitalObj;
         BuildingManager.Instance.EnterBuilding(hospitalObj);
+        addInterest = false;
         TimeManager.Instance.IncrementDayCount(true, dayCount);
     }
 
@@ -142,18 +144,21 @@ public class HospitalManager : MonoBehaviour
 
     private void AddInterest(int dayCount)
     {
-        if (Player.Instance.PlayerHospitalOutstandingDebt != 0f)
+        if (addInterest)
         {
-            Player.Instance.PlayerHospitalOutstandingDebt += BillInterest;
-            daysUnpaid++;
-
-            if (daysUnpaid >= 6)
+            if (Player.Instance.PlayerHospitalOutstandingDebt != 0f)
             {
-                GameManager.Instance.GameOver();
+                Player.Instance.PlayerHospitalOutstandingDebt += BillInterest;
+                daysUnpaid++;
+
+                if (daysUnpaid >= 15)
+                {
+                    GameManager.Instance.GameOver();
+                }
             }
         }
 
-
+        addInterest = true;
     }
 
 

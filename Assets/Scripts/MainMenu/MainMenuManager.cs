@@ -73,7 +73,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void ShowGameOverlay()
     {
-        GameDataManager.Instance.LoadAllGameStateData();
         gameModePanel.SetActive(true);
         AudioManager.Instance.PlaySFX("Select");
     }

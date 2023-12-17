@@ -95,18 +95,13 @@ public class LevelManager : MonoBehaviour
         }
 
         GameManager.onSaveGameStateData += SaveGameData;
+        LoadAllMissions();
     }
 
 
     private void OnDestroy()
     {
         GameManager.onSaveGameStateData -= SaveGameData;
-    }
-
-
-    private void Start()
-    {
-        LoadAllMissions();
     }
 
 
