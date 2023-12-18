@@ -49,7 +49,7 @@ public class MainMenuManager : MonoBehaviour
         }
         
         AnimateMainMenu();
-        var res = GameDataManager.Instance.LoadAllGameStateData();
+        var res = GameDataManager.Instance.LoadGameData();
         AudioManager.Instance.PlayMusic("Theme");
     }
 

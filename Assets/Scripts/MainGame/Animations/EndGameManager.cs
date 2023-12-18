@@ -104,6 +104,6 @@ public class EndGameManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
         GameDataManager.Instance.AllPlayersGameStateData.Remove(Player.Instance.PlayerName);
-        GameDataManager.Instance.SaveGameStateData();
+        GameDataManager.Instance.SaveGameData();
     }
 }

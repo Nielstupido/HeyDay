@@ -96,7 +96,7 @@ public class PauseMenu : MonoBehaviour
         yield return new WaitForSeconds(1f);
         gameSavedOverlay.SetActive(false);
         GameDataManager.Instance.AllPlayersGameStateData[Player.Instance.PlayerName] = GameManager.Instance.CurrentGameStateData;
-        GameDataManager.Instance.SaveGameStateData();
+        GameDataManager.Instance.SaveGameData();
         yield return null;
     }
 

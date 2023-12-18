@@ -4,6 +4,7 @@ using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 
 
 public class GameDataManager : MonoBehaviour
@@ -146,92 +147,92 @@ public class GameDataManager : MonoBehaviour
 
 
     //===>> PLAYERS' GAME STATE DATA <<===//
-    public ValueTuple<bool, string> LoadAllGameStateData()
-    {
-        try
-        {
-            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
-            string filePath = directoryPath + "PlayerGameStateData.json";
+    // public ValueTuple<bool, string> LoadAllGameStateData()
+    // {
+    //     try
+    //     {
+    //         string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+    //         string filePath = directoryPath + "PlayerGameStateData.json";
 
-            // Check if the directory exists, create it if not
-            if (!Directory.Exists(directoryPath))
-            {
-                Debug.Log("TEST 1: Directory mo wala");
-                Directory.CreateDirectory(directoryPath);
-            }
+    //         // Check if the directory exists, create it if not
+    //         if (!Directory.Exists(directoryPath))
+    //         {
+    //             Debug.Log("TEST 1: Directory mo wala");
+    //             Directory.CreateDirectory(directoryPath);
+    //         }
 
-            if (!File.Exists(filePath))
-            {
-                // If the file doesn't exist, create it
-                string playerGameStateData = JsonConvert.SerializeObject(new Dictionary<string, GameStateData>());
-                File.WriteAllText(filePath, playerGameStateData);
-            }
+    //         if (!File.Exists(filePath))
+    //         {
+    //             // If the file doesn't exist, create it
+    //             string playerGameStateData = JsonConvert.SerializeObject(new Dictionary<string, GameStateData>());
+    //             File.WriteAllText(filePath, playerGameStateData);
+    //         }
 
-            string jsonString = File.ReadAllText(filePath);
+    //         string jsonString = File.ReadAllText(filePath);
 
-            // Deserialize into playerRecords using Json.NET
-            allPlayersGameStateData = JsonConvert.DeserializeObject<Dictionary<string, GameStateData>>(jsonString);
-            Debug.Log("Data saved");
-        }
-        catch (Exception e)
-        {
-            return (false, e.ToString());
-        }
+    //         // Deserialize into playerRecords using Json.NET
+    //         allPlayersGameStateData = JsonConvert.DeserializeObject<Dictionary<string, GameStateData>>(jsonString);
+    //         Debug.Log("Data saved");
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         return (false, e.ToString());
+    //     }
 
-        return (true, "");
-    }
-
-
-    public ValueTuple<bool, string> SaveGameStateData(string playerName, GameStateData currentPlayerGameStateData)
-    {
-        try
-        {
-            if (allPlayersGameStateData.ContainsKey(playerName))
-            {
-                allPlayersGameStateData[playerName] = currentPlayerGameStateData;
-            }
-            else
-            {
-                allPlayersGameStateData.Add(playerName, currentPlayerGameStateData);
-            }
-
-            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
-            string filePath = directoryPath + "PlayerGameStateData.json";
-
-            // Serialize playerRecords using Json.NET
-            string jsonString = JsonConvert.SerializeObject(allPlayersGameStateData);
-
-            File.WriteAllText(filePath, jsonString);
-        }
-        catch (Exception e)
-        {
-            return (false, e.ToString());
-        }
-
-        return (true, "");
-    }
+    //     return (true, "");
+    // }
 
 
-    public ValueTuple<bool, string> SaveGameStateData()
-    {
-        try
-        {
-            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
-            string filePath = directoryPath + "PlayerGameStateData.json";
+    // public ValueTuple<bool, string> SaveGameStateData(string playerName, GameStateData currentPlayerGameStateData)
+    // {
+    //     try
+    //     {
+    //         if (allPlayersGameStateData.ContainsKey(playerName))
+    //         {
+    //             allPlayersGameStateData[playerName] = currentPlayerGameStateData;
+    //         }
+    //         else
+    //         {
+    //             allPlayersGameStateData.Add(playerName, currentPlayerGameStateData);
+    //         }
 
-            // Serialize playerRecords using Json.NET
-            string jsonString = JsonConvert.SerializeObject(allPlayersGameStateData);
+    //         string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+    //         string filePath = directoryPath + "PlayerGameStateData.json";
 
-            File.WriteAllText(filePath, jsonString);
-            Debug.Log("Game saved");
-        }
-        catch (Exception e)
-        {
-            return (false, e.ToString());
-        }
+    //         // Serialize playerRecords using Json.NET
+    //         string jsonString = JsonConvert.SerializeObject(allPlayersGameStateData);
 
-        return (true, "");
-    }
+    //         File.WriteAllText(filePath, jsonString);
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         return (false, e.ToString());
+    //     }
+
+    //     return (true, "");
+    // }
+
+
+    // public ValueTuple<bool, string> SaveGameStateData()
+    // {
+    //     try
+    //     {
+    //         string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+    //         string filePath = directoryPath + "PlayerGameStateData.json";
+
+    //         // Serialize playerRecords using Json.NET
+    //         string jsonString = JsonConvert.SerializeObject(allPlayersGameStateData);
+
+    //         File.WriteAllText(filePath, jsonString);
+    //         Debug.Log("Game saved");
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         return (false, e.ToString());
+    //     }
+
+    //     return (true, "");
+    // }
 
     
     public ValueTuple<GameStateData, string> GetCurrentGameState(string playerName)
@@ -250,30 +251,100 @@ public class GameDataManager : MonoBehaviour
     }
 
 
-    public Dictionary<string, GameStateData> GetAllGameStateData()
-    {
-        Dictionary<string, GameStateData> currentPlayersGameStateData = new Dictionary<string, GameStateData>();
-
-        foreach (var item in allPlayersGameStateData)
-        {
-            try
-            {
-                currentPlayersGameStateData.Add(item.Key, item.Value);
-            }
-            catch (Exception)
-            {
-                continue;
-            }
-        }
-
-        return currentPlayersGameStateData;
-    }   
-
-
     public void NewGameState(string playerName)
     {
         GameManager.Instance.CurrentGameStateData = new GameStateData();
-        SaveGameStateData(playerName, new GameStateData());
+        SaveGameData(playerName, new GameStateData());
     }
     //===>> PLAYERS' GAME STATE DATA <<===//
+
+
+
+
+    public ValueTuple<bool, string> SaveGameData(string playerName, GameStateData currentPlayerGameStateData) 
+    {
+        try
+        {
+            if (allPlayersGameStateData.ContainsKey(playerName))
+            {
+                allPlayersGameStateData[playerName] = currentPlayerGameStateData;
+            }
+            else
+            {
+                allPlayersGameStateData.Add(playerName, currentPlayerGameStateData);
+            }
+
+            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+            string filePath = directoryPath + "PlayerGameStateData.dat";
+
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fileStream = File.Create(filePath);
+            bf.Serialize(fileStream, allPlayersGameStateData);
+            fileStream.Close();
+        }
+        catch (Exception e)
+        {
+            return (false, e.ToString());
+        }
+
+        return (true, "");
+    }
+
+
+    public ValueTuple<bool, string> SaveGameData() 
+    {
+        try
+        {
+            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+            string filePath = directoryPath + "PlayerGameStateData.dat";
+
+            // Serialize playerRecords using Json.NET
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fileStreamSave = File.Create(filePath);
+            bf.Serialize(fileStreamSave, allPlayersGameStateData);
+            fileStreamSave.Close();
+        }
+        catch (Exception e)
+        {
+            return (false, e.ToString());
+        }
+
+        return (true, "");
+    }
+
+
+    public ValueTuple<bool, string> LoadGameData()
+    {
+        try
+        {
+            BinaryFormatter bf = new BinaryFormatter ();
+            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+            string filePath = directoryPath + "PlayerGameStateData.dat";
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            if (!File.Exists(filePath))
+            {
+                FileStream fileStreamSave = File.Create(filePath);
+                Dictionary<string, GameStateData> dataHolder = new Dictionary<string, GameStateData>();
+                bf.Serialize(fileStreamSave, dataHolder);
+                fileStreamSave.Close ();
+            }
+
+            FileStream fileStreamLoad = File.Open (filePath, FileMode.Open);
+            Dictionary<string, GameStateData> data = (Dictionary<string, GameStateData>)bf.Deserialize(fileStreamLoad);
+            fileStreamLoad.Close ();
+
+            allPlayersGameStateData = data;
+        }
+        catch (Exception e)
+        {
+            return (false, e.ToString());
+        }
+
+        return (true, "");
+    }
 }

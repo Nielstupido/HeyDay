@@ -29,7 +29,7 @@ public class GameModeManager : MonoBehaviour
     {
         MenuObjManager.onGameStart();
         AudioManager.Instance.StopMusic();
-        SceneManager.LoadScene("MainGame");
+        GameLoader.Instance.LoadGameScene();
     }
 
 
@@ -67,7 +67,7 @@ public class GameModeManager : MonoBehaviour
 
     private void DisplaySavedGames()
     {
-        if (GameDataManager.Instance.GetAllGameStateData().Keys.Count == 0)
+        if (GameDataManager.Instance.AllPlayersGameStateData.Keys.Count == 0)
         {
             noSavedGamesSign.SetActive(true);
             return;
@@ -79,7 +79,7 @@ public class GameModeManager : MonoBehaviour
             Object.Destroy(savedGamesHolder.GetChild(i).gameObject);
         }
 
-        foreach (var savedGame in GameDataManager.Instance.GetAllGameStateData())
+        foreach (var savedGame in GameDataManager.Instance.AllPlayersGameStateData)
         {
             GameObject newEntry = Instantiate(savedGamePrefab, savedGamesHolder);
             SavedGameObj leaderboardEntry = newEntry.GetComponent<SavedGameObj>();

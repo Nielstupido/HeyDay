@@ -212,6 +212,7 @@ public class GameManager : MonoBehaviour
             this.currentGameStateData.playerName = Player.Instance.PlayerName;
             this.currentGameStateData.currentCharacter = Player.Instance.CurrentCharacter;
             this.currentGameStateData.playerGender = Player.Instance.PlayerGender;
+            GameDataManager.Instance.SaveGameData(Player.Instance.PlayerName, new GameStateData());
         }
 
         if (PlayerPrefs.GetInt("FirstLoad") == 0) 
