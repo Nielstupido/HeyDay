@@ -35,7 +35,7 @@ public class TutorialManager : MonoBehaviour
     private bool isDoneEating = false;
 
 
-    private int index = 12;
+    private int index = 1;
     public bool IsBudgetSet { set{isBudgetSet = value;} get{return isBudgetSet;}}
     public bool IsPhoneUsed { set{isPhoneUsed = value;} get{return isPhoneUsed;}}
     public bool IsMissionViewed { set{isMissionViewed = value;} get{return isMissionViewed;}}
