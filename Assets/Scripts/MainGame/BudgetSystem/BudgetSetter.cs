@@ -118,6 +118,8 @@ public class BudgetSetter : MonoBehaviour
         BudgetSystem.Instance.SaveBudget(sliders[0].value, sliders[1].value, sliders[2].value, sliders[3].value);
         this.gameObject.SetActive(false);
         OverlayAnimations.Instance.AnimCloseOverlay(budgetSetterPopUp, this.gameObject);
+        TutorialManager.Instance.IsBudgetSet = true;
+        // TutorialManager.Instance.StartTutorial();
 
         if (PlayerPrefs.GetInt("GameStart") == 0)
         {

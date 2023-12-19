@@ -101,4 +101,17 @@ public class OverlayAnimations : MonoBehaviour
         .setEase(LeanTweenType.easeInElastic);
     }
 
+    public void OpenTutorialAnim(GameObject obj)
+    {
+        LeanTween.scale(obj, new Vector3(1f,1f,1f),1.5f)
+        .setEase(LeanTweenType.easeOutBack);
+    }
+
+    public void CloseTutorialAnim(GameObject obj, GameObject panel)
+    {
+        LeanTween.scale(obj, new Vector3(0f,0f,0f),1.5f)
+        .setEase(LeanTweenType.easeInBack)
+        .setOnComplete(() => panel.SetActive(false));
+    }
+
 }

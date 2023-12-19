@@ -65,6 +65,7 @@ public class PlayerPhone : MonoBehaviour
         npcResponseText.text = "";
         playerMsgText.gameObject.SetActive(false);
         npcResponseText.gameObject.SetActive(false);
+        TutorialManager.Instance.IsPhoneUsed = true;
     }
 
 

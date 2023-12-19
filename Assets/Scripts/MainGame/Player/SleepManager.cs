@@ -9,7 +9,7 @@ public class SleepManager : MonoBehaviour
     [SerializeField] private GameObject sleepingManagerOverlay;
     [SerializeField] private GameObject sleepPopUp;
     [SerializeField] private TextMeshProUGUI sleepHrsText;
-    private float sleepHrs;
+    public float sleepHrs;
     public static SleepManager Instance { get; private set; }
 
 
@@ -65,6 +65,7 @@ public class SleepManager : MonoBehaviour
         AudioManager.Instance.PlaySFX("Yawn");
         sleepHrs = float.Parse(sleepHrsText.text);
         StartCoroutine(DoSleep(sleepHrs));
+        TutorialManager.Instance.IsSleepDone = true;
     }
 
 
