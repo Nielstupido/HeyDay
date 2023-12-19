@@ -23,7 +23,6 @@ public class ResBuildingSelect : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            Debug.Log(eventData);
             ResBuildingManager.Instance.ResBuildingName = eventData.selectedObject.gameObject.GetComponent<ResBuilding>().buildingNameStr;
             ResBuildingManager.Instance.MonthlyRentText = eventData.selectedObject.gameObject.GetComponent<ResBuilding>().monthlyRent.ToString();
             ResBuildingManager.Instance.MonthlyWaterText = eventData.selectedObject.gameObject.GetComponent<ResBuilding>().monthlyWaterCharge.ToString();

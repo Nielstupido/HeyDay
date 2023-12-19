@@ -83,17 +83,21 @@ public class LifeEventsManager : MonoBehaviour
                     possibilityPercentage += 1;
                 }
                 break;
+
             case LifeEvents.ACCIDENT:
                 if (Player.Instance.PlayerHospitalOutstandingDebt != 0f)
                 {
                     return;
                 }
+                
                 upcomingEvent = new Accident();
                 possibilityPercentage = 1;
                 break;  
+
             default:
                 randomChance = Random.Range(0, 2);
                 possibilityPercentage = 1;
+
                 if (randomChance == 0)
                 {
                     upcomingEvent = new Earthquake();

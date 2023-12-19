@@ -31,7 +31,8 @@ public class PlayerInfoManager : MonoBehaviour
         AnimOverlayManager.Instance.StartBlackScreenFadeLoadScreen();
         yield return new WaitForSeconds(0.6f);
         characterCreationOverlay.SetActive(false);
-        introCutsceneMannager.StartIntro();
+        // introCutsceneMannager.StartIntro();
+        GoalSetter.Instance.SetGoal();GoalSetter.Instance.SetGoal();
     }
 
     public void StartIntroScene()

@@ -194,8 +194,8 @@ public class InteractionSystemManager : MonoBehaviour
 
         if (npcResponse.Item1)
         {
-            Player.Instance.ContactList.Add(interactingCharacter.characterName);
             getContactNumBtn.enabled = false;
+            Player.Instance.ContactList.Add(interactingCharacter.characterName);
         }
         else
         {

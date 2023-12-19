@@ -95,7 +95,7 @@ public class HospitalManager : MonoBehaviour
         Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] = 100;
         Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] = 100;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
-        PlayerTravelManager.Instance.MovePlayerModel(hospitalObj);
+        PlayerTravelManager.Instance.MovePlayerModel(true, hospitalObj);
         BuildingManager.Instance.CurrentSelectedBuilding = hospitalObj;
         BuildingManager.Instance.EnterBuilding(hospitalObj);
         addInterest = false;
@@ -153,7 +153,7 @@ public class HospitalManager : MonoBehaviour
 
                 if (daysUnpaid >= 15)
                 {
-                    GameManager.Instance.GameOver();
+                    GameManager.Instance.GameOver("HOSPITAL BILLS");
                 }
             }
         }

@@ -164,6 +164,23 @@ public class LevelManager : MonoBehaviour
 
         InstantiateCurrentLvlMissions();
     }
+
+
+    public void PrepareLevelDets()
+    {
+        tempLevelName = "Level ";
+
+        if (GameManager.Instance.CurrentGameLevel == 0)
+        {
+            tempLevelName += "1";
+        }
+        else
+        {
+            tempLevelName += GameManager.Instance.CurrentGameLevel.ToString();
+        }
+
+        missionOverlayLevelText.text = tempLevelName;
+    }
     
 
     public void InstantiateCurrentLvlMissions()

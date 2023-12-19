@@ -52,6 +52,11 @@ public class Missions : MonoBehaviour
         }
 
         LevelManager.onFinishedPlayerAction += OnPlayerActionCompleted;
+        if (checkedBox != null && this.missionStatus == MissionStatus.COMPLETED)
+        {
+            this.missionCheckBox.sprite = checkedBox;
+            this.missionCheckBox.GetComponent<RectTransform>().sizeDelta = new Vector2(60f, 60f);
+        }
     }
 
 
