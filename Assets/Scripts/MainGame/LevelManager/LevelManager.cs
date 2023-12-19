@@ -227,6 +227,7 @@ public class LevelManager : MonoBehaviour
         OverlayAnimations.Instance.AnimOpenOverlay(missionPopUp);
         lastUIactions = GameManager.Instance.GetCurrentUIaction();
         GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
+        TutorialManager.Instance.IsMissionViewed = true;
     }
 
 

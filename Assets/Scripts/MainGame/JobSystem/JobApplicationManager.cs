@@ -307,6 +307,7 @@ public class JobApplicationManager : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("Select");
         qualifiedMsgOverlay.SetActive(false);
+        TutorialManager.Instance.IsPlayerHired = true;
         OverlayAnimations.Instance.AnimCloseOverlay(qualifiedPopUp, qualifiedMsgOverlay);
     }
 }

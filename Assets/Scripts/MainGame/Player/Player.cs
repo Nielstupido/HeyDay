@@ -216,6 +216,7 @@ public class Player : MonoBehaviour
         StartCoroutine(DoAnim(ActionAnimations.EAT, 5f));
         AudioManager.Instance.PlaySFX("Eat");
         TimeManager.Instance.AddClockTime(false, foodToConsume.eatingTime);
+        TutorialManager.Instance.IsFoodEaten = true;
         playerStatsDict[PlayerStats.HAPPINESS] += foodToConsume.happinessBarValue;
         playerStatsDict[PlayerStats.ENERGY] += foodToConsume.energyBarValue;
         playerStatsDict[PlayerStats.HUNGER] += foodToConsume.hungerBarValue;
