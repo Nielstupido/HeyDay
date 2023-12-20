@@ -34,6 +34,7 @@ public class SwitchMenuItem : MonoBehaviour
       AudioManager.Instance.PlaySFX("Select");
       OverlayAnimations.Instance.AnimCloseOverlay(menuPopUp, menuOverlay);
       menuOverlay.SetActive(false);
+      TutorialManager.Instance.IsDoneEating = true;
    }  
 
 

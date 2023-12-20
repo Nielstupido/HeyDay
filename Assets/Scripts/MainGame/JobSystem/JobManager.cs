@@ -34,6 +34,7 @@ public class JobManager : MonoBehaviour
 
     private IEnumerator SalaryAnim()
     {
+        TutorialManager.Instance.IsSalaryReceived = true;
         yield return new WaitForSeconds(0.2f);
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.SALARY);
         yield return new WaitForSeconds(1f);

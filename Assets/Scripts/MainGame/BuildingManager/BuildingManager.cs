@@ -176,6 +176,7 @@ public class BuildingManager : MonoBehaviour
         currentSelectedBuilding.actionButtons.Clear();
         buildingInteriorOverlay.SetActive(false);
         buildingSelectCopy.RefreshSelectOverlayUI();
+        TutorialManager.Instance.IsExitedBuilding = true;
     }
 
 
@@ -269,6 +270,7 @@ public class BuildingManager : MonoBehaviour
         AudioManager.Instance.PlayMusic("Theme2");
         ResBuildingManager.Instance.ResBuildingSelectOverlay.SetActive(false);
         GameManager.Instance.UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
+        TutorialManager.Instance.LeftSuburbs = true;
         camera1.SetActive(true);
         resViewHUD.SetActive(false);
         camera2.SetActive(false);
