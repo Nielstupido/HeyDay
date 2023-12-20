@@ -216,6 +216,7 @@ public class LevelManager : MonoBehaviour
         AudioManager.Instance.PlaySFX("Select");
         OverlayAnimations.Instance.AnimCloseOverlay(missionPopUp, missionOverlay);
         GameManager.Instance.UpdateBottomOverlay(lastUIactions);
+        TutorialManager.Instance.IsMissionViewed = true;
     }
 
 
@@ -227,7 +228,6 @@ public class LevelManager : MonoBehaviour
         OverlayAnimations.Instance.AnimOpenOverlay(missionPopUp);
         lastUIactions = GameManager.Instance.GetCurrentUIaction();
         GameManager.Instance.UpdateBottomOverlay(UIactions.HIDE_BOTTOM_OVERLAY);
-        TutorialManager.Instance.IsMissionViewed = true;
     }
 
 

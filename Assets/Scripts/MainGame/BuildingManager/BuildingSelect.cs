@@ -70,6 +70,7 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
         {
             AnimationManager.ScaleObj(BuildingManager.Instance.BuildingSelectOverlay, scaleDown, 0.4f, true, LeanTweenType.easeInOutBack);
             GameUiController.onScreenOverlayChanged(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
+            TutorialManager.Instance.IsStatsOverlayShown = true;
         }
         else
         {
@@ -96,6 +97,7 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
                 BuildingManager.Instance.BuildingSelectOverlay.SetActive(true);
                 AnimationManager.ScaleObj(BuildingManager.Instance.BuildingSelectOverlay, Vector3.one, 0.4f, false, LeanTweenType.easeOutBounce);
                 GameUiController.onScreenOverlayChanged(UIactions.SHOW_SMALL_BOTTOM_OVERLAY);
+                TutorialManager.Instance.IsStatsOverlayShown = false;
             }
         }
     }
