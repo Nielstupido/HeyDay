@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a36e4e78b4773142950dae044465e64, type: 3}
   m_Name: Mission40 4
   m_EditorClassIdentifier: 
-  id: 39.4
+  id: 40.4
   missionStatus: 0
   missionType: 2
   missionDets: Study for at least 40 hours

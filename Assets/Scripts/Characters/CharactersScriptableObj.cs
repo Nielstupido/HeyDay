@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 
 [CreateAssetMenu( menuName = "Character Asset Container")]
+[Serializable]
 public class CharactersScriptableObj : ScriptableObject
 {
     public string characterName;

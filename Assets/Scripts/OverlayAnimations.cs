@@ -30,21 +30,21 @@ public class OverlayAnimations : MonoBehaviour
 
     public void AnimOpenOverlay(GameObject obj)
     {
-        LeanTween.scale(obj, new Vector3(1f,1f,1f),0.5f).setDelay(0.5f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(obj, new Vector3(1f,1f,1f),0.5f).setDelay(0.5f).setEaseOutElastic();
     }
 
 
     public void AnimCloseOverlay(GameObject obj, GameObject panel)
     {
         LeanTween.scale(obj, new Vector3(0f,0f,0f),0.5f)
-        .setEase(LeanTweenType.easeInElastic)
+        .setEaseInElastic()
         .setOnComplete(() => panel.SetActive(false));
     }
 
 
     public void AnimShowObj(GameObject obj)
     {
-        LeanTween.scale(obj, new Vector3(1f,1f,1f),0.5f).setEase(LeanTweenType.easeOutBounce);
+        LeanTween.scale(obj, new Vector3(1f,1f,1f),0.5f).setEaseOutBounce();
     }
 
 
@@ -114,13 +114,13 @@ public class OverlayAnimations : MonoBehaviour
     public void OpenTutorialAnim(GameObject obj)
     {
         LeanTween.scale(obj, new Vector3(1f,1f,1f),1.5f)
-        .setEase(LeanTweenType.easeOutBack);
+        .setEaseOutBack();
     }
 
     public void CloseTutorialAnim(GameObject obj, GameObject panel)
     {
         LeanTween.scale(obj, new Vector3(0f,0f,0f),1.5f)
-        .setEase(LeanTweenType.easeInBack)
+        .setEaseInBack()
         .setOnComplete(() => panel.SetActive(false));
     }
 

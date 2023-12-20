@@ -127,6 +127,7 @@ public class BudgetSetter : MonoBehaviour
 
         if (PlayerPrefs.GetInt("GameStart") == 0)
         {
+            PlayerPrefs.SetInt("GameRestart", 1);
             GameManager.Instance.StartGame(new GameStateData()); 
         }
         else

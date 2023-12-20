@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 
-public enum StudyFields
+[Serializable]public enum StudyFields
 {
     NONE,
     Architecture_and_Design,
@@ -18,7 +18,7 @@ public enum StudyFields
 }
 
 
-public enum UniversityCourses
+[Serializable]public enum UniversityCourses
 {
     NONE,
     ANY,

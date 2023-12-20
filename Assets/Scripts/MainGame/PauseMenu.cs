@@ -66,16 +66,18 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        LevelManager.Instance.ResetLvlMissionStats();
         AudioManager.Instance.PlaySFX("Select");
         pauseMenuOverlay.SetActive(false);
         GameDataManager.Instance.PlayerRecords[Player.Instance.PlayerName] = 0;
         GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
-        GameDataManager.Instance.NewGameState(Player.Instance.PlayerName);
+        GameManager.Instance.CurrentGameStateData = new GameStateData();
+        GameDataManager.Instance.AllPlayersGameStateData[Player.Instance.PlayerName] = new GameStateData();
         
         PlayerPrefs.SetInt("FirstLoad", 1);
         PlayerPrefs.SetInt("GameStart", 0);
-        var gameStateRes = GameDataManager.Instance.GetCurrentGameState(Player.Instance.PlayerName);
-        GameManager.Instance.StartGame(gameStateRes.Item1);
+        PlayerPrefs.SetInt("GameRestart", 0);
+        GameManager.Instance.StartGame(GameManager.Instance.CurrentGameStateData);
         GoalSetter.Instance.SetGoal();
     }
 

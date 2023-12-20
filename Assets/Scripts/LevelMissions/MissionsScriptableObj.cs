@@ -1,7 +1,9 @@
 using UnityEngine;
+using System;
 
 
 [CreateAssetMenu(menuName = "Game Missions", fileName = "Mission")]
+[Serializable]
 public class MissionsScriptableObj : ScriptableObject
 {
     public string id;

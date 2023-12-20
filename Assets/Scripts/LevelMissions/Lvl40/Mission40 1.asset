@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a36e4e78b4773142950dae044465e64, type: 3}
   m_Name: Mission40 1
   m_EditorClassIdentifier: 
-  id: 
+  id: 40.1
   missionStatus: 0
-  missionType: 0
-  missionDets: 
+  missionType: 10
+  missionDets: Pay off debts
   currentNumberForMission: 0
   requiredNumberForMission: 0
   targetBuilding: 0

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a36e4e78b4773142950dae044465e64, type: 3}
   m_Name: Mission40 2
   m_EditorClassIdentifier: 
-  id: 
+  id: 40.2
   missionStatus: 0
-  missionType: 0
-  missionDets: 
+  missionType: 11
+  missionDets: Finish your degree
   currentNumberForMission: 0
   requiredNumberForMission: 0
   targetBuilding: 0

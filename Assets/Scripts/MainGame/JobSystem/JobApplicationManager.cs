@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 
 
-public enum JobFields
+[System.Serializable]public enum JobFields
 {
     NONE,
     Assistant_Nurse,

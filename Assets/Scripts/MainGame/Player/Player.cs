@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using System;
 
 
-public enum PlayerStats
+[Serializable]public enum PlayerStats
 {
     NONE,
     ALL,
@@ -14,7 +14,7 @@ public enum PlayerStats
     MONEY
 }
 
-public enum Gender
+[Serializable]public enum Gender
 {
     MALE,
     FEMALE

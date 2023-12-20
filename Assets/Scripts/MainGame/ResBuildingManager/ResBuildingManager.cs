@@ -113,16 +113,25 @@ public class ResBuildingManager : MonoBehaviour
 
     private void ShowBtn()
     {
-        if(Player.Instance.CurrentPlayerPlace.buildingEnumName == currentSelectedResBuilding.buildingEnumName)
+        if (Player.Instance.CurrentPlayerPlace != null)
         {
-            rentBtn.SetActive(false);
-            enterBtn.SetActive(true);
+            if(Player.Instance.CurrentPlayerPlace.buildingEnumName == currentSelectedResBuilding.buildingEnumName)
+            {
+                rentBtn.SetActive(false);
+                enterBtn.SetActive(true);
+            }
+            else
+            {
+                rentBtn.SetActive(true);
+                enterBtn.SetActive(false);
+            }
         }
         else
         {
             rentBtn.SetActive(true);
             enterBtn.SetActive(false);
         }
+
     }
 
 

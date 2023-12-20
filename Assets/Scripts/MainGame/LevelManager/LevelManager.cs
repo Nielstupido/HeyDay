@@ -199,11 +199,36 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    public void OnMissionFinished(MissionsScriptableObj mission)
+    public void ResetLvlMissionStats()
     {
-        currentActiveMissions.Remove(mission);
+        foreach(MissionsScriptableObj mission in currentActiveMissions)
+        {
+            mission.missionStatus = MissionStatus.PENDING;
+        }    
+    }
 
-        if (currentActiveMissions.Count == 0)
+
+    public void OnMissionFinished(MissionsScriptableObj doneMission)
+    {
+        // currentActiveMissions.Remove(mission);
+        foreach (MissionsScriptableObj mission in currentActiveMissions)
+        {
+            if (mission.id == doneMission.id)
+            {
+                mission.missionStatus = MissionStatus.COMPLETED;
+            }
+        }
+
+        int i = 0;
+        foreach (MissionsScriptableObj mission in currentActiveMissions)
+        {
+            if (mission.missionStatus == MissionStatus.COMPLETED)
+            {
+                i++;
+            }
+        }
+
+        if (i == currentActiveMissions.Count)
         {
             nextLevelBtn.SetActive(true);
         }

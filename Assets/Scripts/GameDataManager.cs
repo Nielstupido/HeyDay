@@ -9,6 +9,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameDataManager : MonoBehaviour
 {
+    [SerializeField] private GameStateHolder gameStateHolder;
     public static GameDataManager Instance {private set; get;}
     public Dictionary<string, int> playerRecords = new Dictionary<string, int>();
     private Dictionary<string, GameStateData> allPlayersGameStateData = new Dictionary<string, GameStateData>();
@@ -298,7 +299,6 @@ public class GameDataManager : MonoBehaviour
             string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
             string filePath = directoryPath + "PlayerGameStateData.dat";
 
-            // Serialize playerRecords using Json.NET
             BinaryFormatter bf = new BinaryFormatter();
             FileStream fileStreamSave = File.Create(filePath);
             bf.Serialize(fileStreamSave, allPlayersGameStateData);
@@ -336,12 +336,12 @@ public class GameDataManager : MonoBehaviour
 
             FileStream fileStreamLoad = File.Open (filePath, FileMode.Open);
             Dictionary<string, GameStateData> data = (Dictionary<string, GameStateData>)bf.Deserialize(fileStreamLoad);
-            fileStreamLoad.Close ();
-
             allPlayersGameStateData = data;
+            fileStreamLoad.Close ();
         }
         catch (Exception e)
         {
+            Debug.Log(e);
             return (false, e.ToString());
         }
 

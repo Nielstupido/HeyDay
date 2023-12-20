@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 [CreateAssetMenu(menuName = "Job Position")]
+[Serializable]
 public class JobPositions : ScriptableObject
 {
     public string jobPosName;

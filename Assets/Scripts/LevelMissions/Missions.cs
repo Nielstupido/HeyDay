@@ -29,17 +29,17 @@ public class Missions : MonoBehaviour
     public void LoadMissionDets(MissionsScriptableObj mission)
     {
         this.missionCopy = mission;
-        this.missionID = mission.id;
-        this.missionStatus = mission.missionStatus;
-        this.missionDets = mission.missionDets;
-        this.missionType = mission.missionType;
-        this.currentNumberForMission = mission.currentNumberForMission;
-        this.requiredNumberForMission = mission.requiredNumberForMission;
-        this.targetBuilding = mission.targetBuilding;
-        this.targetIitemType = mission.targetIitemType;
-        this.targetApp = mission.targetApp;
-        this.targetPlayerStats = mission.targetPlayerStats;
-        this.missionDetsText.text = this.missionDets;
+        // this.missionID = mission.id;
+        // this.missionStatus = mission.missionStatus;
+        // this.missionDets = mission.missionDets;
+        // this.missionType = mission.missionType;
+        // this.currentNumberForMission = mission.currentNumberForMission;
+        // this.requiredNumberForMission = mission.requiredNumberForMission;
+        // this.targetBuilding = mission.targetBuilding;
+        // this.targetIitemType = mission.targetIitemType;
+        // this.targetApp = mission.targetApp;
+        // this.targetPlayerStats = mission.targetPlayerStats;
+        this.missionDetsText.text = this.missionCopy.missionDets;
         this.missionCheckBox.sprite = uncheckedBox;
 
         if (this.requiredNumberForMission == 0)
@@ -52,7 +52,8 @@ public class Missions : MonoBehaviour
         }
 
         LevelManager.onFinishedPlayerAction += OnPlayerActionCompleted;
-        if (checkedBox != null && this.missionStatus == MissionStatus.COMPLETED)
+
+        if (this.checkedBox != null && this.missionCopy.missionStatus == MissionStatus.COMPLETED)
         {
             this.missionCheckBox.sprite = checkedBox;
             this.missionCheckBox.GetComponent<RectTransform>().sizeDelta = new Vector2(60f, 60f);
@@ -88,7 +89,7 @@ public class Missions : MonoBehaviour
         APPS interactedApp = APPS.NONE,
         PlayerStats interactedPlayerStats = PlayerStats.NONE)
     {
-        if (missionType != actionMissionType)
+        if (this.missionCopy.missionType != actionMissionType)
         {
             return;
         }
@@ -103,46 +104,46 @@ public class Missions : MonoBehaviour
         }
         else if (actionMissionType == MissionType.VISIT || actionMissionType == MissionType.BROWSEJOB || actionMissionType == MissionType.EAT)
         {
-            if (this.targetBuilding == interactedBuilding)
+            if (this.missionCopy.targetBuilding == interactedBuilding)
             {
                 MissionDone();
             }
         }
         else if (actionMissionType == MissionType.STUDYHR || actionMissionType == MissionType.WORKHR)
         {
-            this.currentNumberForMission += actionAddedNumber;
-            this.missionProgressText.text = this.currentNumberForMission.ToString() + "/" + this.requiredNumberForMission.ToString();
+            this.missionCopy.currentNumberForMission += actionAddedNumber;
+            this.missionProgressText.text = this.missionCopy.currentNumberForMission.ToString() + "/" + this.missionCopy.requiredNumberForMission.ToString();
 
-            if (this.requiredNumberForMission <= this.currentNumberForMission)
+            if (this.missionCopy.requiredNumberForMission <= this.missionCopy.currentNumberForMission)
             {
                 MissionDone();
             }
         }
         else if (actionMissionType == MissionType.SLEEPHR)
         {
-            if (this.requiredNumberForMission <= actionAddedNumber)
+            if (this.missionCopy.requiredNumberForMission <= actionAddedNumber)
             {
-                this.missionProgressText.text = actionAddedNumber.ToString() + "/" + this.requiredNumberForMission.ToString();
+                this.missionProgressText.text = actionAddedNumber.ToString() + "/" + this.missionCopy.requiredNumberForMission.ToString();
                 MissionDone();
             }
         }
         else if (actionMissionType == MissionType.MAXSTATS)
         {
-            if (this.targetPlayerStats == interactedPlayerStats)
+            if (this.missionCopy.targetPlayerStats == interactedPlayerStats)
             {
                 MissionDone();
             }
         }
         else if (actionMissionType == MissionType.BUY)
         {
-            if (this.targetIitemType == interactedItemType || this.targetIitemType == ItemType.NA)
+            if (this.missionCopy.targetIitemType == interactedItemType || this.missionCopy.targetIitemType == ItemType.NA)
             {
                 MissionDone();
             }
         }
         else if (actionMissionType == MissionType.USEAPP)
         {
-            if (this.targetApp == interactedApp)
+            if (this.missionCopy.targetApp == interactedApp)
             {
                 MissionDone();
             }
@@ -152,11 +153,11 @@ public class Missions : MonoBehaviour
 
     private void MissionDone()
     {
+        this.missionCopy.missionStatus = MissionStatus.COMPLETED;
+        LevelManager.Instance.OnMissionFinished(this.missionCopy);
+
         if (this.missionCheckBox != null)
         {
-            this.missionStatus = MissionStatus.COMPLETED;
-            LevelManager.Instance.OnMissionFinished(this.missionCopy);
-
             if (checkedBox != null)
             {
                 this.missionCheckBox.sprite = checkedBox;

@@ -246,12 +246,19 @@ public class GameManager : MonoBehaviour
         onGameStarted();
         LoadGameData();
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
-        StartCoroutine(DelayOpenMissions());
+
+        if (PlayerPrefs.GetInt("GameRestart") != 0)
+        {
+            StartCoroutine(DelayOpenMissions());
+        }
+        
+        PlayerPrefs.SetInt("GameRestart", 1);
     }
 
 
     private IEnumerator DelayOpenMissions()
     {
+        levelManager.CloseMissionOverlay();
         yield return new WaitForSeconds(2f);
         levelManager.OpenMissionOverlay();
         yield return null;
@@ -281,6 +288,7 @@ public class GameManager : MonoBehaviour
         pauseBtn.SetActive(true);
         AssignNpcToBuilding(0);
         levelManager.PrepareCurrentLevelMissions();
+        StartCoroutine(DelayOpenMissions());
     }
 
 

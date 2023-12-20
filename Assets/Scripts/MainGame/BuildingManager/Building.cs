@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 
+[Serializable]
 public abstract class Building : MonoBehaviour
 {
     [HideInInspector]public string buildingStringName;

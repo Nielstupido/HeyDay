@@ -1,11 +1,11 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 
-[System.Serializable]
+[Serializable]
 public class GameStateData
 {
     //Player Data

@@ -224,7 +224,7 @@ public class TutorialManager : MonoBehaviour
 
     private void HandleStatsToggled()
     {
-        if (smallBotOverlay.activeSelf && isStatsOverlayShown)
+        if (smallBotOverlay.activeSelf)
         {
             SetTutorialContent("View your life goals, track your finances, buy groceries, " +
             "or call a HeyDay Citizen through your phone. Try using it!");
