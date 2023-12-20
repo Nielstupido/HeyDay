@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7bbd351fbdf149acb81d2b7c75426, type: 3}
   m_Name: AssistantPharmacistIII
   m_EditorClassIdentifier: 
-  jobPosName: I
+  jobPosName: Assistant Pharmacist III
   jobPosReqs: Enrolled in BS Pharmacy + 500 WH (Asst. Pharmacist)
   establishment: 1
   workField: 5
   reqStudyField: 0
-  reqCourse: 28
+  reqCourse: 
   reqWorkField: 5
   reqWorkHrs: 500
   salaryPerHr: 65

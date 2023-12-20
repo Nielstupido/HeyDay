@@ -71,29 +71,33 @@ public class LifeEventsManager : MonoBehaviour
         {
             case LifeEvents.ROBBERY:
                 upcomingEvent = new Robbery();
-                possibilityPercentage = 2;
+                possibilityPercentage = 1;
 
                 if (TimeManager.Instance.CurrentTime > 22f || TimeManager.Instance.CurrentTime < 4f)
                 {
-                    possibilityPercentage += 2;
+                    possibilityPercentage += 1;
                 }
 
                 if (Player.Instance.PlayerCash > 10000)
                 {
-                    possibilityPercentage += 2;
+                    possibilityPercentage += 1;
                 }
                 break;
+
             case LifeEvents.ACCIDENT:
                 if (Player.Instance.PlayerHospitalOutstandingDebt != 0f)
                 {
                     return;
                 }
+                
                 upcomingEvent = new Accident();
-                possibilityPercentage = 2;
+                possibilityPercentage = 1;
                 break;  
+
             default:
                 randomChance = Random.Range(0, 2);
                 possibilityPercentage = 1;
+
                 if (randomChance == 0)
                 {
                     upcomingEvent = new Earthquake();
@@ -106,7 +110,7 @@ public class LifeEventsManager : MonoBehaviour
                 break;
         }
 
-        randomChance = Random.Range(1, 101);
+        randomChance = Random.Range(1, 201);
 
         if (randomChance > possibilityPercentage) 
         {

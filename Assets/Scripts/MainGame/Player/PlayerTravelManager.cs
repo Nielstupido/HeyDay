@@ -22,7 +22,6 @@ public class PlayerActionObservers : MonoBehaviour
 public class PlayerTravelManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerModel;
-    [SerializeField] private Player3dController player3DController;
     private Building currentVisitedBuilding;
     private ModeOfTravels currentModeOfTravel;
     public Building CurrentVisitedBuilding { get{return currentVisitedBuilding;}}
@@ -67,24 +66,39 @@ public class PlayerTravelManager : MonoBehaviour
     public void PlayerTravel(Building selectedBuilding, ModeOfTravels modeOfTravel, ActionAnimations actionAnimation)
     {
         currentModeOfTravel = modeOfTravel;
-        StartCoroutine(StartTravelingOverlay(2f, selectedBuilding, actionAnimation));
+
+        if (modeOfTravel == ModeOfTravels.WALK)
+        {
+            StartCoroutine(StartTravelingOverlay(false, 2f, selectedBuilding, actionAnimation));
+        }
+        else
+        {
+            StartCoroutine(StartTravelingOverlay(true, 2f, selectedBuilding, actionAnimation));
+        }
     }
 
 
-    public void MovePlayerModel(Building selectedBuilding)
+    public void MovePlayerModel(bool directlyMove, Building selectedBuilding)
     {
-        // player3DController.playerNavMesh.isStopped = true;
-        // playerModel.gameObject.transform.position = selectedBuilding.transform.GetChild(selectedBuilding.transform.childCount - 1).transform.position;
-        Player3dController.Instance.WalkToPoint(selectedBuilding.transform.GetChild(selectedBuilding.transform.childCount - 1).transform.position);
+        if (directlyMove)
+        {
+            Player3dController.Instance.StopMovement();      
+            playerModel.gameObject.transform.position = selectedBuilding.transform.GetChild(selectedBuilding.transform.childCount - 1).transform.position;
+        }
+        else
+        {
+            Player3dController.Instance.WalkToPoint(selectedBuilding.transform.GetChild(selectedBuilding.transform.childCount - 1).transform.position);
+        }
+
         currentVisitedBuilding = selectedBuilding;
         PlayerActionObservers.onPlayerTraveled(currentModeOfTravel);
     }
 
 
-    private IEnumerator StartTravelingOverlay(float travelingTime, Building selectedBuilding, ActionAnimations actionAnimation)
+    private IEnumerator StartTravelingOverlay(bool directlyMove, float travelingTime, Building selectedBuilding, ActionAnimations actionAnimation)
     {
         AnimOverlayManager.Instance.StartAnim(actionAnimation);
-        MovePlayerModel(selectedBuilding);
+        MovePlayerModel(directlyMove, selectedBuilding);
         yield return new WaitForSeconds(travelingTime);
         AnimOverlayManager.Instance.StopAnim();
         AudioManager.Instance.StopMusicEffect();

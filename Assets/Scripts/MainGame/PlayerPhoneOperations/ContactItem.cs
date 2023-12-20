@@ -22,8 +22,6 @@ public class ContactItem : MonoBehaviour
 
     public void CallContact(string name)
     {
-        Debugger.Instance.ShowError(name);
-
         if (MeetUpSystem.Instance.CheckForPendingMeetup())
         {
             PromptManager.Instance.ShowPrompt(pendingMeetupPrompt);

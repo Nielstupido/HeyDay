@@ -31,15 +31,14 @@ public class PlayerInfoManager : MonoBehaviour
         AnimOverlayManager.Instance.StartBlackScreenFadeLoadScreen();
         yield return new WaitForSeconds(0.6f);
         characterCreationOverlay.SetActive(false);
-        introCutsceneMannager.StartIntro();
+        // introCutsceneMannager.StartIntro();
+        GoalSetter.Instance.SetGoal();GoalSetter.Instance.SetGoal();
     }
 
     public void StartIntroScene()
     {
         AudioManager.Instance.PlaySFX("Select");
         string playerName = playerNameTextInput.text.TrimEnd();
-        Player.Instance.PlayerName = playerName;
-        playerNameTextDisplay.text = playerName;
 
         if (!GameDataManager.Instance.IsPlayerNameAvailable(playerName))
         {
@@ -47,6 +46,8 @@ public class PlayerInfoManager : MonoBehaviour
             return;
         }
 
+        Player.Instance.PlayerName = playerName;
+        playerNameTextDisplay.text = playerName;
         GameDataManager.Instance.SavePlayerRecords(playerName, 0);
         StartCoroutine(ProceedIntro());
     }

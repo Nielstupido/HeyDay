@@ -32,6 +32,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ShowPauseMenu()
     {
+        GameManager.onSaveGameStateData();
         pauseMenuOverlay.SetActive(true);
         OverlayAnimations.Instance.AnimOpenOverlay(pauseMenuPopUp);
         PauseGame();
@@ -82,7 +83,6 @@ public class PauseMenu : MonoBehaviour
     public void SaveGame()
     {
         AudioManager.Instance.PlaySFX("Select");
-        GameManager.onSaveGameStateData();
         StartCoroutine(ProceedGameSave());
     }
 
@@ -91,11 +91,16 @@ public class PauseMenu : MonoBehaviour
     {
         gameSavingOverlay.SetActive(true);
         yield return new WaitForSeconds(2f);
+
+        GameDataManager.Instance.AllPlayersGameStateData[Player.Instance.PlayerName] = GameManager.Instance.CurrentGameStateData;
+        GameDataManager.Instance.SaveGameData();
+        
+        yield return new WaitForSeconds(2f);
         gameSavedOverlay.SetActive(true);
         gameSavingOverlay.SetActive(false);
         yield return new WaitForSeconds(1f);
         gameSavedOverlay.SetActive(false);
-        GameDataManager.Instance.SaveGameStateData(Player.Instance.PlayerName, GameManager.Instance.CurrentGameStateData);
+
         yield return null;
     }
 

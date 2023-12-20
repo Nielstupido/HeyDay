@@ -64,6 +64,7 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
     {
         AudioManager.Instance.PlaySFX("Select");
         Building currentSelectedBuilding = eventData.selectedObject.GetComponentInParent<Building>();
+        BuildingManager.Instance.BuildingSelectCopy = this;
 
         if (BuildingManager.Instance.BuildingSelectOverlay.activeSelf && BuildingManager.Instance.CurrentSelectedBuilding == currentSelectedBuilding)
         {
@@ -74,10 +75,19 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
         {
             BuildingManager.Instance.BuildingNameText = currentSelectedBuilding.buildingStringName;
             BuildingManager.Instance.BuildingDescriptionText = currentSelectedBuilding.buildingDescription;
-            BuildingManager.Instance.BuildingOpeningHrs = TimeManager.Instance.TransposeTimeValue((int)currentSelectedBuilding.buildingOpeningTime).ToString() + " " + 
-                                                        TimeManager.Instance.AmOrPm((int)currentSelectedBuilding.buildingOpeningTime).ToString() + " - " +
-                                                        TimeManager.Instance.TransposeTimeValue((int)currentSelectedBuilding.buildingClosingTime).ToString() + " " + 
-                                                        TimeManager.Instance.AmOrPm((int)currentSelectedBuilding.buildingClosingTime).ToString();
+            
+            if (currentSelectedBuilding.buildingOpeningTime == 0f && currentSelectedBuilding.buildingClosingTime == 0f)
+            {
+                BuildingManager.Instance.BuildingOpeningHrs = "24/7";
+            }
+            else
+            {
+                BuildingManager.Instance.BuildingOpeningHrs = TimeManager.Instance.TransposeTimeValue((int)currentSelectedBuilding.buildingOpeningTime).ToString() + " " + 
+                                                                        TimeManager.Instance.AmOrPm((int)currentSelectedBuilding.buildingOpeningTime).ToString() + " - " +
+                                                                        TimeManager.Instance.TransposeTimeValue((int)currentSelectedBuilding.buildingClosingTime).ToString() + " " + 
+                                                                        TimeManager.Instance.AmOrPm((int)currentSelectedBuilding.buildingClosingTime).ToString();
+            }
+            
             BuildingManager.Instance.CurrentSelectedBuilding = currentSelectedBuilding;
             RefreshSelectOverlayUI(); 
 

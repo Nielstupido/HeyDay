@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: NotQualifiedForJobPos
   m_EditorClassIdentifier: 
   promptTitle: Not Qualified
-  promptContent: sad naman
+  promptContent: Thank you for applying for the position. While we appreciate your
+    interest, we regret to inform you that you have not met the qualifications for
+    the role. We encourage you to explore other opportunities. Best of luck on your
+    journey!

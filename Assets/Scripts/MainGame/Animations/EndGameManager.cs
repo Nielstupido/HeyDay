@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class EndGameManager : MonoBehaviour
 {
@@ -16,17 +17,18 @@ public class EndGameManager : MonoBehaviour
     [SerializeField] private List<Sprite> goodSceneImagesBoy = new List<Sprite>();
     [SerializeField] private List<Sprite> badSceneImagesGirl = new List<Sprite>();
     [SerializeField] private List<Sprite> badSceneImagesBoy = new List<Sprite>();
+    [SerializeField] private TextMeshProUGUI gameOverMsg;
     private bool isGoodEnding;
 
 
     private IEnumerator StartCutscene(List<Sprite> sceneImages)
     {
-        foreach(Sprite image in sceneImages)
+        for(int i = 1; i < sceneImages.Count; i++)
         {
             yield return new WaitForSeconds(2.5f);
             AnimOverlayManager.Instance.StartBlackScreenFadeLoadScreen();
             yield return new WaitForSeconds(0.5f);
-            sceneImageObj.sprite = image;
+            sceneImageObj.sprite = sceneImages[i];
         }
 
         yield return new WaitForSeconds(4f);
@@ -37,7 +39,7 @@ public class EndGameManager : MonoBehaviour
     }
 
 
-    public void ShowOutro(bool isGameFinished)
+    public void ShowOutro(bool isGameFinished, string gameOverReason)
     {
         isGoodEnding = isGameFinished;
         
@@ -47,6 +49,7 @@ public class EndGameManager : MonoBehaviour
         }
         else
         {
+            gameOverMsg.text = 	"Your journey has reached an unfortunate end due to UNRESOLVED " + gameOverReason + ". Financial responsibility is key to success in our HEYDAY world.";
             badEndOverlay.SetActive(true); 
         }
     }
@@ -103,5 +106,7 @@ public class EndGameManager : MonoBehaviour
     public void ReturnHome()
     {
         SceneManager.LoadScene("MainMenu");
+        GameDataManager.Instance.AllPlayersGameStateData.Remove(Player.Instance.PlayerName);
+        GameDataManager.Instance.SaveGameData();
     }
 }

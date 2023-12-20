@@ -25,6 +25,7 @@ public class HospitalManager : MonoBehaviour
     [SerializeField] private Prompts paidBills; 
 
     private const float BillInterest = 30f;
+    private bool addInterest = false;
     private int daysUnpaid = 0; 
     private float hospitalBill; 
     public static HospitalManager Instance { get; private set; }
@@ -79,7 +80,7 @@ public class HospitalManager : MonoBehaviour
     }
 
 
-    public void Hospitalized(int dayCount, float bill = 300)
+    public void Hospitalized(int dayCount, float bill = 250)
     {
         AudioManager.Instance.PlaySFX("Ambulance");
         hospitalBill = bill * dayCount;
@@ -94,9 +95,10 @@ public class HospitalManager : MonoBehaviour
         Player.Instance.PlayerStatsDict[PlayerStats.ENERGY] = 100;
         Player.Instance.PlayerStatsDict[PlayerStats.HUNGER] = 100;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
-        PlayerTravelManager.Instance.MovePlayerModel(hospitalObj);
+        PlayerTravelManager.Instance.MovePlayerModel(true, hospitalObj);
         BuildingManager.Instance.CurrentSelectedBuilding = hospitalObj;
         BuildingManager.Instance.EnterBuilding(hospitalObj);
+        addInterest = false;
         TimeManager.Instance.IncrementDayCount(true, dayCount);
     }
 
@@ -142,18 +144,21 @@ public class HospitalManager : MonoBehaviour
 
     private void AddInterest(int dayCount)
     {
-        if (Player.Instance.PlayerHospitalOutstandingDebt != 0f)
+        if (addInterest)
         {
-            Player.Instance.PlayerHospitalOutstandingDebt += BillInterest;
-            daysUnpaid++;
-
-            if (daysUnpaid >= 3)
+            if (Player.Instance.PlayerHospitalOutstandingDebt != 0f)
             {
-                GameManager.Instance.GameOver();
+                Player.Instance.PlayerHospitalOutstandingDebt += BillInterest;
+                daysUnpaid++;
+
+                if (daysUnpaid >= 15)
+                {
+                    GameManager.Instance.GameOver("HOSPITAL BILLS");
+                }
             }
         }
 
-
+        addInterest = true;
     }
 
 

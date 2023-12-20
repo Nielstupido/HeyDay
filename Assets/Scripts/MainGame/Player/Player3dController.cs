@@ -8,8 +8,6 @@ public class Player3dController : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent playerNavMesh;
     [SerializeField] private Animator animator;
-    private float clickTimeThres = 0.3f;
-    private float firstClickTime = 0f;
     private Vector3 targetPos = Vector3.zero;
     public static Player3dController Instance { get; private set; }
 
@@ -58,5 +56,13 @@ public class Player3dController : MonoBehaviour
         targetPos = pos;
         animator.enabled = true;
         animator.Play("Walking");
+    }
+
+
+    public void StopMovement()
+    {
+        targetPos = Vector3.zero;
+        playerNavMesh.isStopped = true;
+        animator.enabled = false;
     }
 }

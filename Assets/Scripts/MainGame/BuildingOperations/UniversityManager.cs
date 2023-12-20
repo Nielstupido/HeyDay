@@ -389,8 +389,9 @@ public class UniversityManager : MonoBehaviour
 
     private void UpdateCourseDetsHUD()
     {
-        course.text = GameManager.Instance.EnumStringParser(selectedCourse);
-        duration.text = "/" + selectedCourseDuration.ToString();
+        course.text = GameManager.Instance.EnumStringParser(Player.Instance.PlayerEnrolledCourse);
+        duration.text = "/" + Player.Instance.PlayerEnrolledCourseDuration.ToString();
+        UpdateStudyHours(0);
     }
 
 
@@ -409,7 +410,7 @@ public class UniversityManager : MonoBehaviour
     {
         AudioManager.Instance.PlaySFX("Select");
         studyDuration = int.Parse(studyDurationText.text);
-        if (studyDuration > 0f)
+        if (studyDuration > 1f)
         {
             studyDurationText.text = (--studyDuration).ToString();
         }

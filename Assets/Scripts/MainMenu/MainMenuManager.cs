@@ -49,7 +49,7 @@ public class MainMenuManager : MonoBehaviour
         }
         
         AnimateMainMenu();
-        var res = GameDataManager.Instance.LoadAllGameStateData();
+        var res = GameDataManager.Instance.LoadGameData();
         AudioManager.Instance.PlayMusic("Theme");
     }
 
@@ -73,7 +73,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void ShowGameOverlay()
     {
-        GameDataManager.Instance.LoadAllGameStateData();
         gameModePanel.SetActive(true);
         AudioManager.Instance.PlaySFX("Select");
     }
@@ -127,7 +126,6 @@ public class MainMenuManager : MonoBehaviour
             GameObject newEntry = Instantiate(leaderboardEntryPrefab, leaderboardEntryParent.transform);
             LeaderboardTemplate leaderboardEntry = newEntry.GetComponent<LeaderboardTemplate>();
             leaderboardEntry.SetPlayerInfo(savedPlayer.Key, ++index, savedPlayer.Value);
-            index++;
         }
     }
 

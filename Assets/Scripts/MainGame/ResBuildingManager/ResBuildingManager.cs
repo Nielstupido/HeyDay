@@ -113,7 +113,7 @@ public class ResBuildingManager : MonoBehaviour
 
     private void ShowBtn()
     {
-        if(Player.Instance.CurrentPlayerPlace == currentSelectedResBuilding)
+        if(Player.Instance.CurrentPlayerPlace.buildingEnumName == currentSelectedResBuilding.buildingEnumName)
         {
             rentBtn.SetActive(false);
             enterBtn.SetActive(true);
@@ -148,7 +148,7 @@ public class ResBuildingManager : MonoBehaviour
         stayCount++;
         float totalBilling = 0;
 
-        if (stayCount % 3 == 0)
+        if (stayCount % 15 == 0)
         {
             totalBilling = Player.Instance.CurrentPlayerPlace.monthlyElecCharge + Player.Instance.CurrentPlayerPlace.monthlyRent + Player.Instance.CurrentPlayerPlace.monthlyWaterCharge;
 
@@ -180,9 +180,9 @@ public class ResBuildingManager : MonoBehaviour
 
         if (unpaidBill != 0f)
         {
-            if (daysUnpaidRent >= 5)
+            if (daysUnpaidRent >= 6)
             {
-                GameManager.Instance.GameOver();
+                GameManager.Instance.GameOver("APARTMENT BILLS");
                 return;
             }
 
@@ -270,6 +270,7 @@ public class ResBuildingManager : MonoBehaviour
 
     public void LeaveRoom()
     {
+        currentSelectedResBuilding = null;
         AudioManager.Instance.PlaySFX("Select");
         roomBgOverlay.SetActive(false);
         miniBtnsHolder.SetActive(false);

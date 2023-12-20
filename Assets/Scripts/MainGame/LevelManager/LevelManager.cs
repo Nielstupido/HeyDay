@@ -72,7 +72,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject missionOverlay;
     [SerializeField] private GameObject missionPopUp;
     [SerializeField] private GameObject nextLevelBtn;
-    [SerializeField] private TextMeshProUGUI missionOverlayLevelText;
+    [SerializeField] private TextMeshProUGUI missionOverlayLevelText; 
+    [SerializeField] private CameraMovement cameraMovement; 
     private Dictionary<string, List<MissionsScriptableObj>> allMissions = new Dictionary<string, List<MissionsScriptableObj>>();
     public List<MissionsScriptableObj> currentActiveMissions = new List<MissionsScriptableObj>();
     private string tempLevelName;
@@ -94,18 +95,13 @@ public class LevelManager : MonoBehaviour
         }
 
         GameManager.onSaveGameStateData += SaveGameData;
+        LoadAllMissions();
     }
 
 
     private void OnDestroy()
     {
         GameManager.onSaveGameStateData -= SaveGameData;
-    }
-
-
-    private void Start()
-    {
-        LoadAllMissions();
     }
 
 
@@ -168,6 +164,23 @@ public class LevelManager : MonoBehaviour
 
         InstantiateCurrentLvlMissions();
     }
+
+
+    public void PrepareLevelDets()
+    {
+        tempLevelName = "Level ";
+
+        if (GameManager.Instance.CurrentGameLevel == 0)
+        {
+            tempLevelName += "1";
+        }
+        else
+        {
+            tempLevelName += GameManager.Instance.CurrentGameLevel.ToString();
+        }
+
+        missionOverlayLevelText.text = tempLevelName;
+    }
     
 
     public void InstantiateCurrentLvlMissions()
@@ -199,6 +212,7 @@ public class LevelManager : MonoBehaviour
 
     public void CloseMissionOverlay()
     {
+        cameraMovement.enabled = true;
         AudioManager.Instance.PlaySFX("Select");
         OverlayAnimations.Instance.AnimCloseOverlay(missionPopUp, missionOverlay);
         GameManager.Instance.UpdateBottomOverlay(lastUIactions);
@@ -207,6 +221,7 @@ public class LevelManager : MonoBehaviour
 
     public void OpenMissionOverlay()
     {
+        cameraMovement.enabled = false;
         missionOverlay.SetActive(true);
         AudioManager.Instance.PlaySFX("Select");
         OverlayAnimations.Instance.AnimOpenOverlay(missionPopUp);
