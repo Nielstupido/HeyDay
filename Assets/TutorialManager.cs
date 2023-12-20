@@ -48,6 +48,7 @@ public class TutorialManager : MonoBehaviour
     public bool IsDoneEating { set{isDoneEating = value;} get{return isDoneEating;}}
     public static TutorialManager Instance {private set; get;}
 
+
     private void Awake() 
     { 
         if (Instance == null)

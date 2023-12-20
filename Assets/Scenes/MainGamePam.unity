@@ -3917,6 +3917,7 @@ MonoBehaviour:
   missionPopUp: {fileID: 714422047}
   nextLevelBtn: {fileID: 621143077}
   missionOverlayLevelText: {fileID: 1143903487}
+  cameraMovement: {fileID: 0}
   currentActiveMissions: []
 --- !u!114 &89637883
 MonoBehaviour:
@@ -5216,6 +5217,9 @@ MonoBehaviour:
   interactionSystemManager: {fileID: 797988384}
   levelManager: {fileID: 89637882}
   endGameManager: {fileID: 1605115985}
+  playerNameTextDisplay: {fileID: 1064102319}
+  playerAgeTextDisplay: {fileID: 688169380}
+  playerBustIcon: {fileID: 534693303}
   characters:
   - {fileID: 11400000, guid: 94f879924c0c02442b11caa7b380e3d6, type: 2}
   - {fileID: 11400000, guid: 30b133fca9f9f364ab952c90df54104c, type: 2}
@@ -16952,7 +16956,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerModel: {fileID: 1092815155}
-  player3DController: {fileID: 1092815162}
 --- !u!114 &433560207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23974,6 +23977,8 @@ MonoBehaviour:
   smallBotOverlay: {fileID: 2911800399325964226}
   phoneOverlay: {fileID: 2008300090}
   missionOverlay: {fileID: 1773205518}
+  buildingInteriorOverlay: {fileID: 62309206}
+  buildingSelectOverlay: {fileID: 434310656}
   animationOverlay: {fileID: 484068888}
   promptOverlay: {fileID: 1812526034}
   clickToContOverlay: {fileID: 1109571926}
@@ -56361,6 +56366,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2a9e6524415b8ba4a9b237a42335a376, type: 3}
   - {fileID: 21300000, guid: bd396b57ebfb8184e89fe026e9106bb3, type: 3}
   - {fileID: 21300000, guid: 25d42df962a141047893482e8ea9d994, type: 3}
+  gameOverMsg: {fileID: 0}
 --- !u!114 &1605115986
 MonoBehaviour:
   m_ObjectHideFlags: 0
