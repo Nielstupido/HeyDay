@@ -61,6 +61,8 @@ public class JobApplicationManager : MonoBehaviour
     [SerializeField] private List<JobPositions> factoryJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> callCenterJobPositions = new List<JobPositions>();
     [SerializeField] private List<JobPositions> electricCompanyJobPositions = new List<JobPositions>();
+    [SerializeField] private List<JobPositions> allJobPos = new List<JobPositions>();
+    public List<JobPositions> AllJobPos {get{return allJobPos;}}
     private Player currentPlayer;
     private bool isHalfQuali;
     private List<JobPositions> jobPositionsList = new List<JobPositions>();

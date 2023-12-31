@@ -16,6 +16,7 @@ public class IntroCutsceneMannager : MonoBehaviour
 
     private IEnumerator StartCutscene()
     {
+        AudioManager.Instance.PlayMusic("Intro");
         if (Player.Instance.PlayerGender == Gender.MALE)
         {
             foreach(Sprite image in sceneImagesBoy)
@@ -42,6 +43,7 @@ public class IntroCutsceneMannager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         IntroOverlay.SetActive(false);
         GoalSetter.Instance.SetGoal();
+        AudioManager.Instance.StopMusic();
         yield return null;
     }
 
@@ -52,7 +54,5 @@ public class IntroCutsceneMannager : MonoBehaviour
         IntroOverlay.SetActive(true);
         botBar.LeanSize(new Vector2(0f, 90f), 2f).delay = 0.5f;
         topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene());} ).delay = 0.5f;
-
-        // GoalSetter.Instance.SetGoal(); //testing purposes
     }
 }

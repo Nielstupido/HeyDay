@@ -34,7 +34,15 @@ public class MeetUpSystem : MonoBehaviour
         this.meetupBuilding = GameManager.Instance.CurrentGameStateData.meetupBuilding;
         this.meetupTime = GameManager.Instance.CurrentGameStateData.meetupTime;
         this.meetupDay = GameManager.Instance.CurrentGameStateData.meetupDay;
-        this.meetupCharacter = GameManager.Instance.CurrentGameStateData.meetupCharacter;
+
+        foreach (CharactersScriptableObj charac in GameManager.Instance.Characters)
+        {
+            if (charac.characterID == GameManager.Instance.CurrentGameStateData.meetupCharacter)
+            {
+                this.meetupCharacter = charac;
+            }
+        }
+
         this.pendingMeetup = GameManager.Instance.CurrentGameStateData.pendingMeetup;
     }
 
@@ -44,7 +52,9 @@ public class MeetUpSystem : MonoBehaviour
         GameManager.Instance.CurrentGameStateData.meetupBuilding = this.meetupBuilding;
         GameManager.Instance.CurrentGameStateData.meetupTime = this.meetupTime;
         GameManager.Instance.CurrentGameStateData.meetupDay = this.meetupDay;
-        GameManager.Instance.CurrentGameStateData.meetupCharacter = this.meetupCharacter;
+
+        GameManager.Instance.CurrentGameStateData.meetupCharacter = this.meetupCharacter.characterID;
+
         GameManager.Instance.CurrentGameStateData.pendingMeetup = this.pendingMeetup;
     }
 

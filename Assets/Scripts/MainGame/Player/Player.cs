@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 
 [Serializable]public enum PlayerStats
@@ -132,26 +133,21 @@ public class Player : MonoBehaviour
     }
 
 
-    private void OnEnable()
-    {
-        PlayerStatsObserver.onPlayerStatChanged += StatsChecker;
-    }
-
-
-    private void OnDisable()
-    {
-        PlayerStatsObserver.onPlayerStatChanged -= StatsChecker;
-    }
-
-
     private void SaveGameData()
     {
         GameManager.Instance.CurrentGameStateData.playerName = this.playerName;
         GameManager.Instance.CurrentGameStateData.playerAge = this.playerAge;
-        GameManager.Instance.CurrentGameStateData.playerGender = this.playerGender;
-        GameManager.Instance.CurrentGameStateData.currentCharacter = this.currentCharacter;
+        GameManager.Instance.CurrentGameStateData.playerGender = this.playerGender.ToString();
+        GameManager.Instance.CurrentGameStateData.currentCharacter = this.currentCharacter.characterID;
         GameManager.Instance.CurrentGameStateData.contactList = this.contactList;
-        GameManager.Instance.CurrentGameStateData.playerStatsDict = this.playerStatsDict;
+
+        int i = 0;
+        foreach(float val in this.playerStatsDict.Values)
+        {
+            GameManager.Instance.CurrentGameStateData.playerStatsDict[i] = val;
+            i++;
+        }
+        
         GameManager.Instance.CurrentGameStateData.playerCash = this.playerCash;
         GameManager.Instance.CurrentGameStateData.playerBankSavings = this.playerBankSavings;
         GameManager.Instance.CurrentGameStateData.playerTotalDebt = this.playerTotalDebt;
@@ -161,17 +157,36 @@ public class Player : MonoBehaviour
         GameManager.Instance.CurrentGameStateData.playerLvlSavings = this.playerLvlSavings;
         GameManager.Instance.CurrentGameStateData.playerLvlConsumablesExpenses = this.playerLvlConsumablesExpenses;
         GameManager.Instance.CurrentGameStateData.playerLvlEmergencyFunds = this.playerLvlEmergencyFunds;
-        GameManager.Instance.CurrentGameStateData.goalCourse = this.goalCourse;
-        GameManager.Instance.CurrentGameStateData.courseEnrolled = this.courseEnrolled;
-        GameManager.Instance.CurrentGameStateData.studyFieldEnrolled = this.studyFieldEnrolled;
+        GameManager.Instance.CurrentGameStateData.goalCourse = this.goalCourse.ToString();
+        GameManager.Instance.CurrentGameStateData.courseEnrolled = this.courseEnrolled.ToString();
+        GameManager.Instance.CurrentGameStateData.studyFieldEnrolled = this.studyFieldEnrolled.ToString();
         GameManager.Instance.CurrentGameStateData.playerEnrolledCourseDuration = this.playerEnrolledCourseDuration;
-        GameManager.Instance.CurrentGameStateData.playerOwnedVehicles = this.playerOwnedVehicles;
-        GameManager.Instance.CurrentGameStateData.playerOwnedAppliances = this.playerOwnedAppliances;
+
+        i = 0;
+        foreach (Items vehicle in this.playerOwnedVehicles)
+        {
+            GameManager.Instance.CurrentGameStateData.playerOwnedVehicles[i] = vehicle.itemName;
+            i++;
+        }
+
+        i = 0;
+        foreach (Items appliance in this.playerOwnedAppliances)
+        {
+            GameManager.Instance.CurrentGameStateData.playerOwnedAppliances[i] = appliance.itemName;
+            i++;
+        }
+
         GameManager.Instance.CurrentGameStateData.groceryBarValue = this.groceryBarValue;
-        GameManager.Instance.CurrentGameStateData.currentPlayerJob = this.currentPlayerJob;
-        GameManager.Instance.CurrentGameStateData.playerWorkFieldHistory = this.playerWorkFieldHistory;
+        GameManager.Instance.CurrentGameStateData.currentPlayerJobName = this.currentPlayerJob.jobPosName;
+        GameManager.Instance.CurrentGameStateData.currentPlayerJobEstab = this.currentPlayerJob.establishment.ToString();
+
+        foreach (KeyValuePair<JobFields, float> kv in this.playerWorkFieldHistory)
+        {
+            GameManager.Instance.CurrentGameStateData.playerWorkFieldHistory.Add(kv.Key.ToString(), kv.Value);
+        }
+
         GameManager.Instance.CurrentGameStateData.currentWorkHours = this.currentWorkHours;
-        GameManager.Instance.CurrentGameStateData.currentPlayerPlace = this.currentPlayerPlace;
+        GameManager.Instance.CurrentGameStateData.currentPlayerPlace = this.currentPlayerPlace.buildingNameStr;
     }
 
 
@@ -179,14 +194,31 @@ public class Player : MonoBehaviour
     {
         if (this.goalCourse == UniversityCourses.NONE)
         {
-            this.goalCourse = GameManager.Instance.CurrentGameStateData.goalCourse;
+            this.goalCourse = GameManager.Instance.StringEnumParser<UniversityCourses>(GameManager.Instance.CurrentGameStateData.goalCourse);
         }
         this.playerName = GameManager.Instance.CurrentGameStateData.playerName;
         this.playerAge = GameManager.Instance.CurrentGameStateData.playerAge;
-        this.playerGender = GameManager.Instance.CurrentGameStateData.playerGender;
-        this.currentCharacter = GameManager.Instance.CurrentGameStateData.currentCharacter;
+        this.playerGender = GameManager.Instance.StringEnumParser<Gender>(GameManager.Instance.CurrentGameStateData.playerGender);
+        
+        foreach(CharactersScriptableObj charac in GameManager.Instance.Characters)
+        {
+            if (charac.characterID == GameManager.Instance.CurrentGameStateData.currentCharacter)
+            {
+                this.currentCharacter = charac;
+                this.currentCharacter.name = this.playerName;
+            }
+        }
+
         this.contactList = GameManager.Instance.CurrentGameStateData.contactList;
-        this.playerStatsDict = GameManager.Instance.CurrentGameStateData.playerStatsDict;
+
+        this.playerStatsDict = new Dictionary<PlayerStats, float>
+        {
+            { PlayerStats.HAPPINESS, GameManager.Instance.CurrentGameStateData.playerStatsDict[0] },
+            { PlayerStats.HUNGER, GameManager.Instance.CurrentGameStateData.playerStatsDict[1] },
+            { PlayerStats.ENERGY, GameManager.Instance.CurrentGameStateData.playerStatsDict[2] },
+            { PlayerStats.MONEY, GameManager.Instance.CurrentGameStateData.playerStatsDict[3] }
+        };
+
         this.playerCash = GameManager.Instance.CurrentGameStateData.playerCash;
         this.playerBankSavings = GameManager.Instance.CurrentGameStateData.playerBankSavings;
         this.playerTotalDebt = GameManager.Instance.CurrentGameStateData.playerTotalDebt;
@@ -196,18 +228,79 @@ public class Player : MonoBehaviour
         this.playerLvlSavings = GameManager.Instance.CurrentGameStateData.playerLvlSavings;
         this.playerLvlConsumablesExpenses = GameManager.Instance.CurrentGameStateData.playerLvlConsumablesExpenses;
         this.playerLvlEmergencyFunds = GameManager.Instance.CurrentGameStateData.playerLvlEmergencyFunds;
-        this.courseEnrolled = GameManager.Instance.CurrentGameStateData.courseEnrolled;
-        this.studyFieldEnrolled = GameManager.Instance.CurrentGameStateData.studyFieldEnrolled;
+        this.courseEnrolled = GameManager.Instance.StringEnumParser<UniversityCourses>(GameManager.Instance.CurrentGameStateData.courseEnrolled);
+        this.studyFieldEnrolled = GameManager.Instance.StringEnumParser<StudyFields>(GameManager.Instance.CurrentGameStateData.studyFieldEnrolled);
         this.playerEnrolledCourseDuration = GameManager.Instance.CurrentGameStateData.playerEnrolledCourseDuration;
-        this.playerOwnedVehicles = GameManager.Instance.CurrentGameStateData.playerOwnedVehicles;
-        this.playerOwnedAppliances = GameManager.Instance.CurrentGameStateData.playerOwnedAppliances;
-        this.groceryBarValue = GameManager.Instance.CurrentGameStateData.groceryBarValue;
-        this.currentPlayerJob = GameManager.Instance.CurrentGameStateData.currentPlayerJob;
-        this.playerWorkFieldHistory = GameManager.Instance.CurrentGameStateData.playerWorkFieldHistory;
-        this.currentWorkHours = GameManager.Instance.CurrentGameStateData.currentWorkHours;
-        this.currentPlayerPlace = GameManager.Instance.CurrentGameStateData.currentPlayerPlace;
 
+        foreach (string vehicleName in GameManager.Instance.CurrentGameStateData.playerOwnedVehicles)
+        {
+            foreach (Items car in CarCatalogueManager.Instance.BrandNewVehicles)
+            {
+                if (car.itemName == vehicleName)
+                {
+                    this.playerOwnedVehicles.Add(car);
+                    break;
+                }
+            }
+
+            foreach (Items car in CarCatalogueManager.Instance.SecondHandVehicles)
+            {
+                if (car.itemName == vehicleName)
+                {
+                    this.playerOwnedVehicles.Add(car);
+                    break;
+                }
+            }
+        }
+
+        foreach (string applianceName in GameManager.Instance.CurrentGameStateData.playerOwnedAppliances)
+        {
+            foreach (Items appliance in MallManager.Instance.AppliancesAvailable)
+            {
+                if (appliance.itemName == applianceName)
+                {
+                    this.playerOwnedAppliances.Add(appliance);
+                    break;
+                }
+            }
+        }
+
+        this.groceryBarValue = GameManager.Instance.CurrentGameStateData.groceryBarValue;
+
+        foreach (JobPositions jobPos in JobApplicationManager.Instance.AllJobPos)
+        {
+            if (GameManager.Instance.CurrentGameStateData.currentPlayerJobName == jobPos.jobPosName &&
+                GameManager.Instance.CurrentGameStateData.currentPlayerJobEstab == jobPos.establishment.ToString())
+            {
+                this.currentPlayerJob = jobPos;
+                break;
+            }
+        }
+
+        foreach (KeyValuePair<string, float> kv in GameManager.Instance.CurrentGameStateData.playerWorkFieldHistory)
+        {
+            this.playerWorkFieldHistory.Add(GameManager.Instance.StringEnumParser<JobFields>(kv.Key), kv.Value);
+        }
+
+        this.currentWorkHours = GameManager.Instance.CurrentGameStateData.currentWorkHours;
+
+        foreach (ResBuilding resB in ResBuildingManager.Instance.AllResBuildings)
+        {
+            if (GameManager.Instance.CurrentGameStateData.currentPlayerPlace == resB.buildingNameStr)
+            {
+                this.currentPlayerPlace = resB;
+            }
+        }
+
+        StartCoroutine(DelayRefreshStat());
+    }
+
+
+    private IEnumerator DelayRefreshStat()
+    {
+        yield return new WaitForSeconds(2f);
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
+        yield return null;
     }
 
 

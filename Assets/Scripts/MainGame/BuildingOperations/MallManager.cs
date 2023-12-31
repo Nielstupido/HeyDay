@@ -18,7 +18,7 @@ public class MallManager : MonoBehaviour
     [SerializeField] private Sprite servicesHeader;
     [SerializeField] private List<Items> appliancesAvailable = new List<Items>();
     [SerializeField] private List<Items> servicesAvailable = new List<Items>();
-
+    public List<Items> AppliancesAvailable {get{return appliancesAvailable;}}
     private List<Items> mallItems = new List<Items>();
     public static MallManager Instance { get; private set; }
 

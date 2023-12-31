@@ -272,7 +272,8 @@ public class CharactersScriptableObj : ScriptableObject
         
         numberObtained = true;
         relStatBarValue += 10;
-        return (CheckRelStatus(), currentSocialEnergyLvl, "");
+        CheckRelStatus();
+        return (true, currentSocialEnergyLvl, "");
     }
 
 

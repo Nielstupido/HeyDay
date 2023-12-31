@@ -180,8 +180,8 @@ public class PlayerPhone : MonoBehaviour
 
             PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
 
-            Player.Instance.GroceryBarValue++;
-            groceryBar.value++;
+            Player.Instance.GroceryBarValue--;
+            groceryBar.value--;
             return;
         }
         

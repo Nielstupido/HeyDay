@@ -7365,6 +7365,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a445d96ea2ec04644a6de332032eea7e, type: 3}
   - name: Theme2
     clip: {fileID: 8300000, guid: 2d3c721ec6f8e1049b59f9801388c84a, type: 3}
+  - name: Intro
+    clip: {fileID: 8300000, guid: 5c63f96542e6099459e97fd55bb4bca1, type: 3}
+  - name: BadEnding
+    clip: {fileID: 8300000, guid: 87736a22615c318438289a977567090d, type: 3}
+  - name: GoodEnding
+    clip: {fileID: 8300000, guid: aaa2325f95c89084faa237dcfad19248, type: 3}
   sfxSounds:
   - name: Click
     clip: {fileID: 8300000, guid: 2f79ffcda4e4cc145ad801061c3de1bb, type: 3}
@@ -7439,7 +7445,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -17557,9 +17563,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f2ce9674c70924e815aee05a83eadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enable_music: {fileID: 0}
-  disable_music: {fileID: 0}
-  enable_sfx: {fileID: 0}
+  musicBtn: {fileID: 1020363816}
+  sfxBtn: {fileID: 2142719797}
   _musicSlider: {fileID: 1232682922}
   _sfxSlider: {fileID: 1956043833}
 --- !u!1 &789145632
@@ -23226,8 +23231,8 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.31764707, g: 0.31764707, b: 0.31764707, a: 1}
-    m_DisabledColor: {r: 0.5188679, g: 0.4968405, b: 0.4968405, a: 0.5019608}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -50211,10 +50216,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_SelectedColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
+    m_DisabledColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:

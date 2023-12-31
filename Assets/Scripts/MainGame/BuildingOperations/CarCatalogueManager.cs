@@ -19,8 +19,24 @@ public class CarCatalogueManager : MonoBehaviour
     [SerializeField] private Image targetImage;
     [SerializeField] private List<Items> brandNewVehicles = new List<Items>();
     [SerializeField] private List<Items> secondHandVehicles = new List<Items>();
+    public List<Items> BrandNewVehicles {get{return brandNewVehicles;}}
+    public List<Items> SecondHandVehicles {get{return secondHandVehicles;}}
     private List<Items> vehicleDets = new List<Items>();
     private int currentItem = 0;
+    public static CarCatalogueManager Instance { get; private set; }
+
+
+    private void Awake() 
+    { 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
 
     private void Start()

@@ -71,7 +71,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private BudgetSetter budgetSetter;
     [SerializeField] private PlayerInfoManager playerInfoManager;
     [SerializeField] private InteractionSystemManager interactionSystemManager;
-    [SerializeField] private LevelManager levelManager;
     [SerializeField] private EndGameManager endGameManager;
     [SerializeField] private TextMeshProUGUI playerNameTextDisplay;
     [SerializeField] private TextMeshProUGUI playerAgeTextDisplay;
@@ -151,20 +150,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void OnEnable()
-    {
-        GameUiController.onScreenOverlayChanged += UpdateBottomOverlay;
-        TimeManager.onDayAdded += AssignNpcToBuilding;
-    }
-
-
-    private void OnDisable()
-    {
-        GameUiController.onScreenOverlayChanged -= UpdateBottomOverlay;
-        TimeManager.onDayAdded -= AssignNpcToBuilding;
-    }
-
-
     private void Start()
     {
         if (PlayerPrefs.GetInt("GameMode") == 0) 
@@ -181,7 +166,7 @@ public class GameManager : MonoBehaviour
 
     private void PrepareCharacters()
     {
-        if (currentGameStateData.characters.Count != 0)
+        if (currentGameStateData.charactersID.Count != 0)
         {
             characters = currentGameStateData.characters;
         }
@@ -210,30 +195,68 @@ public class GameManager : MonoBehaviour
     public void StartGame(GameStateData gameStateData)
     {
         currentGameStateData = gameStateData;
+        Debug.Log("current place == " + currentGameStateData.currentPlayerPlace);
+        LoadGameData();
 
         if (PlayerPrefs.GetInt("GameStart") == 0)
         {
             currentGameStateData.playerName = Player.Instance.PlayerName;
-            currentGameStateData.currentCharacter = Player.Instance.CurrentCharacter;
-            currentGameStateData.playerGender = Player.Instance.PlayerGender;
+            currentGameStateData.currentCharacter = Player.Instance.CurrentCharacter.characterID;
+            currentGameStateData.playerGender = Player.Instance.PlayerGender.ToString();
             GameDataManager.Instance.SaveGameData(Player.Instance.PlayerName, new GameStateData());
         }
 
         if (PlayerPrefs.GetInt("FirstLoad") == 0) 
         {
             PlayerPrefs.SetInt("FirstLoad", 1);
-            levelManager.currentActiveMissions = gameStateData.currentActiveMissions;
-            levelManager.PrepareLevelDets();
-            levelManager.InstantiateCurrentLvlMissions();
+
+
+            LevelManager.Instance.currentActiveMissions.Clear();
+            bool isExited = false;
+
+            for (int i = 0; i < gameStateData.currentActiveMissionsID.Count; i++)
+            {
+                foreach (string missionLvl in LevelManager.Instance.AllMissions.Keys)
+                {
+                    foreach (MissionsScriptableObj mission in LevelManager.Instance.AllMissions[missionLvl])
+                    {
+                        if (mission.id == gameStateData.currentActiveMissionsID[i])
+                        {
+                            mission.missionStatus = StringEnumParser<MissionStatus>(gameStateData.currentActiveMissionsStatus[i]);
+                            mission.currentNumberForMission = gameStateData.currentActiveMissionsCurrentNumber[i];
+                            LevelManager.Instance.currentActiveMissions.Add(mission);
+                            isExited = true;
+                            break;
+                        }
+                    }
+
+                    if (isExited)
+                    {
+                        isExited = false;
+                        break;
+                    }
+                }
+            }
+
+            LevelManager.Instance.PrepareLevelDets();
+            LevelManager.Instance.InstantiateCurrentLvlMissions();
 
             playerAgeTextDisplay.text = gameStateData.playerAge.ToString();
             playerNameTextDisplay.text = gameStateData.playerName;
-            playerBustIcon.sprite = gameStateData.currentCharacter.bustIcon;
+
+            foreach(CharactersScriptableObj charac in characters)
+            {
+                if (charac.characterID == gameStateData.currentCharacter)
+                {
+                    playerBustIcon.sprite = charac.bustIcon;
+                }
+            }
+            
             playerBustIcon.SetNativeSize();
         }
         else
         {
-            levelManager.PrepareCurrentLevelMissions();
+            LevelManager.Instance.PrepareCurrentLevelMissions();
         }
 
         PlayerPrefs.SetInt("GameStart", 1);
@@ -244,7 +267,6 @@ public class GameManager : MonoBehaviour
         TimeManager.Instance.AddClockTime(true, 7f);
         AudioManager.Instance.PlayMusic("Theme2");
         onGameStarted();
-        LoadGameData();
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
 
         if (PlayerPrefs.GetInt("GameRestart") != 0)
@@ -253,14 +275,24 @@ public class GameManager : MonoBehaviour
         }
         
         PlayerPrefs.SetInt("GameRestart", 1);
+
+        Dictionary<PlayerStats, float> currentPlayerStatsDict = new Dictionary<PlayerStats, float>
+        {
+            { PlayerStats.HAPPINESS, currentGameStateData.playerStatsDict[0] },
+            { PlayerStats.HUNGER, currentGameStateData.playerStatsDict[1] },
+            { PlayerStats.ENERGY, currentGameStateData.playerStatsDict[2] },
+            { PlayerStats.MONEY, currentGameStateData.playerStatsDict[3] }
+        };
+
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, currentPlayerStatsDict);
     }
 
 
     private IEnumerator DelayOpenMissions()
     {
-        levelManager.CloseMissionOverlay();
+        LevelManager.Instance.CloseMissionOverlay();
         yield return new WaitForSeconds(2f);
-        levelManager.OpenMissionOverlay();
+        LevelManager.Instance.OpenMissionOverlay();
         yield return null;
     }
 
@@ -278,7 +310,16 @@ public class GameManager : MonoBehaviour
         currentGameStateData.currentGameLevel = this.currentGameLevel;
         currentGameStateData.inflationDuration = this.inflationDuration;
         currentGameStateData.inflationRate = this.inflationRate;
-        levelManager.PrepareCurrentLevelMissions();
+
+        int i = 0;
+        foreach (CharactersScriptableObj charac in characters)
+        {
+            currentGameStateData.charactersID[i] = charac.characterID;
+            currentGameStateData.charactersName[i] = charac.characterName;
+            i++;
+        }
+
+        LevelManager.Instance.PrepareCurrentLevelMissions();
     }
 
 
@@ -287,7 +328,7 @@ public class GameManager : MonoBehaviour
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         pauseBtn.SetActive(true);
         AssignNpcToBuilding(0);
-        levelManager.PrepareCurrentLevelMissions();
+        LevelManager.Instance.PrepareCurrentLevelMissions();
         StartCoroutine(DelayOpenMissions());
     }
 
@@ -296,25 +337,27 @@ public class GameManager : MonoBehaviour
     {
         BudgetSystem.Instance.ResetBudget();
         Player.Instance.ResetLvlExpenses();
+        LevelManager.Instance.PrepareCurrentLevelMissions();
         budgetSetter.PrepareBudgeSetter(Player.Instance.PlayerCash);
-        levelManager.PrepareCurrentLevelMissions();
     }
 
 
     public void LoadSavedGame()
     {
         // var res = GameDataManager.Instance.LoadAllGameStateData();
-        var gameStateRes = GameDataManager.Instance.GetCurrentGameState(PlayerPrefs.GetString("PlayerName"));
+        // var gameStateRes = GameDataManager.Instance.GetCurrentGameState(PlayerPrefs.GetString("PlayerName"));
 
-        if (gameStateRes.Item1 == null)
+        if (!GameDataManager.Instance.AllPlayersGameStateData.ContainsKey(PlayerPrefs.GetString("PlayerName")))
         {
             PlayerPrefs.SetInt("GameStart", 0);
+            PlayerPrefs.SetInt("FirstLoad", 1);
             playerInfoManager.OpenCharacterCreationOVerlay();
         }
         else
         {
             PlayerPrefs.SetInt("FirstLoad", 0);
-            StartGame(gameStateRes.Item1);
+            PlayerPrefs.SetInt("GameStart", 1);
+            StartGame(GameDataManager.Instance.AllPlayersGameStateData[PlayerPrefs.GetString("PlayerName")]);
         }
     }
 
@@ -364,6 +407,13 @@ public class GameManager : MonoBehaviour
     public string EnumStringParser<T>(T enumElement)
     {
         return enumElement.ToString().Replace("_", " ");
+    }
+
+
+    public T StringEnumParser<T>(string enumString)
+    {
+        T parsed_enum = (T)System.Enum.Parse( typeof(T), enumString);
+        return parsed_enum;
     }
 
 

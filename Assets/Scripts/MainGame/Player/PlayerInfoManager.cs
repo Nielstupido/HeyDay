@@ -32,7 +32,10 @@ public class PlayerInfoManager : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         characterCreationOverlay.SetActive(false);
         // introCutsceneMannager.StartIntro();
-        GoalSetter.Instance.SetGoal();GoalSetter.Instance.SetGoal();
+
+        //for testing
+        GoalSetter.Instance.SetGoal();
+        AudioManager.Instance.StopMusic();
     }
 
     public void StartIntroScene()
@@ -55,6 +58,7 @@ public class PlayerInfoManager : MonoBehaviour
 
     public void OpenCharacterCreationOVerlay()
     {
+        LevelManager.Instance.ResetAllMissionStats();
         characterCreationOverlay.SetActive(true);
         selectGenderOverlay.SetActive(true);
         OverlayAnimations.Instance.AnimShowObj(boyButton);

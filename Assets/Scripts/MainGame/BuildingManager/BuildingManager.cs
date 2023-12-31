@@ -13,7 +13,6 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private Text buildingDescriptionText;
     [SerializeField] private Text buildingOpeningHrs;
     [SerializeField] private List<Sprite> buttonImages = new List<Sprite>();
-    [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject walkBtn;
     [SerializeField] private GameObject rideBtn; 
     [SerializeField] private GameObject enterBtn;
@@ -32,7 +31,9 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private BoxCollider resAreaCollider;
     [SerializeField] private Prompts notEnoughMoneyFare;
     [SerializeField] private List<BoxCollider> resBuildingColliders = new List<BoxCollider>();
+    [SerializeField] private List<Building> allBuildings = new List<Building>();
 
+    public List<Building> AllBuildings { get{return allBuildings;}}
     private Building currentSelectedBuilding;
     private BuildingSelect buildingSelectCopy;
     public delegate void OnBuildingBtnClicked(Buttons clickedBtn);

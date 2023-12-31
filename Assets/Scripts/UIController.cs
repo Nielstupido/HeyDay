@@ -5,20 +5,24 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] private GameObject enable_music;
-    [SerializeField] private GameObject disable_music;
-    [SerializeField] private GameObject enable_sfx;
+    [SerializeField] private Button musicBtn;
+    [SerializeField] private Button sfxBtn;
 
     public Slider _musicSlider, _sfxSlider;
+
 
     public void ToggleMusic()
     {
         AudioManager.Instance.ToggleMusic();
         AudioManager.Instance.PlaySFX("Select");
 
-        if (_musicSlider.value == 0)
+        if (musicBtn.image.color  == musicBtn.colors.normalColor)
         {
-            enable_music = disable_music;
+            musicBtn.image.color = musicBtn.colors.disabledColor;
+        }
+        else
+        {
+            musicBtn.image.color = musicBtn.colors.normalColor;
         }
     }
 
@@ -26,6 +30,15 @@ public class UIController : MonoBehaviour
     {
         AudioManager.Instance.ToggleSFX();
         AudioManager.Instance.PlaySFX("Select");
+
+        if (sfxBtn.image.color  == sfxBtn.colors.normalColor)
+        {
+            sfxBtn.image.color = sfxBtn.colors.disabledColor;
+        }
+        else
+        {
+            sfxBtn.image.color = sfxBtn.colors.normalColor;
+        }
     }
 
     public void MusicVolume()

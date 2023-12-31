@@ -66,7 +66,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        LevelManager.Instance.ResetLvlMissionStats();
+        LevelManager.Instance.ResetAllMissionStats();
         AudioManager.Instance.PlaySFX("Select");
         pauseMenuOverlay.SetActive(false);
         GameDataManager.Instance.PlayerRecords[Player.Instance.PlayerName] = 0;
@@ -94,15 +94,16 @@ public class PauseMenu : MonoBehaviour
         gameSavingOverlay.SetActive(true);
         yield return new WaitForSeconds(2f);
 
-        GameDataManager.Instance.AllPlayersGameStateData[Player.Instance.PlayerName] = GameManager.Instance.CurrentGameStateData;
-        GameDataManager.Instance.SaveGameData();
+        GameDataManager.Instance.SaveGameData(Player.Instance.PlayerName, GameManager.Instance.CurrentGameStateData);
         
         yield return new WaitForSeconds(2f);
         gameSavedOverlay.SetActive(true);
         gameSavingOverlay.SetActive(false);
         yield return new WaitForSeconds(1f);
         gameSavedOverlay.SetActive(false);
-
+        Debug.Log("saving current place == " + Player.Instance.CurrentPlayerPlace);
+        Debug.Log("saving current place == " + GameManager.Instance.CurrentGameStateData.currentPlayerPlace);
+        Debug.Log("saving current place == " + GameDataManager.Instance.AllPlayersGameStateData[Player.Instance.PlayerName].currentPlayerPlace);
         yield return null;
     }
 

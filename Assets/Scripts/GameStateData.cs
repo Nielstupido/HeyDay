@@ -9,17 +9,17 @@ using TMPro;
 public class GameStateData
 {
     //Player Data
-    public string playerName = null;
+    public string playerName = "";
     public int playerAge = 19;
-    public Gender playerGender;
-    public CharactersScriptableObj currentCharacter;
+    public string playerGender;
+    public int currentCharacter;
     public List<string> contactList = new List<string>();    
-    public Dictionary<PlayerStats, float> playerStatsDict = new Dictionary<PlayerStats, float>() 
+    public List<float> playerStatsDict = new List<float>() 
                                                             {
-                                                                {PlayerStats.HAPPINESS, 100f},
-                                                                {PlayerStats.HUNGER, 100f},
-                                                                {PlayerStats.ENERGY, 100f},
-                                                                {PlayerStats.MONEY, 5000f},
+                                                                100f,
+                                                                100f,
+                                                                100f,
+                                                                5000f,
                                                             };
 
     public float playerCash = 5000f;
@@ -33,20 +33,21 @@ public class GameStateData
     public float playerLvlConsumablesExpenses = 0f;
     public float playerLvlEmergencyFunds = 0f;
 
-    public UniversityCourses goalCourse = UniversityCourses.NONE;
-    public UniversityCourses courseEnrolled = UniversityCourses.NONE;
-    public StudyFields studyFieldEnrolled = StudyFields.NONE;
+    public string goalCourse = UniversityCourses.NONE.ToString();
+    public string courseEnrolled = UniversityCourses.NONE.ToString();
+    public string studyFieldEnrolled = StudyFields.NONE.ToString();
     public float playerStudyHours = 0f;
     public float playerEnrolledCourseDuration = 0f;
 
-    public List<Items> playerOwnedVehicles = new List<Items>();
-    public List<Items> playerOwnedAppliances = new List<Items>();
+    public List<string> playerOwnedVehicles = new List<string>();
+    public List<string> playerOwnedAppliances = new List<string>();
     public int groceryBarValue = 0;
 
-    public JobPositions currentPlayerJob = null;
-    public Dictionary<JobFields,float> playerWorkFieldHistory = new Dictionary<JobFields, float>();
+    public string currentPlayerJobName;
+    public string currentPlayerJobEstab;
+    public Dictionary<string,float> playerWorkFieldHistory = new Dictionary<string, float>();
     public float currentWorkHours = 0f;
-    public ResBuilding currentPlayerPlace = null;
+    public string currentPlayerPlace;
 
   
 
@@ -57,7 +58,8 @@ public class GameStateData
 
 
     //GameManager
-    public List<CharactersScriptableObj> characters = new List<CharactersScriptableObj>();
+    public List<int> charactersID = new List<int>();
+    public List<string> charactersName = new List<string>();
     public int currentGameLevel = 1;
     public int inflationDuration = 0;
     public float inflationRate = 0f;
@@ -72,12 +74,14 @@ public class GameStateData
 
 
     //PlayerTravelManager
-    public Building currentVisitedBuilding = null;
+    public string currentVisitedBuilding;
 
 
 
     //LevelManager
-    public List<MissionsScriptableObj> currentActiveMissions = new List<MissionsScriptableObj>();
+    public List<string> currentActiveMissionsID = new List<string>();
+    public List<string> currentActiveMissionsStatus = new List<string>();
+    public List<float> currentActiveMissionsCurrentNumber = new List<float>();
 
 
 
@@ -95,9 +99,9 @@ public class GameStateData
 
 
     //Meetup system
-    public Building meetupBuilding = null;
+    public Building meetupBuilding;
     public float meetupTime = 0f;
     public int meetupDay = 0;
-    public CharactersScriptableObj meetupCharacter = null;
+    public int meetupCharacter;
     public bool pendingMeetup = false;
 }

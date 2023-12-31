@@ -28,11 +28,12 @@ public class ResBuildingManager : MonoBehaviour
     [SerializeField] private Prompts existingDebt;
     [SerializeField] private GameObject debtReminderOverlay;
     [SerializeField] private GameObject debtReminderPopUp;
-
+    [SerializeField] private List<ResBuilding> allResBuildings = new List<ResBuilding>();
     private ResBuilding currentSelectedResBuilding;
     private int stayCount;
     private float unpaidBill;
     private int daysUnpaidRent;
+    public List<ResBuilding> AllResBuildings {get{return allResBuildings;}}
     public GameObject ResBuildingSelectOverlay { get{return resBuildingSelectOverlay;}}
     public ResBuilding CurrentSelectedResBuilding { set{currentSelectedResBuilding = value; ShowBtn();} get{return currentSelectedResBuilding;}}
     public float UnpaidBill { set{unpaidBill = value; } get{return unpaidBill;}}
@@ -261,6 +262,7 @@ public class ResBuildingManager : MonoBehaviour
             Player.Instance.CurrentPlayerPlace = selectedBuilding;
             EnterRoom(selectedBuilding);
             LevelManager.onFinishedPlayerAction(MissionType.RENTROOM);
+            GameManager.onSaveGameStateData();
         }
     }
 

@@ -76,6 +76,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private CameraMovement cameraMovement; 
     private Dictionary<string, List<MissionsScriptableObj>> allMissions = new Dictionary<string, List<MissionsScriptableObj>>();
     public List<MissionsScriptableObj> currentActiveMissions = new List<MissionsScriptableObj>();
+    public Dictionary<string, List<MissionsScriptableObj>> AllMissions {get{return allMissions;}}
     private string tempLevelName;
     private string[] tempSplitIdHolder;
     private int missionLevelCounter;
@@ -107,7 +108,14 @@ public class LevelManager : MonoBehaviour
 
     private void SaveGameData()
     {
-        GameManager.Instance.CurrentGameStateData.currentActiveMissions = this.currentActiveMissions;
+        int i = 0;
+        foreach (MissionsScriptableObj mission in this.currentActiveMissions)
+        {
+            GameManager.Instance.CurrentGameStateData.currentActiveMissionsID[i] = mission.id;
+            GameManager.Instance.CurrentGameStateData.currentActiveMissionsStatus[i] = mission.missionStatus.ToString();
+            GameManager.Instance.CurrentGameStateData.currentActiveMissionsCurrentNumber[i] = mission.currentNumberForMission;
+            i++;
+        }
     }
 
 
@@ -199,11 +207,18 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    public void ResetLvlMissionStats()
+    public void ResetAllMissionStats()
     {
-        foreach(MissionsScriptableObj mission in currentActiveMissions)
+        foreach(List<MissionsScriptableObj> missionList in allMissions.Values)
         {
-            mission.missionStatus = MissionStatus.PENDING;
+            foreach(MissionsScriptableObj mission in missionList)
+            {
+                if (mission != null)
+                {
+                    mission.missionStatus = MissionStatus.PENDING;
+                    mission.currentNumberForMission = 0f;
+                }
+            }  
         }    
     }
 

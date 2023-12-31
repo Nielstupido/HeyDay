@@ -32,6 +32,7 @@ public class EndGameManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(4f);
+        AudioManager.Instance.StopMusic();
         AnimOverlayManager.Instance.StartScreenFadeLoadScreen();
         yield return new WaitForSeconds(0.7f);
         ReturnHome();
@@ -67,6 +68,7 @@ public class EndGameManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         if (isGoodEnding)
         {
+            AudioManager.Instance.PlayMusic("GoodEnding");
             if (Player.Instance.PlayerGender == Gender.MALE)
             {
                 sceneImageObj.sprite = goodSceneImagesBoy[0];
@@ -84,6 +86,7 @@ public class EndGameManager : MonoBehaviour
         }
         else
         {
+            AudioManager.Instance.PlayMusic("BadEnding");
             if (Player.Instance.PlayerGender == Gender.MALE)
             {
                 sceneImageObj.sprite = badSceneImagesBoy[0];

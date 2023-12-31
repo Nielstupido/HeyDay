@@ -276,6 +276,8 @@ public class InteractionSystemManager : MonoBehaviour
         Player.Instance.PlayerStatsDict[PlayerStats.MONEY] = Player.Instance.PlayerCash;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.MONEY, Player.Instance.PlayerStatsDict);
         debtValue.text = "₱" + interactingCharacter.currentDebt.ToString();
+        payDebtBtn.interactable = true;
+        borrowMoneyBtn.interactable = false;
     }
 
 
@@ -396,6 +398,14 @@ public class InteractionSystemManager : MonoBehaviour
 
         speechBubbleImage.SetActive(true);
         speechBubbleText.text = msg;
+        StartCoroutine(HideSpeechBubble());
+    }
+
+
+    private IEnumerator HideSpeechBubble()
+    {
+        yield return new WaitForSeconds(2f);
+        speechBubbleImage.SetActive(false);
     }
 
 

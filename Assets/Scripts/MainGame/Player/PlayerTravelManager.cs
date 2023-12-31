@@ -53,13 +53,24 @@ public class PlayerTravelManager : MonoBehaviour
 
     private void LoadGameData()
     {
-        this.currentVisitedBuilding = GameManager.Instance.CurrentGameStateData.currentVisitedBuilding;
+        foreach (Building building in BuildingManager.Instance.AllBuildings)
+        {
+            if (GameManager.Instance.CurrentGameStateData.currentVisitedBuilding == building.buildingStringName)
+            {
+                this.currentVisitedBuilding = building;
+            }
+        }
+
+        if (this.currentVisitedBuilding != null)
+        {
+            MovePlayerModel(true, this.currentVisitedBuilding);
+        }
     }
 
 
     private void SaveGameData()
     {
-        GameManager.Instance.CurrentGameStateData.currentVisitedBuilding = this.currentVisitedBuilding;
+        GameManager.Instance.CurrentGameStateData.currentVisitedBuilding = this.currentVisitedBuilding.buildingStringName;
     }
 
 
