@@ -168,7 +168,11 @@ public class GameManager : MonoBehaviour
     {
         if (currentGameStateData.charactersID.Count != 0)
         {
-            characters = currentGameStateData.characters;
+            // foreach (CharactersScriptableObj charac in characters)
+            // {
+                
+            // }
+            // characters = currentGameStateData.characters;
         }
         else
         {

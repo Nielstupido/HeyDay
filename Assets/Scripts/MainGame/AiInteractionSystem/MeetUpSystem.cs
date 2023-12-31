@@ -31,7 +31,14 @@ public class MeetUpSystem : MonoBehaviour
 
     private void LoadGameData()
     {
-        this.meetupBuilding = GameManager.Instance.CurrentGameStateData.meetupBuilding;
+        foreach (Building building in BuildingManager.Instance.AllBuildings)
+        {
+            if (GameManager.Instance.CurrentGameStateData.meetupBuilding == building.buildingStringName)
+            {
+                this.meetupBuilding = building;
+            }
+        }
+
         this.meetupTime = GameManager.Instance.CurrentGameStateData.meetupTime;
         this.meetupDay = GameManager.Instance.CurrentGameStateData.meetupDay;
 
@@ -49,7 +56,8 @@ public class MeetUpSystem : MonoBehaviour
 
     private void SaveGameData()
     {
-        GameManager.Instance.CurrentGameStateData.meetupBuilding = this.meetupBuilding;
+        GameManager.Instance.CurrentGameStateData.meetupBuilding = this.meetupBuilding.buildingStringName;
+
         GameManager.Instance.CurrentGameStateData.meetupTime = this.meetupTime;
         GameManager.Instance.CurrentGameStateData.meetupDay = this.meetupDay;
 

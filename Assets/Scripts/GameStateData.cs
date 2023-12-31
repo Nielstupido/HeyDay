@@ -60,6 +60,7 @@ public class GameStateData
     //GameManager
     public List<int> charactersID = new List<int>();
     public List<string> charactersName = new List<string>();
+    //<<<<<<<<<<<<<<<<finish all character attribs>>>>>>>>>>>>>>>>
     public int currentGameLevel = 1;
     public int inflationDuration = 0;
     public float inflationRate = 0f;
@@ -99,7 +100,7 @@ public class GameStateData
 
 
     //Meetup system
-    public Building meetupBuilding;
+    public string meetupBuilding;
     public float meetupTime = 0f;
     public int meetupDay = 0;
     public int meetupCharacter;
