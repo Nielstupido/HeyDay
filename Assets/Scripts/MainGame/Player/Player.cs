@@ -162,23 +162,25 @@ public class Player : MonoBehaviour
         GameManager.Instance.CurrentGameStateData.studyFieldEnrolled = this.studyFieldEnrolled.ToString();
         GameManager.Instance.CurrentGameStateData.playerEnrolledCourseDuration = this.playerEnrolledCourseDuration;
 
-        i = 0;
+        GameManager.Instance.CurrentGameStateData.playerOwnedVehicles.Clear();
         foreach (Items vehicle in this.playerOwnedVehicles)
         {
-            GameManager.Instance.CurrentGameStateData.playerOwnedVehicles[i] = vehicle.itemName;
-            i++;
+            GameManager.Instance.CurrentGameStateData.playerOwnedVehicles.Add(vehicle.itemName);
         }
 
-        i = 0;
+        GameManager.Instance.CurrentGameStateData.playerOwnedAppliances.Clear();
         foreach (Items appliance in this.playerOwnedAppliances)
         {
-            GameManager.Instance.CurrentGameStateData.playerOwnedAppliances[i] = appliance.itemName;
-            i++;
+            GameManager.Instance.CurrentGameStateData.playerOwnedAppliances.Add(appliance.itemName);
         }
 
         GameManager.Instance.CurrentGameStateData.groceryBarValue = this.groceryBarValue;
-        GameManager.Instance.CurrentGameStateData.currentPlayerJobName = this.currentPlayerJob.jobPosName;
-        GameManager.Instance.CurrentGameStateData.currentPlayerJobEstab = this.currentPlayerJob.establishment.ToString();
+
+        if (this.currentPlayerJob != null)
+        {
+            GameManager.Instance.CurrentGameStateData.currentPlayerJobName = this.currentPlayerJob.jobPosName;
+            GameManager.Instance.CurrentGameStateData.currentPlayerJobEstab = this.currentPlayerJob.establishment.ToString();
+        }
 
         foreach (KeyValuePair<JobFields, float> kv in this.playerWorkFieldHistory)
         {
@@ -186,7 +188,11 @@ public class Player : MonoBehaviour
         }
 
         GameManager.Instance.CurrentGameStateData.currentWorkHours = this.currentWorkHours;
-        GameManager.Instance.CurrentGameStateData.currentPlayerPlace = this.currentPlayerPlace.buildingNameStr;
+
+        if (this.currentPlayerPlace != null)
+        {
+            GameManager.Instance.CurrentGameStateData.currentPlayerPlace = this.currentPlayerPlace.buildingNameStr;
+        }
     }
 
 
@@ -289,6 +295,7 @@ public class Player : MonoBehaviour
             if (GameManager.Instance.CurrentGameStateData.currentPlayerPlace == resB.buildingNameStr)
             {
                 this.currentPlayerPlace = resB;
+                Debug.Log("game loaded current place is = " + this.currentPlayerPlace.buildingNameStr);
             }
         }
 

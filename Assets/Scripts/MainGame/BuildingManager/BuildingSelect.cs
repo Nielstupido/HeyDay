@@ -20,17 +20,6 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
         PlayerActionObservers.onPlayerTraveled -= RefreshSelectOverlayUI;
     }
 
-    
-        private void OnEnable()
-    {
-        PlayerActionObservers.onPlayerTraveled += RefreshSelectOverlayUI;
-    }
-
-
-    private void OnDisable()
-    {
-        PlayerActionObservers.onPlayerTraveled -= RefreshSelectOverlayUI;
-    }
 
     public void RefreshSelectOverlayUI(ModeOfTravels modeOfTravel = ModeOfTravels.NA)
     {
@@ -45,6 +34,8 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
         {
             BuildingManager.Instance.WalkBtn.SetActive(false);
             BuildingManager.Instance.RideBtn.SetActive(false);
+            BuildingManager.Instance.ClosedBtn.SetActive(false);
+            BuildingManager.Instance.EnterBtn.SetActive(false);
 
             if (CheckIsBuildingOpen(PlayerTravelManager.Instance.CurrentVisitedBuilding))
             {

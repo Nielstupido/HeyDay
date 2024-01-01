@@ -8,7 +8,10 @@ public class GameModeManager : MonoBehaviour
     [SerializeField] private GameObject noSavedGamesSign;
     [SerializeField] private GameObject savedGamesOverlay;
     [SerializeField] private GameObject savedGamePrefab;
+    [SerializeField] private GameObject deleteConfirmationOverlay;
+    [SerializeField] private GameObject deleteConfirmationPanel;
     [SerializeField] private Transform savedGamesHolder;
+    private string playerNameToDelete;
     public static GameModeManager Instance { get; private set; }
 
 
@@ -63,19 +66,51 @@ public class GameModeManager : MonoBehaviour
     }
 
 
+    public void DeleteGameSave(string playerName)
+    {
+        playerNameToDelete = playerName;
+        deleteConfirmationOverlay.GetComponent<RectTransform>().localScale = Vector3.zero;
+        LeanTween.scale(deleteConfirmationOverlay, Vector3.one, 0.4f).setEaseOutElastic();
+        deleteConfirmationOverlay.SetActive(true);
+        deleteConfirmationPanel.SetActive(true);
+    }
+
+
+    public void ConfirmDeletion()
+    {
+        GameDataManager.Instance.AllPlayersGameStateData.Remove(playerNameToDelete);
+        GameDataManager.Instance.SaveGameData();
+        CloseConfirmDeletionOverlay();
+        DisplaySavedGames();
+    }
+
+
+    public void CloseConfirmDeletionOverlay()
+    {
+        LeanTween.scale(deleteConfirmationOverlay, Vector3.zero, 0.4f).setEaseInBack().setOnComplete(HideDeletionOverlay);
+    }
+
+
+    private void HideDeletionOverlay()
+    {
+        deleteConfirmationOverlay.SetActive(false);
+        deleteConfirmationPanel.SetActive(false);
+    }
+
+
     private void DisplaySavedGames()
     {
+        for (int i = 0; i < savedGamesHolder.childCount; i++)
+        {
+            Object.Destroy(savedGamesHolder.GetChild(i).gameObject);
+        }
+
         if (GameDataManager.Instance.AllPlayersGameStateData.Keys.Count == 0)
         {
             noSavedGamesSign.SetActive(true);
             return;
         }
         noSavedGamesSign.SetActive(false);
-
-        for (int i = 0; i < savedGamesHolder.childCount; i++)
-        {
-            Object.Destroy(savedGamesHolder.GetChild(i).gameObject);
-        }
 
         foreach (var savedGame in GameDataManager.Instance.AllPlayersGameStateData)
         {

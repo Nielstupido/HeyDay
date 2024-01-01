@@ -70,7 +70,10 @@ public class PlayerTravelManager : MonoBehaviour
 
     private void SaveGameData()
     {
-        GameManager.Instance.CurrentGameStateData.currentVisitedBuilding = this.currentVisitedBuilding.buildingStringName;
+        if (this.currentVisitedBuilding != null)
+        {
+            GameManager.Instance.CurrentGameStateData.currentVisitedBuilding = this.currentVisitedBuilding.buildingStringName;
+        }
     }
 
 

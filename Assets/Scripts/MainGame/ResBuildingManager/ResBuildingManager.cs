@@ -129,6 +129,7 @@ public class ResBuildingManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("current player place = " + Player.Instance.CurrentPlayerPlace.ToString());
             rentBtn.SetActive(true);
             enterBtn.SetActive(false);
         }

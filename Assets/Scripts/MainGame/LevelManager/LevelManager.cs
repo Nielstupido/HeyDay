@@ -108,13 +108,15 @@ public class LevelManager : MonoBehaviour
 
     private void SaveGameData()
     {
-        int i = 0;
+        GameManager.Instance.CurrentGameStateData.currentActiveMissionsID.Clear();
+        GameManager.Instance.CurrentGameStateData.currentActiveMissionsStatus.Clear();
+        GameManager.Instance.CurrentGameStateData.currentActiveMissionsCurrentNumber.Clear();
+
         foreach (MissionsScriptableObj mission in this.currentActiveMissions)
         {
-            GameManager.Instance.CurrentGameStateData.currentActiveMissionsID[i] = mission.id;
-            GameManager.Instance.CurrentGameStateData.currentActiveMissionsStatus[i] = mission.missionStatus.ToString();
-            GameManager.Instance.CurrentGameStateData.currentActiveMissionsCurrentNumber[i] = mission.currentNumberForMission;
-            i++;
+            GameManager.Instance.CurrentGameStateData.currentActiveMissionsID.Add(mission.id);
+            GameManager.Instance.CurrentGameStateData.currentActiveMissionsStatus.Add(mission.missionStatus.ToString());
+            GameManager.Instance.CurrentGameStateData.currentActiveMissionsCurrentNumber.Add(mission.currentNumberForMission);
         }
     }
 

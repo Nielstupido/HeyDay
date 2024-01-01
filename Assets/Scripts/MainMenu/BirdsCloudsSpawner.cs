@@ -68,7 +68,6 @@ public class BirdsCloudsSpawner : MonoBehaviour
             {
                 totalSpawnedObj--;
             }
-            Debug.Log(gameObject.name + " total spawned " + totalSpawnedObj);
         }
     }
 }

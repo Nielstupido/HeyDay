@@ -168,11 +168,16 @@ public class GameManager : MonoBehaviour
     {
         if (currentGameStateData.charactersID.Count != 0)
         {
-            // foreach (CharactersScriptableObj charac in characters)
-            // {
-                
-            // }
-            // characters = currentGameStateData.characters;
+            for (int i = 0; i < currentGameStateData.charactersID.Count; i++)
+            {
+                foreach (CharactersScriptableObj charac in characters)
+                {
+                    if (charac.characterID == currentGameStateData.charactersID[i])
+                    {
+                        charac.characterName = currentGameStateData.charactersName[i];
+                    }
+                }
+            }
         }
         else
         {
@@ -199,7 +204,7 @@ public class GameManager : MonoBehaviour
     public void StartGame(GameStateData gameStateData)
     {
         currentGameStateData = gameStateData;
-        Debug.Log("current place == " + currentGameStateData.currentPlayerPlace);
+        Debug.Log("game started current place == " + currentGameStateData.currentPlayerPlace);
         LoadGameData();
 
         if (PlayerPrefs.GetInt("GameStart") == 0)
@@ -207,7 +212,7 @@ public class GameManager : MonoBehaviour
             currentGameStateData.playerName = Player.Instance.PlayerName;
             currentGameStateData.currentCharacter = Player.Instance.CurrentCharacter.characterID;
             currentGameStateData.playerGender = Player.Instance.PlayerGender.ToString();
-            GameDataManager.Instance.SaveGameData(Player.Instance.PlayerName, new GameStateData());
+            GameDataManager.Instance.SaveGameData(Player.Instance.PlayerName, currentGameStateData);
         }
 
         if (PlayerPrefs.GetInt("FirstLoad") == 0) 
@@ -315,12 +320,13 @@ public class GameManager : MonoBehaviour
         currentGameStateData.inflationDuration = this.inflationDuration;
         currentGameStateData.inflationRate = this.inflationRate;
 
-        int i = 0;
+        currentGameStateData.charactersID.Clear();
+        currentGameStateData.charactersName.Clear();
+
         foreach (CharactersScriptableObj charac in characters)
         {
-            currentGameStateData.charactersID[i] = charac.characterID;
-            currentGameStateData.charactersName[i] = charac.characterName;
-            i++;
+            currentGameStateData.charactersID.Add(charac.characterID);
+            currentGameStateData.charactersName.Add(charac.characterName);
         }
 
         LevelManager.Instance.PrepareCurrentLevelMissions();

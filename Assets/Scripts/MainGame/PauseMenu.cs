@@ -73,7 +73,6 @@ public class PauseMenu : MonoBehaviour
         GameDataManager.Instance.SavePlayerRecords(Player.Instance.PlayerName, 0);
         GameManager.Instance.CurrentGameStateData = new GameStateData();
         GameDataManager.Instance.AllPlayersGameStateData[Player.Instance.PlayerName] = new GameStateData();
-        
         PlayerPrefs.SetInt("FirstLoad", 1);
         PlayerPrefs.SetInt("GameStart", 0);
         PlayerPrefs.SetInt("GameRestart", 0);

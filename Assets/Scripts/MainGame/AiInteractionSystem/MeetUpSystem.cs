@@ -56,6 +56,11 @@ public class MeetUpSystem : MonoBehaviour
 
     private void SaveGameData()
     {
+        if (this.meetupBuilding == null)
+        {
+            return;
+        }
+        
         GameManager.Instance.CurrentGameStateData.meetupBuilding = this.meetupBuilding.buildingStringName;
 
         GameManager.Instance.CurrentGameStateData.meetupTime = this.meetupTime;
