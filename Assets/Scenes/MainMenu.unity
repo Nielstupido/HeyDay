@@ -14508,7 +14508,8 @@ MonoBehaviour:
   noSavedGamesSign: {fileID: 529137144}
   savedGamesOverlay: {fileID: 1637287189}
   savedGamePrefab: {fileID: 8138367920569070305, guid: 47811f1450376d94f99cdbdf196dd87c, type: 3}
-  deleteConfirmationOverlay: {fileID: 501043973}
+  deleteConfirmationOverlay: {fileID: 1886000699}
+  deleteConfirmationPanel: {fileID: 501043973}
   savedGamesHolder: {fileID: 2104199023}
 --- !u!4 &626436056
 Transform:

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RegalSanctuary : ResBuilding
 {
-    private void Start()
+    private void Awake()
     {
         this.buildingEnumName = ResBuildings.REGALSANCTUARY;
         this.buildingNameStr = "Regal Sanctuary";
@@ -15,6 +15,11 @@ public class RegalSanctuary : ResBuilding
         this.adtnlEnergyForSleep = 10f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
+    }
+
+
+    private void Start()
+    {
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

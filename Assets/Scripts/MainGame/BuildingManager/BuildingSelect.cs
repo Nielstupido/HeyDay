@@ -8,10 +8,15 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
     private Vector3 scaleDown = new Vector3(0.1f, 0.1f, 0.1f);
 
 
+    private void Awake()
+    {
+        PlayerActionObservers.onPlayerTraveled += RefreshSelectOverlayUI;
+    }
+
+
     private void Start()
     {
         BuildingManager.Instance.BuildingSelectOverlay.transform.localScale = scaleDown;
-        PlayerActionObservers.onPlayerTraveled += RefreshSelectOverlayUI;
     }
 
 
@@ -34,8 +39,6 @@ public class BuildingSelect : MonoBehaviour, IPointerClickHandler
         {
             BuildingManager.Instance.WalkBtn.SetActive(false);
             BuildingManager.Instance.RideBtn.SetActive(false);
-            BuildingManager.Instance.ClosedBtn.SetActive(false);
-            BuildingManager.Instance.EnterBtn.SetActive(false);
 
             if (CheckIsBuildingOpen(PlayerTravelManager.Instance.CurrentVisitedBuilding))
             {

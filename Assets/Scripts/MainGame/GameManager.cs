@@ -174,14 +174,23 @@ public class GameManager : MonoBehaviour
                 {
                     if (charac.characterID == currentGameStateData.charactersID[i])
                     {
-                        charac.characterName = currentGameStateData.charactersName[i];
+                        charac.PrepareCharacter(
+                            currentGameStateData.charactersName[i],
+                            currentGameStateData.charactersRelStatBarValue[i],
+                            StringEnumParser<RelStatus>(currentGameStateData.charactersRelStatus[i]),
+                            currentGameStateData.charactersCurrentDebt[i],
+                            currentGameStateData.charactersBeenFriends[i],
+                            currentGameStateData.charactersNumberObtained[i],
+                            currentGameStateData.charactersGotCalledToday[i]
+                            );
+                        break;
                     }
                 }
             }
         }
         else
         {
-            foreach (var character in characters)
+            foreach (CharactersScriptableObj character in characters)
             {
                 if (character.characterGender == Gender.MALE)
                 {
@@ -195,7 +204,6 @@ public class GameManager : MonoBehaviour
                     character.PrepareCharacter(characterNamesFemale[randomNum], 15, RelStatus.STRANGERS);
                     characterNamesFemale.RemoveAt(randomNum);
                 }
-
             }
         }
     }
@@ -204,7 +212,6 @@ public class GameManager : MonoBehaviour
     public void StartGame(GameStateData gameStateData)
     {
         currentGameStateData = gameStateData;
-        Debug.Log("game started current place == " + currentGameStateData.currentPlayerPlace);
         LoadGameData();
 
         if (PlayerPrefs.GetInt("GameStart") == 0)
@@ -306,6 +313,14 @@ public class GameManager : MonoBehaviour
     }
 
 
+    private IEnumerator DelayRefreshStats(Dictionary<PlayerStats, float> currentPlayerStatsDict)
+    {
+        yield return new WaitForSeconds(2f);
+        PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, currentPlayerStatsDict);
+        yield return null;
+    }
+
+
     private void LoadGameData()
     {
         this.currentGameLevel = currentGameStateData.currentGameLevel;
@@ -322,11 +337,23 @@ public class GameManager : MonoBehaviour
 
         currentGameStateData.charactersID.Clear();
         currentGameStateData.charactersName.Clear();
+        currentGameStateData.charactersRelStatus.Clear();
+        currentGameStateData.charactersRelStatBarValue.Clear();
+        currentGameStateData.charactersCurrentDebt.Clear();
+        currentGameStateData.charactersNumberObtained.Clear();
+        currentGameStateData.charactersBeenFriends.Clear();
+        currentGameStateData.charactersGotCalledToday.Clear();
 
         foreach (CharactersScriptableObj charac in characters)
         {
             currentGameStateData.charactersID.Add(charac.characterID);
             currentGameStateData.charactersName.Add(charac.characterName);
+            currentGameStateData.charactersRelStatus.Add(charac.relStatus.ToString());
+            currentGameStateData.charactersRelStatBarValue.Add(charac.relStatBarValue);
+            currentGameStateData.charactersCurrentDebt.Add(charac.currentDebt);
+            currentGameStateData.charactersNumberObtained.Add(charac.numberObtained);
+            currentGameStateData.charactersBeenFriends.Add(charac.beenFriends);
+            currentGameStateData.charactersGotCalledToday.Add(charac.gotCalledToday);
         }
 
         LevelManager.Instance.PrepareCurrentLevelMissions();

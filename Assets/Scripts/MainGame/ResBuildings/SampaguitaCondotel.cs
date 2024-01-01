@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SampaguitaCondotel : ResBuilding
 {
-    private void Start()
+    private void Awake()
     {
         this.buildingEnumName = ResBuildings.SAMPAGUITACONDOTEL;
         this.buildingNameStr = "Sampaguita Condotel";
@@ -15,6 +15,11 @@ public class SampaguitaCondotel : ResBuilding
         this.adtnlEnergyForSleep = 25f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
+    }
+
+
+    private void Start()
+    {
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

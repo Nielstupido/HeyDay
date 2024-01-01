@@ -26,6 +26,8 @@ public class MeetUpSystem : MonoBehaviour
     
         GameManager.onGameStarted += LoadGameData;
         GameManager.onGameStarted += SaveGameData;
+        TimeManager.onTimeAdded += CheckMeetupStatus;
+        TimeManager.onDayAdded += CheckMeetupStatus;
     }
 
 
@@ -72,30 +74,10 @@ public class MeetUpSystem : MonoBehaviour
     }
 
 
-    private void Start()
-    {
-        TimeManager.onTimeAdded += CheckMeetupStatus;
-        TimeManager.onDayAdded += CheckMeetupStatus;
-    }
-
-
     private void OnDestroy()
     {
         GameManager.onGameStarted -= LoadGameData;
         GameManager.onSaveGameStateData -= SaveGameData;
-        TimeManager.onTimeAdded -= CheckMeetupStatus;
-        TimeManager.onDayAdded -= CheckMeetupStatus;   
-    }
-
-    private void OnEnable()
-    {
-        TimeManager.onTimeAdded += CheckMeetupStatus;
-        TimeManager.onDayAdded += CheckMeetupStatus;
-    }
-
-
-    private void OnDisable()
-    {
         TimeManager.onTimeAdded -= CheckMeetupStatus;
         TimeManager.onDayAdded -= CheckMeetupStatus;   
     }

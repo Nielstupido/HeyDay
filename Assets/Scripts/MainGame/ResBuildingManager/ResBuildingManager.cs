@@ -33,7 +33,7 @@ public class ResBuildingManager : MonoBehaviour
     private int stayCount;
     private float unpaidBill;
     private int daysUnpaidRent;
-    public List<ResBuilding> AllResBuildings {get{return allResBuildings;}}
+    public List<ResBuilding> AllResBuildings {set{allResBuildings = value;} get{return allResBuildings;}}
     public GameObject ResBuildingSelectOverlay { get{return resBuildingSelectOverlay;}}
     public ResBuilding CurrentSelectedResBuilding { set{currentSelectedResBuilding = value; ShowBtn();} get{return currentSelectedResBuilding;}}
     public float UnpaidBill { set{unpaidBill = value; } get{return unpaidBill;}}
@@ -114,6 +114,17 @@ public class ResBuildingManager : MonoBehaviour
 
     private void ShowBtn()
     {
+        if (GameManager.Instance.CurrentGameStateData.currentPlayerPlace != null)
+        {
+            Debug.Log("(gamemanager) current player place = " + GameManager.Instance.CurrentGameStateData.currentPlayerPlace);
+        }
+        else
+        {
+            Debug.Log("(gamemanager) current player place is null = " + GameManager.Instance.CurrentGameStateData.currentPlayerPlace == null);
+        }
+
+        Debug.Log("current player place is null = " + Player.Instance.CurrentPlayerPlace == null);
+
         if (Player.Instance.CurrentPlayerPlace != null)
         {
             if(Player.Instance.CurrentPlayerPlace.buildingEnumName == currentSelectedResBuilding.buildingEnumName)
@@ -129,7 +140,6 @@ public class ResBuildingManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("current player place = " + Player.Instance.CurrentPlayerPlace.ToString());
             rentBtn.SetActive(true);
             enterBtn.SetActive(false);
         }

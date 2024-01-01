@@ -60,7 +60,13 @@ public class GameStateData
     //GameManager
     public List<int> charactersID = new List<int>();
     public List<string> charactersName = new List<string>();
-    //<<<<<<<<<<<<<<<<finish all character attribs>>>>>>>>>>>>>>>>
+    public List<string> charactersRelStatus = new List<string>();
+    public List<int> charactersRelStatBarValue = new List<int>();
+    public List<float> charactersCurrentDebt = new List<float>();
+    public List<bool> charactersNumberObtained = new List<bool>();
+    public List<bool> charactersBeenFriends = new List<bool>();
+    public List<bool> charactersGotCalledToday = new List<bool>();
+
     public int currentGameLevel = 1;
     public int inflationDuration = 0;
     public float inflationRate = 0f;

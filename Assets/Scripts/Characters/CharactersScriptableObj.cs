@@ -27,9 +27,9 @@ public class CharactersScriptableObj : ScriptableObject
     public int relStatBarValue = 0;
     public float currentDebt = 0f;
     public bool numberObtained = false;
-    public bool beenFriends;
+    public bool beenFriends = false;
     public Buildings currentBuildiing;
-    public bool gotCalledToday;
+    public bool gotCalledToday = false;
 
     private int socialEnergyLvl = 0;
     private int currentSocialEnergyLvl = 0;
@@ -124,27 +124,31 @@ public class CharactersScriptableObj : ScriptableObject
     }
 
 
-    private void OnEnable()
-    {
-        TimeManager.onDayAdded += (x) => { gotCalledToday = false; };
-    }
-
-
-    private void OnDisable()
+    private void OnDestroy()
     {
         TimeManager.onDayAdded -= (x) => { gotCalledToday = false; };
     }
 
 
     //<<<<<<<<<<<<<<<<<<<< PUBLIC METHODS >>>>>>>>>>>>>>>>>>>>>>//
-    public void PrepareCharacter(string name, int relStatVal, RelStatus savedRelStatus)
+    public void PrepareCharacter(
+        string name, 
+        int relStatVal, 
+        RelStatus savedRelStatus, 
+        float playerCurrentDebt = 0f,
+        bool playerBeenFriends = false, 
+        bool playerNumberObtained = false,
+        bool playerGotCalledToday = false)
     {
         socialEnergyLvl = UnityEngine.Random.Range(1, 3);
         currentSocialEnergyLvl = socialEnergyLvl;
         characterName = name;
         relStatBarValue = relStatVal;
-        beenFriends = false;
         relStatus = savedRelStatus;
+        currentDebt = playerCurrentDebt;
+        beenFriends = playerBeenFriends;
+        numberObtained = playerNumberObtained;
+        gotCalledToday = playerGotCalledToday;
     }
     
 

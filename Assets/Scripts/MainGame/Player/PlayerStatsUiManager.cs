@@ -15,7 +15,7 @@ public class PlayerStatsUiManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyTextSmallOverlay;
 
 
-    private void Start()
+    private void Awake()
     {
         PlayerStatsObserver.onPlayerStatChanged += UpdateStatsText;
         hungerBar.interactable = false;

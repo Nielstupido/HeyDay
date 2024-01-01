@@ -116,11 +116,6 @@ public class Player : MonoBehaviour
 
         GameManager.onGameStarted += LoadGameData;
         GameManager.onSaveGameStateData += SaveGameData;
-    }
-
-
-    private void Start()
-    {
         PlayerStatsObserver.onPlayerStatChanged += StatsChecker;
     }
 
@@ -191,7 +186,7 @@ public class Player : MonoBehaviour
 
         if (this.currentPlayerPlace != null)
         {
-            GameManager.Instance.CurrentGameStateData.currentPlayerPlace = this.currentPlayerPlace.buildingNameStr;
+            GameManager.Instance.CurrentGameStateData.currentPlayerPlace = this.currentPlayerPlace.buildingEnumName.ToString();
         }
     }
 
@@ -290,12 +285,15 @@ public class Player : MonoBehaviour
 
         this.currentWorkHours = GameManager.Instance.CurrentGameStateData.currentWorkHours;
 
-        foreach (ResBuilding resB in ResBuildingManager.Instance.AllResBuildings)
+        if (GameManager.Instance.CurrentGameStateData.currentPlayerPlace != null)
         {
-            if (GameManager.Instance.CurrentGameStateData.currentPlayerPlace == resB.buildingNameStr)
+            foreach (ResBuilding resB in ResBuildingManager.Instance.AllResBuildings)
             {
-                this.currentPlayerPlace = resB;
-                Debug.Log("game loaded current place is = " + this.currentPlayerPlace.buildingNameStr);
+                if (GameManager.Instance.StringEnumParser<ResBuildings>(GameManager.Instance.CurrentGameStateData.currentPlayerPlace) == resB.buildingEnumName)
+                {
+                    this.currentPlayerPlace = resB;
+                    break;
+                }
             }
         }
 

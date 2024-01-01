@@ -56,18 +56,6 @@ public class HospitalManager : MonoBehaviour
     }
 
 
-    private void OnEnable()
-    {
-        TimeManager.onDayAdded += AddInterest;
-    }
-    
-
-    private void OnDisable()
-    {
-        TimeManager.onDayAdded -= AddInterest;
-    }
-
-
     private void LoadGameData()
     {
         this.daysUnpaid = GameManager.Instance.CurrentGameStateData.daysUnpaid;

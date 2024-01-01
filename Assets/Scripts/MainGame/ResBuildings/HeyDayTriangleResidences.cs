@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeyDayTriangleResidences : ResBuilding
 {
-    private void Start()
+    private void Awake()
     {
         this.buildingEnumName = ResBuildings.HEYDAYTRIANGLERESIDENCES;
         this.buildingNameStr = "HeyDay Triangle Residences";
@@ -15,6 +15,11 @@ public class HeyDayTriangleResidences : ResBuilding
         this.adtnlEnergyForSleep = 15f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
+    }
+
+
+    private void Start()
+    {
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

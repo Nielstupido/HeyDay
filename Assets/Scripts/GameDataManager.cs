@@ -357,13 +357,13 @@ public class GameDataManager : MonoBehaviour
                 FileStream fileStreamSave = File.Create(filePath);
                 Dictionary<string, GameStateData> dataHolder = new Dictionary<string, GameStateData>();
                 bf.Serialize(fileStreamSave, dataHolder);
-                fileStreamSave.Close ();
+                fileStreamSave.Close();
             }
 
             FileStream fileStreamLoad = File.Open (filePath, FileMode.Open);
             Dictionary<string, GameStateData> data = (Dictionary<string, GameStateData>)bf.Deserialize(fileStreamLoad);
             allPlayersGameStateData = data;
-            fileStreamLoad.Close ();
+            fileStreamLoad.Close();
 
             if (allPlayersGameStateData.Count == 0)
             {

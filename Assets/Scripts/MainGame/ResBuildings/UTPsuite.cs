@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UTPsuite : ResBuilding
 {
-    private void Start()
+    private void Awake()
     {
         this.buildingEnumName = ResBuildings.UTPSUITE;
         this.buildingNameStr = "UTP Suite";
@@ -15,6 +15,11 @@ public class UTPsuite : ResBuilding
         this.adtnlEnergyForSleep = 8f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
+    }
+
+
+    private void Start()
+    {
         BuildingManager.Instance.onBuildingBtnClicked += CheckBtnClicked;
     }
 

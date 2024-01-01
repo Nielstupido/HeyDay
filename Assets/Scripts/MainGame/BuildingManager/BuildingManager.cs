@@ -115,7 +115,11 @@ public class BuildingManager : MonoBehaviour
 
     public void Ride()
     {
+        walkBtn.SetActive(false);
+        rideBtn.SetActive(false);
+        enterBtn.SetActive(true);
         AudioManager.Instance.PlaySFX("Select");
+        
         if (Player.Instance.PlayerOwnedVehicles.Count == 0)
         {
             if (!Player.Instance.Pay(false, 13f, 0.1f, 0f, 1f, notEnoughMoneyFare, 5f))
