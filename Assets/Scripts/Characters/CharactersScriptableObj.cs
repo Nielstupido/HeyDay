@@ -231,15 +231,15 @@ public class CharactersScriptableObj : ScriptableObject
         switch (this.relStatus)
         {
             case RelStatus.STRANGERS:
-                return NpcDecision(2, rejectStrangers);
+                return NpcDecision(5, rejectStrangers);
             case RelStatus.FRIENDS:
-                return NpcDecision(6, rejectFriends);
+                return NpcDecision(15, rejectFriends);
             case RelStatus.GOOD_FRIENDS:
-                return NpcDecision(8, rejectGoodFriends);
+                return NpcDecision(17, rejectGoodFriends);
             case RelStatus.BEST_BUDDIES:
-                return NpcDecision(9, rejectBestBuddies);
+                return NpcDecision(19, rejectBestBuddies);
             case RelStatus.ENEMIES:
-                return NpcDecision(1, rejectEnemies);
+                return NpcDecision(3, rejectEnemies);
             default:
                 return (false, 0, "");
         }
@@ -261,7 +261,7 @@ public class CharactersScriptableObj : ScriptableObject
 
         if (this.relStatus == RelStatus.STRANGERS || this.relStatus == RelStatus.ENEMIES)
         {
-            randomNum = UnityEngine.Random.Range(1, 11);
+            randomNum = UnityEngine.Random.Range(1, 20);
 
             if (randomNum > (relStatBarValue / 4))
             {
@@ -283,7 +283,7 @@ public class CharactersScriptableObj : ScriptableObject
 
     public ValueTuple<CharacterEmotions, CharacterStance, int> YellAt()
     {
-        randomNum = UnityEngine.Random.Range(1, 11);
+        randomNum = UnityEngine.Random.Range(1, 20);
 
         if (relStatus == RelStatus.STRANGERS)
         {
@@ -319,7 +319,7 @@ public class CharactersScriptableObj : ScriptableObject
 
     public ValueTuple<CharacterEmotions, CharacterStance, int> TellJoke()
     {
-        randomNum = UnityEngine.Random.Range(1, 11);
+        randomNum = UnityEngine.Random.Range(1, 20);
 
         if (relStatus == RelStatus.STRANGERS)
         {
@@ -361,15 +361,15 @@ public class CharactersScriptableObj : ScriptableObject
         switch (this.relStatus)
         {
             case RelStatus.STRANGERS:
-                return NpcDecision(3, rejectStrangers);
+                return NpcDecision(5, rejectStrangers);
             case RelStatus.FRIENDS:
-                return NpcDecision(6, rejectFriends);
+                return NpcDecision(15, rejectFriends);
             case RelStatus.GOOD_FRIENDS:
-                return NpcDecision(8, rejectGoodFriends);
+                return NpcDecision(17, rejectGoodFriends);
             case RelStatus.BEST_BUDDIES:
-                return NpcDecision(9, rejectBestBuddies);
+                return NpcDecision(19, rejectBestBuddies);
             case RelStatus.ENEMIES:
-                return NpcDecision(2, rejectEnemies);
+                return NpcDecision(3, rejectEnemies);
             default:
                 return (false, 0, "");
         }
@@ -413,7 +413,7 @@ public class CharactersScriptableObj : ScriptableObject
             return (false, currentSocialEnergyLvl, rejections[randomNum]);
         }
 
-        randomNum = UnityEngine.Random.Range(1, 11);
+        randomNum = UnityEngine.Random.Range(1, 20);
 
         if (randomNum <= possibilityRate)
         {

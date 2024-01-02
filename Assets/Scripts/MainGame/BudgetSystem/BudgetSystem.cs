@@ -145,10 +145,10 @@ public class BudgetSystem : MonoBehaviour
                 }
                 return 1f; //bad
 
-            case > 0.6f:
+            case > 0.85f:
                 return 2f; //good
 
-            case < 0.61f:
+            case < 0.86f:
                 if (isSavingsEmergency)
                 {
                     return 1f; //bad

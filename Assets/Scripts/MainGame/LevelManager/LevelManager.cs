@@ -77,6 +77,7 @@ public class LevelManager : MonoBehaviour
     private Dictionary<string, List<MissionsScriptableObj>> allMissions = new Dictionary<string, List<MissionsScriptableObj>>();
     public List<MissionsScriptableObj> currentActiveMissions = new List<MissionsScriptableObj>();
     public Dictionary<string, List<MissionsScriptableObj>> AllMissions {get{return allMissions;}}
+    public CameraMovement CameraMovementRef {set{cameraMovement = value;} get{return cameraMovement;}}
     private string tempLevelName;
     private string[] tempSplitIdHolder;
     private int missionLevelCounter;

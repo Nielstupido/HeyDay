@@ -213,10 +213,13 @@ public class PlayerPhone : MonoBehaviour
     public void DialContact(string characterName)
     {
         AudioManager.Instance.PlaySFX("Select");
-        if (GameManager.Instance.Characters[GameManager.Instance.Characters.FindIndex( (character) => character.name == currrentSelectedContact )].gotCalledToday)
+        foreach (CharactersScriptableObj charac in GameManager.Instance.Characters)
         {
-            PromptManager.Instance.ShowPrompt(contactBusyPrompt);
-            return;
+            if (characterName == charac.characterName && charac.gotCalledToday)
+            {
+                PromptManager.Instance.ShowPrompt(contactBusyPrompt);
+                return;
+            }
         }
 
         currrentSelectedContact = characterName;
@@ -229,7 +232,16 @@ public class PlayerPhone : MonoBehaviour
         playerMsgText.text = "Hi " + currrentSelectedContact.Split(' ').First() + "! It's been a minute. Wanna hang out?";
         playerBubbleHolder.SetActive(true);
         StartCoroutine(GettingNpcResponse());
-        GameManager.Instance.Characters[GameManager.Instance.Characters.FindIndex( (character) => character.name == currrentSelectedContact )].gotCalledToday = true;
+
+        foreach (CharactersScriptableObj charac in GameManager.Instance.Characters)
+        {
+            if (currrentSelectedContact == charac.characterName)
+            {
+                charac.gotCalledToday = true;
+                break;
+            }
+        }
+
         inviteBtn.SetActive(false);
     }
 
@@ -244,7 +256,7 @@ public class PlayerPhone : MonoBehaviour
 
     private IEnumerator CloseCallConvoView()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
         callConvoView.SetActive(false);
         yield return null;
     }
@@ -252,7 +264,7 @@ public class PlayerPhone : MonoBehaviour
 
     private IEnumerator GettingNpcResponse()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         GetNpcResponse();
         yield return null;
     }

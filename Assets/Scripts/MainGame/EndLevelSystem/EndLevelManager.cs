@@ -38,6 +38,7 @@ public class EndLevelManager : MonoBehaviour
 
     public void LevelFinished()
     {
+        LevelManager.Instance.CameraMovementRef.enabled = false;
         GameManager.Instance.CurrentGameLevel++;
         endLvlOverlay.SetActive(true);
         OverlayAnimations.Instance.AnimOpenOverlay(endLvlOverlay);

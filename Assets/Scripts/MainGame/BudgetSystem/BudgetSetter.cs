@@ -12,7 +12,6 @@ public class BudgetSetter : MonoBehaviour
     [SerializeField] private List<TextMeshProUGUI> amountTexts = new List<TextMeshProUGUI>();
     [SerializeField] private TextMeshProUGUI playerCurrentMoneyText;
     [SerializeField] private GameObject budgetSetterPopUp;
-    [SerializeField] private CameraMovement cameraMovement;
     private const float BillsRecommPercentage = 0.5f;
     private const float SavingsRecommPercentage = 0.1f;
     private const float ConsumablesRecommPercentage = 0.3f;
@@ -23,7 +22,7 @@ public class BudgetSetter : MonoBehaviour
 
     public void PrepareBudgeSetter(float currentPlayerMoney)
     {
-        cameraMovement.enabled = false;
+        LevelManager.Instance.CameraMovementRef.enabled = false;
 
         if (currentPlayerMoney == -1f)
         {
@@ -111,7 +110,7 @@ public class BudgetSetter : MonoBehaviour
 
     public void Continue()
     {
-        cameraMovement.enabled = true;
+        LevelManager.Instance.CameraMovementRef.enabled = true;
         AudioManager.Instance.PlaySFX("Select");
 
         if (sliders[0].value + sliders[1].value + sliders[2].value + sliders[3].value < (moneyValue * 0.9))

@@ -182,7 +182,7 @@ public class InteractionSystemManager : MonoBehaviour
         UpdateCharacterEmo(CharacterEmotions.HAPPY, CharacterStance.DEFAULT);
         UpdateRelStatusUI();
         StartCoroutine(ReturnToDefaultEmo(1));
-        payDebtBtn.enabled = false;
+        payDebtBtn.interactable = false;
         debtValue.text = "₱" + interactingCharacter.currentDebt.ToString();
     }
 
@@ -194,8 +194,9 @@ public class InteractionSystemManager : MonoBehaviour
 
         if (npcResponse.Item1)
         {
-            getContactNumBtn.enabled = false;
+            getContactNumBtn.interactable = false;
             Player.Instance.ContactList.Add(interactingCharacter.characterName);
+            ToggleSpeechBubble(false, "Sure");
         }
         else
         {
@@ -404,7 +405,7 @@ public class InteractionSystemManager : MonoBehaviour
 
     private IEnumerator HideSpeechBubble()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         speechBubbleImage.SetActive(false);
     }
 

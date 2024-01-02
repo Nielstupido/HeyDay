@@ -16,11 +16,11 @@ public class ContactItem : MonoBehaviour
     {
         this.contactNameText.text = contactName;
         this.playerPhone = playerPhoneRef;
-        this.contactBtn.onClick.AddListener( () => {this.CallContact(contactName);});
+        this.contactBtn.onClick.AddListener( () => {this.CallContact();});
     }
 
 
-    public void CallContact(string name)
+    public void CallContact()
     {
         if (MeetUpSystem.Instance.CheckForPendingMeetup())
         {
@@ -28,6 +28,7 @@ public class ContactItem : MonoBehaviour
             return;
         }
 
-        this.playerPhone.DialContact(name);
+        Debug.Log("dial " + this.contactNameText.text);
+        this.playerPhone.DialContact(this.contactNameText.text);
     }
 }

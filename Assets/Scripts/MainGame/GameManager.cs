@@ -307,7 +307,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator DelayOpenMissions()
     {
         LevelManager.Instance.CloseMissionOverlay();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         LevelManager.Instance.OpenMissionOverlay();
         yield return null;
     }
@@ -362,6 +362,7 @@ public class GameManager : MonoBehaviour
 
     public void StartNextLevel()
     {
+        LevelManager.Instance.CameraMovementRef.enabled = true;
         UpdateBottomOverlay(UIactions.SHOW_DEFAULT_BOTTOM_OVERLAY);
         pauseBtn.SetActive(true);
         AssignNpcToBuilding(0);
