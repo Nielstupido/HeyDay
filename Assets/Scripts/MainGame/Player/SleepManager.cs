@@ -85,6 +85,7 @@ public class SleepManager : MonoBehaviour
 
         sleepingManagerOverlay.SetActive(false);
         OverlayAnimations.Instance.AnimCloseOverlay(sleepPopUp, sleepingManagerOverlay);
+        AudioManager.Instance.StopSFX();
         AnimOverlayManager.Instance.StopAnim();
         LifeEventsManager.Instance.StartLifeEvent(); //random (earthquake, inflation)
 

@@ -32,8 +32,8 @@ public class LifeEventsPrompt : MonoBehaviour
 
     public void Continue()
     {
+        AudioManager.Instance.StopSFX();
         AudioManager.Instance.PlaySFX("Select");
         messagePromptOverlay.SetActive(false);
-        AudioManager.Instance.StopSFX();
     }
 }

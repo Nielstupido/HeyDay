@@ -7507,10 +7507,42 @@ MonoBehaviour:
   - name: GoodEnding
     clip: {fileID: 8300000, guid: aaa2325f95c89084faa237dcfad19248, type: 3}
   sfxSounds:
-  - name: Click
-    clip: {fileID: 8300000, guid: 2f79ffcda4e4cc145ad801061c3de1bb, type: 3}
+  - name: News
+    clip: {fileID: 8300000, guid: 8f14ab4f01ab9cd4381c4eeb2c832fef, type: 3}
+  - name: Barber
+    clip: {fileID: 8300000, guid: c663422e801d2c147858af64bd96e0e6, type: 3}
+  - name: Ambulance
+    clip: {fileID: 8300000, guid: 02fd0c7f3d1de85489f5e3fcf089588e, type: 3}
+  - name: Commute
+    clip: {fileID: 8300000, guid: b4a56e2fc97bf754c897a40d1808e107, type: 3}
+  - name: Dental
+    clip: {fileID: 8300000, guid: 9c1d1fff273734e4ba73b9a93efa3614, type: 3}
+  - name: Drive
+    clip: {fileID: 8300000, guid: 995940d2c08fcd84ba5ad6cd2df89111, type: 3}
+  - name: Sleep
+    clip: {fileID: 8300000, guid: f0ce5062dd616ea48823597e2cd35a17, type: 3}
+  - name: Walk
+    clip: {fileID: 8300000, guid: 87f10efa47c01284a9b7469ea0afc391, type: 3}
+  - name: Earthquake
+    clip: {fileID: 8300000, guid: e8e083dd34fceac4eb98554c02bf29f8, type: 3}
+  - name: Salon
+    clip: {fileID: 8300000, guid: 2459e326bb313ea4081d19a7f1ca0757, type: 3}
+  - name: WatchMovie
+    clip: {fileID: 8300000, guid: 62db1ca3c087f0940a765e96d8a7e0a9, type: 3}
+  - name: Ambulance
+    clip: {fileID: 8300000, guid: 2df9e1c6b8ca19648a8007dffd75e26c, type: 3}
+  - name: OfficeNoise
+    clip: {fileID: 8300000, guid: 1ae2139bc7a081945bb359b79d00f0aa, type: 3}
+  - name: Eat
+    clip: {fileID: 8300000, guid: 4eec7b35c2c3d2341ae1f42532cf4889, type: 3}
+  - name: Party
+    clip: {fileID: 8300000, guid: 541dff28b5a5af741aaf54fd79c4855f, type: 3}
   - name: Select
     clip: {fileID: 8300000, guid: df2a504863a41bf48a9498498b6375cf, type: 3}
+  - name: Pay
+    clip: {fileID: 8300000, guid: 77f4c6970b7fcb94f8486777ede063e3, type: 3}
+  - name: Click
+    clip: {fileID: 8300000, guid: 2f79ffcda4e4cc145ad801061c3de1bb, type: 3}
   musicEffectSounds:
   - name: News
     clip: {fileID: 8300000, guid: 8f14ab4f01ab9cd4381c4eeb2c832fef, type: 3}
@@ -19880,7 +19912,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.765
   m_Pitch: 1
   Loop: 1
   Mute: 0

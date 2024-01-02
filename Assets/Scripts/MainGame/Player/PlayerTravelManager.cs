@@ -116,6 +116,7 @@ public class PlayerTravelManager : MonoBehaviour
         yield return new WaitForSeconds(travelingTime);
         AnimOverlayManager.Instance.StopAnim();
         AudioManager.Instance.StopMusicEffect();
+        AudioManager.Instance.StopSFX();
         yield return null;
     }
 }

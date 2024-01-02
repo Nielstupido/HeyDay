@@ -421,6 +421,7 @@ public class UniversityManager : MonoBehaviour
         AudioManager.Instance.PlaySFX("Study");
         AnimOverlayManager.Instance.StartAnim(ActionAnimations.STUDY);
         yield return new WaitForSeconds(seconds);
+        AudioManager.Instance.StopSFX();
         AnimOverlayManager.Instance.StopAnim();
     }
 }

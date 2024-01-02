@@ -173,6 +173,7 @@ public class BuildingManager : MonoBehaviour
 
     public void ExitBuilding()
     {
+        AudioManager.Instance.StopSFX();
         AudioManager.Instance.StopMusicEffect();
         AudioManager.Instance.PlayMusic("Theme2");
         RemoveBuildingActionBtns();

@@ -93,6 +93,7 @@ public class HospitalManager : MonoBehaviour
 
     public void CloseHospitalizedOverlay()
     {
+        AudioManager.Instance.StopSFX();
         AudioManager.Instance.PlaySFX("Select");
         hospitalizedPrompt.SetActive(false);
         OverlayAnimations.Instance.AnimCloseOverlay(hospitalizedPopUp, hospitalizedPrompt);

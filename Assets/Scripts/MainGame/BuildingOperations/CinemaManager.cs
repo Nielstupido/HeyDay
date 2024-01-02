@@ -38,6 +38,7 @@ public class CinemaManager : MonoBehaviour
         yield return new WaitForSeconds(waitingTime);
         cinemaOverlay.SetActive(false);
         AnimOverlayManager.Instance.StopAnim();
+        AudioManager.Instance.StopSFX();
         yield return null;
     }
 }

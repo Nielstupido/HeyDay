@@ -581,6 +581,7 @@ public class Player : MonoBehaviour
         AnimOverlayManager.Instance.StartAnim(actionAnimation);
         yield return new WaitForSeconds(animLength);
         AnimOverlayManager.Instance.StopAnim();
+        AudioManager.Instance.StopSFX();
         yield return null;
     }
 }

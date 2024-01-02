@@ -209,6 +209,7 @@ public class BankSystemManager : MonoBehaviour
         Player.Instance.PlayerStatsDict[PlayerStats.MONEY] = Player.Instance.PlayerCash;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, Player.Instance.PlayerStatsDict);
         
+        AudioManager.Instance.StopSFX();
         yield return null;
     }
 }

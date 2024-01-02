@@ -38,6 +38,7 @@ public class BarManager : MonoBehaviour
         yield return new WaitForSeconds(waitingTime);
         barOverlay.SetActive(false);
         AnimOverlayManager.Instance.StopAnim();
+        AudioManager.Instance.StopSFX();
         yield return null;
     }
 }
