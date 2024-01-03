@@ -83,11 +83,11 @@ public class PlayerTravelManager : MonoBehaviour
 
         if (modeOfTravel == ModeOfTravels.WALK)
         {
-            StartCoroutine(StartTravelingOverlay(false, 2f, selectedBuilding, actionAnimation));
+            StartCoroutine(StartTravelingOverlay(false, 5f, selectedBuilding, actionAnimation));
         }
         else
         {
-            StartCoroutine(StartTravelingOverlay(true, 2f, selectedBuilding, actionAnimation));
+            StartCoroutine(StartTravelingOverlay(true, 4f, selectedBuilding, actionAnimation));
         }
     }
 

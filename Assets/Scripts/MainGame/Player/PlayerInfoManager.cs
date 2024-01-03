@@ -31,11 +31,11 @@ public class PlayerInfoManager : MonoBehaviour
         AnimOverlayManager.Instance.StartBlackScreenFadeLoadScreen();
         yield return new WaitForSeconds(0.6f);
         characterCreationOverlay.SetActive(false);
-        // introCutsceneMannager.StartIntro();
+        introCutsceneMannager.StartIntro();
 
         //for testing
-        GoalSetter.Instance.SetGoal();
-        AudioManager.Instance.StopMusic();
+        // GoalSetter.Instance.SetGoal();
+        // AudioManager.Instance.StopMusic();
     }
 
     public void StartIntroScene()

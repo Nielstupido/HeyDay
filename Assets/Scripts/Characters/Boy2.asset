@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 990bc42e7e295a74291254d230eab176, type: 3}
-  m_Name: "tr\u200B"
+  m_Name: "test3\u200B"
   m_EditorClassIdentifier: 
   characterName: Gabriel Santos
   characterGender: 0
@@ -31,5 +31,5 @@ MonoBehaviour:
   currentDebt: 0
   numberObtained: 0
   beenFriends: 0
-  currentBuildiing: 5
+  currentBuildiing: 6
   gotCalledToday: 0

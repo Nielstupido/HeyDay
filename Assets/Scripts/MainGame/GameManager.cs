@@ -65,6 +65,9 @@ public class GameUiController : MonoBehaviour
 
 public class GameManager : MonoBehaviour
 {
+    //For Demo Only
+    [SerializeField] private GameObject demoBtnsOverlay;
+
     [SerializeField] private GameObject defaultBottomOverlay;
     [SerializeField] private GameObject smallBottomOverlay;
     [SerializeField] private GameObject pauseBtn;
@@ -509,6 +512,13 @@ public class GameManager : MonoBehaviour
     public void GameFinished()
     {
         endGameManager.ShowOutro(true, "");
+    }
+
+
+    //For Demo Only
+    public void ToggleDemoBtnsOverlay()
+    {
+        demoBtnsOverlay.SetActive(!demoBtnsOverlay.activeSelf);
     }
 
 
