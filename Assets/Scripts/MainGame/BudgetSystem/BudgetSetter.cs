@@ -40,7 +40,6 @@ public class BudgetSetter : MonoBehaviour
         {
             oldVals[i] = 0f;
             sliders[i].maxValue = currentPlayerMoney;
-            sliders[i].value = 0f;
             recommSliders[i].maxValue = currentPlayerMoney;
             amountTexts[i].text = sliders[i].value.ToString("0");
 
@@ -48,15 +47,19 @@ public class BudgetSetter : MonoBehaviour
             {
                 case 0:
                     recommSliders[i].value = currentPlayerMoney * BillsRecommPercentage;
+                    sliders[i].value = currentPlayerMoney * BillsRecommPercentage;
                     break;
                 case 1:
                     recommSliders[i].value = currentPlayerMoney * SavingsRecommPercentage;
+                    sliders[i].value = currentPlayerMoney * SavingsRecommPercentage;
                     break;
                 case 2:
                     recommSliders[i].value = currentPlayerMoney * ConsumablesRecommPercentage;
+                    sliders[i].value = currentPlayerMoney * ConsumablesRecommPercentage;
                     break;
                 case 3:
                     recommSliders[i].value = currentPlayerMoney * EmergencyRecommPercentage;
+                    sliders[i].value = currentPlayerMoney * EmergencyRecommPercentage;
                     break;
             }
         }
