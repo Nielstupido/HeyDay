@@ -54,10 +54,12 @@ public class Player : MonoBehaviour
     private float playerLvlBillExpenses;
     private float playerLvlSavings;
     private float playerLvlConsumablesExpenses;
+    private float playerLvlMiscExpenses;
     private float playerLvlEmergencyFunds;
     public float PlayerLvlBillExpenses { set{playerLvlBillExpenses = value;} get{return playerLvlBillExpenses;}}
     public float PlayerLvlSavings { set{playerLvlSavings = value;} get{return playerLvlSavings;}}
     public float PlayerLvlConsumablesExpenses { set{playerLvlConsumablesExpenses = value;} get{return playerLvlConsumablesExpenses;}}
+    public float PlayerLvlMiscExpenses { set{playerLvlMiscExpenses = value;} get{return playerLvlMiscExpenses;}}
     public float PlayerLvlEmergencyFunds { set{playerLvlEmergencyFunds = value;} get{return playerLvlEmergencyFunds;}}
 
     //Studies
@@ -426,7 +428,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            playerLvlConsumablesExpenses += price;
+            playerLvlMiscExpenses += price;
         }
 
         AudioManager.Instance.PlaySFX("Pay");

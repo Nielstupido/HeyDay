@@ -10,7 +10,9 @@ public class OverlayAnimations : MonoBehaviour
     movieTicket,
     barTicket,
     debtReminderOverlay,
-    debtReminderPopUp;
+    debtReminderPopUp,
+    gameReminderOverlay,
+    gameReminderPopup;
 
 
     public static OverlayAnimations Instance { get; private set; }
@@ -125,18 +127,18 @@ public class OverlayAnimations : MonoBehaviour
     }
 
 
-    public void OpenGameReminder(GameObject obj, GameObject panel)
+    public void OpenGameReminder()
     {
-        obj.GetComponent<RectTransform>().localScale = Vector3.zero;
-        panel.SetActive(true);
-        LeanTween.scale(obj, new Vector3(1f,1f,1f),1.5f)
+        gameReminderPopup.GetComponent<RectTransform>().localScale = Vector3.zero;
+        gameReminderOverlay.SetActive(true);
+        LeanTween.scale(gameReminderPopup, new Vector3(1f,1f,1f),0.5f)
         .setEaseOutBack();
     }
 
-    public void CloseGameReminder(GameObject obj, GameObject panel)
+    public void CloseGameReminder()
     {
-        LeanTween.scale(obj, new Vector3(0f,0f,0f),1.5f)
+        LeanTween.scale(gameReminderPopup, new Vector3(0f,0f,0f),0.5f)
         .setEaseInBack()
-        .setOnComplete(() => panel.SetActive(false));
+        .setOnComplete(() => gameReminderOverlay.SetActive(false));
     }
 }

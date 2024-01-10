@@ -27,9 +27,18 @@ public class PlayerPhone : MonoBehaviour
     
     //Goaltracker
     [SerializeField] private GameObject goalTrackerOverlay;
+    [SerializeField] private TextMeshProUGUI courseValue;
 
     //Financetracker
     [SerializeField] private GameObject financeTrackerOverlay;
+    [SerializeField] private TextMeshProUGUI savingsValue;
+    [SerializeField] private TextMeshProUGUI bankBalValue;
+    [SerializeField] private TextMeshProUGUI cashBalValue;
+    [SerializeField] private TextMeshProUGUI incomeValue;
+    [SerializeField] private TextMeshProUGUI debtValue; 
+    [SerializeField] private TextMeshProUGUI monthlyOutflowValue; 
+    [SerializeField] private TextMeshProUGUI foodExpenditureValue; 
+    [SerializeField] private TextMeshProUGUI miscExpenditureValue; 
 
     //Olshop
     [SerializeField] private GameObject oLShopOverlay;
@@ -37,13 +46,6 @@ public class PlayerPhone : MonoBehaviour
     [SerializeField] private Slider groceryBar;
     private float groceryPrice = 50f;
 
-    [SerializeField] private TextMeshProUGUI courseValue;
-    [SerializeField] private TextMeshProUGUI savingsValue;
-    [SerializeField] private TextMeshProUGUI bankBalValue;
-    [SerializeField] private TextMeshProUGUI cashBalValue;
-    [SerializeField] private TextMeshProUGUI incomeValue;
-    [SerializeField] private TextMeshProUGUI debtValue; 
-    [SerializeField] private TextMeshProUGUI monthlyOutflowValue; 
     [SerializeField] private Prompts noGroceryPrompt; 
     [SerializeField] private Prompts errorMoneyPrompt; 
     [SerializeField] private Prompts groceryBarFull; 
@@ -120,6 +122,26 @@ public class PlayerPhone : MonoBehaviour
         {
             
             monthlyOutflowValue.text = "0";
+        }
+
+        try
+        {
+            foodExpenditureValue.text = Player.Instance.PlayerLvlConsumablesExpenses.ToString();
+        }
+        catch (System.Exception)
+        {
+            
+            foodExpenditureValue.text = "0";
+        }
+
+        try
+        {
+            miscExpenditureValue.text = Player.Instance.PlayerLvlMiscExpenses.ToString();
+        }
+        catch (System.Exception)
+        {
+            
+            miscExpenditureValue.text = "0";
         }
 
         debtValue.text = Player.Instance.PlayerTotalDebt.ToString();

@@ -205,6 +205,7 @@ public class TimeManager : MonoBehaviour
     {
         if (isAddingDays)
         {
+            OverlayAnimations.Instance.OpenGameReminder();
             currentDayCount += daysToAdd;
             UpdateDayUI(currentDayCount);
             onDayAdded(currentDayCount);
@@ -217,6 +218,11 @@ public class TimeManager : MonoBehaviour
             UpdateDayUI(currentDayCount);
             toggleCounter = 0;
             onDayAdded(currentDayCount);
+        }
+
+        if (currentDayCount != 1)
+        {
+            OverlayAnimations.Instance.OpenGameReminder();
         }
     }
 
