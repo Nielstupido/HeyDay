@@ -124,4 +124,19 @@ public class OverlayAnimations : MonoBehaviour
         .setOnComplete(() => panel.SetActive(false));
     }
 
+
+    public void OpenGameReminder(GameObject obj, GameObject panel)
+    {
+        obj.GetComponent<RectTransform>().localScale = Vector3.zero;
+        panel.SetActive(true);
+        LeanTween.scale(obj, new Vector3(1f,1f,1f),1.5f)
+        .setEaseOutBack();
+    }
+
+    public void CloseGameReminder(GameObject obj, GameObject panel)
+    {
+        LeanTween.scale(obj, new Vector3(0f,0f,0f),1.5f)
+        .setEaseInBack()
+        .setOnComplete(() => panel.SetActive(false));
+    }
 }

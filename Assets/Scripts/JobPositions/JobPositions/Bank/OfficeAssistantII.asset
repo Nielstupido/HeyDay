@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: OfficeAssistantII
   m_EditorClassIdentifier: 
   jobPosName: Office Assistant II
-  jobPosReqs: Enrolled in any Business and Management Course + 250 WH (Office Assistant)
+  jobPosReqs: Enrolled in any Business and Management Course + 80 WH (Office Assistant)
   establishment: 3
   workField: 7
   reqStudyField: 2
   reqCourse: 
   reqWorkField: 7
-  reqWorkHrs: 250
-  salaryPerHr: 50
+  reqWorkHrs: 80
+  salaryPerHr: 61

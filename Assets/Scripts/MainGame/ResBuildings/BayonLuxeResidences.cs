@@ -8,8 +8,8 @@ public class BayonLuxeResidences : ResBuilding
     {
         this.buildingEnumName = ResBuildings.BAYONLUXERESIDENCES;
         this.buildingNameStr = "Bayon Luxe Residences";
-        this.monthlyRent = 4000f;
-        this.monthlyElecCharge = 800f;
+        this.monthlyRent = 8000f;
+        this.monthlyElecCharge = 900f;
         this.monthlyWaterCharge = 400f;
         this.dailyAdtnlHappiness = 23f; 
         this.adtnlEnergyForSleep = 20f;

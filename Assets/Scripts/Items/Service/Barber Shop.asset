@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: Barber Shop Service
   itemType: 4
   itemImage: {fileID: 21300000, guid: 576e3a41126c3cd44b785800c38b7a03, type: 3}
-  itemPrice: 150
+  itemPrice: 70
   itemCondition: 0
   vehicleType: 0
   vehicleColor: 0

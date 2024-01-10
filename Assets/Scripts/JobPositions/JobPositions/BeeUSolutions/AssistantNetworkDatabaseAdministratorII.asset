@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: AssistantNetworkDatabaseAdministratorII
   m_EditorClassIdentifier: 
   jobPosName: Assistant Network/Database Administrator I
-  jobPosReqs: Enrolled in BS Computer Science/Information Technology + 500 WH (Asst.
+  jobPosReqs: Enrolled in BS Computer Science/Information Technology + 300 WH (Asst.
     Programmer)
   establishment: 12
   workField: 0
   reqStudyField: 0
   reqCourse: 2800000029000000
   reqWorkField: 15
-  reqWorkHrs: 800
-  salaryPerHr: 55
+  reqWorkHrs: 300
+  salaryPerHr: 81

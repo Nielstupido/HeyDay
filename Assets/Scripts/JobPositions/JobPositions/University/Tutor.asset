@@ -16,8 +16,8 @@ MonoBehaviour:
   jobPosReqs: Enrolled in any Education Course
   establishment: 11
   workField: 0
-  reqStudyField: 0
-  reqCourse: 0
+  reqStudyField: 3
+  reqCourse: 
   reqWorkField: 0
   reqWorkHrs: 0
-  salaryPerHr: 48
+  salaryPerHr: 51

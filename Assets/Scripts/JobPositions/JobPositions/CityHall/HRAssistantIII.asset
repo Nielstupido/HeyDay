@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jobPosName: HR Assistant III
   jobPosReqs: Enrolled in BS Psychology or any Business and Management Courses +
-    400 WH (HR Assistant)
+    150 WH (HR Assistant)
   establishment: 0
   workField: 0
   reqStudyField: 0
-  reqCourse: 0
+  reqCourse: 
   reqWorkField: 0
-  reqWorkHrs: 400
-  salaryPerHr: 48
+  reqWorkHrs: 150
+  salaryPerHr: 66

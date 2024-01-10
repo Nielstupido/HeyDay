@@ -122,7 +122,7 @@ public class BuildingManager : MonoBehaviour
         
         if (Player.Instance.PlayerOwnedVehicles.Count == 0)
         {
-            if (!Player.Instance.Pay(false, 13f, 0.1f, 0f, 1f, notEnoughMoneyFare, 5f))
+            if (!Player.Instance.Pay(false, 15f, 0.1f, 0f, 1f, notEnoughMoneyFare, 5f))
             {
                 return;
             }

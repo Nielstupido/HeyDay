@@ -11,8 +11,8 @@ public class UTPsuite : ResBuilding
         this.monthlyRent = 1800f;
         this.monthlyElecCharge = 450f;
         this.monthlyWaterCharge = 150f;
-        this.dailyAdtnlHappiness = 12f; 
-        this.adtnlEnergyForSleep = 8f;
+        this.dailyAdtnlHappiness = 8f; 
+        this.adtnlEnergyForSleep = 6f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
     }

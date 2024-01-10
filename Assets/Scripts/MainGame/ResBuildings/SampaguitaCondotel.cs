@@ -8,9 +8,9 @@ public class SampaguitaCondotel : ResBuilding
     {
         this.buildingEnumName = ResBuildings.SAMPAGUITACONDOTEL;
         this.buildingNameStr = "Sampaguita Condotel";
-        this.monthlyRent = 5000f;
-        this.monthlyElecCharge = 800f;
-        this.monthlyWaterCharge = 450f;
+        this.monthlyRent = 10000f;
+        this.monthlyElecCharge = 1200f;
+        this.monthlyWaterCharge = 500f;
         this.dailyAdtnlHappiness = 25f; 
         this.adtnlEnergyForSleep = 25f;
 

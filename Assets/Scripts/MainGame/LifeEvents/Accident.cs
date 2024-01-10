@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Accident : LifeEvent
 {
-    private float hospitalBill = 350f;
+    private float hospitalBill = 1800f;
 
 
     public override void TriggerLifeEvent()

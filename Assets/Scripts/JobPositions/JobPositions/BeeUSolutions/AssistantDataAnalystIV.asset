@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: AssistantDataAnalystIV
   m_EditorClassIdentifier: 
   jobPosName: Assistant Data Analyst IV
-  jobPosReqs: Enrolled in BS Computer Science/Information Technology + 1000 WH (Asst.
+  jobPosReqs: Enrolled in BS Computer Science/Information Technology + 300 WH (Asst.
     Data Analyst)
   establishment: 12
   workField: 16
   reqStudyField: 0
   reqCourse: 2800000029000000
   reqWorkField: 16
-  reqWorkHrs: 1000
-  salaryPerHr: 58
+  reqWorkHrs: 300
+  salaryPerHr: 82

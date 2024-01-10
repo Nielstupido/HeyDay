@@ -17,7 +17,7 @@ MonoBehaviour:
   establishment: 16
   workField: 7
   reqStudyField: 2
-  reqCourse: 0
+  reqCourse: 
   reqWorkField: 7
   reqWorkHrs: 0
-  salaryPerHr: 45
+  salaryPerHr: 48

@@ -11,8 +11,8 @@ public class RegalSanctuary : ResBuilding
         this.monthlyRent = 2500f;
         this.monthlyElecCharge = 600f;
         this.monthlyWaterCharge = 200f;
-        this.dailyAdtnlHappiness = 15f; 
-        this.adtnlEnergyForSleep = 10f;
+        this.dailyAdtnlHappiness = 10f; 
+        this.adtnlEnergyForSleep = 8f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
     }

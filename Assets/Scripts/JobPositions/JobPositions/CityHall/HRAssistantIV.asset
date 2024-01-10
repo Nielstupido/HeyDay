@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: HRAssistantIV
   m_EditorClassIdentifier: 
   jobPosName: HR Assistant IV
-  jobPosReqs: Enrolled in BS Psychology or any Social Science related course + 800
+  jobPosReqs: Enrolled in BS Psychology or any Social Science related course + 310
     WH (HR Assistant)
   establishment: 0
   workField: 0
   reqStudyField: 0
-  reqCourse: 0
+  reqCourse: 
   reqWorkField: 0
-  reqWorkHrs: 800
-  salaryPerHr: 50
+  reqWorkHrs: 310
+  salaryPerHr: 72

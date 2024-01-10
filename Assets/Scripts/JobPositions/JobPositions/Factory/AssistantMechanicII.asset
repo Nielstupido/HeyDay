@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: AssistantMechanicII
   m_EditorClassIdentifier: 
   jobPosName: Assistant Mechanic II
-  jobPosReqs: Enrolled in BS Mechanical Engineering/Industrial Technology + 250 WH
+  jobPosReqs: Enrolled in BS Mechanical Engineering/Industrial Technology + 85 WH
     (Asst. Mechanic)
   establishment: 20
   workField: 19
   reqStudyField: 0
   reqCourse: 1900000018000000
   reqWorkField: 19
-  reqWorkHrs: 250
-  salaryPerHr: 48
+  reqWorkHrs: 85
+  salaryPerHr: 63

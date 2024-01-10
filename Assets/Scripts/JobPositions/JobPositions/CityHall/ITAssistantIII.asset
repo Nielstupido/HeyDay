@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: ITAssistantIII
   m_EditorClassIdentifier: 
   jobPosName: IT Assistant III
-  jobPosReqs: Enrolled in BS Computer Science/Information Technology + 450 WH (IT
+  jobPosReqs: Enrolled in BS Computer Science/Information Technology + 150 WH (IT
     Assistant)
   establishment: 19
   workField: 9
   reqStudyField: 0
-  reqCourse: 0
+  reqCourse: 
   reqWorkField: 9
-  reqWorkHrs: 450
-  salaryPerHr: 55
+  reqWorkHrs: 150
+  salaryPerHr: 63

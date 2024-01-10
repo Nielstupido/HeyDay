@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: OfficeAssistantIV
   m_EditorClassIdentifier: 
   jobPosName: Office Assistant IV
-  jobPosReqs: Enrolled in any Social Science Course + 800 WH (Office Assistant)
+  jobPosReqs: Enrolled in any Social Science Course + 300 WH (Office Assistant)
   establishment: 18
   workField: 7
   reqStudyField: 6
-  reqCourse: 0
+  reqCourse: 
   reqWorkField: 7
-  reqWorkHrs: 800
-  salaryPerHr: 60
+  reqWorkHrs: 300
+  salaryPerHr: 80

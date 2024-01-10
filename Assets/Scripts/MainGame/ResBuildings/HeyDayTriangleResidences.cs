@@ -11,8 +11,8 @@ public class HeyDayTriangleResidences : ResBuilding
         this.monthlyRent = 3500f;
         this.monthlyElecCharge = 700f;
         this.monthlyWaterCharge = 350f;
-        this.dailyAdtnlHappiness = 20f; 
-        this.adtnlEnergyForSleep = 15f;
+        this.dailyAdtnlHappiness = 12f; 
+        this.adtnlEnergyForSleep = 10f;
 
         this.actionButtons = new List<Buttons>(){Buttons.SLEEP, Buttons.EAT, Buttons.PAY};
     }
