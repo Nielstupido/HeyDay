@@ -345,7 +345,6 @@ public class Player : MonoBehaviour
         playerStatsDict[PlayerStats.HAPPINESS] -= workHrsDone * WorkHappinessCutValue;
         playerStatsDict[PlayerStats.HUNGER] -= workHrsDone * WorkHungerCutValue;
         PlayerStatsObserver.onPlayerStatChanged(PlayerStats.ALL, playerStatsDict);
-        //save game
     }
 
 

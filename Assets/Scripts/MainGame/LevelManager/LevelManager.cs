@@ -229,6 +229,8 @@ public class LevelManager : MonoBehaviour
     public void OnMissionFinished(MissionsScriptableObj doneMission)
     {
         // currentActiveMissions.Remove(mission);
+        GameDataManager.Instance.SaveGameData(Player.Instance.PlayerName, GameManager.Instance.CurrentGameStateData);
+
         foreach (MissionsScriptableObj mission in currentActiveMissions)
         {
             if (mission.id == doneMission.id)

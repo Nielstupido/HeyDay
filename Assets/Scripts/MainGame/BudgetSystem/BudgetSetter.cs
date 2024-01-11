@@ -48,18 +48,22 @@ public class BudgetSetter : MonoBehaviour
                 case 0:
                     recommSliders[i].value = currentPlayerMoney * BillsRecommPercentage;
                     sliders[i].value = currentPlayerMoney * BillsRecommPercentage;
+                    amountTexts[i].text = (currentPlayerMoney * BillsRecommPercentage).ToString("0");
                     break;
                 case 1:
                     recommSliders[i].value = currentPlayerMoney * SavingsRecommPercentage;
                     sliders[i].value = currentPlayerMoney * SavingsRecommPercentage;
+                    amountTexts[i].text = (currentPlayerMoney * SavingsRecommPercentage).ToString("0");
                     break;
                 case 2:
                     recommSliders[i].value = currentPlayerMoney * ConsumablesRecommPercentage;
                     sliders[i].value = currentPlayerMoney * ConsumablesRecommPercentage;
+                    amountTexts[i].text = (currentPlayerMoney * ConsumablesRecommPercentage).ToString("0");
                     break;
                 case 3:
                     recommSliders[i].value = currentPlayerMoney * EmergencyRecommPercentage;
                     sliders[i].value = currentPlayerMoney * EmergencyRecommPercentage;
+                    amountTexts[i].text = (currentPlayerMoney * EmergencyRecommPercentage).ToString("0");
                     break;
             }
         }
