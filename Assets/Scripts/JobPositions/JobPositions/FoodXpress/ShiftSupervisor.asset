@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfc7bbd351fbdf149acb81d2b7c75426, type: 3}
-  m_Name: AssistantMechanicI
+  m_Name: ShiftSupervisor
   m_EditorClassIdentifier: 
-  jobPosName: Assistant Mechanic I
-  jobPosReqs: Enrolled in BS MechanicalEngineering/Industrial Technology
-  establishment: 20
-  workField: 19
-  reqStudyField: 0
-  reqCourse: 1900000018000000
+  jobPosName: Shift Supervisor
+  jobPosReqs: 'Enrolled in any Business and Management Course + 320 WH '
+  establishment: 9
+  workField: 13
+  reqStudyField: 2
+  reqCourse: 
   reqWorkField: 0
-  reqWorkHrs: 0
-  salaryPerHr: 48
+  reqWorkHrs: 320
+  salaryPerHr: 85

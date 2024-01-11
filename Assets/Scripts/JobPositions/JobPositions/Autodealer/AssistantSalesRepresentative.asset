@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfc7bbd351fbdf149acb81d2b7c75426, type: 3}
-  m_Name: AssistantSalesRepresentativeIV
+  m_Name: AssistantSalesRepresentative
   m_EditorClassIdentifier: 
-  jobPosName: Assistant Sales Representative IV
-  jobPosReqs: Enrolled in any Business and Management Course + 800 WH (Asst. Sales
-    Representative)
+  jobPosName: Assistant Sales Representative
+  jobPosReqs: Enrolled in any Business and Management Course
   establishment: 7
   workField: 18
   reqStudyField: 2
   reqCourse: 
-  reqWorkField: 18
-  reqWorkHrs: 800
-  salaryPerHr: 62
+  reqWorkField: 0
+  reqWorkHrs: 0
+  salaryPerHr: 48
