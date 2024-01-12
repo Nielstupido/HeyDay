@@ -121,9 +121,12 @@ public class HospitalManager : MonoBehaviour
     
     public void PayHospitalFees()
     {
+        float tempHospiBill = Player.Instance.PlayerHospitalOutstandingDebt;
         AudioManager.Instance.PlaySFX("Select");
+        
         if (Player.Instance.Pay(false, Player.Instance.PlayerHospitalOutstandingDebt, 0.5f, 10f, 5, notEnoughMoneyForBills))
         {
+            Player.Instance.PlayerExpensesHospiBills += tempHospiBill;
             daysUnpaid = 0;
             Player.Instance.PlayerHospitalOutstandingDebt = 0f;
             StartCoroutine(PayBills());

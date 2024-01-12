@@ -42,6 +42,7 @@ public class SlotMachineResults : MonoBehaviour
     {
         if (Pay(5f, 200f, 0.5f))
         {
+            Player.Instance.PlayerExpensesArcade += 200f;
             slotMachine1.StartRand();
             slotMachine2.StartRand();
             slotMachine3.StartRand();

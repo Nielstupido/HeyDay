@@ -33,6 +33,13 @@ public class GameStateData
     public float playerLvlConsumablesExpenses = 0f;
     public float playerLvlEmergencyFunds = 0f;
 
+    public float playerExpensesHospiBills = 0f;
+    public float playerExpensesFares = 0f;
+    public float playerExpensesArcade = 0f;
+    public float playerExpensesServices = 0f;
+    public float playerExpensesAppliances = 0f;
+    public float playerExpensesCar = 0f;
+
     public string goalCourse = UniversityCourses.NONE.ToString();
     public string courseEnrolled = UniversityCourses.NONE.ToString();
     public string studyFieldEnrolled = StudyFields.NONE.ToString();

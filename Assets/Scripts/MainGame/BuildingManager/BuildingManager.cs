@@ -127,6 +127,7 @@ public class BuildingManager : MonoBehaviour
                 return;
             }
 
+            Player.Instance.PlayerExpensesFares += 15f;
             playerTravelManager.PlayerTravel(currentSelectedBuilding, ModeOfTravels.COMMUTE, ActionAnimations.COMMUTE);
             LevelManager.onFinishedPlayerAction(MissionType.COMMUTE);
             LifeEventsManager.Instance.StartLifeEvent(LifeEvents.ACCIDENT);

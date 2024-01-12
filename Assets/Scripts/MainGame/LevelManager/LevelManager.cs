@@ -177,6 +177,22 @@ public class LevelManager : MonoBehaviour
     }
 
 
+    public void LoadScriptableObjMissions()
+    {
+        currentActiveMissions.Clear();
+        tempLevelName = "Level 1";
+
+        missionOverlayLevelText.text = tempLevelName;
+
+        foreach (MissionsScriptableObj mission in allMissions[tempLevelName])
+        {
+            currentActiveMissions.Add(mission);
+        }
+
+        InstantiateCurrentLvlMissions();
+    }
+
+
     public void PrepareLevelDets()
     {
         tempLevelName = "Level ";

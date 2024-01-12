@@ -392,6 +392,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("GameStart", 0);
             PlayerPrefs.SetInt("FirstLoad", 1);
+            LevelManager.Instance.LoadScriptableObjMissions();
             playerInfoManager.OpenCharacterCreationOVerlay();
         }
         else

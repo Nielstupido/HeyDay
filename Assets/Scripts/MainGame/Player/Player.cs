@@ -43,11 +43,23 @@ public class Player : MonoBehaviour
     private float playerBankSavings;
     private float playerTotalDebt;
     private float playerHospitalOutstandingDebt;
+    private float playerExpensesHospiBills;
+    private float playerExpensesFares;
+    private float playerExpensesArcade;
+    private float playerExpensesServices;
+    private float playerExpensesAppliances;
+    private float playerExpensesCar;
     private bool isPlayerHasBankAcc;
     public float PlayerCash { set{playerCash = value;} get{return playerCash;}}
     public float PlayerBankSavings { set{playerBankSavings = value;} get{return playerBankSavings;}}
     public float PlayerHospitalOutstandingDebt { set{playerHospitalOutstandingDebt = value;} get{return playerHospitalOutstandingDebt;}}
     public float PlayerTotalDebt { set{playerTotalDebt = value;} get{return playerTotalDebt;}}
+    public float PlayerExpensesHospiBills { set{playerExpensesHospiBills = value;} get{return playerExpensesHospiBills;}}
+    public float PlayerExpensesFares { set{playerExpensesFares = value;} get{return playerExpensesFares;}}
+    public float PlayerExpensesArcade { set{playerExpensesArcade = value;} get{return playerExpensesArcade;}}
+    public float PlayerExpensesServices { set{playerExpensesServices = value;} get{return playerExpensesServices;}}
+    public float PlayerExpensesAppliances { set{playerExpensesAppliances = value;} get{return playerExpensesAppliances;}}
+    public float PlayerExpensesCar { set{playerExpensesCar = value;} get{return playerExpensesCar;}}
     public bool IsPlayerHasBankAcc { set{isPlayerHasBankAcc = value;} get{return isPlayerHasBankAcc;}}
 
     //Budget tracking
@@ -154,6 +166,14 @@ public class Player : MonoBehaviour
         GameManager.Instance.CurrentGameStateData.playerLvlSavings = this.playerLvlSavings;
         GameManager.Instance.CurrentGameStateData.playerLvlConsumablesExpenses = this.playerLvlConsumablesExpenses;
         GameManager.Instance.CurrentGameStateData.playerLvlEmergencyFunds = this.playerLvlEmergencyFunds;
+
+        GameManager.Instance.CurrentGameStateData.playerExpensesHospiBills = this.playerExpensesHospiBills;
+        GameManager.Instance.CurrentGameStateData.playerExpensesFares = this.playerExpensesFares;
+        GameManager.Instance.CurrentGameStateData.playerExpensesArcade = this.playerExpensesArcade;
+        GameManager.Instance.CurrentGameStateData.playerExpensesServices = this.playerExpensesServices;
+        GameManager.Instance.CurrentGameStateData.playerExpensesAppliances = this.playerExpensesAppliances;
+        GameManager.Instance.CurrentGameStateData.playerExpensesCar = this.playerExpensesCar;
+
         GameManager.Instance.CurrentGameStateData.goalCourse = this.goalCourse.ToString();
         GameManager.Instance.CurrentGameStateData.courseEnrolled = this.courseEnrolled.ToString();
         GameManager.Instance.CurrentGameStateData.studyFieldEnrolled = this.studyFieldEnrolled.ToString();
@@ -231,6 +251,14 @@ public class Player : MonoBehaviour
         this.playerLvlSavings = GameManager.Instance.CurrentGameStateData.playerLvlSavings;
         this.playerLvlConsumablesExpenses = GameManager.Instance.CurrentGameStateData.playerLvlConsumablesExpenses;
         this.playerLvlEmergencyFunds = GameManager.Instance.CurrentGameStateData.playerLvlEmergencyFunds;
+
+        this.playerExpensesHospiBills = GameManager.Instance.CurrentGameStateData.playerExpensesHospiBills;
+        this.playerExpensesFares = GameManager.Instance.CurrentGameStateData.playerExpensesFares;
+        this.playerExpensesArcade = GameManager.Instance.CurrentGameStateData.playerExpensesArcade;
+        this.playerExpensesServices = GameManager.Instance.CurrentGameStateData.playerExpensesServices;
+        this.playerExpensesAppliances = GameManager.Instance.CurrentGameStateData.playerExpensesAppliances;
+        this.playerExpensesCar = GameManager.Instance.CurrentGameStateData.playerExpensesCar;
+
         this.courseEnrolled = GameManager.Instance.StringEnumParser<UniversityCourses>(GameManager.Instance.CurrentGameStateData.courseEnrolled);
         this.studyFieldEnrolled = GameManager.Instance.StringEnumParser<StudyFields>(GameManager.Instance.CurrentGameStateData.studyFieldEnrolled);
         this.playerEnrolledCourseDuration = GameManager.Instance.CurrentGameStateData.playerEnrolledCourseDuration;
@@ -375,17 +403,20 @@ public class Player : MonoBehaviour
         switch (item.itemType)
         {
             case ItemType.VEHICLE:
+                playerExpensesCar += item.itemPrice;
                 playerOwnedVehicles.Add(item);
                 playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
                 playerStatsDict[PlayerStats.HAPPINESS] += item.happinessBarValue;
                 break;
             case ItemType.APPLIANCE:
+                playerExpensesAppliances += item.itemPrice;
                 playerOwnedAppliances.Add(item);
                 playerStatsDict[PlayerStats.ENERGY] -= energyLevelCutValue;
                 playerStatsDict[PlayerStats.HAPPINESS] += item.happinessBarValue;
                 LevelManager.onFinishedPlayerAction(MissionType.BUY, interactedItemType:ItemType.APPLIANCE);
                 break;
             case ItemType.SERVICE:
+                playerExpensesServices += item.itemPrice;
                 if (item.itemName == "Spa Service")
                 {
                     LevelManager.onFinishedPlayerAction(MissionType.MASSAGE);
@@ -472,6 +503,13 @@ public class Player : MonoBehaviour
         playerLvlSavings = 0f;
         playerLvlConsumablesExpenses = 0f;
         playerLvlEmergencyFunds = 0f;
+
+        playerExpensesHospiBills = 0f;
+        playerExpensesFares = 0f;
+        playerExpensesArcade = 0f;
+        playerExpensesServices = 0f;
+        playerExpensesAppliances = 0f;
+        playerExpensesCar = 0f;
     }
 
 

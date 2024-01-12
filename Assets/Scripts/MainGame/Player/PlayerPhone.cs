@@ -38,7 +38,12 @@ public class PlayerPhone : MonoBehaviour
     [SerializeField] private TextMeshProUGUI debtValue; 
     [SerializeField] private TextMeshProUGUI monthlyOutflowValue; 
     [SerializeField] private TextMeshProUGUI foodExpenditureValue; 
-    [SerializeField] private TextMeshProUGUI miscExpenditureValue; 
+    [SerializeField] private TextMeshProUGUI hospiBillsExpenditureValue; 
+    [SerializeField] private TextMeshProUGUI faresExpenditureValue; 
+    [SerializeField] private TextMeshProUGUI arcadeExpenditureValue; 
+    [SerializeField] private TextMeshProUGUI servicesExpenditureValue; 
+    [SerializeField] private TextMeshProUGUI appliancesExpenditureValue; 
+    [SerializeField] private TextMeshProUGUI carExpenditureValue; 
 
     //Olshop
     [SerializeField] private GameObject oLShopOverlay;
@@ -136,12 +141,62 @@ public class PlayerPhone : MonoBehaviour
 
         try
         {
-            miscExpenditureValue.text = Player.Instance.PlayerLvlMiscExpenses.ToString();
+            hospiBillsExpenditureValue.text = Player.Instance.PlayerExpensesHospiBills.ToString();
         }
         catch (System.Exception)
         {
             
-            miscExpenditureValue.text = "0";
+            hospiBillsExpenditureValue.text = "0";
+        }
+
+        try
+        {
+            faresExpenditureValue.text = Player.Instance.PlayerExpensesFares.ToString();
+        }
+        catch (System.Exception)
+        {
+            
+            faresExpenditureValue.text = "0";
+        }
+
+        try
+        {
+            arcadeExpenditureValue.text = Player.Instance.PlayerExpensesArcade.ToString();
+        }
+        catch (System.Exception)
+        {
+            
+            arcadeExpenditureValue.text = "0";
+        }
+
+        try
+        {
+            servicesExpenditureValue.text = Player.Instance.PlayerExpensesServices.ToString();
+        }
+        catch (System.Exception)
+        {
+            
+            servicesExpenditureValue.text = "0";
+        }
+
+        try
+        {
+            appliancesExpenditureValue.text = Player.Instance.PlayerExpensesAppliances.ToString();
+        }
+        catch (System.Exception)
+        {
+            
+            appliancesExpenditureValue.text = "0";
+        }
+
+        try
+        {
+            carExpenditureValue.text = Player.Instance.PlayerExpensesCar.ToString();
+        }
+        catch (System.Exception)
+        {
+            
+            carExpenditureValue.text = "0";
         }
 
         debtValue.text = Player.Instance.PlayerTotalDebt.ToString();
