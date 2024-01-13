@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a36e4e78b4773142950dae044465e64, type: 3}
   m_Name: Mission2 1
   m_EditorClassIdentifier: 
-  id: 1.1
+  id: 2.1
   missionStatus: 0
   missionType: 13
   missionDets: Take a walk to any establishment
-  currentNumberForGoal: 0
-  requiredNumberForGoal: 0
+  currentNumberForMission: 0
+  requiredNumberForMission: 0
   targetBuilding: 0
   targetIitemType: 0
   targetApp: 0
+  targetPlayerStats: 0

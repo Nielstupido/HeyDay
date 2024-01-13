@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour
 {
     //For Demo Only
     [SerializeField] private GameObject demoBtnsOverlay;
-
     [SerializeField] private GameObject defaultBottomOverlay;
     [SerializeField] private GameObject smallBottomOverlay;
     [SerializeField] private GameObject pauseBtn;
@@ -157,7 +156,9 @@ public class GameManager : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("GameMode") == 0) 
         {
+            LevelManager.Instance.LoadAllMissions();
             PlayerPrefs.SetInt("GameStart", 0);
+            PlayerPrefs.SetInt("FirstLoad", 1);
             playerInfoManager.OpenCharacterCreationOVerlay();
         }
         else
@@ -290,7 +291,7 @@ public class GameManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("GameRestart") != 0)
         {
-            StartCoroutine(DelayOpenMissions());
+            StartCoroutine("DelayOpenMissions");
         }
         
         PlayerPrefs.SetInt("GameRestart", 1);
@@ -392,7 +393,6 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("GameStart", 0);
             PlayerPrefs.SetInt("FirstLoad", 1);
-            LevelManager.Instance.LoadScriptableObjMissions();
             playerInfoManager.OpenCharacterCreationOVerlay();
         }
         else

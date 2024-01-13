@@ -66,7 +66,7 @@ public class LevelManager : MonoBehaviour
         PlayerStats interactedPlayerStats = PlayerStats.NONE);
     public static OnFinishedPlayerAction onFinishedPlayerAction;
 
-    [SerializeField] private MissionsHolder missionsHolder;
+    [SerializeField] private List<MissionsScriptableObj> missionsHolder = new List<MissionsScriptableObj>();
     [SerializeField] private Transform missionPrefabsHolder;
     [SerializeField] private GameObject missionPrefab;
     [SerializeField] private GameObject missionOverlay;
@@ -123,11 +123,12 @@ public class LevelManager : MonoBehaviour
 
 
     //loads all missions to a dictionary for easy access during gameplay
-    private void LoadAllMissions()
+    public void LoadAllMissions()
     {
+        allMissions.Clear();
         missionLevelCounter = 1;
 
-        foreach (MissionsScriptableObj mission in missionsHolder.missions)
+        foreach (MissionsScriptableObj mission in missionsHolder)
         {
             tempLevelName = "Level ";
             tempSplitIdHolder = mission.id.Split(".");
@@ -165,22 +166,6 @@ public class LevelManager : MonoBehaviour
         {
             tempLevelName += GameManager.Instance.CurrentGameLevel.ToString();
         }
-
-        missionOverlayLevelText.text = tempLevelName;
-
-        foreach (MissionsScriptableObj mission in allMissions[tempLevelName])
-        {
-            currentActiveMissions.Add(mission);
-        }
-
-        InstantiateCurrentLvlMissions();
-    }
-
-
-    public void LoadScriptableObjMissions()
-    {
-        currentActiveMissions.Clear();
-        tempLevelName = "Level 1";
 
         missionOverlayLevelText.text = tempLevelName;
 

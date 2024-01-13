@@ -48,15 +48,13 @@ public class GameDataManager : MonoBehaviour
 
     public ValueTuple<bool, string> LoadPlayerRecords()
     {
+        string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+        string filePath = directoryPath + "PlayerScores.json";
+
         try
         {
-            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
-            string filePath = directoryPath + "PlayerScores.json";
-
-            // Check if the directory exists, create it if not
             if (!Directory.Exists(directoryPath))
             {
-                Debug.Log("TEST 1: Directory mo wala");
                 Directory.CreateDirectory(directoryPath);
             }
 
@@ -72,10 +70,26 @@ public class GameDataManager : MonoBehaviour
             // Deserialize into playerRecords using Json.NET
             playerRecords = JsonConvert.DeserializeObject<Dictionary<string, int>>(Decrypt(jsonString));
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            Debug.LogError($"{e}");
-            return (false, e.ToString());
+            try
+            {
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                if (!File.Exists(filePath))
+                {
+                    // If the file doesn't exist, create it
+                    string playerRecord = JsonConvert.SerializeObject(new Dictionary<string, int>());
+                    File.WriteAllText(filePath, Encrypt(playerRecord));
+                }
+            }
+            catch (Exception)
+            {
+                return (false, "Delete/Clear Game Cache and Game Data before trying opening the game.");
+            }
         }
 
         return (true, "");
@@ -216,12 +230,12 @@ public class GameDataManager : MonoBehaviour
 
     public ValueTuple<bool, string> LoadGameData()
     {
+        BinaryFormatter bf = new BinaryFormatter ();
+        string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
+        string filePath = directoryPath + "PlayerGameStateData.dat";
+
         try
         {
-            BinaryFormatter bf = new BinaryFormatter ();
-            string directoryPath = Application.persistentDataPath + "/DoNotDelete/";
-            string filePath = directoryPath + "PlayerGameStateData.dat";
-
             if (!Directory.Exists(directoryPath))
             {
                 Directory.CreateDirectory(directoryPath);
@@ -239,17 +253,30 @@ public class GameDataManager : MonoBehaviour
             Dictionary<string, GameStateData> data = (Dictionary<string, GameStateData>)bf.Deserialize(fileStreamLoad);
             allPlayersGameStateData = data;
             fileStreamLoad.Close();
-
-            if (allPlayersGameStateData.Count == 0)
-            {
-                Debug.Log("ERROR LOADING GAME DATA 0 keys found");
-                return (false, "error");
-            }
         }
-        catch (Exception e)
+        catch (Exception)
         {
-            Debug.Log("ERROR LOADING GAME DATA " + e.ToString());
-            return (false, e.ToString());
+            try
+            {
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                if (!File.Exists(filePath))
+                {
+                    FileStream fileStreamSave = File.Create(filePath);
+                    Dictionary<string, GameStateData> dataHolder = new Dictionary<string, GameStateData>();
+                    bf.Serialize(fileStreamSave, dataHolder);
+                    fileStreamSave.Close();
+                }
+
+                allPlayersGameStateData = new Dictionary<string, GameStateData>();
+            }
+            catch (Exception)
+            {
+                return (false, "Delete/Clear Game Cache and Game Data before trying opening the game.");
+            }
         }
 
         return (true, "");

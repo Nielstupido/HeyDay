@@ -68,20 +68,20 @@ public class IntroCutsceneMannager : MonoBehaviour
         sceneImageObj.sprite = firstScene;
         IntroOverlay.SetActive(true);
         botBar.LeanSize(new Vector2(0f, 90f), 2f).delay = 0.5f;
-        topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(StartCutscene());} ).delay = 0.5f;
+        topBar.LeanSize(new Vector2(0f, 90f), 2f).setOnComplete( () => {StartCoroutine(nameof(StartCutscene));} ).delay = 0.5f;
     }
 
 
     public void SkipIntro()
     {
-        StopCoroutine(StartCutscene());
-        StartCoroutine(SkipCutscenes());
+        StartCoroutine(nameof(SkipCutscene));
     }
 
 
-    private IEnumerator SkipCutscenes()
+    private IEnumerator SkipCutscene()
     {
         AnimOverlayManager.Instance.StartBlackScreenFadeLoadScreen();
+        StopCoroutine(nameof(StartCutscene));
         yield return new WaitForSeconds(0.5f);
         IntroOverlay.SetActive(false);
         GoalSetter.Instance.SetGoal();
